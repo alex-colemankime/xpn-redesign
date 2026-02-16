@@ -21,11 +21,11 @@
   @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700&display=swap');
 
   :root {
-    /* Cream palette */
-    --cream: #F6F1EB;
-    --cream-dark: #EDE6DC;
-    --cream-deep: #E2D9CD;
-    --white: #FFFFFF;
+    /* Warm neutral palette — closer to XPN's earthy tones */
+    --cream: #F0EBE3;
+    --cream-dark: #E5DED4;
+    --cream-deep: #D9D0C4;
+    --white: #FDFCFA;
     --ink: #1A1714;
     --ink-medium: #3D3833;
     --ink-light: #6B6560;
@@ -79,7 +79,7 @@
   /* ── Row 1: Now Playing ── */
   .header-now-playing {
     background: #292119;
-    height: 80px;
+    height: 100px;
     display: flex;
     align-items: center;
   }
@@ -97,13 +97,13 @@
     flex-shrink: 0;
   }
   .header-logo svg {
-    height: 36px;
+    height: 42px;
     width: auto;
   }
 
   /* Large circular play button */
   .header-play-btn {
-    width: 52px; height: 52px;
+    width: 60px; height: 60px;
     border-radius: 50%;
     border: 2.5px solid rgba(255,255,255,0.35);
     background: none;
@@ -122,7 +122,7 @@
 
   /* Album art thumbnail */
   .header-album-art {
-    width: 56px; height: 56px;
+    width: 68px; height: 68px;
     border-radius: 4px;
     overflow: hidden;
     flex-shrink: 0;
@@ -140,7 +140,7 @@
   }
   .header-np-info__label {
     font-family: var(--font-ui);
-    font-size: 0.62rem;
+    font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -149,7 +149,7 @@
   }
   .header-np-info__show {
     font-family: var(--font-ui);
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     color: rgba(255,255,255,0.6);
     white-space: nowrap;
     overflow: hidden;
@@ -158,7 +158,7 @@
   }
   .header-np-info__track {
     font-family: var(--font-ui);
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     color: #FFFFFF;
     white-space: nowrap;
     overflow: hidden;
@@ -169,7 +169,7 @@
   .header-np-info__track span { color: rgba(255,255,255,0.55); font-weight: 400; }
   .header-np-info__album {
     font-family: var(--font-ui);
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     color: rgba(255,255,255,0.4);
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -409,7 +409,7 @@
   .sec-head__title {
     font-family: var(--font-display);
     font-size: clamp(1.6rem, 2.5vw, 2.4rem);
-    font-weight: 900;
+    font-weight: 500;
     letter-spacing: -0.02em;
   }
   .sec-head__link {
@@ -742,28 +742,46 @@
   .sidebar-playlist-item {
     display: flex;
     gap: var(--s3);
-    padding: var(--s2) 0;
+    padding: var(--s3) 0;
     align-items: center;
+    border-bottom: 1px solid var(--ink-faint);
   }
-  .sidebar-playlist-item__num {
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--ink-faint);
-    width: 28px;
-    text-align: center;
+  .sidebar-playlist-item:last-child { border-bottom: none; }
+  .sidebar-playlist-item__art {
+    width: 44px;
+    height: 44px;
+    border-radius: 3px;
+    overflow: hidden;
     flex-shrink: 0;
+    background: var(--cream-deep);
   }
-  .sidebar-playlist-item__info {}
+  .sidebar-playlist-item__art .ph { font-size: 0.35rem; }
+  .sidebar-playlist-item__info {
+    flex: 1;
+    min-width: 0;
+  }
   .sidebar-playlist-item__song {
     font-family: var(--font-ui);
     font-size: 0.82rem;
     font-weight: 600;
     line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .sidebar-playlist-item__artist {
     font-size: 0.75rem;
     color: var(--ink-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sidebar-playlist-item__time {
+    font-family: var(--font-ui);
+    font-size: 0.65rem;
+    color: var(--ink-muted);
+    flex-shrink: 0;
+    white-space: nowrap;
   }
 
   /* ════════════════════════════════════════════════════════════════
@@ -1062,12 +1080,56 @@
     letter-spacing: 0.1em; text-transform: uppercase;
     color: rgba(0,0,0,0.15);
   }
-  .ph--a { background: linear-gradient(135deg, #E8D5C4 0%, #D4C0AD 100%); }
-  .ph--b { background: linear-gradient(135deg, #C9D5DC 0%, #B0BCC4 100%); }
-  .ph--c { background: linear-gradient(135deg, #D5C9B8 0%, #C4B8A6 100%); }
-  .ph--d { background: linear-gradient(135deg, #BDC9C6 0%, #A8B5B2 100%); }
-  .ph--e { background: linear-gradient(135deg, #D8CFC4 0%, #C6BBAF 100%); }
+  .ph--a { background: linear-gradient(135deg, #DDD0C0 0%, #CCBFAD 100%); }
+  .ph--b { background: linear-gradient(135deg, #C5CDD2 0%, #ADB7BE 100%); }
+  .ph--c { background: linear-gradient(135deg, #CFC3B0 0%, #BFB29E 100%); }
+  .ph--d { background: linear-gradient(135deg, #B8C3C0 0%, #A3AFAC 100%); }
+  .ph--e { background: linear-gradient(135deg, #D2C8BB 0%, #C0B5A7 100%); }
   .ph--dark { background: linear-gradient(135deg, #333 0%, #222 100%); color: rgba(255,255,255,0.15); }
+
+  /* ════════════════════════════════════════════════════════════════
+     MOSAIC CTA BANNER — fills gap under stacked stories
+     ════════════════════════════════════════════════════════════════ */
+  .mosaic-cta {
+    background: var(--ink);
+    border-radius: 6px;
+    padding: var(--s5) var(--s6);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s5);
+    margin-top: auto;
+  }
+  .mosaic-cta__text {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 1.3;
+  }
+  .mosaic-cta__text span {
+    color: rgba(255,255,255,0.55);
+    font-weight: 400;
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 2px;
+  }
+  .mosaic-cta__btn {
+    flex-shrink: 0;
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.65em 1.5em;
+    border: none;
+    border-radius: 4px;
+    background: var(--xpn-red);
+    color: white;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .mosaic-cta__btn:hover { background: var(--xpn-red-hover); }
 
   /* ════════════════════════════════════════════════════════════════
      BANNER AD SPACES
@@ -1120,7 +1182,7 @@
       </button>
 
       <div class="header-album-art">
-        <div class="ph ph--dark" style="height:56px;font-size:0.4rem;">Art</div>
+        <div class="ph ph--dark" style="height:68px;font-size:0.4rem;">Art</div>
       </div>
 
       <div class="header-np-info">
@@ -1218,6 +1280,13 @@
             <div class="m-card__meta">XPN Staff · Feb 9</div>
           </div>
         </article>
+        <div class="mosaic-cta">
+          <div class="mosaic-cta__text">
+            Become a Part of WXPN
+            <span>Your support keeps independent music on the air.</span>
+          </div>
+          <button class="mosaic-cta__btn">Join Now</button>
+        </div>
       </div>
 
       <!-- Three mid-size cards -->
@@ -1252,6 +1321,70 @@
         </div>
       </article>
 
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ EVENTS ═════════════ -->
+<section class="events-section">
+  <div class="container">
+    <div class="sec-head" style="border-bottom-color: var(--ink);">
+      <h2 class="sec-head__title">Upcoming Events</h2>
+      <a href="#" class="sec-head__link">
+        Full Calendar
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="events-scroll">
+      <div class="event-card">
+        <div class="event-card__img"><div class="ph ph--a">Photo</div></div>
+        <div class="event-card__body">
+          <div class="event-card__date">Tue, Feb 18</div>
+          <div class="event-card__name">Free at Noon: Hurray for the Riff Raff</div>
+          <div class="event-card__venue">World Cafe Live</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card__img"><div class="ph ph--b">Photo</div></div>
+        <div class="event-card__body">
+          <div class="event-card__date">Sat, Feb 22</div>
+          <div class="event-card__name">XPN Welcomes: Julien Baker</div>
+          <div class="event-card__venue">Union Transfer</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card__img"><div class="ph ph--c">Photo</div></div>
+        <div class="event-card__body">
+          <div class="event-card__date">Wed, Mar 5</div>
+          <div class="event-card__name">XPN Concert: The National</div>
+          <div class="event-card__venue">The Met Philadelphia</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card__img"><div class="ph ph--d">Photo</div></div>
+        <div class="event-card__body">
+          <div class="event-card__date">Fri, Mar 14</div>
+          <div class="event-card__name">Free at Noon: Faye Webster</div>
+          <div class="event-card__venue">World Cafe Live</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card__img"><div class="ph ph--e">Photo</div></div>
+        <div class="event-card__body">
+          <div class="event-card__date">Sat, Mar 22</div>
+          <div class="event-card__name">XPN Welcomes: Big Thief</div>
+          <div class="event-card__venue">The Fillmore Philadelphia</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card__img"><div class="ph ph--a">Photo</div></div>
+        <div class="event-card__body">
+          <div class="event-card__date">Fri, Apr 4</div>
+          <div class="event-card__name">XPN Concert: Bon Iver</div>
+          <div class="event-card__venue">The Mann Center</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1335,7 +1468,7 @@
 
 <!-- ═════════════ MID-PAGE AD ═════════════ -->
 <div class="container">
-  <div class="ad-slot ad-slot--rectangle">Ad — 300&times;250</div>
+  <div class="ad-slot ad-slot--leaderboard">Ad — 728&times;90</div>
 </div>
 
 <!-- ═════════════ ON AIR BAND ═════════════ -->
@@ -1445,65 +1578,46 @@
           <div class="ad-slot ad-slot--sidebar">Ad — 300&times;250</div>
         </div>
         <div class="sidebar__block">
-          <div class="sidebar__heading">Recently Played</div>
+          <div class="sidebar__heading">On-Air Playlist</div>
           <div class="sidebar-playlist-item">
-            <div class="sidebar-playlist-item__num">1</div>
+            <div class="sidebar-playlist-item__art"><div class="ph ph--a" style="height:44px">Art</div></div>
             <div class="sidebar-playlist-item__info">
               <div class="sidebar-playlist-item__song">Landslide</div>
               <div class="sidebar-playlist-item__artist">Fleetwood Mac</div>
             </div>
+            <div class="sidebar-playlist-item__time">1:42 PM</div>
           </div>
           <div class="sidebar-playlist-item">
-            <div class="sidebar-playlist-item__num">2</div>
+            <div class="sidebar-playlist-item__art"><div class="ph ph--b" style="height:44px">Art</div></div>
             <div class="sidebar-playlist-item__info">
               <div class="sidebar-playlist-item__song">Mykonos</div>
               <div class="sidebar-playlist-item__artist">Fleet Foxes</div>
             </div>
+            <div class="sidebar-playlist-item__time">1:37 PM</div>
           </div>
           <div class="sidebar-playlist-item">
-            <div class="sidebar-playlist-item__num">3</div>
+            <div class="sidebar-playlist-item__art"><div class="ph ph--c" style="height:44px">Art</div></div>
             <div class="sidebar-playlist-item__info">
               <div class="sidebar-playlist-item__song">Motion Sickness</div>
               <div class="sidebar-playlist-item__artist">Phoebe Bridgers</div>
             </div>
+            <div class="sidebar-playlist-item__time">1:33 PM</div>
           </div>
           <div class="sidebar-playlist-item">
-            <div class="sidebar-playlist-item__num">4</div>
+            <div class="sidebar-playlist-item__art"><div class="ph ph--d" style="height:44px">Art</div></div>
             <div class="sidebar-playlist-item__info">
               <div class="sidebar-playlist-item__song">First Day of My Life</div>
               <div class="sidebar-playlist-item__artist">Bright Eyes</div>
             </div>
+            <div class="sidebar-playlist-item__time">1:28 PM</div>
           </div>
           <div class="sidebar-playlist-item">
-            <div class="sidebar-playlist-item__num">5</div>
+            <div class="sidebar-playlist-item__art"><div class="ph ph--e" style="height:44px">Art</div></div>
             <div class="sidebar-playlist-item__info">
               <div class="sidebar-playlist-item__song">Pink Rabbits</div>
               <div class="sidebar-playlist-item__artist">The National</div>
             </div>
-          </div>
-        </div>
-        <div class="sidebar__block">
-          <div class="sidebar__heading">XPN Member Picks</div>
-          <div class="sidebar-playlist-item">
-            <div class="sidebar-playlist-item__num">1</div>
-            <div class="sidebar-playlist-item__info">
-              <div class="sidebar-playlist-item__song">Kyoto</div>
-              <div class="sidebar-playlist-item__artist">Phoebe Bridgers</div>
-            </div>
-          </div>
-          <div class="sidebar-playlist-item">
-            <div class="sidebar-playlist-item__num">2</div>
-            <div class="sidebar-playlist-item__info">
-              <div class="sidebar-playlist-item__song">Graceland</div>
-              <div class="sidebar-playlist-item__artist">Paul Simon</div>
-            </div>
-          </div>
-          <div class="sidebar-playlist-item">
-            <div class="sidebar-playlist-item__num">3</div>
-            <div class="sidebar-playlist-item__info">
-              <div class="sidebar-playlist-item__song">A&W</div>
-              <div class="sidebar-playlist-item__artist">Lana Del Rey</div>
-            </div>
+            <div class="sidebar-playlist-item__time">1:23 PM</div>
           </div>
         </div>
       </aside>
@@ -1511,87 +1625,6 @@
   </div>
 </section>
 
-<!-- ═════════════ EVENTS ═════════════ -->
-<section class="events-section">
-  <div class="container">
-    <div class="sec-head" style="border-bottom-color: var(--ink);">
-      <h2 class="sec-head__title">Upcoming Events</h2>
-      <a href="#" class="sec-head__link">
-        Full Calendar
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-
-    <div class="events-scroll">
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--a">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Tue, Feb 18</div>
-          <div class="event-card__name">Free at Noon: Hurray for the Riff Raff</div>
-          <div class="event-card__venue">World Cafe Live</div>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--b">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Sat, Feb 22</div>
-          <div class="event-card__name">XPN Welcomes: Julien Baker</div>
-          <div class="event-card__venue">Union Transfer</div>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--c">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Wed, Mar 5</div>
-          <div class="event-card__name">XPN Concert: The National</div>
-          <div class="event-card__venue">The Met Philadelphia</div>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--d">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Fri, Mar 14</div>
-          <div class="event-card__name">Free at Noon: Faye Webster</div>
-          <div class="event-card__venue">World Cafe Live</div>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--e">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Sat, Mar 22</div>
-          <div class="event-card__name">XPN Welcomes: Big Thief</div>
-          <div class="event-card__venue">The Fillmore Philadelphia</div>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--a">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Fri, Apr 4</div>
-          <div class="event-card__name">XPN Concert: Bon Iver</div>
-          <div class="event-card__venue">The Mann Center</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═════════════ MEMBERSHIP + NEWSLETTER ═════════════ -->
-<section class="membership-band">
-  <div class="container">
-    <div class="membership-band__eyebrow">Support Independent Radio</div>
-    <h2 class="membership-band__headline">Keep the Music Playing</h2>
-    <p class="membership-band__text">WXPN is powered by listeners like you. Your membership supports the artists, the sessions, the stories, and the signal.</p>
-    <button class="btn-join">Become a Member</button>
-
-    <div class="newsletter-inline">
-      <div class="newsletter-inline__label">Or get the weekly newsletter</div>
-      <div class="newsletter-form">
-        <input type="email" placeholder="your@email.com">
-        <button>Subscribe</button>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ═════════════ FOOTER ═════════════ -->
 <footer class="site-footer">
