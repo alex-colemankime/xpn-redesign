@@ -823,26 +823,28 @@
   .oap {
     background: var(--white);
     border-radius: 10px;
-    border: 1px solid rgba(0,0,0,0.08);
-    border-left: 4px solid var(--xpn-red);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-left: 4px solid #F5A623;
     overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
   }
   .oap__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--s4) var(--s5);
+    padding: 18px 20px 14px;
     background: #f5f1ec;
   }
   .oap__title {
     font-family: var(--font-display);
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 800;
     color: var(--ink);
+    letter-spacing: -0.01em;
   }
   .oap__link {
     font-family: var(--font-ui);
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--ink-medium);
     transition: color 0.15s;
@@ -851,14 +853,14 @@
 
   .oap__date {
     font-family: var(--font-ui);
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     font-weight: 500;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--ink-light);
-    padding: var(--s2) var(--s5);
-    background: var(--white);
-    border-bottom: 1px solid #eae5de;
+    padding: 8px 20px;
+    background: #f5f1ec;
+    border-top: 1px solid #e8e3db;
   }
 
   .oap__list {
@@ -866,21 +868,22 @@
   }
   .oap__item {
     display: flex;
-    gap: var(--s4);
-    padding: var(--s5);
+    gap: 16px;
+    padding: 20px;
     align-items: flex-start;
-    border-bottom: 1px solid #eae5de;
+    border-bottom: 1px solid #e8e3db;
   }
   .oap__item:last-child { border-bottom: none; }
 
   .oap__time {
     font-family: var(--font-display);
-    font-size: 1.35rem;
+    font-size: 1.45rem;
     font-weight: 800;
     color: var(--ink);
     flex-shrink: 0;
-    min-width: 80px;
-    line-height: 1.2;
+    min-width: 85px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
   }
   .oap__time sup {
     font-size: 0.55rem;
@@ -895,16 +898,18 @@
   }
   .oap__song {
     font-family: var(--font-display);
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     font-weight: 700;
     line-height: 1.35;
     color: var(--ink);
   }
-  .oap__show {
+  .oap__artist {
     font-family: var(--font-ui);
-    font-size: 0.82rem;
-    color: var(--ink-muted);
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--ink-medium);
     margin-top: 4px;
+    line-height: 1.4;
   }
 
   /* ════════════════════════════════════════════════════════════════
@@ -1656,41 +1661,41 @@
               <span class="oap__title">On-Air Playlist</span>
               <a href="#" class="oap__link">View More</a>
             </div>
-            <div class="oap__date">16 February</div>
+            <div class="oap__date">17 February</div>
             <div class="oap__list">
               <div class="oap__item">
-                <div class="oap__time">03:22<sup>PM</sup></div>
+                <div class="oap__time">10:20<sup>AM</sup></div>
                 <div class="oap__info">
-                  <div class="oap__song">Nirvanna the Band the Show the Movie 2-16-2026 Hour 2, Part 5</div>
-                  <div class="oap__show">|World Cafe|</div>
+                  <div class="oap__song">The Hand</div>
+                  <div class="oap__artist">Annabelle Dinda</div>
                 </div>
               </div>
               <div class="oap__item">
-                <div class="oap__time">03:05<sup>PM</sup></div>
+                <div class="oap__time">10:15<sup>AM</sup></div>
                 <div class="oap__info">
-                  <div class="oap__song">Nirvanna the Band the Show the Movie 2-16-2026 Hour 2, Part 3</div>
-                  <div class="oap__show">|World Cafe|</div>
+                  <div class="oap__song">Time Is On My Side</div>
+                  <div class="oap__artist">The Rolling Stones</div>
                 </div>
               </div>
               <div class="oap__item">
-                <div class="oap__time">03:00<sup>PM</sup></div>
+                <div class="oap__time">10:11<sup>AM</sup></div>
                 <div class="oap__info">
-                  <div class="oap__song">Nirvanna the Band the Show the Movie 2-16-2026 Hour 2, Part 2</div>
-                  <div class="oap__show">|World Cafe|</div>
+                  <div class="oap__song">Count the Ways</div>
+                  <div class="oap__artist">The Last Dinner Party</div>
                 </div>
               </div>
               <div class="oap__item">
-                <div class="oap__time">02:59<sup>PM</sup></div>
+                <div class="oap__time">10:08<sup>AM</sup></div>
                 <div class="oap__info">
-                  <div class="oap__song">Nirvanna the Band the Show the Movie 2-16-2026 Hour 2, Part 1</div>
-                  <div class="oap__show">|World Cafe|</div>
+                  <div class="oap__song">Unbelievers</div>
+                  <div class="oap__artist">Vampire Weekend</div>
                 </div>
               </div>
               <div class="oap__item">
-                <div class="oap__time">02:50<sup>PM</sup></div>
+                <div class="oap__time">10:06<sup>AM</sup></div>
                 <div class="oap__info">
-                  <div class="oap__song">Nirvanna the Band the Show the Movie 2-16-2026 Hour 1, Part 7</div>
-                  <div class="oap__show">|World Cafe|</div>
+                  <div class="oap__song">Sweet Love</div>
+                  <div class="oap__artist">Stephen Sanchez</div>
                 </div>
               </div>
             </div>
