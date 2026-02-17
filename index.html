@@ -287,41 +287,105 @@
   .header-nav-secondary a.nav-donate:hover { color: #D9A83A; }
 
   /* ════════════════════════════════════════════════════════════════
-     TOP STORIES — NPR-style flat editorial layout
-     No card backgrounds — images + text directly on page canvas
+     TOP STORIES — NPR-inspired clean layout
+     Featured story side-by-side, then 4-up card row below
      ════════════════════════════════════════════════════════════════ */
   .top-stories {
     padding: var(--s6) 0 var(--s7);
   }
 
-  /* Top row: hero left (60%), 2 stacked stories right (40%) */
-  .top-stories-hero {
+  /* Featured story: image right, text left — side by side */
+  .ts-featured {
     display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: var(--s6);
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s7);
+    align-items: center;
     padding-bottom: var(--s6);
     border-bottom: 1px solid var(--ink-faint);
-  }
-
-  .ts-item {
     cursor: pointer;
   }
-  .ts-item:hover .ts-item__headline { color: var(--xpn-red); }
-  .ts-item:hover .ts-item__img img { transform: scale(1.02); }
+  .ts-featured:hover .ts-featured__headline { color: var(--xpn-red); }
+  .ts-featured:hover .ts-featured__img img { transform: scale(1.02); }
 
-  .ts-item__img {
+  .ts-featured__text {
+    padding: var(--s5) 0;
+  }
+  .ts-featured__tag {
+    font-family: var(--font-ui);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--xpn-red);
+    margin-bottom: var(--s3);
+    display: inline-block;
+  }
+  .ts-featured__headline {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    transition: color 0.2s;
+    margin-bottom: var(--s3);
+  }
+  .ts-featured__excerpt {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--ink-light);
+    margin-bottom: var(--s3);
+  }
+  .ts-featured__meta {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+  }
+  .ts-featured__img {
     overflow: hidden;
     border-radius: 6px;
     background: var(--cream-dark);
-    position: relative;
-    margin-bottom: var(--s3);
+    aspect-ratio: 4/3;
   }
-  .ts-item__img img {
+  .ts-featured__img img {
     width: 100%; height: 100%; object-fit: cover;
     transition: transform 0.5s ease;
   }
 
-  .ts-item__tag {
+  /* 4-up card row below featured */
+  .ts-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s5);
+    padding-top: var(--s6);
+  }
+
+  .ts-card {
+    cursor: pointer;
+    background: var(--white);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 7px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s;
+  }
+  .ts-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+  .ts-card:hover .ts-card__headline { color: var(--xpn-red); }
+  .ts-card:hover .ts-card__img img { transform: scale(1.03); }
+
+  .ts-card__img {
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    background: var(--cream-dark);
+  }
+  .ts-card__img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .ts-card__body {
+    padding: var(--s3) var(--s4) var(--s4);
+  }
+  .ts-card__tag {
     font-family: var(--font-ui);
     font-size: 0.6rem;
     font-weight: 600;
@@ -331,54 +395,20 @@
     margin-bottom: var(--s1);
     display: inline-block;
   }
-
-  .ts-item__headline {
+  .ts-card__headline {
     font-family: var(--font-display);
+    font-size: 1rem;
     font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    transition: color 0.2s;
+    line-height: 1.3;
     color: var(--ink);
+    transition: color 0.15s;
   }
-
-  .ts-item__excerpt {
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: var(--ink-light);
-    margin-top: var(--s2);
-  }
-
-  .ts-item__meta {
+  .ts-card__meta {
     font-family: var(--font-ui);
     font-size: 0.68rem;
     color: var(--ink-muted);
-    margin-top: var(--s3);
+    margin-top: var(--s2);
   }
-
-  /* Hero item (left) */
-  .ts-item--hero .ts-item__img { height: 380px; }
-  .ts-item--hero .ts-item__headline {
-    font-size: clamp(1.5rem, 2.2vw, 2rem);
-  }
-
-  /* Stacked right column */
-  .top-stories-side {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s5);
-  }
-  .top-stories-side .ts-item__img { height: 180px; }
-  .top-stories-side .ts-item__headline { font-size: 1.05rem; }
-
-  /* Bottom row: 4 items in a flat row, separated by top border */
-  .top-stories-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--s6);
-    padding-top: var(--s6);
-  }
-  .top-stories-row .ts-item__img { height: 150px; }
-  .top-stories-row .ts-item__headline { font-size: 0.95rem; }
 
   /* CTA banner */
   .top-stories-cta {
@@ -767,7 +797,7 @@
   .oap {
     background: var(--white);
     border-radius: 10px;
-    border: 1px solid rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.08);
     border-left: 4px solid var(--xpn-red);
     overflow: hidden;
   }
@@ -776,17 +806,17 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--s4) var(--s5);
-    background: var(--cream);
+    background: #f5f1ec;
   }
   .oap__title {
     font-family: var(--font-display);
-    font-size: 1.35rem;
+    font-size: 1.4rem;
     font-weight: 800;
     color: var(--ink);
   }
   .oap__link {
     font-family: var(--font-ui);
-    font-size: 0.78rem;
+    font-size: 0.82rem;
     font-weight: 600;
     color: var(--ink-medium);
     transition: color 0.15s;
@@ -795,14 +825,14 @@
 
   .oap__date {
     font-family: var(--font-ui);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
-    color: var(--ink-medium);
+    color: var(--ink-light);
     padding: var(--s2) var(--s5);
-    background: var(--cream);
-    border-top: 1px solid var(--cream-dark);
+    background: var(--white);
+    border-bottom: 1px solid #eae5de;
   }
 
   .oap__list {
@@ -811,23 +841,23 @@
   .oap__item {
     display: flex;
     gap: var(--s4);
-    padding: var(--s5) var(--s5);
+    padding: var(--s5);
     align-items: flex-start;
-    border-bottom: 1px solid var(--cream-dark);
+    border-bottom: 1px solid #eae5de;
   }
   .oap__item:last-child { border-bottom: none; }
 
   .oap__time {
     font-family: var(--font-display);
-    font-size: 1.2rem;
+    font-size: 1.35rem;
     font-weight: 800;
     color: var(--ink);
     flex-shrink: 0;
-    min-width: 70px;
-    line-height: 1.15;
+    min-width: 80px;
+    line-height: 1.2;
   }
   .oap__time sup {
-    font-size: 0.5rem;
+    font-size: 0.55rem;
     font-weight: 700;
     vertical-align: super;
     margin-left: 1px;
@@ -839,16 +869,16 @@
   }
   .oap__song {
     font-family: var(--font-display);
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     font-weight: 700;
     line-height: 1.35;
     color: var(--ink);
   }
   .oap__show {
     font-family: var(--font-ui);
-    font-size: 0.78rem;
+    font-size: 0.82rem;
     color: var(--ink-muted);
-    margin-top: 3px;
+    margin-top: 4px;
   }
 
   /* ════════════════════════════════════════════════════════════════
@@ -1107,9 +1137,9 @@
      RESPONSIVE
      ════════════════════════════════════════════════════════════════ */
   @media (max-width: 1024px) {
-    .top-stories-hero { grid-template-columns: 1fr; }
-    .ts-item--hero .ts-item__img { height: 280px; }
-    .top-stories-row { grid-template-columns: 1fr 1fr; }
+    .ts-featured { grid-template-columns: 1fr; }
+    .ts-featured__img { aspect-ratio: 16/9; }
+    .ts-cards { grid-template-columns: 1fr 1fr; }
     .video-layout { grid-template-columns: 1fr; }
     .stories-layout { grid-template-columns: 1fr; }
     .sidebar { display: none; }
@@ -1126,7 +1156,7 @@
     .header-np-info__album { display: none; }
     .header-now-playing { height: 64px; }
     .header-nav-row { height: 44px; }
-    .top-stories-row { grid-template-columns: 1fr; }
+    .ts-cards { grid-template-columns: 1fr; }
     .top-stories-cta { flex-direction: column; text-align: center; }
     .story-row { grid-template-columns: 1fr; gap: var(--s5); }
     .footer-grid { grid-template-columns: 1fr; }
@@ -1251,70 +1281,60 @@
 <!-- ═════════════ TOP STORIES ═════════════ -->
 <section class="top-stories">
   <div class="container">
-    <!-- Hero row: big story left, 2 stacked right -->
-    <div class="top-stories-hero">
-      <article class="ts-item ts-item--hero">
-        <div class="ts-item__img">
-          <div class="ph ph--a" style="height:380px">Lead Photo</div>
-        </div>
-        <span class="ts-item__tag">Feature</span>
-        <h2 class="ts-item__headline">How Technology Amplified Black Music's Cultural Exchange Across the Atlantic</h2>
-        <p class="ts-item__excerpt">From 78 RPM records to streaming playlists, a history of the machines that carried the sound.</p>
-        <div class="ts-item__meta">XPN Staff · Feb 11, 2026</div>
-      </article>
-      <div class="top-stories-side">
-        <article class="ts-item">
-          <div class="ts-item__img">
-            <div class="ph ph--b" style="height:180px">Photo</div>
-          </div>
-          <span class="ts-item__tag">Live Review</span>
-          <h3 class="ts-item__headline">Brandi Carlile Made Xfinity Mobile Arena Feel Intimate</h3>
-          <div class="ts-item__meta">XPN Staff · Feb 12</div>
-        </article>
-        <article class="ts-item">
-          <div class="ts-item__img">
-            <div class="ph ph--c" style="height:180px">Photo</div>
-          </div>
-          <span class="ts-item__tag">Jazz</span>
-          <h3 class="ts-item__headline">John Morrison's Philly Top 5: Jazz & Pop Past & Future</h3>
-          <div class="ts-item__meta">XPN Staff · Feb 10</div>
-        </article>
+    <!-- Featured story: text left, image right -->
+    <article class="ts-featured">
+      <div class="ts-featured__text">
+        <span class="ts-featured__tag">Feature</span>
+        <h2 class="ts-featured__headline">How Technology Amplified Black Music's Cultural Exchange Across the Atlantic</h2>
+        <p class="ts-featured__excerpt">From 78 RPM records to streaming playlists, a history of the machines that carried the sound — and how Philadelphia was at the center of it all.</p>
+        <div class="ts-featured__meta">XPN Staff · Feb 11, 2026</div>
       </div>
-    </div>
+      <div class="ts-featured__img">
+        <div class="ph ph--a">Lead Photo</div>
+      </div>
+    </article>
 
-    <!-- Bottom row: 4 flat stories -->
-    <div class="top-stories-row">
-      <article class="ts-item">
-        <div class="ts-item__img">
-          <div class="ph ph--d" style="height:150px">Photo</div>
+    <!-- 4-up card row -->
+    <div class="ts-cards">
+      <article class="ts-card">
+        <div class="ts-card__img">
+          <div class="ph ph--b">Photo</div>
         </div>
-        <span class="ts-item__tag">Indie</span>
-        <h3 class="ts-item__headline">Waxahatchee's Katie Crutchfield on Creativity and Sobriety</h3>
-        <div class="ts-item__meta">XPN Staff · Feb 9</div>
+        <div class="ts-card__body">
+          <span class="ts-card__tag">Live Review</span>
+          <h3 class="ts-card__headline">Brandi Carlile Made Xfinity Mobile Arena Feel Intimate</h3>
+          <div class="ts-card__meta">XPN Staff · Feb 12</div>
+        </div>
       </article>
-      <article class="ts-item">
-        <div class="ts-item__img">
-          <div class="ph ph--e" style="height:150px">Photo</div>
+      <article class="ts-card">
+        <div class="ts-card__img">
+          <div class="ph ph--c">Photo</div>
         </div>
-        <span class="ts-item__tag">Album Review</span>
-        <h3 class="ts-item__headline">MJ Lenderman's 'Manning Fireworks' Is Controlled Chaos</h3>
-        <div class="ts-item__meta">XPN Staff · Feb 8</div>
+        <div class="ts-card__body">
+          <span class="ts-card__tag">Indie</span>
+          <h3 class="ts-card__headline">Waxahatchee's Katie Crutchfield on Creativity and Sobriety</h3>
+          <div class="ts-card__meta">XPN Staff · Feb 9</div>
+        </div>
       </article>
-      <article class="ts-item">
-        <div class="ts-item__img">
-          <div class="ph ph--a" style="height:150px">Photo</div>
+      <article class="ts-card">
+        <div class="ts-card__img">
+          <div class="ph ph--d">Photo</div>
         </div>
-        <span class="ts-item__tag">Playlist</span>
-        <h3 class="ts-item__headline">XPN Staff Picks: 10 Songs We Can't Stop Playing</h3>
-        <div class="ts-item__meta">XPN Staff · Feb 7</div>
+        <div class="ts-card__body">
+          <span class="ts-card__tag">Album Review</span>
+          <h3 class="ts-card__headline">MJ Lenderman's 'Manning Fireworks' Is Controlled Chaos</h3>
+          <div class="ts-card__meta">XPN Staff · Feb 8</div>
+        </div>
       </article>
-      <article class="ts-item">
-        <div class="ts-item__img">
-          <div class="ph ph--b" style="height:150px">Photo</div>
+      <article class="ts-card">
+        <div class="ts-card__img">
+          <div class="ph ph--e">Photo</div>
         </div>
-        <span class="ts-item__tag">Interview</span>
-        <h3 class="ts-item__headline">A Conversation with Adrianne Lenker on Song and Silence</h3>
-        <div class="ts-item__meta">XPN Staff · Feb 6</div>
+        <div class="ts-card__body">
+          <span class="ts-card__tag">Interview</span>
+          <h3 class="ts-card__headline">A Conversation with Adrianne Lenker on Song and Silence</h3>
+          <div class="ts-card__meta">XPN Staff · Feb 6</div>
+        </div>
       </article>
     </div>
 
@@ -1592,36 +1612,36 @@
               <div class="oap__item">
                 <div class="oap__time">03:22<sup>PM</sup></div>
                 <div class="oap__info">
-                  <div class="oap__song">Landslide</div>
-                  <div class="oap__show">Fleetwood Mac · |World Cafe|</div>
+                  <div class="oap__song">Nirvanna the Band the Show the Movie 2-16-2026 Hour 2, Part 5</div>
+                  <div class="oap__show">|World Cafe|</div>
                 </div>
               </div>
               <div class="oap__item">
-                <div class="oap__time">03:17<sup>PM</sup></div>
+                <div class="oap__time">03:05<sup>PM</sup></div>
                 <div class="oap__info">
-                  <div class="oap__song">Mykonos</div>
-                  <div class="oap__show">Fleet Foxes · |World Cafe|</div>
+                  <div class="oap__song">Nirvanna the Band the Show the Movie 2-16-2026 Hour 2, Part 3</div>
+                  <div class="oap__show">|World Cafe|</div>
                 </div>
               </div>
               <div class="oap__item">
-                <div class="oap__time">03:12<sup>PM</sup></div>
+                <div class="oap__time">03:00<sup>PM</sup></div>
                 <div class="oap__info">
-                  <div class="oap__song">Motion Sickness</div>
-                  <div class="oap__show">Phoebe Bridgers · |World Cafe|</div>
+                  <div class="oap__song">Nirvanna the Band the Show the Movie 2-16-2026 Hour 2, Part 2</div>
+                  <div class="oap__show">|World Cafe|</div>
                 </div>
               </div>
               <div class="oap__item">
-                <div class="oap__time">03:07<sup>PM</sup></div>
+                <div class="oap__time">02:59<sup>PM</sup></div>
                 <div class="oap__info">
-                  <div class="oap__song">First Day of My Life</div>
-                  <div class="oap__show">Bright Eyes · |World Cafe|</div>
+                  <div class="oap__song">Nirvanna the Band the Show the Movie 2-16-2026 Hour 2, Part 1</div>
+                  <div class="oap__show">|World Cafe|</div>
                 </div>
               </div>
               <div class="oap__item">
-                <div class="oap__time">03:02<sup>PM</sup></div>
+                <div class="oap__time">02:50<sup>PM</sup></div>
                 <div class="oap__info">
-                  <div class="oap__song">Pink Rabbits</div>
-                  <div class="oap__show">The National · |World Cafe|</div>
+                  <div class="oap__song">Nirvanna the Band the Show the Movie 2-16-2026 Hour 1, Part 7</div>
+                  <div class="oap__show">|World Cafe|</div>
                 </div>
               </div>
             </div>
