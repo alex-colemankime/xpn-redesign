@@ -18,7 +18,7 @@
     - One accent: XPN's signature orange-red, used only for interactive elements
   */
 
-  @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap');
 
   :root {
     /* Warm neutral palette — closer to XPN's earthy tones */
@@ -34,20 +34,15 @@
     /* Single accent */
     --xpn-red: #D93E01;
     --xpn-red-hover: #C23600;
-    --xpn-red-light: rgba(217,62,1,0.08);
     /* Header (dark, KEXP-style) */
-    --header-bg: #111111;
     --header-text: #FFFFFF;
     --header-muted: #888888;
-    --header-border: rgba(255,255,255,0.08);
     /* Type */
-    --font-display: 'Figtree', system-ui, -apple-system, sans-serif;
-    --font-ui: 'Figtree', system-ui, -apple-system, sans-serif;
-    --font-body: 'Figtree', system-ui, -apple-system, sans-serif;
-    /* Spacing scale: 4, 8, 12, 16, 24, 32, 48, 64, 96, 128 */
+    --font: 'Figtree', system-ui, -apple-system, sans-serif;
+    /* Spacing scale: 4, 8, 12, 16, 24, 32, 48, 64, 96 */
     --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px;
     --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
-    --s9: 96px; --s10: 128px;
+    --s9: 96px;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -55,7 +50,7 @@
   body {
     background: var(--cream);
     color: var(--ink);
-    font-family: var(--font-body);
+    font-family: var(--font);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
@@ -139,7 +134,7 @@
     flex: 1;
   }
   .header-np-info__label {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -148,7 +143,7 @@
     line-height: 1;
   }
   .header-np-info__show {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.85rem;
     color: rgba(255,255,255,0.6);
     white-space: nowrap;
@@ -157,7 +152,7 @@
     line-height: 1.3;
   }
   .header-np-info__track {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 1.05rem;
     color: #FFFFFF;
     white-space: nowrap;
@@ -168,7 +163,7 @@
   .header-np-info__track strong { font-weight: 600; }
   .header-np-info__track span { color: rgba(255,255,255,0.55); font-weight: 400; }
   .header-np-info__album {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.78rem;
     color: rgba(255,255,255,0.4);
     text-transform: uppercase;
@@ -226,7 +221,7 @@
   .header-menu-btn:hover { color: #FFFFFF; }
   .header-menu-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
   .header-menu-btn__text {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.85rem;
     font-weight: 500;
   }
@@ -238,7 +233,7 @@
     gap: var(--s5);
   }
   .header-nav-primary a {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 1.1rem;
     font-weight: 600;
     color: #FFFFFF;
@@ -255,7 +250,7 @@
     margin-left: auto;
   }
   .header-nav-secondary a {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -311,7 +306,7 @@
     padding: var(--s5) 0;
   }
   .ts-featured__tag {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -321,7 +316,7 @@
     display: inline-block;
   }
   .ts-featured__headline {
-    font-family: var(--font-display);
+    font-family: var(--font);
     font-size: clamp(1.6rem, 2.5vw, 2.2rem);
     font-weight: 700;
     line-height: 1.18;
@@ -337,7 +332,7 @@
     margin-bottom: var(--s3);
   }
   .ts-featured__meta {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.72rem;
     color: var(--ink-muted);
   }
@@ -386,7 +381,7 @@
     padding: var(--s3) var(--s4) var(--s4);
   }
   .ts-card__tag {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -396,7 +391,7 @@
     display: inline-block;
   }
   .ts-card__headline {
-    font-family: var(--font-display);
+    font-family: var(--font);
     font-size: 1rem;
     font-weight: 700;
     line-height: 1.3;
@@ -404,7 +399,7 @@
     transition: color 0.15s;
   }
   .ts-card__meta {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.68rem;
     color: var(--ink-muted);
     margin-top: var(--s2);
@@ -459,7 +454,7 @@
     min-width: 0;
   }
   .promo-strip__title {
-    font-family: var(--font-display);
+    font-family: var(--font);
     font-size: 1.05rem;
     font-weight: 700;
     color: var(--ink);
@@ -471,7 +466,7 @@
     color: var(--ink-light);
   }
   .promo-strip__desc {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.8rem;
     color: var(--ink-muted);
     margin-top: 2px;
@@ -492,18 +487,18 @@
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    padding: var(--s7) 0 var(--s6);
+    padding: var(--s6) 0 var(--s5);
     border-bottom: 2px solid var(--ink);
-    margin-bottom: var(--s6);
+    margin-bottom: var(--s5);
   }
   .sec-head__title {
-    font-family: var(--font-display);
+    font-family: var(--font);
     font-size: clamp(1.6rem, 2.5vw, 2.4rem);
     font-weight: 500;
     letter-spacing: -0.02em;
   }
   .sec-head__link {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.06em;
@@ -521,7 +516,7 @@
      VIDEO SECTION — Featured session + grid
      ════════════════════════════════════════════════════════════════ */
   .video-section {
-    padding-bottom: var(--s9);
+    padding-bottom: var(--s7);
   }
 
   .video-layout {
@@ -574,7 +569,7 @@
   .video-featured__play svg { width: 24px; height: 24px; fill: white; margin-left: 3px; }
 
   .video-featured__tag {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -583,7 +578,7 @@
     margin-bottom: var(--s2);
   }
   .video-featured__title {
-    font-family: var(--font-display);
+    font-family: var(--font);
     font-size: 1.6rem;
     font-weight: 700;
     color: white;
@@ -621,7 +616,7 @@
   .video-thumb__duration {
     position: absolute;
     bottom: 6px; right: 6px;
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.6rem;
     font-weight: 600;
     background: rgba(0,0,0,0.75);
@@ -632,7 +627,7 @@
 
   .video-thumb__body { padding-top: 2px; }
   .video-thumb__show {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -641,7 +636,7 @@
     margin-bottom: 4px;
   }
   .video-thumb__title {
-    font-family: var(--font-display);
+    font-family: var(--font);
     font-size: 1rem;
     font-weight: 700;
     line-height: 1.3;
@@ -659,7 +654,7 @@
   .on-air-band {
     background: var(--ink);
     color: white;
-    padding: var(--s7) 0;
+    padding: var(--s6) 0;
   }
   .on-air-band .container {
     display: grid;
@@ -681,12 +676,11 @@
   }
   .on-air-art img { width: 100%; height: 100%; object-fit: cover; }
 
-  .on-air-details {}
   .on-air-details__live {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -700,8 +694,9 @@
     background: var(--xpn-red);
     animation: pulse-dot 1.5s ease-in-out infinite;
   }
+  @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
   .on-air-details__song {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-weight: 600;
     font-size: 1.1rem;
   }
@@ -729,7 +724,7 @@
     min-width: 140px;
   }
   .sched-slot__time {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.62rem;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -738,7 +733,7 @@
     margin-bottom: 4px;
   }
   .sched-slot__name {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-weight: 600;
     font-size: 0.9rem;
   }
@@ -752,7 +747,7 @@
   /* ════════════════════════════════════════════════════════════════
      STORIES SECTION — Three-column + sidebar
      ════════════════════════════════════════════════════════════════ */
-  .stories-section { padding-bottom: var(--s9); }
+  .stories-section { padding-bottom: var(--s7); }
 
   .stories-layout {
     display: grid;
@@ -788,7 +783,7 @@
   .story-item:hover .story-item__img img { transform: scale(1.03); }
 
   .story-item__tag {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.58rem;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -798,7 +793,7 @@
     display: inline-block;
   }
   .story-item__title {
-    font-family: var(--font-display);
+    font-family: var(--font);
     font-size: 1.05rem;
     font-weight: 700;
     line-height: 1.3;
@@ -811,7 +806,6 @@
   }
 
   /* Sidebar */
-  .sidebar {}
   .sidebar__block {
     padding-bottom: var(--s6);
     margin-bottom: var(--s6);
@@ -835,7 +829,7 @@
     background: #f3efe8;
   }
   .oap__title {
-    font-family: var(--font-display);
+    font-family: var(--font);
     font-size: 1.1rem;
     font-weight: 800;
     color: var(--ink);
@@ -845,7 +839,7 @@
     line-height: 1.3;
   }
   .oap__link {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.78rem;
     font-weight: 600;
     color: var(--ink-medium);
@@ -854,7 +848,7 @@
   .oap__link:hover { color: var(--xpn-red); }
 
   .oap__date {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.04em;
@@ -878,7 +872,7 @@
   .oap__item:last-child { border-bottom: none; }
 
   .oap__time {
-    font-family: var(--font-display);
+    font-family: var(--font);
     font-size: 1.15rem;
     font-weight: 800;
     color: var(--ink);
@@ -899,14 +893,14 @@
     min-width: 0;
   }
   .oap__song {
-    font-family: var(--font-display);
+    font-family: var(--font);
     font-size: 0.88rem;
     font-weight: 700;
     line-height: 1.3;
     color: var(--ink);
   }
   .oap__artist {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.8rem;
     font-weight: 400;
     color: var(--ink-medium);
@@ -918,7 +912,7 @@
      EVENTS — Horizontal scrolling cards
      ════════════════════════════════════════════════════════════════ */
   .events-section {
-    padding: var(--s7) 0 var(--s9);
+    padding: var(--s6) 0 var(--s7);
     background: var(--cream-dark);
   }
 
@@ -956,7 +950,7 @@
   .event-card__body { padding: var(--s4); }
 
   .event-card__date {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.62rem;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -965,7 +959,7 @@
     margin-bottom: var(--s2);
   }
   .event-card__name {
-    font-family: var(--font-display);
+    font-family: var(--font);
     font-weight: 700;
     font-size: 1.05rem;
     line-height: 1.25;
@@ -977,120 +971,21 @@
   }
 
   /* ════════════════════════════════════════════════════════════════
-     MEMBERSHIP CTA — Full width band
-     ════════════════════════════════════════════════════════════════ */
-  .membership-band {
-    padding: var(--s9) 0;
-    text-align: center;
-  }
-  .membership-band__eyebrow {
-    font-family: var(--font-ui);
-    font-size: 0.62rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--xpn-red);
-    margin-bottom: var(--s4);
-  }
-  .membership-band__headline {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 900;
-    line-height: 1.1;
-    max-width: 700px;
-    margin: 0 auto var(--s5);
-  }
-  .membership-band__text {
-    font-size: 1rem;
-    color: var(--ink-light);
-    max-width: 520px;
-    margin: 0 auto var(--s6);
-    line-height: 1.7;
-  }
-  .btn-join {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--s3);
-    font-family: var(--font-ui);
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    padding: 0.9em 2.5em;
-    border: none;
-    border-radius: 4px;
-    background: var(--xpn-red);
-    color: white;
-    transition: background 0.15s, transform 0.15s;
-  }
-  .btn-join:hover {
-    background: var(--xpn-red-hover);
-    transform: translateY(-1px);
-  }
-
-  .newsletter-inline {
-    margin-top: var(--s7);
-    padding-top: var(--s6);
-    border-top: 1px solid var(--ink-faint);
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .newsletter-inline__label {
-    font-family: var(--font-ui);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-medium);
-    margin-bottom: var(--s3);
-  }
-  .newsletter-form {
-    display: flex;
-    gap: var(--s2);
-  }
-  .newsletter-form input {
-    flex: 1;
-    padding: 0.7em 1em;
-    border: 1px solid var(--ink-faint);
-    border-radius: 4px;
-    background: var(--white);
-    font-family: var(--font-body);
-    font-size: 0.88rem;
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  .newsletter-form input:focus { border-color: var(--ink-medium); }
-  .newsletter-form input::placeholder { color: var(--ink-muted); }
-  .newsletter-form button {
-    padding: 0.7em 1.5em;
-    border: none;
-    border-radius: 4px;
-    background: var(--ink);
-    color: var(--cream);
-    font-family: var(--font-ui);
-    font-weight: 600;
-    font-size: 0.82rem;
-    transition: background 0.15s;
-  }
-  .newsletter-form button:hover { background: var(--ink-medium); }
-
-  /* ════════════════════════════════════════════════════════════════
      FOOTER — Light, clean
      ════════════════════════════════════════════════════════════════ */
   .site-footer {
     background: var(--ink);
     color: var(--header-text);
-    padding: var(--s8) 0 var(--s6);
+    padding: var(--s7) 0 var(--s5);
   }
   .footer-grid {
     display: grid;
     grid-template-columns: 2fr repeat(3, 1fr);
     gap: var(--s7);
-    margin-bottom: var(--s8);
+    margin-bottom: var(--s7);
   }
   .footer-brand__logo {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-weight: 700;
     font-size: 1.4rem;
     margin-bottom: var(--s3);
@@ -1130,7 +1025,7 @@
   .footer-social a svg { width: 14px; height: 14px; fill: currentColor; }
 
   .footer-col__title {
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.62rem;
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -1203,7 +1098,7 @@
   .ph {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-ui); font-size: 0.6rem; font-weight: 600;
+    font-family: var(--font); font-size: 0.6rem; font-weight: 600;
     letter-spacing: 0.1em; text-transform: uppercase;
     color: rgba(0,0,0,0.15);
   }
@@ -1226,7 +1121,7 @@
     background: var(--cream-dark);
     border: 1px dashed var(--ink-faint);
     color: var(--ink-muted);
-    font-family: var(--font-ui);
+    font-family: var(--font);
     font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -1237,11 +1132,6 @@
     height: 90px;
     margin-top: var(--s5);
     margin-bottom: var(--s2);
-  }
-  .ad-slot--rectangle {
-    width: 300px;
-    height: 250px;
-    margin: var(--s6) auto;
   }
   .ad-slot--sidebar {
     width: 100%;
@@ -1408,7 +1298,7 @@
 <!-- ═════════════ EVENTS ═════════════ -->
 <section class="events-section">
   <div class="container">
-    <div class="sec-head" style="border-bottom-color: var(--ink);">
+    <div class="sec-head">
       <h2 class="sec-head__title">Upcoming Events</h2>
       <a href="#" class="sec-head__link">
         Full Calendar
