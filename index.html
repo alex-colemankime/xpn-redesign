@@ -410,47 +410,73 @@
     margin-top: var(--s2);
   }
 
-  /* CTA banner */
-  .top-stories-cta {
-    background: var(--ink);
-    border-radius: 6px;
-    padding: var(--s5) var(--s6);
+  /* Promo strip — Vox-style 3-up links */
+  .promo-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: var(--s7);
+    border-top: 1px dotted var(--ink-muted);
+    border-bottom: 1px dotted var(--ink-muted);
+  }
+  .promo-strip__item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--s5);
-    margin-top: var(--s6);
-  }
-  .top-stories-cta__text {
-    font-family: var(--font-display);
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: #FFFFFF;
-    line-height: 1.3;
-  }
-  .top-stories-cta__text span {
-    color: rgba(255,255,255,0.5);
-    font-weight: 400;
-    font-size: 0.85rem;
-    display: block;
-    margin-top: 2px;
-  }
-  .top-stories-cta__btn {
-    flex-shrink: 0;
-    font-family: var(--font-ui);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.7em 1.8em;
-    border: none;
-    border-radius: 4px;
-    background: var(--xpn-red);
-    color: white;
+    gap: var(--s4);
+    padding: var(--s5) var(--s5);
     cursor: pointer;
     transition: background 0.15s;
+    text-decoration: none;
+    color: inherit;
   }
-  .top-stories-cta__btn:hover { background: var(--xpn-red-hover); }
+  .promo-strip__item:hover { background: var(--cream-dark); }
+  .promo-strip__item:not(:last-child) {
+    border-right: 1px dotted var(--ink-muted);
+  }
+  .promo-strip__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: var(--xpn-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .promo-strip__icon svg {
+    width: 22px;
+    height: 22px;
+    fill: white;
+    stroke: none;
+  }
+  .promo-strip__icon--outline svg {
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .promo-strip__text {
+    min-width: 0;
+  }
+  .promo-strip__title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .promo-strip__title .arrow {
+    font-weight: 400;
+    margin-left: 4px;
+    color: var(--ink-light);
+  }
+  .promo-strip__desc {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
 
   /* Divider line between sections */
   .section-rule {
@@ -1157,7 +1183,8 @@
     .header-now-playing { height: 64px; }
     .header-nav-row { height: 44px; }
     .ts-cards { grid-template-columns: 1fr; }
-    .top-stories-cta { flex-direction: column; text-align: center; }
+    .promo-strip { grid-template-columns: 1fr; }
+    .promo-strip__item:not(:last-child) { border-right: none; border-bottom: 1px dotted var(--ink-muted); }
     .story-row { grid-template-columns: 1fr; gap: var(--s5); }
     .footer-grid { grid-template-columns: 1fr; }
     .footer-bottom { flex-direction: column; gap: var(--s3); text-align: center; }
@@ -1338,13 +1365,35 @@
       </article>
     </div>
 
-    <!-- CTA banner -->
-    <div class="top-stories-cta">
-      <div class="top-stories-cta__text">
-        Become a Part of WXPN
-        <span>Your support keeps independent music on the air.</span>
-      </div>
-      <button class="top-stories-cta__btn">Join Now</button>
+    <!-- Promo strip — Vox-style -->
+    <div class="promo-strip">
+      <a href="#" class="promo-strip__item">
+        <div class="promo-strip__icon promo-strip__icon--outline">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 4 12 13 22 4"/></svg>
+        </div>
+        <div class="promo-strip__text">
+          <div class="promo-strip__title">Newsletters <span class="arrow">&rarr;</span></div>
+          <div class="promo-strip__desc">XPN picks in your inbox</div>
+        </div>
+      </a>
+      <a href="#" class="promo-strip__item">
+        <div class="promo-strip__icon">
+          <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </div>
+        <div class="promo-strip__text">
+          <div class="promo-strip__title">Donate <span class="arrow">&rarr;</span></div>
+          <div class="promo-strip__desc">Support independent radio</div>
+        </div>
+      </a>
+      <a href="#" class="promo-strip__item">
+        <div class="promo-strip__icon promo-strip__icon--outline">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="promo-strip__text">
+          <div class="promo-strip__title">Streaming Archive <span class="arrow">&rarr;</span></div>
+          <div class="promo-strip__desc">Listen to past sessions</div>
+        </div>
+      </a>
     </div>
   </div>
 </section>
