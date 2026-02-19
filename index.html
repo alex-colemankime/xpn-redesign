@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WXPN 88.5 — Where Music Matters</title>
+<style>
+  /*
+    WXPN REDESIGN v2 — "The Broadsheet"
+
+    Philosophy:
+    - Cream canvas, ink-weight typography, photography does the color work
+    - KEXP-style header: dark sticky bar, logo left, nav center, listen/donate right
+    - No single giant hero. Instead: a curated editorial mosaic up top
+    - Content organized by intent (Listen / Watch / Read) not CMS type
+    - Bold serif headlines at magazine scale
+    - Generous but purposeful whitespace
+    - One accent: XPN's signature orange-red, used only for interactive elements
+  */
+
+  @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    /* Warm neutral palette — closer to XPN's earthy tones */
+    --cream: #F0EBE3;
+    --cream-dark: #E5DED4;
+    --cream-deep: #D9D0C4;
+    --white: #FDFCFA;
+    --ink: #1A1714;
+    --ink-medium: #3D3833;
+    --ink-light: #6B6560;
+    --ink-muted: #9E9890;
+    --ink-faint: #C8C2BA;
+    /* Single accent */
+    --xpn-red: #D93E01;
+    --xpn-red-hover: #C23600;
+    /* Header (dark, KEXP-style) */
+    --header-text: #FFFFFF;
+    --header-muted: #888888;
+    /* Type */
+    --font: 'Figtree', system-ui, -apple-system, sans-serif;
+    /* Spacing scale: 4, 8, 12, 16, 24, 32, 48, 64, 96 */
+    --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px;
+    --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
+    --s9: 96px;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--font);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  button { cursor: pointer; font-family: inherit; }
+
+  .container { max-width: 1360px; margin: 0 auto; padding: 0 var(--s7); }
+
+  /* ════════════════════════════════════════════════════════════════
+     HEADER — Matching KEXP.org layout
+     Row 1 (now playing): Logo icon | Play btn | Album art | Now playing text | Search
+     Row 2 (nav): Hamburger+Menu | Listen Watch Read | Events VisitXPN DonorLounge | Playlist | Donate
+     ════════════════════════════════════════════════════════════════ */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  /* ── Row 1: Now Playing ── */
+  .header-now-playing {
+    background: #292119;
+    height: 100px;
+    display: flex;
+    align-items: center;
+  }
+  .header-now-playing .container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: var(--s5);
+  }
+
+  /* Logo: WXPN SVG */
+  .header-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .header-logo svg {
+    height: 42px;
+    width: auto;
+  }
+
+  /* Large circular play button */
+  .header-play-btn {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    border: 2.5px solid rgba(255,255,255,0.35);
+    background: none;
+    color: #FFFFFF;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-left: var(--s4);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .header-play-btn:hover {
+    border-color: #C4922A;
+    background: rgba(196,146,42,0.15);
+  }
+  .header-play-btn svg { width: 22px; height: 22px; margin-left: 2px; }
+
+  /* Album art thumbnail */
+  .header-album-art {
+    width: 68px; height: 68px;
+    border-radius: 4px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #1a1510;
+  }
+  .header-album-art img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Now playing text block */
+  .header-np-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+  }
+  .header-np-info__label {
+    font-family: var(--font);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #C4922A;
+    line-height: 1;
+  }
+  .header-np-info__show {
+    font-family: var(--font);
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+  }
+  .header-np-info__track {
+    font-family: var(--font);
+    font-size: 1.05rem;
+    color: #FFFFFF;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+  }
+  .header-np-info__track strong { font-weight: 600; }
+  .header-np-info__track span { color: rgba(255,255,255,0.55); font-weight: 400; }
+  .header-np-info__album {
+    font-family: var(--font);
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+  }
+
+  /* Search icon (far right of row 1) */
+  .header-search-btn {
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    border: none; background: none;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: color 0.15s;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .header-search-btn:hover { color: #FFFFFF; }
+  .header-search-btn svg { width: 20px; height: 20px; }
+
+  /* ── Row 2: Navigation ── */
+  .header-nav-row {
+    background: #3B3024;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+  }
+  .header-nav-row .container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 0;
+  }
+
+  /* Hamburger + Menu label */
+  .header-menu-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--s2);
+    border: none;
+    background: none;
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    padding: 6px 0;
+    margin-right: var(--s6);
+    flex-shrink: 0;
+    transition: color 0.15s;
+  }
+  .header-menu-btn:hover { color: #FFFFFF; }
+  .header-menu-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .header-menu-btn__text {
+    font-family: var(--font);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  /* Primary nav: Listen Watch Read (bigger, bolder) */
+  .header-nav-primary {
+    display: flex;
+    align-items: center;
+    gap: var(--s5);
+  }
+  .header-nav-primary a {
+    font-family: var(--font);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    transition: color 0.15s;
+    white-space: nowrap;
+  }
+  .header-nav-primary a:hover { color: #C4922A; }
+
+  /* Secondary nav: Events, Visit, Donor Lounge (smaller, uppercase) */
+  .header-nav-secondary {
+    display: flex;
+    align-items: center;
+    gap: var(--s5);
+    margin-left: auto;
+  }
+  .header-nav-secondary a {
+    font-family: var(--font);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    transition: color 0.15s;
+    white-space: nowrap;
+  }
+  .header-nav-secondary a:hover { color: #FFFFFF; }
+
+  /* Playlist + Donate (bigger, last items) */
+  .header-nav-secondary a.nav-playlist {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #FFFFFF;
+    margin-left: var(--s4);
+  }
+  .header-nav-secondary a.nav-playlist:hover { color: #C4922A; }
+
+  .header-nav-secondary a.nav-donate {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #C4922A;
+  }
+  .header-nav-secondary a.nav-donate:hover { color: #D9A83A; }
+
+  /* ════════════════════════════════════════════════════════════════
+     TOP STORIES — NPR-inspired clean layout
+     Featured story side-by-side, then 4-up card row below
+     ════════════════════════════════════════════════════════════════ */
+  .top-stories {
+    padding: var(--s6) 0 var(--s7);
+  }
+
+  /* Featured story: image right, text left — side by side */
+  .ts-featured {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s7);
+    align-items: center;
+    padding-bottom: var(--s6);
+    border-bottom: 1px solid var(--ink-faint);
+    cursor: pointer;
+  }
+  .ts-featured:hover .ts-featured__headline { color: var(--xpn-red); }
+  .ts-featured:hover .ts-featured__img img { transform: scale(1.02); }
+
+  .ts-featured__text {
+    padding: var(--s5) 0;
+  }
+  .ts-featured__tag {
+    font-family: var(--font);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--xpn-red);
+    margin-bottom: var(--s3);
+    display: inline-block;
+  }
+  .ts-featured__headline {
+    font-family: var(--font);
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    transition: color 0.2s;
+    margin-bottom: var(--s3);
+  }
+  .ts-featured__excerpt {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--ink-light);
+    margin-bottom: var(--s3);
+  }
+  .ts-featured__meta {
+    font-family: var(--font);
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+  }
+  .ts-featured__img {
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--cream-dark);
+    aspect-ratio: 4/3;
+  }
+  .ts-featured__img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  /* 4-up card row below featured */
+  .ts-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s5);
+    padding-top: var(--s6);
+  }
+
+  .ts-card {
+    cursor: pointer;
+    background: var(--white);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 7px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s;
+  }
+  .ts-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+  .ts-card:hover .ts-card__headline { color: var(--xpn-red); }
+  .ts-card:hover .ts-card__img img { transform: scale(1.03); }
+
+  .ts-card__img {
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    background: var(--cream-dark);
+  }
+  .ts-card__img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .ts-card__body {
+    padding: var(--s3) var(--s4) var(--s4);
+  }
+  .ts-card__tag {
+    font-family: var(--font);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--xpn-red);
+    margin-bottom: var(--s1);
+    display: inline-block;
+  }
+  .ts-card__headline {
+    font-family: var(--font);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+    transition: color 0.15s;
+  }
+  .ts-card__meta {
+    font-family: var(--font);
+    font-size: 0.68rem;
+    color: var(--ink-muted);
+    margin-top: var(--s2);
+  }
+
+  /* Promo strip — Vox-style 3-up links */
+  .promo-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: var(--s7);
+    border-top: 1px dotted var(--ink-muted);
+    border-bottom: 1px dotted var(--ink-muted);
+  }
+  .promo-strip__item {
+    display: flex;
+    align-items: center;
+    gap: var(--s4);
+    padding: var(--s5) var(--s5);
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .promo-strip__item:hover { background: var(--cream-dark); }
+  .promo-strip__item:not(:last-child) {
+    border-right: 1px dotted var(--ink-muted);
+  }
+  .promo-strip__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: var(--xpn-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .promo-strip__icon svg {
+    width: 22px;
+    height: 22px;
+    fill: white;
+    stroke: none;
+  }
+  .promo-strip__icon--outline svg {
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .promo-strip__text {
+    min-width: 0;
+  }
+  .promo-strip__title {
+    font-family: var(--font);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .promo-strip__title .arrow {
+    font-weight: 400;
+    margin-left: 4px;
+    color: var(--ink-light);
+  }
+  .promo-strip__desc {
+    font-family: var(--font);
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  /* Divider line between sections */
+  .section-rule {
+    border: none;
+    border-top: 1px solid var(--ink-faint);
+    margin: 0;
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     SECTION HEADER
+     ════════════════════════════════════════════════════════════════ */
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: var(--s6) 0 var(--s5);
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: var(--s5);
+  }
+  .sec-head__title {
+    font-family: var(--font);
+    font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .sec-head__link {
+    font-family: var(--font);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--xpn-red);
+    display: flex;
+    align-items: center;
+    gap: var(--s2);
+    transition: gap 0.2s;
+  }
+  .sec-head__link:hover { gap: var(--s3); }
+  .sec-head__link svg { width: 14px; height: 14px; }
+
+  /* ════════════════════════════════════════════════════════════════
+     VIDEO SECTION — Featured session + grid
+     ════════════════════════════════════════════════════════════════ */
+  .video-section {
+    padding-bottom: var(--s7);
+  }
+
+  .video-layout {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: var(--s5);
+  }
+
+  .video-featured {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--ink);
+    aspect-ratio: 16/9;
+  }
+  .video-featured img {
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: 0.85;
+    transition: opacity 0.3s, transform 0.5s;
+  }
+  .video-featured:hover img { opacity: 0.7; transform: scale(1.02); }
+
+  .video-featured__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--s6);
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 55%);
+  }
+  .video-featured__play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255,255,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .video-featured:hover .video-featured__play {
+    background: var(--xpn-red);
+    border-color: var(--xpn-red);
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+  .video-featured__play svg { width: 24px; height: 24px; fill: white; margin-left: 3px; }
+
+  .video-featured__tag {
+    font-family: var(--font);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--xpn-red);
+    margin-bottom: var(--s2);
+  }
+  .video-featured__title {
+    font-family: var(--font);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: var(--s1);
+  }
+  .video-featured__meta {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .video-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s4);
+  }
+
+  .video-thumb {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: var(--s4);
+    cursor: pointer;
+    align-items: start;
+  }
+  .video-thumb:hover .video-thumb__title { color: var(--xpn-red); }
+
+  .video-thumb__img {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    background: var(--cream-dark);
+  }
+  .video-thumb__img img { width: 100%; height: 100%; object-fit: cover; }
+  .video-thumb__duration {
+    position: absolute;
+    bottom: 6px; right: 6px;
+    font-family: var(--font);
+    font-size: 0.6rem;
+    font-weight: 600;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  .video-thumb__body { padding-top: 2px; }
+  .video-thumb__show {
+    font-family: var(--font);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--xpn-red);
+    margin-bottom: 4px;
+  }
+  .video-thumb__title {
+    font-family: var(--font);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    transition: color 0.15s;
+  }
+  .video-thumb__meta {
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    margin-top: 4px;
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     ON AIR + SCHEDULE — Horizontal band
+     ════════════════════════════════════════════════════════════════ */
+  .on-air-band {
+    background: var(--ink);
+    color: white;
+    padding: var(--s6) 0;
+  }
+  .on-air-band .container {
+    display: grid;
+    grid-template-columns: auto 1px 1fr;
+    gap: var(--s7);
+    align-items: center;
+  }
+  .on-air-now {
+    display: flex;
+    align-items: center;
+    gap: var(--s5);
+  }
+  .on-air-art {
+    width: 88px; height: 88px;
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #222;
+  }
+  .on-air-art img { width: 100%; height: 100%; object-fit: cover; }
+
+  .on-air-details__live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--xpn-red);
+    margin-bottom: var(--s2);
+  }
+  .on-air-details__live .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--xpn-red);
+    animation: pulse-dot 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .on-air-details__song {
+    font-family: var(--font);
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .on-air-details__artist {
+    font-size: 0.85rem;
+    color: var(--header-muted);
+    margin-top: 2px;
+  }
+  .on-air-details__show {
+    font-size: 0.78rem;
+    color: var(--header-muted);
+    margin-top: var(--s2);
+  }
+  .on-air-details__show strong { color: white; font-weight: 500; }
+
+  .on-air-divider { background: rgba(255,255,255,0.1); width: 1px; align-self: stretch; }
+
+  .on-air-schedule {
+    display: flex;
+    gap: var(--s6);
+    overflow-x: auto;
+  }
+  .sched-slot {
+    flex-shrink: 0;
+    min-width: 140px;
+  }
+  .sched-slot__time {
+    font-family: var(--font);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--header-muted);
+    margin-bottom: 4px;
+  }
+  .sched-slot__name {
+    font-family: var(--font);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .sched-slot__host {
+    font-size: 0.78rem;
+    color: var(--header-muted);
+  }
+  .sched-slot--active .sched-slot__time { color: var(--xpn-red); }
+  .sched-slot--active .sched-slot__name { color: white; }
+
+  /* ════════════════════════════════════════════════════════════════
+     STORIES SECTION — Three-column + sidebar
+     ════════════════════════════════════════════════════════════════ */
+  .stories-section { padding-bottom: var(--s7); }
+
+  .stories-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: var(--s7);
+  }
+
+  .stories-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .story-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--s5);
+    padding: var(--s6) 0;
+    border-bottom: 1px solid var(--ink-faint);
+  }
+  .story-row:first-child { padding-top: 0; }
+
+  .story-item { cursor: pointer; }
+  .story-item:hover .story-item__title { color: var(--xpn-red); }
+
+  .story-item__img {
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 3/2;
+    margin-bottom: var(--s3);
+    background: var(--cream-dark);
+  }
+  .story-item__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .story-item:hover .story-item__img img { transform: scale(1.03); }
+
+  .story-item__tag {
+    font-family: var(--font);
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--xpn-red);
+    margin-bottom: var(--s1);
+    display: inline-block;
+  }
+  .story-item__title {
+    font-family: var(--font);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+    transition: color 0.15s;
+  }
+  .story-item__meta {
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    margin-top: var(--s2);
+  }
+
+  /* Sidebar */
+  .sidebar__block {
+    padding-bottom: var(--s6);
+    margin-bottom: var(--s6);
+    border-bottom: 1px solid var(--ink-faint);
+  }
+  .sidebar__block:last-child { border-bottom: none; }
+
+  /* On-Air Playlist — exact match to xpn.org widget */
+  .oap {
+    background: var(--white);
+    border-radius: 0;
+    border: 1px solid rgba(0,0,0,0.08);
+    overflow: hidden;
+    box-shadow: 5px 5px 0 0 #F5C088;
+  }
+  .oap__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px 10px;
+    background: #f3efe8;
+  }
+  .oap__title {
+    font-family: var(--font);
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--ink);
+    background: var(--white);
+    padding: 4px 12px;
+    border: 1px solid rgba(0,0,0,0.1);
+    line-height: 1.3;
+  }
+  .oap__link {
+    font-family: var(--font);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--ink-medium);
+    transition: color 0.15s;
+  }
+  .oap__link:hover { color: var(--xpn-red); }
+
+  .oap__date {
+    font-family: var(--font);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    padding: 6px 16px;
+    background: #f3efe8;
+    border-top: 1px solid #e5e0d7;
+  }
+
+  .oap__list {
+    padding: 0;
+  }
+  .oap__item {
+    display: flex;
+    gap: 14px;
+    padding: 14px 16px;
+    align-items: center;
+    border-bottom: 1px solid #e5e0d7;
+  }
+  .oap__item:last-child { border-bottom: none; }
+
+  .oap__time {
+    font-family: var(--font);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--ink);
+    flex-shrink: 0;
+    min-width: 68px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .oap__time sup {
+    font-size: 0.48rem;
+    font-weight: 700;
+    vertical-align: super;
+    margin-left: 1px;
+  }
+
+  .oap__info {
+    flex: 1;
+    min-width: 0;
+  }
+  .oap__song {
+    font-family: var(--font);
+    font-size: 0.88rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .oap__artist {
+    font-family: var(--font);
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--ink-medium);
+    margin-top: 3px;
+    line-height: 1.3;
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     EVENTS — Horizontal scrolling cards
+     ════════════════════════════════════════════════════════════════ */
+  .events-section {
+    padding: var(--s6) 0 var(--s7);
+    background: var(--cream-dark);
+  }
+
+  .events-scroll {
+    display: flex;
+    gap: var(--s4);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--s4);
+    -webkit-overflow-scrolling: touch;
+  }
+  .events-scroll::-webkit-scrollbar { height: 4px; }
+  .events-scroll::-webkit-scrollbar-track { background: transparent; }
+  .events-scroll::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 2px; }
+
+  .event-card {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .event-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+
+  .event-card__img {
+    height: 160px;
+    background: var(--cream-deep);
+    overflow: hidden;
+  }
+  .event-card__img img { width: 100%; height: 100%; object-fit: cover; }
+
+  .event-card__body { padding: var(--s4); }
+
+  .event-card__date {
+    font-family: var(--font);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--xpn-red);
+    margin-bottom: var(--s2);
+  }
+  .event-card__name {
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 1.05rem;
+    line-height: 1.25;
+    margin-bottom: var(--s1);
+  }
+  .event-card__venue {
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     FOOTER — Light, clean
+     ════════════════════════════════════════════════════════════════ */
+  .site-footer {
+    background: var(--ink);
+    color: var(--header-text);
+    padding: var(--s7) 0 var(--s5);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    gap: var(--s7);
+    margin-bottom: var(--s7);
+  }
+  .footer-brand__logo {
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: var(--s3);
+    display: flex;
+    align-items: center;
+    gap: var(--s3);
+  }
+  .footer-bars {
+    display: flex; align-items: flex-end; gap: 3px; height: 20px;
+  }
+  .footer-bars span { width: 3px; background: var(--xpn-red); border-radius: 1px; }
+  .footer-bars span:nth-child(1) { height: 40%; }
+  .footer-bars span:nth-child(2) { height: 70%; }
+  .footer-bars span:nth-child(3) { height: 100%; }
+  .footer-bars span:nth-child(4) { height: 55%; }
+
+  .footer-brand__text {
+    font-size: 0.85rem;
+    color: var(--header-muted);
+    line-height: 1.6;
+    max-width: 320px;
+    margin-bottom: var(--s5);
+  }
+  .footer-social {
+    display: flex;
+    gap: var(--s3);
+  }
+  .footer-social a {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--header-muted);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .footer-social a:hover { color: white; border-color: rgba(255,255,255,0.3); }
+  .footer-social a svg { width: 14px; height: 14px; fill: currentColor; }
+
+  .footer-col__title {
+    font-family: var(--font);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--header-muted);
+    margin-bottom: var(--s4);
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: var(--s2); }
+  .footer-col a {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    transition: color 0.15s;
+  }
+  .footer-col a:hover { color: white; }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--s6);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.72rem;
+    color: var(--header-muted);
+  }
+  .footer-bottom__links {
+    display: flex;
+    gap: var(--s5);
+  }
+  .footer-bottom__links a {
+    color: var(--header-muted);
+    transition: color 0.15s;
+  }
+  .footer-bottom__links a:hover { color: rgba(255,255,255,0.7); }
+
+  /* ════════════════════════════════════════════════════════════════
+     RESPONSIVE
+     ════════════════════════════════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .ts-featured { grid-template-columns: 1fr; }
+    .ts-featured__img { aspect-ratio: 16/9; }
+    .ts-cards { grid-template-columns: 1fr 1fr; }
+    .video-layout { grid-template-columns: 1fr; }
+    .stories-layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .on-air-band .container { grid-template-columns: 1fr; gap: var(--s5); }
+    .on-air-divider { display: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .container { padding: 0 var(--s5); }
+    .header-nav-primary { display: none; }
+    .header-nav-secondary { display: none; }
+    .header-np-info__show { display: none; }
+    .header-np-info__album { display: none; }
+    .header-now-playing { height: 64px; }
+    .header-nav-row { height: 44px; }
+    .ts-cards { grid-template-columns: 1fr; }
+    .promo-strip { grid-template-columns: 1fr; }
+    .promo-strip__item:not(:last-child) { border-right: none; border-bottom: 1px dotted var(--ink-muted); }
+    .story-row { grid-template-columns: 1fr; gap: var(--s5); }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: var(--s3); text-align: center; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     PLACEHOLDER IMAGES (mockup only)
+     ═══════════════════════════════════════════════════════════════ */
+  .ph {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font); font-size: 0.6rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(0,0,0,0.15);
+  }
+  .ph--a { background: linear-gradient(135deg, #DDD0C0 0%, #CCBFAD 100%); }
+  .ph--b { background: linear-gradient(135deg, #C5CDD2 0%, #ADB7BE 100%); }
+  .ph--c { background: linear-gradient(135deg, #CFC3B0 0%, #BFB29E 100%); }
+  .ph--d { background: linear-gradient(135deg, #B8C3C0 0%, #A3AFAC 100%); }
+  .ph--e { background: linear-gradient(135deg, #D2C8BB 0%, #C0B5A7 100%); }
+  .ph--dark { background: linear-gradient(135deg, #333 0%, #222 100%); color: rgba(255,255,255,0.15); }
+
+
+  /* ════════════════════════════════════════════════════════════════
+     BANNER AD SPACES
+     ════════════════════════════════════════════════════════════════ */
+  .ad-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background: var(--cream-dark);
+    border: 1px dashed var(--ink-faint);
+    color: var(--ink-muted);
+    font-family: var(--font);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .ad-slot--leaderboard {
+    max-width: 728px;
+    height: 90px;
+    margin-top: var(--s5);
+    margin-bottom: var(--s2);
+  }
+  .ad-slot--sidebar {
+    width: 100%;
+    height: 250px;
+    margin-bottom: var(--s6);
+  }
+</style>
+</head>
+<body>
+
+<!-- ═════════════ HEADER — KEXP-style ═════════════ -->
+<header class="site-header">
+  <!-- Row 1: Now Playing -->
+  <div class="header-now-playing">
+    <div class="container">
+      <a href="/" class="header-logo">
+        <svg viewBox="0 0 196 62" xmlns="http://www.w3.org/2000/svg"><g fill="#FFFFFF" fill-rule="evenodd"><path d="M138.902234,21.2979581 C138.902234,21.0187442 138.913866,20.7395303 138.900489,20.4608993 C138.774281,17.8372213 138.445676,15.2607591 137.052157,12.9518525 C135.200916,9.88574581 131.063397,9.04285793 128.258329,11.1838864 C126.704287,12.3701083 125.951112,14.0716226 125.492228,15.9077892 C124.603539,19.465289 124.580857,23.0571805 125.250863,26.6467404 C125.600406,28.5184644 126.237261,30.2969229 127.634269,31.6772538 C130.471326,34.4787193 135.406222,33.6200929 137.375528,29.9862318 C138.850471,27.2663737 138.990637,24.297613 138.902234,21.2979581 L138.902234,21.2979581 Z M137.758804,0.000174873004 C138.099041,0.28638369 138.536406,0.224012319 138.927824,0.316695011 C144.453628,1.62824254 148.115979,5.08140147 150.247551,10.2553108 C151.877201,14.2086065 152.259314,18.3700011 152.12729,22.5978474 C151.998756,26.7405889 151.253723,30.7457636 149.327456,34.4629808 C145.861106,41.153039 139.272133,44.0081322 132.432489,42.6027362 C129.764679,42.053635 127.488287,40.7712329 125.478851,38.9653777 C125.33345,38.8342229 125.215967,38.5526774 124.987397,38.6686765 C124.773949,38.7765149 124.905973,39.0510655 124.905973,39.2457574 C124.896667,46.2861446 124.88678,53.3259488 124.910044,60.366336 C124.91237,61.0460091 124.71986,61.215053 124.05567,61.2109726 C120.125201,61.1847416 116.194732,61.1975657 112.263682,61.222668 C111.759433,61.2255453 111.653581,61.0576673 111.654163,60.5825956 C111.66405,40.9542667 111.663468,21.3253548 111.650091,1.69702593 C111.650091,1.14559305 111.752453,0.933413806 112.367789,0.938659996 C116.089462,0.969554227 119.811136,0.968971317 123.532228,0.939242906 C124.135931,0.933996716 124.284821,1.12111083 124.258068,1.68711646 C124.215611,2.58712952 124.246436,3.49064004 124.246436,4.37491453 C124.515718,4.48216997 124.599468,4.28398057 124.701249,4.19188079 C127.18818,1.93835067 130.083979,0.573175417 133.411907,0.134244176 C133.524157,0.119088516 133.646293,0.123168886 133.710851,0.000174873004 L137.758804,0.000174873004 Z"/><path d="M19.7668617,24.6345933 C20.331016,23.0543242 20.6183276,21.5241854 21.0161436,20.0272725 C21.6780071,17.5359151 22.2817104,15.0288192 22.9255442,12.5327985 C23.8654136,8.88902798 24.8297104,5.25166948 25.7521318,1.6032357 C25.8725234,1.12816404 26.0446777,0.957371408 26.5367134,0.960285958 C29.9559537,0.978356168 33.3751941,0.976607438 36.7944344,0.959678021 C37.2556451,0.957371408 37.4376866,1.11767166 37.5487727,1.562432 C38.7468736,6.36502761 39.964749,11.1617941 41.1808795,15.9591435 C41.8776392,18.7052326 42.5807964,21.449573 43.2839537,24.1933304 C43.3118706,24.3023346 43.3706125,24.4037609 43.4851881,24.6724824 C43.8294967,23.4955871 44.1249507,22.4650022 44.4314552,21.4379148 C45.455657,18.0074893 46.4943988,14.5811443 47.5075501,11.1478043 C48.3369151,8.33934383 49.1389448,5.52388846 49.9502801,2.71076473 C50.066019,2.31030555 50.1666362,1.905766 50.2742326,1.50297518 C50.3684522,1.15089753 50.5522386,0.959120138 50.9616866,0.960285958 C54.8229448,0.972527068 58.684203,0.971361248 62.5454611,0.963200508 C63.0223751,0.962034688 63.1607964,1.09610399 63.007835,1.58516549 C61.7015561,5.75588665 60.4098172,9.93185399 59.121568,14.1084042 C58.0531644,17.5720556 57.0033721,21.040953 55.9308973,24.5028556 C54.5001555,29.1195029 53.0537104,33.731487 51.6171525,38.3469685 C51.3059953,39.3466591 50.9901852,40.345184 50.708108,41.3524525 C50.5836451,41.796047 50.3882267,41.9913219 49.8892119,41.9884073 C46.0744819,41.9685884 42.2597519,41.9779149 38.445022,41.9831611 C38.1030398,41.9831611 37.8093306,41.977332 37.6953365,41.550059 C36.8147905,38.2496225 35.9191228,34.9532664 35.0315976,31.6539957 C33.9690101,27.7041974 32.9104938,23.7526504 31.8490694,19.8022693 C31.8252237,19.7154157 31.786838,19.6320595 31.701924,19.4006443 C31.4454374,20.2487783 31.2098884,20.9628431 31.0133068,21.6874003 C29.9018647,25.7916697 28.798565,29.8988536 27.6946837,34.0060376 C27.0560843,36.3819788 26.4081792,38.7550055 25.7957519,41.1379416 C25.6404641,41.7424193 25.4049151,42.0053117 24.7157163,41.9984526 C20.9242504,41.958096 17.1327846,41.9703371 13.3413187,41.9895731 C12.8440487,41.9919048 12.5962861,41.8537551 12.4439062,41.3594474 C10.2425412,34.2257947 8.0272178,27.0962223 5.80607834,19.9683986 C4.68474896,16.3712609 3.53841068,12.782284 2.41417329,9.18631208 C1.62319407,6.6553168 0.860131751,4.11616078 0.0627548961,1.58808004 C-0.0890433234,1.10776219 0.0249507418,0.962617598 0.515823145,0.963783418 C4.37708131,0.974275798 8.23833947,0.974275798 12.0995976,0.962617598 C12.5084641,0.961451778 12.726565,1.07745087 12.8487015,1.49598026 C13.7589092,4.61688048 14.6888914,7.7319516 15.6177104,10.8470227 C16.9460902,15.3039527 18.2785412,19.7602997 19.6104107,24.2160639 C19.640654,24.3180731 19.6848558,24.416002 19.7668617,24.6345933" opacity="0.746117001"/><path d="M170.413799,5.79476675 C171.615972,4.45057625 172.734974,3.33896685 174.081384,2.4803404 C177.249954,0.461140112 180.730262,-0.0424941401 184.388541,0.3614625 C186.813823,0.629601107 189.043687,1.43751439 190.996126,2.93559312 C193.77793,5.07079251 195.065598,7.99175459 195.409325,11.4064415 C195.563449,12.9389119 195.584969,14.4754627 195.584969,16.0137622 C195.583224,24.4047519 195.577408,32.7963244 195.597201,41.1873141 C195.598927,41.8057816 195.481443,42.0156292 194.809111,42.0093592 C190.925752,41.9730768 187.04123,41.978323 183.157871,42.0063027 C182.557657,42.0098001 182.373289,41.8833087 182.375615,41.246188 C182.400043,34.5100799 182.414001,27.7733888 182.370963,21.0372807 C182.359912,19.3450929 182.388411,17.6307546 181.933598,15.9682952 C181.123426,13.0071124 178.592292,11.4554059 175.578428,12.0732905 C172.537811,12.6958384 170.990749,14.5180151 170.719722,17.8475971 C170.632482,18.9149054 170.583627,19.9880427 170.581882,21.0588484 C170.57025,27.7949565 170.568506,34.5316476 170.589443,41.2677557 C170.59177,41.842505 170.458001,42.0098001 169.86942,42.0063027 C165.915687,41.978323 161.961954,41.9812375 158.008221,42.0004736 C157.493503,42.0028052 157.343449,41.8786454 157.344029,41.3417853 C157.361479,28.1487829 157.363224,14.9557805 157.346357,1.76277817 C157.345776,1.14431065 157.473147,0.933297224 158.13501,0.938543414 C161.995687,0.971769285 165.856363,0.964191455 169.71704,0.943789604 C170.24688,0.940875054 170.448114,1.0539596 170.427758,1.63162342 C170.382393,2.95074878 170.413799,4.27162288 170.413799,5.79476675"/><path d="M106.018668,0.951892054 C105.428923,1.84316147 104.938633,2.59744702 104.435547,3.34298893 C100.751677,8.79902667 97.0689709,14.2562302 93.371143,19.7023585 C93.0983715,20.1039835 93.0721994,20.3884436 93.3531134,20.8046413 C95.4858493,23.9686769 97.5924131,27.1507827 99.7082825,30.3258935 C102.185909,34.0431107 104.664698,37.7597449 107.139998,41.477545 C107.22433,41.6040365 107.40579,41.7241159 107.291214,41.9019035 C107.187689,42.0627866 106.994597,41.9875913 106.840472,41.9881742 C102.397612,41.9910887 97.9547513,41.9852596 93.5118908,42.0015811 C93.1204724,42.0033298 92.9355228,41.8342859 92.7412677,41.5410822 C90.609695,38.3199214 88.4664902,35.1075044 86.3285199,31.890424 C85.863238,31.1903491 85.8754516,31.1920978 85.420057,31.8764341 C83.2797602,35.0911829 81.1295763,38.2989367 78.9991668,41.5212632 C78.7665258,41.8739238 78.5193448,42.0004153 78.0976831,41.9986665 C73.6548226,41.9840938 69.211962,41.9916716 64.7691015,41.9875913 C64.595784,41.9870083 64.3654694,42.0936809 64.2555466,41.9036522 C64.1357365,41.6949704 64.3805911,41.5760568 64.4748107,41.4349926 C67.6800214,36.6364773 70.8927929,31.8432083 74.103238,27.0487734 C75.5008285,24.9613726 76.8844605,22.8646453 78.3029887,20.7924002 C78.5885555,20.3744537 78.5484249,20.0981544 78.2785614,19.6953636 C74.2503834,13.6861442 70.2390718,7.66526669 66.2306682,1.64322333 C66.1091134,1.4607725 65.8281994,1.2806533 65.9503359,1.05273549 C66.0718908,0.825983491 66.3731608,0.961801524 66.5935881,0.961218614 C70.8974457,0.955389514 75.2007217,0.966464804 79.503416,0.941399673 C80.0815288,0.938485123 80.4159501,1.10986067 80.7346682,1.6065 C82.3933982,4.18704263 84.0974932,6.73843977 85.8562588,9.4064189 C86.5309175,8.40439659 87.1602113,7.4734893 87.7854338,6.54083327 C88.9393329,4.82066582 90.0967217,3.1022471 91.2360807,1.37333599 C91.4041638,1.11918723 91.55887,0.947811684 91.8868938,0.947811684 C96.5373864,0.953640784 101.188461,0.951892054 106.018668,0.951892054"/></g></svg>
+      </a>
+
+      <button class="header-play-btn" aria-label="Play">
+        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+      </button>
+
+      <div class="header-album-art">
+        <div class="ph ph--dark" style="height:68px;font-size:0.4rem;">Art</div>
+      </div>
+
+      <div class="header-np-info">
+        <span class="header-np-info__label">Now Playing</span>
+        <span class="header-np-info__show">The World Cafe with Raina Douris</span>
+        <span class="header-np-info__track"><strong>Dove Ellis</strong> <span>&mdash; Little Left Hope</span></span>
+        <span class="header-np-info__album">Blizzard</span>
+      </div>
+
+      <button class="header-search-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Row 2: Navigation -->
+  <div class="header-nav-row">
+    <div class="container">
+      <button class="header-menu-btn" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <span class="header-menu-btn__text">Menu</span>
+      </button>
+
+      <nav class="header-nav-primary">
+        <a href="#">Listen</a>
+        <a href="#watch">Watch</a>
+        <a href="#read">Read</a>
+      </nav>
+
+      <nav class="header-nav-secondary">
+        <a href="#">Events</a>
+        <a href="#">Visit WXPN</a>
+        <a href="#">Concert Calendar</a>
+        <a href="#" class="nav-playlist">Playlist</a>
+        <a href="#" class="nav-donate">Donate</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ═════════════ LEADERBOARD AD ═════════════ -->
+<div class="container">
+  <div class="ad-slot ad-slot--leaderboard">Ad — 728&times;90</div>
+</div>
+
+<!-- ═════════════ TOP STORIES ═════════════ -->
+<section class="top-stories">
+  <div class="container">
+    <!-- Featured story: text left, image right -->
+    <article class="ts-featured">
+      <div class="ts-featured__text">
+        <span class="ts-featured__tag">Feature</span>
+        <h2 class="ts-featured__headline">How Technology Amplified Black Music's Cultural Exchange Across the Atlantic</h2>
+        <p class="ts-featured__excerpt">From 78 RPM records to streaming playlists, a history of the machines that carried the sound — and how Philadelphia was at the center of it all.</p>
+        <div class="ts-featured__meta">XPN Staff · Feb 11, 2026</div>
+      </div>
+      <div class="ts-featured__img">
+        <div class="ph ph--a">Lead Photo</div>
+      </div>
+    </article>
+
+    <!-- 4-up card row -->
+    <div class="ts-cards">
+      <article class="ts-card">
+        <div class="ts-card__img">
+          <div class="ph ph--b">Photo</div>
+        </div>
+        <div class="ts-card__body">
+          <span class="ts-card__tag">Live Review</span>
+          <h3 class="ts-card__headline">Brandi Carlile Made Xfinity Mobile Arena Feel Intimate</h3>
+          <div class="ts-card__meta">XPN Staff · Feb 12</div>
+        </div>
+      </article>
+      <article class="ts-card">
+        <div class="ts-card__img">
+          <div class="ph ph--c">Photo</div>
+        </div>
+        <div class="ts-card__body">
+          <span class="ts-card__tag">Indie</span>
+          <h3 class="ts-card__headline">Waxahatchee's Katie Crutchfield on Creativity and Sobriety</h3>
+          <div class="ts-card__meta">XPN Staff · Feb 9</div>
+        </div>
+      </article>
+      <article class="ts-card">
+        <div class="ts-card__img">
+          <div class="ph ph--d">Photo</div>
+        </div>
+        <div class="ts-card__body">
+          <span class="ts-card__tag">Album Review</span>
+          <h3 class="ts-card__headline">MJ Lenderman's 'Manning Fireworks' Is Controlled Chaos</h3>
+          <div class="ts-card__meta">XPN Staff · Feb 8</div>
+        </div>
+      </article>
+      <article class="ts-card">
+        <div class="ts-card__img">
+          <div class="ph ph--e">Photo</div>
+        </div>
+        <div class="ts-card__body">
+          <span class="ts-card__tag">Interview</span>
+          <h3 class="ts-card__headline">A Conversation with Adrianne Lenker on Song and Silence</h3>
+          <div class="ts-card__meta">XPN Staff · Feb 6</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Promo strip — Vox-style -->
+    <div class="promo-strip">
+      <a href="#" class="promo-strip__item">
+        <div class="promo-strip__icon promo-strip__icon--outline">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 4 12 13 22 4"/></svg>
+        </div>
+        <div class="promo-strip__text">
+          <div class="promo-strip__title">Newsletters <span class="arrow">&rarr;</span></div>
+          <div class="promo-strip__desc">XPN picks in your inbox</div>
+        </div>
+      </a>
+      <a href="#" class="promo-strip__item">
+        <div class="promo-strip__icon">
+          <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </div>
+        <div class="promo-strip__text">
+          <div class="promo-strip__title">Donate <span class="arrow">&rarr;</span></div>
+          <div class="promo-strip__desc">Support independent radio</div>
+        </div>
+      </a>
+      <a href="#" class="promo-strip__item">
+        <div class="promo-strip__icon promo-strip__icon--outline">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="promo-strip__text">
+          <div class="promo-strip__title">Streaming Archive <span class="arrow">&rarr;</span></div>
+          <div class="promo-strip__desc">Listen to past sessions</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ EVENTS ═════════════ -->
+<section class="events-section">
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="sec-head__title">Upcoming Events</h2>
+      <a href="#" class="sec-head__link">
+        Full Calendar
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="events-scroll">
+      <div class="event-card">
+        <div class="event-card__img"><div class="ph ph--a">Photo</div></div>
+        <div class="event-card__body">
+          <div class="event-card__date">Tue, Feb 18</div>
+          <div class="event-card__name">Free at Noon: Hurray for the Riff Raff</div>
+          <div class="event-card__venue">World Cafe Live</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card__img"><div class="ph ph--b">Photo</div></div>
+        <div class="event-card__body">
+          <div class="event-card__date">Sat, Feb 22</div>
+          <div class="event-card__name">XPN Welcomes: Julien Baker</div>
+          <div class="event-card__venue">Union Transfer</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card__img"><div class="ph ph--c">Photo</div></div>
+        <div class="event-card__body">
+          <div class="event-card__date">Wed, Mar 5</div>
+          <div class="event-card__name">XPN Concert: The National</div>
+          <div class="event-card__venue">The Met Philadelphia</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card__img"><div class="ph ph--d">Photo</div></div>
+        <div class="event-card__body">
+          <div class="event-card__date">Fri, Mar 14</div>
+          <div class="event-card__name">Free at Noon: Faye Webster</div>
+          <div class="event-card__venue">World Cafe Live</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card__img"><div class="ph ph--e">Photo</div></div>
+        <div class="event-card__body">
+          <div class="event-card__date">Sat, Mar 22</div>
+          <div class="event-card__name">XPN Welcomes: Big Thief</div>
+          <div class="event-card__venue">The Fillmore Philadelphia</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card__img"><div class="ph ph--a">Photo</div></div>
+        <div class="event-card__body">
+          <div class="event-card__date">Fri, Apr 4</div>
+          <div class="event-card__name">XPN Concert: Bon Iver</div>
+          <div class="event-card__venue">The Mann Center</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ VIDEO SECTION ═════════════ -->
+<section id="watch" class="video-section">
+  <div class="container">
+    <hr class="section-rule">
+    <div class="sec-head">
+      <h2 class="sec-head__title">Watch</h2>
+      <a href="#" class="sec-head__link">
+        All Sessions
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="video-layout">
+      <!-- Featured video -->
+      <div class="video-featured">
+        <div class="ph ph--dark" style="position:absolute;inset:0;">Featured Session</div>
+        <div class="video-featured__overlay">
+          <div class="video-featured__play">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          </div>
+          <span class="video-featured__tag">World Cafe Session</span>
+          <h3 class="video-featured__title">Hurray for the Riff Raff — Full Session</h3>
+          <span class="video-featured__meta">18 min · Recorded Feb 5, 2026</span>
+        </div>
+      </div>
+
+      <!-- Sidebar thumbnails -->
+      <div class="video-sidebar">
+        <div class="video-thumb">
+          <div class="video-thumb__img">
+            <div class="ph ph--dark">Thumb</div>
+            <span class="video-thumb__duration">24:10</span>
+          </div>
+          <div class="video-thumb__body">
+            <span class="video-thumb__show">Free at Noon</span>
+            <h4 class="video-thumb__title">Japanese Breakfast</h4>
+            <span class="video-thumb__meta">Jan 31, 2026</span>
+          </div>
+        </div>
+        <div class="video-thumb">
+          <div class="video-thumb__img">
+            <div class="ph ph--dark">Thumb</div>
+            <span class="video-thumb__duration">32:45</span>
+          </div>
+          <div class="video-thumb__body">
+            <span class="video-thumb__show">Indie Rock Hit Parade</span>
+            <h4 class="video-thumb__title">The War on Drugs</h4>
+            <span class="video-thumb__meta">Jan 24, 2026</span>
+          </div>
+        </div>
+        <div class="video-thumb">
+          <div class="video-thumb__img">
+            <div class="ph ph--dark">Thumb</div>
+            <span class="video-thumb__duration">19:30</span>
+          </div>
+          <div class="video-thumb__body">
+            <span class="video-thumb__show">World Cafe Session</span>
+            <h4 class="video-thumb__title">Faye Webster</h4>
+            <span class="video-thumb__meta">Jan 17, 2026</span>
+          </div>
+        </div>
+        <div class="video-thumb">
+          <div class="video-thumb__img">
+            <div class="ph ph--dark">Thumb</div>
+            <span class="video-thumb__duration">28:15</span>
+          </div>
+          <div class="video-thumb__body">
+            <span class="video-thumb__show">Free at Noon</span>
+            <h4 class="video-thumb__title">Bartees Strange</h4>
+            <span class="video-thumb__meta">Jan 10, 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ MID-PAGE AD ═════════════ -->
+<div class="container">
+  <div class="ad-slot ad-slot--leaderboard">Ad — 728&times;90</div>
+</div>
+
+<!-- ═════════════ ON AIR BAND ═════════════ -->
+<section class="on-air-band">
+  <div class="container">
+    <div class="on-air-now">
+      <div class="on-air-art">
+        <div class="ph ph--dark" style="height:88px">Art</div>
+      </div>
+      <div class="on-air-details">
+        <div class="on-air-details__live"><span class="dot"></span> On Air</div>
+        <div class="on-air-details__song">Landslide</div>
+        <div class="on-air-details__artist">Fleetwood Mac</div>
+        <div class="on-air-details__show"><strong>World Cafe</strong> with Raina Douris</div>
+      </div>
+    </div>
+    <div class="on-air-divider"></div>
+    <div class="on-air-schedule">
+      <div class="sched-slot sched-slot--active">
+        <div class="sched-slot__time">Now — 2:00 PM</div>
+        <div class="sched-slot__name">World Cafe</div>
+        <div class="sched-slot__host">Raina Douris</div>
+      </div>
+      <div class="sched-slot">
+        <div class="sched-slot__time">2:00 PM</div>
+        <div class="sched-slot__name">Press Play</div>
+        <div class="sched-slot__host">Kristen Kurtis</div>
+      </div>
+      <div class="sched-slot">
+        <div class="sched-slot__time">6:00 PM</div>
+        <div class="sched-slot__name">Funky Friday</div>
+        <div class="sched-slot__host">Robert Drake</div>
+      </div>
+      <div class="sched-slot">
+        <div class="sched-slot__time">9:00 PM</div>
+        <div class="sched-slot__name">Rhythm & Roots</div>
+        <div class="sched-slot__host">Helen Leicht</div>
+      </div>
+      <div class="sched-slot">
+        <div class="sched-slot__time">12:00 AM</div>
+        <div class="sched-slot__name">Sleepy Hollow</div>
+        <div class="sched-slot__host">Dan Reed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ STORIES + SIDEBAR ═════════════ -->
+<section id="read" class="stories-section">
+  <div class="container">
+    <hr class="section-rule">
+    <div class="sec-head">
+      <h2 class="sec-head__title">Read</h2>
+      <a href="#" class="sec-head__link">
+        All Stories
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="stories-layout">
+      <div class="stories-list">
+        <div class="story-row">
+          <article class="story-item">
+            <div class="story-item__img"><div class="ph ph--c">Photo</div></div>
+            <span class="story-item__tag">World Cafe</span>
+            <h3 class="story-item__title">How Mdou Moctar Is Rewriting the Guitar Hero Playbook</h3>
+            <div class="story-item__meta">XPN Staff · Feb 6</div>
+          </article>
+          <article class="story-item">
+            <div class="story-item__img"><div class="ph ph--d">Photo</div></div>
+            <span class="story-item__tag">Press Play</span>
+            <h3 class="story-item__title">The Rise of Philly's DIY Venue Scene After the Pandemic</h3>
+            <div class="story-item__meta">XPN Staff · Feb 5</div>
+          </article>
+          <article class="story-item">
+            <div class="story-item__img"><div class="ph ph--e">Photo</div></div>
+            <span class="story-item__tag">Opinion</span>
+            <h3 class="story-item__title">Why We Still Need College Radio in 2026</h3>
+            <div class="story-item__meta">XPN Staff · Feb 4</div>
+          </article>
+        </div>
+        <div class="story-row">
+          <article class="story-item">
+            <div class="story-item__img"><div class="ph ph--a">Photo</div></div>
+            <span class="story-item__tag">Album Review</span>
+            <h3 class="story-item__title">Arooj Aftab's New Record Is a Hymn to Patience</h3>
+            <div class="story-item__meta">XPN Staff · Feb 3</div>
+          </article>
+          <article class="story-item">
+            <div class="story-item__img"><div class="ph ph--b">Photo</div></div>
+            <span class="story-item__tag">Feature</span>
+            <h3 class="story-item__title">Inside the Making of XPN's New Podcast Series</h3>
+            <div class="story-item__meta">XPN Staff · Feb 2</div>
+          </article>
+          <article class="story-item">
+            <div class="story-item__img"><div class="ph ph--c">Photo</div></div>
+            <span class="story-item__tag">Interview</span>
+            <h3 class="story-item__title">Sharon Van Etten on Motherhood, Memory, and Making Music</h3>
+            <div class="story-item__meta">XPN Staff · Feb 1</div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Sidebar: Ad + Recently Played -->
+      <aside class="sidebar">
+        <div class="sidebar__block">
+          <div class="ad-slot ad-slot--sidebar">Ad — 300&times;250</div>
+        </div>
+        <div class="sidebar__block" style="border-bottom:none; padding-bottom:0;">
+          <div class="oap">
+            <div class="oap__header">
+              <span class="oap__title">On-Air Playlist</span>
+              <a href="#" class="oap__link">View More</a>
+            </div>
+            <div class="oap__date">17 February</div>
+            <div class="oap__list">
+              <div class="oap__item">
+                <div class="oap__time">10:20<sup>AM</sup></div>
+                <div class="oap__info">
+                  <div class="oap__song">The Hand</div>
+                  <div class="oap__artist">Annabelle Dinda</div>
+                </div>
+              </div>
+              <div class="oap__item">
+                <div class="oap__time">10:15<sup>AM</sup></div>
+                <div class="oap__info">
+                  <div class="oap__song">Time Is On My Side</div>
+                  <div class="oap__artist">The Rolling Stones</div>
+                </div>
+              </div>
+              <div class="oap__item">
+                <div class="oap__time">10:11<sup>AM</sup></div>
+                <div class="oap__info">
+                  <div class="oap__song">Count the Ways</div>
+                  <div class="oap__artist">The Last Dinner Party</div>
+                </div>
+              </div>
+              <div class="oap__item">
+                <div class="oap__time">10:08<sup>AM</sup></div>
+                <div class="oap__info">
+                  <div class="oap__song">Unbelievers</div>
+                  <div class="oap__artist">Vampire Weekend</div>
+                </div>
+              </div>
+              <div class="oap__item">
+                <div class="oap__time">10:06<sup>AM</sup></div>
+                <div class="oap__info">
+                  <div class="oap__song">Sweet Love</div>
+                  <div class="oap__artist">Stephen Sanchez</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═════════════ FOOTER ═════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand__logo">
+          <div class="footer-bars"><span></span><span></span><span></span><span></span></div>
+          WXPN
+        </div>
+        <p class="footer-brand__text">Listener-powered public radio from the University of Pennsylvania. Where the music matters since 1945.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.35 29 29 0 0 0-.46-5.33z" fill="none" stroke="currentColor" stroke-width="2"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-col__title">Discover</h4>
+        <ul>
+          <li><a href="#">Music News</a></li>
+          <li><a href="#">Album Reviews</a></li>
+          <li><a href="#">Sessions</a></li>
+          <li><a href="#">Playlists</a></li>
+          <li><a href="#">Concert Calendar</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-col__title">Programs</h4>
+        <ul>
+          <li><a href="#">World Cafe</a></li>
+          <li><a href="#">Press Play</a></li>
+          <li><a href="#">Indie Rock Hit Parade</a></li>
+          <li><a href="#">Free at Noon</a></li>
+          <li><a href="#">Full Schedule</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-col__title">Support</h4>
+        <ul>
+          <li><a href="#">Become a Member</a></li>
+          <li><a href="#">Donate</a></li>
+          <li><a href="#">Volunteer</a></li>
+          <li><a href="#">Corporate Sponsorship</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 WXPN &middot; University of Pennsylvania &middot; 88.5 FM Philadelphia</span>
+      <div class="footer-bottom__links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+        <a href="#">FCC Public File</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
