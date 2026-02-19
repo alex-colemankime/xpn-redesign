@@ -949,71 +949,75 @@
   .ev-tile:hover .ev-tile__cta { background: var(--xpn-red); border-color: var(--xpn-red); color: #fff; }
   .ev-tile__cta--free { border-color: rgba(217,62,1,0.3); color: var(--xpn-red); }
 
-  /* ── Featured promo tile — spans 2 cols, horizontal layout ── */
+  /* ── Featured promo tile — spans 2 cols, purely horizontal ── */
   .ev-tile--featured {
     grid-column: span 2;
-    flex-direction: row;
-    align-items: stretch;
+    flex-direction: row !important;
+    align-items: center;
     background: var(--ink);
     border-color: transparent;
+    min-height: 120px;
+    gap: 0;
   }
   .ev-tile--featured:hover {
     border-color: transparent;
-    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+    box-shadow: 0 6px 28px rgba(0,0,0,0.22);
   }
+  /* Image pane */
   .ev-tile--featured .ev-tile__thumb {
-    width: 180px;
+    width: 160px;
+    align-self: stretch;
     flex-shrink: 0;
-    background: #222;
+    background: #1e1e1e;
     overflow: hidden;
     position: relative;
   }
   .ev-tile--featured .ev-tile__thumb .ph {
-    width: 100%; height: 100%;
-    position: absolute; inset: 0;
+    position: absolute; inset: 0; width: 100%; height: 100%;
   }
+  /* Red date column */
   .ev-tile--featured .ev-tile__date {
     background: var(--xpn-red);
-    padding: var(--s4) var(--s4);
-    flex-direction: column;
-    align-items: center;
+    align-self: stretch;
+    flex-direction: column !important;
+    align-items: center !important;
     justify-content: center;
-    gap: 2px;
-    width: 72px;
+    gap: 0;
+    width: 68px;
     flex-shrink: 0;
+    padding: var(--s3) var(--s2);
   }
-  .ev-tile--featured .ev-tile__day { font-size: 2rem; color: #fff; }
-  .ev-tile--featured .ev-tile__month { color: rgba(255,255,255,0.75); font-size: 0.65rem; }
-  .ev-tile--featured .ev-tile__dow { color: rgba(255,255,255,0.45); font-size: 0.6rem; }
+  .ev-tile--featured .ev-tile__day {
+    font-size: 1.9rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+  }
+  .ev-tile--featured .ev-tile__month-wrap { align-items: center; gap: 1px; }
+  .ev-tile--featured .ev-tile__month { color: rgba(255,255,255,0.75); font-size: 0.6rem; }
+  .ev-tile--featured .ev-tile__dow   { color: rgba(255,255,255,0.4);  font-size: 0.56rem; }
+  /* Text body */
   .ev-tile--featured .ev-tile__body {
     padding: var(--s4) var(--s5);
     justify-content: center;
     flex: 1;
-    gap: var(--s2);
+    gap: 3px;
   }
-  .ev-tile--featured .ev-tile__type {
-    color: var(--xpn-red);
-    font-size: 0.58rem;
-  }
-  .ev-tile--featured .ev-tile__artist {
-    font-size: 1.15rem;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -0.01em;
-  }
+  .ev-tile--featured .ev-tile__type   { color: var(--xpn-red); font-size: 0.56rem; }
+  .ev-tile--featured .ev-tile__artist { font-size: 1.05rem; font-weight: 900; color: #fff; letter-spacing: -0.01em; }
   .ev-tile--featured:hover .ev-tile__artist { color: #fff; }
-  .ev-tile--featured .ev-tile__venue { color: rgba(255,255,255,0.5); font-size: 0.72rem; }
-  .ev-tile--featured .ev-tile__time { color: rgba(255,255,255,0.3); }
+  .ev-tile--featured .ev-tile__venue  { color: rgba(255,255,255,0.45); font-size: 0.7rem; }
+  .ev-tile--featured .ev-tile__time   { color: rgba(255,255,255,0.28); font-size: 0.65rem; }
+  /* CTA pill on the right edge */
   .ev-tile--featured .ev-tile__cta {
-    margin: var(--s4) var(--s5) var(--s4) 0;
-    padding: 0.55em 1.5em;
+    margin: 0 var(--s5) 0 0;
+    padding: 0.55em 1.4em;
     background: var(--xpn-red);
     border-color: var(--xpn-red);
     color: #fff;
-    align-self: center;
+    align-self: auto;
     flex-shrink: 0;
     white-space: nowrap;
-    border-radius: 4px;
   }
   .ev-tile--featured:hover .ev-tile__cta {
     background: var(--xpn-red-hover);
@@ -1459,11 +1463,9 @@
 
     <div class="events-strip">
 
-      <!-- Featured Free at Noon promo — spans 2 cols -->
+      <!-- Featured Free at Noon promo — spans 2 cols, horizontal -->
       <div class="ev-tile ev-tile--featured">
-        <div class="ev-tile__thumb">
-          <div class="ph ph--dark">Photo</div>
-        </div>
+        <div class="ev-tile__thumb"><div class="ph ph--dark">Photo</div></div>
         <div class="ev-tile__date">
           <div class="ev-tile__day">20</div>
           <div class="ev-tile__month-wrap"><span class="ev-tile__month">Feb</span><span class="ev-tile__dow">Fri</span></div>
@@ -1471,8 +1473,8 @@
         <div class="ev-tile__body">
           <div class="ev-tile__type">Free at Noon</div>
           <div class="ev-tile__artist">Ben Arnold &amp; The 48 Hour Orchestra</div>
-          <div class="ev-tile__venue">World Cafe Live · Philadelphia, PA</div>
-          <div class="ev-tile__time">Noon – 1:00 PM · Free &amp; open to the public</div>
+          <div class="ev-tile__venue">World Cafe Live &middot; Philadelphia, PA</div>
+          <div class="ev-tile__time">Noon – 1:00 PM &middot; Free &amp; open to the public</div>
         </div>
         <a href="#" class="ev-tile__cta">Free RSVP</a>
       </div>
