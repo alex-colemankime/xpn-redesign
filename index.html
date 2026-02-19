@@ -1844,25 +1844,18 @@
 <script>
   (function() {
     const header = document.querySelector('.site-header');
-    const npRow  = document.querySelector('.header-now-playing');
-    let lastY = 0;
-    let ticking = false;
-
-    function onScroll() {
-      const y = window.scrollY;
-      if (y > 60 && y > lastY) {
-        header.classList.add('is-collapsed');
-      } else if (y < lastY || y <= 60) {
-        header.classList.remove('is-collapsed');
-      }
-      lastY = y;
-      ticking = false;
-    }
+    const COLLAPSE_AT = 120;   // collapse after scrolling this far down
+    const EXPAND_AT   = 80;    // expand once back above this (hysteresis gap prevents flicker)
+    let collapsed = false;
 
     window.addEventListener('scroll', function() {
-      if (!ticking) {
-        requestAnimationFrame(onScroll);
-        ticking = true;
+      const y = window.scrollY;
+      if (!collapsed && y > COLLAPSE_AT) {
+        collapsed = true;
+        header.classList.add('is-collapsed');
+      } else if (collapsed && y < EXPAND_AT) {
+        collapsed = false;
+        header.classList.remove('is-collapsed');
       }
     }, { passive: true });
   })();
