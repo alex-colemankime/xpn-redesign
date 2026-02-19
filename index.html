@@ -21,10 +21,10 @@
   @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap');
 
   :root {
-    /* Crisp, cool-white palette */
-    --cream: #FFFFFF;
-    --cream-dark: #F4F5F7;
-    --cream-deep: #E6E8EC;
+    /* Off-white palette — slight warm-neutral tint, not beige */
+    --cream: #F8F7F5;
+    --cream-dark: #F0EFED;
+    --cream-deep: #E4E2DF;
     --white: #FFFFFF;
     --ink: #0D0D0F;
     --ink-medium: #2C2D30;
@@ -949,6 +949,77 @@
   .ev-tile:hover .ev-tile__cta { background: var(--xpn-red); border-color: var(--xpn-red); color: #fff; }
   .ev-tile__cta--free { border-color: rgba(217,62,1,0.3); color: var(--xpn-red); }
 
+  /* ── Featured promo tile — spans 2 cols, horizontal layout ── */
+  .ev-tile--featured {
+    grid-column: span 2;
+    flex-direction: row;
+    align-items: stretch;
+    background: var(--ink);
+    border-color: transparent;
+  }
+  .ev-tile--featured:hover {
+    border-color: transparent;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  }
+  .ev-tile--featured .ev-tile__thumb {
+    width: 180px;
+    flex-shrink: 0;
+    background: #222;
+    overflow: hidden;
+    position: relative;
+  }
+  .ev-tile--featured .ev-tile__thumb .ph {
+    width: 100%; height: 100%;
+    position: absolute; inset: 0;
+  }
+  .ev-tile--featured .ev-tile__date {
+    background: var(--xpn-red);
+    padding: var(--s4) var(--s4);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    width: 72px;
+    flex-shrink: 0;
+  }
+  .ev-tile--featured .ev-tile__day { font-size: 2rem; color: #fff; }
+  .ev-tile--featured .ev-tile__month { color: rgba(255,255,255,0.75); font-size: 0.65rem; }
+  .ev-tile--featured .ev-tile__dow { color: rgba(255,255,255,0.45); font-size: 0.6rem; }
+  .ev-tile--featured .ev-tile__body {
+    padding: var(--s4) var(--s5);
+    justify-content: center;
+    flex: 1;
+    gap: var(--s2);
+  }
+  .ev-tile--featured .ev-tile__type {
+    color: var(--xpn-red);
+    font-size: 0.58rem;
+  }
+  .ev-tile--featured .ev-tile__artist {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .ev-tile--featured:hover .ev-tile__artist { color: #fff; }
+  .ev-tile--featured .ev-tile__venue { color: rgba(255,255,255,0.5); font-size: 0.72rem; }
+  .ev-tile--featured .ev-tile__time { color: rgba(255,255,255,0.3); }
+  .ev-tile--featured .ev-tile__cta {
+    margin: var(--s4) var(--s5) var(--s4) 0;
+    padding: 0.55em 1.5em;
+    background: var(--xpn-red);
+    border-color: var(--xpn-red);
+    color: #fff;
+    align-self: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+    border-radius: 4px;
+  }
+  .ev-tile--featured:hover .ev-tile__cta {
+    background: var(--xpn-red-hover);
+    border-color: var(--xpn-red-hover);
+  }
+
   .events-view-all {
     margin-top: var(--s5);
     display: flex;
@@ -967,6 +1038,76 @@
   }
   .events-view-all a:hover { color: var(--ink); gap: var(--s3); }
   .events-view-all svg { width: 13px; height: 13px; }
+
+  /* ════════════════════════════════════════════════════════════════
+     DONATE BAND — Full-width membership CTA above footer
+     ════════════════════════════════════════════════════════════════ */
+  .donate-band {
+    background: var(--xpn-red);
+    padding: var(--s7) 0;
+  }
+  .donate-band .container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--s7);
+    align-items: center;
+  }
+  .donate-band__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: var(--s2);
+  }
+  .donate-band__headline {
+    font-family: var(--font);
+    font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--s3);
+  }
+  .donate-band__sub {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 520px;
+    line-height: 1.6;
+  }
+  .donate-band__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--s3);
+    flex-shrink: 0;
+  }
+  .donate-band__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s2);
+    font-family: var(--font);
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 0.85em 2.2em;
+    border-radius: 4px;
+    background: #fff;
+    color: var(--xpn-red);
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .donate-band__btn:hover { background: rgba(255,255,255,0.88); transform: translateY(-1px); }
+  .donate-band__btn--ghost {
+    background: transparent;
+    color: rgba(255,255,255,0.75);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    font-size: 0.78rem;
+  }
+  .donate-band__btn--ghost:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.6); transform: none; }
 
   /* ════════════════════════════════════════════════════════════════
      FOOTER — Light, clean
@@ -1070,12 +1211,16 @@
     .stories-layout { grid-template-columns: 1fr; }
     .sidebar { display: none; }
     .events-strip { grid-template-columns: repeat(3, 1fr); }
+    .ev-tile--featured { grid-column: span 2; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
   }
 
   @media (max-width: 768px) {
     .container { padding: 0 var(--s5); }
     .events-strip { grid-template-columns: repeat(2, 1fr); }
+    .ev-tile--featured { grid-column: span 2; }
+    .donate-band .container { grid-template-columns: 1fr; gap: var(--s5); }
+    .donate-band__actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
     .header-nav-primary { display: none; }
     .header-nav-secondary { display: none; }
     .header-np-info__show { display: none; }
@@ -1313,6 +1458,24 @@
     </div>
 
     <div class="events-strip">
+
+      <!-- Featured Free at Noon promo — spans 2 cols -->
+      <div class="ev-tile ev-tile--featured">
+        <div class="ev-tile__thumb">
+          <div class="ph ph--dark">Photo</div>
+        </div>
+        <div class="ev-tile__date">
+          <div class="ev-tile__day">20</div>
+          <div class="ev-tile__month-wrap"><span class="ev-tile__month">Feb</span><span class="ev-tile__dow">Fri</span></div>
+        </div>
+        <div class="ev-tile__body">
+          <div class="ev-tile__type">Free at Noon</div>
+          <div class="ev-tile__artist">Ben Arnold &amp; The 48 Hour Orchestra</div>
+          <div class="ev-tile__venue">World Cafe Live · Philadelphia, PA</div>
+          <div class="ev-tile__time">Noon – 1:00 PM · Free &amp; open to the public</div>
+        </div>
+        <a href="#" class="ev-tile__cta">Free RSVP</a>
+      </div>
 
       <div class="ev-tile">
         <div class="ev-tile__date">
@@ -1601,6 +1764,21 @@
   </div>
 </section>
 
+
+<!-- ═════════════ DONATE BAND ═════════════ -->
+<section class="donate-band">
+  <div class="container">
+    <div class="donate-band__copy">
+      <div class="donate-band__eyebrow">Support Independent Radio</div>
+      <h2 class="donate-band__headline">WXPN is listener-funded.<br>And listeners like you make it possible.</h2>
+      <p class="donate-band__sub">Public radio has never needed your support more. Every dollar keeps the music on, the sessions recorded, and the stories told — free from algorithms, free from ads.</p>
+    </div>
+    <div class="donate-band__actions">
+      <a href="#" class="donate-band__btn">Become a Member</a>
+      <a href="#" class="donate-band__btn donate-band__btn--ghost">Make a One-Time Gift</a>
+    </div>
+  </div>
+</section>
 
 <!-- ═════════════ FOOTER ═════════════ -->
 <footer class="site-footer">
