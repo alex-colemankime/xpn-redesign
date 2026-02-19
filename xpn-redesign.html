@@ -21,16 +21,16 @@
   @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700&display=swap');
 
   :root {
-    /* Cream palette */
-    --cream: #F6F1EB;
-    --cream-dark: #EDE6DC;
-    --cream-deep: #E2D9CD;
+    /* Crisp, cool-white palette (no beige) */
+    --cream: #FFFFFF;
+    --cream-dark: #F4F5F7;
+    --cream-deep: #E6E8EC;
     --white: #FFFFFF;
-    --ink: #1A1714;
-    --ink-medium: #3D3833;
-    --ink-light: #6B6560;
-    --ink-muted: #9E9890;
-    --ink-faint: #C8C2BA;
+    --ink: #0D0D0F;
+    --ink-medium: #2C2D30;
+    --ink-light: #4B4D52;
+    --ink-muted: #85878E;
+    --ink-faint: #D1D3D9;
     /* Single accent */
     --xpn-red: #D93E01;
     --xpn-red-hover: #C23600;
@@ -76,20 +76,6 @@
     z-index: 1000;
   }
 
-  /* ── Row 1: Now Playing ── */
-  .header-now-playing {
-    background: #292119;
-    height: 80px;
-    display: flex;
-    align-items: center;
-  }
-  .header-now-playing .container {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: var(--s5);
-  }
-
   /* Logo: WXPN SVG */
   .header-logo {
     display: flex;
@@ -97,110 +83,31 @@
     flex-shrink: 0;
   }
   .header-logo svg {
-    height: 36px;
+    height: 32px;
     width: auto;
   }
 
-  /* Large circular play button */
-  .header-play-btn {
-    width: 52px; height: 52px;
-    border-radius: 50%;
-    border: 2.5px solid rgba(255,255,255,0.35);
-    background: none;
-    color: #FFFFFF;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    flex-shrink: 0;
-    margin-left: var(--s4);
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .header-play-btn:hover {
-    border-color: #C4922A;
-    background: rgba(196,146,42,0.15);
-  }
-  .header-play-btn svg { width: 22px; height: 22px; margin-left: 2px; }
-
-  /* Album art thumbnail */
-  .header-album-art {
-    width: 56px; height: 56px;
-    border-radius: 4px;
-    overflow: hidden;
-    flex-shrink: 0;
-    background: #1a1510;
-  }
-  .header-album-art img { width: 100%; height: 100%; object-fit: cover; }
-
-  /* Now playing text block */
-  .header-np-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 0;
-    flex: 1;
-  }
-  .header-np-info__label {
-    font-family: var(--font-ui);
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #C4922A;
-    line-height: 1;
-  }
-  .header-np-info__show {
-    font-family: var(--font-ui);
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.6);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.3;
-  }
-  .header-np-info__track {
-    font-family: var(--font-ui);
-    font-size: 0.9rem;
-    color: #FFFFFF;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.3;
-  }
-  .header-np-info__track strong { font-weight: 600; }
-  .header-np-info__track span { color: rgba(255,255,255,0.55); font-weight: 400; }
-  .header-np-info__album {
-    font-family: var(--font-ui);
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.4);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.3;
-  }
-
-  /* Search icon (far right of row 1) */
+  /* Search icon in nav */
   .header-search-btn {
-    width: 40px; height: 40px;
+    width: 36px; height: 36px;
     display: flex; align-items: center; justify-content: center;
     border: none; background: none;
     color: rgba(255,255,255,0.6);
     cursor: pointer;
     border-radius: 4px;
     transition: color 0.15s;
-    margin-left: auto;
     flex-shrink: 0;
   }
   .header-search-btn:hover { color: #FFFFFF; }
-  .header-search-btn svg { width: 20px; height: 20px; }
+  .header-search-btn svg { width: 18px; height: 18px; }
 
-  /* ── Row 2: Navigation ── */
+  /* ── Navigation row (now also houses logo + search) ── */
   .header-nav-row {
-    background: #3B3024;
-    height: 52px;
+    background: #141414;
+    height: 60px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(0,0,0,0.15);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
   .header-nav-row .container {
     display: flex;
@@ -366,6 +273,44 @@
   }
   .m-card--lead .m-card__img { height: 420px; }
   .m-card--lead .m-card__headline { font-size: clamp(1.6rem, 2.4vw, 2.2rem); }
+
+  /*
+   * Lead card overlay mode — used on mobile.
+   * Text lives inside the image with a bottom gradient,
+   * NPR-style. Activated via a modifier class applied in the media query
+   * by toggling .m-card--lead-overlay on the element, OR by a
+   * CSS-only approach: we use a media-query-scoped override below.
+   */
+  .m-card--lead-overlay {
+    /* desktop: normal stacked layout */
+  }
+  .m-card--lead-overlay .m-card__img {
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    border-radius: 0;
+  }
+  .m-card--lead-overlay .m-card__body {
+    position: relative;
+    z-index: 2;
+    padding: var(--s5) var(--s5) var(--s4);
+    margin-top: auto;
+    /* text on dark gradient — colors flip */
+  }
+  .m-card--lead-overlay .m-card__tag { color: #FFB347; }
+  .m-card--lead-overlay .m-card__headline { color: #fff; }
+  .m-card--lead-overlay .m-card__excerpt { color: rgba(255,255,255,0.80); font-size: 0.88rem; }
+  .m-card--lead-overlay .m-card__meta { color: rgba(255,255,255,0.55); }
+  /* Gradient scrim */
+  .m-card--lead-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0) 100%);
+    border-radius: 6px;
+    z-index: 1;
+    pointer-events: none;
+  }
 
   .m-card--stack {
     grid-column: span 5;
@@ -563,101 +508,103 @@
     margin-top: 4px;
   }
 
-  /* ════════════════════════════════════════════════════════════════
-     ON AIR + SCHEDULE — Horizontal band
-     ════════════════════════════════════════════════════════════════ */
-  .on-air-band {
-    background: var(--ink);
-    color: white;
-    padding: var(--s7) 0;
+  /* ── Video scroll strip (mobile/tablet) ──
+     NPR-style: horizontal scroll of uniform cards.
+     Hidden on desktop (desktop uses video-layout grid). */
+  .video-scroll-strip {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    display: none; /* activated in tablet/mobile MQ */
+    gap: var(--s4);
+    padding-bottom: var(--s3);
+    /* right-edge fade hint */
+    -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
+    mask-image: linear-gradient(to right, black 88%, transparent 100%);
   }
-  .on-air-band .container {
-    display: grid;
-    grid-template-columns: auto 1px 1fr;
-    gap: var(--s7);
-    align-items: center;
+  .video-scroll-strip::-webkit-scrollbar { height: 3px; }
+  .video-scroll-strip::-webkit-scrollbar-track { background: transparent; }
+  .video-scroll-strip::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 2px; }
+
+  /* Each card in the strip */
+  .vsc-card {
+    flex: 0 0 72vw;
+    max-width: 320px;
+    scroll-snap-align: start;
+    cursor: pointer;
   }
-  .on-air-now {
-    display: flex;
-    align-items: center;
-    gap: var(--s5);
+  .vsc-card:first-child {
+    /* First card (featured) slightly wider */
+    flex: 0 0 82vw;
+    max-width: 360px;
   }
-  .on-air-art {
-    width: 88px; height: 88px;
+  .vsc-card:hover .vsc-card__title { color: var(--xpn-red); }
+
+  .vsc-card__thumb {
+    position: relative;
+    aspect-ratio: 16 / 9;
     border-radius: 6px;
     overflow: hidden;
-    flex-shrink: 0;
-    background: #222;
+    background: var(--ink);
+    margin-bottom: var(--s3);
   }
-  .on-air-art img { width: 100%; height: 100%; object-fit: cover; }
+  .vsc-card__thumb .ph {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    border-radius: 0;
+  }
+  .vsc-card__thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.88; }
 
-  .on-air-details {}
-  .on-air-details__live {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+  /* Play button centered on thumb */
+  .vsc-card__play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s;
+  }
+  .vsc-card:hover .vsc-card__play { background: var(--xpn-red); border-color: var(--xpn-red); }
+  .vsc-card__play svg { width: 16px; height: 16px; fill: white; margin-left: 2px; }
+
+  .vsc-card__duration {
+    position: absolute;
+    bottom: 7px; right: 7px;
+    font-size: 0.58rem; font-weight: 600;
+    font-family: var(--font-ui);
+    background: rgba(0,0,0,0.72);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  .vsc-card__label {
     font-family: var(--font-ui);
     font-size: 0.6rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--xpn-red);
-    margin-bottom: var(--s2);
-  }
-  .on-air-details__live .dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--xpn-red);
-    animation: pulse-dot 1.5s ease-in-out infinite;
-  }
-  .on-air-details__song {
-    font-family: var(--font-ui);
-    font-weight: 600;
-    font-size: 1.1rem;
-  }
-  .on-air-details__artist {
-    font-size: 0.85rem;
-    color: var(--header-muted);
-    margin-top: 2px;
-  }
-  .on-air-details__show {
-    font-size: 0.78rem;
-    color: var(--header-muted);
-    margin-top: var(--s2);
-  }
-  .on-air-details__show strong { color: white; font-weight: 500; }
-
-  .on-air-divider { background: rgba(255,255,255,0.1); width: 1px; align-self: stretch; }
-
-  .on-air-schedule {
-    display: flex;
-    gap: var(--s6);
-    overflow-x: auto;
-  }
-  .sched-slot {
-    flex-shrink: 0;
-    min-width: 140px;
-  }
-  .sched-slot__time {
-    font-family: var(--font-ui);
-    font-size: 0.62rem;
-    font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--header-muted);
+    color: var(--xpn-red);
     margin-bottom: 4px;
   }
-  .sched-slot__name {
-    font-family: var(--font-ui);
-    font-weight: 600;
-    font-size: 0.9rem;
+  .vsc-card__title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.25;
+    transition: color 0.15s;
   }
-  .sched-slot__host {
-    font-size: 0.78rem;
-    color: var(--header-muted);
+  .vsc-card:first-child .vsc-card__title { font-size: 1.1rem; }
+  .vsc-card__meta {
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    margin-top: 3px;
   }
-  .sched-slot--active .sched-slot__time { color: var(--xpn-red); }
-  .sched-slot--active .sched-slot__name { color: white; }
 
   /* ════════════════════════════════════════════════════════════════
      STORIES SECTION — Three-column + sidebar
@@ -767,66 +714,193 @@
   }
 
   /* ════════════════════════════════════════════════════════════════
-     EVENTS — Horizontal scrolling cards
+     EVENTS — Compact horizontal-scroll card strip (2026 style)
+     Dense, data-forward. No giant poster. Just the facts.
      ════════════════════════════════════════════════════════════════ */
   .events-section {
-    padding: var(--s7) 0 var(--s9);
-    background: var(--cream-dark);
+    padding: 0 0 var(--s9);
   }
 
-  .events-scroll {
+  /* Filter chips */
+  .events-filters {
     display: flex;
-    gap: var(--s4);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: var(--s4);
-    -webkit-overflow-scrolling: touch;
+    gap: var(--s2);
+    margin-bottom: var(--s5);
+    flex-wrap: wrap;
+    align-items: center;
   }
-  .events-scroll::-webkit-scrollbar { height: 4px; }
-  .events-scroll::-webkit-scrollbar-track { background: transparent; }
-  .events-scroll::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 2px; }
+  .events-filter-btn {
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.35em 0.95em;
+    border-radius: 100px;
+    border: 1px solid var(--ink-faint);
+    background: none;
+    color: var(--ink-medium);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .events-filter-btn:hover { border-color: var(--ink-medium); color: var(--ink); }
+  .events-filter-btn--active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+  }
 
-  .event-card {
-    flex: 0 0 280px;
-    scroll-snap-align: start;
-    background: var(--white);
+  /* Scroll strip container */
+  .events-strip-wrap {
+    position: relative;
+  }
+  .events-strip {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--s3);
+  }
+
+  /* Individual event tile */
+  .ev-tile {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--ink-faint);
     border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
-    transition: box-shadow 0.2s;
-    border: 1px solid rgba(0,0,0,0.04);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: var(--white);
   }
-  .event-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-
-  .event-card__img {
-    height: 160px;
-    background: var(--cream-deep);
-    overflow: hidden;
+  .ev-tile:hover {
+    border-color: var(--ink-medium);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
   }
-  .event-card__img img { width: 100%; height: 100%; object-fit: cover; }
 
-  .event-card__body { padding: var(--s4); }
-
-  .event-card__date {
+  /* Date header bar */
+  .ev-tile__date {
+    background: var(--ink);
+    color: #fff;
+    padding: var(--s3) var(--s4);
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+  }
+  .ev-tile__day {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .ev-tile__month-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .ev-tile__month {
     font-family: var(--font-ui);
-    font-size: 0.62rem;
-    font-weight: 600;
+    font-size: 0.6rem;
+    font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--xpn-red);
-    margin-bottom: var(--s2);
+    color: rgba(255,255,255,0.55);
+    line-height: 1;
   }
-  .event-card__name {
-    font-family: var(--font-display);
+  .ev-tile__dow {
+    font-family: var(--font-ui);
+    font-size: 0.58rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.38);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* Tile body */
+  .ev-tile__body {
+    padding: var(--s3) var(--s4) var(--s4);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: var(--s1);
+  }
+  .ev-tile__type {
+    font-family: var(--font-ui);
+    font-size: 0.55rem;
     font-weight: 700;
-    font-size: 1.05rem;
-    line-height: 1.25;
-    margin-bottom: var(--s1);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--xpn-red);
   }
-  .event-card__venue {
-    font-size: 0.78rem;
+  .ev-tile__artist {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--ink);
+    transition: color 0.15s;
+  }
+  .ev-tile:hover .ev-tile__artist { color: var(--xpn-red); }
+
+  .ev-tile__venue {
+    font-size: 0.7rem;
     color: var(--ink-muted);
+    line-height: 1.35;
+    margin-top: var(--s1);
   }
+  .ev-tile__time {
+    font-size: 0.67rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* CTA button at bottom of tile */
+  .ev-tile__cta {
+    display: block;
+    margin: var(--s3) var(--s4) var(--s4);
+    padding: 0.45em 0;
+    text-align: center;
+    font-family: var(--font-ui);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 4px;
+    border: 1px solid var(--ink-faint);
+    color: var(--ink-medium);
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .ev-tile:hover .ev-tile__cta {
+    background: var(--xpn-red);
+    border-color: var(--xpn-red);
+    color: #fff;
+  }
+  .ev-tile__cta--free {
+    border-color: rgba(217,62,1,0.3);
+    color: var(--xpn-red);
+  }
+  .ev-tile:hover .ev-tile__cta--free {
+    background: var(--xpn-red);
+    color: #fff;
+  }
+
+  /* View all link */
+  .events-view-all {
+    margin-top: var(--s5);
+    display: flex;
+    justify-content: flex-end;
+  }
+  .events-view-all a {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink-medium);
+    display: flex;
+    align-items: center;
+    gap: var(--s2);
+    transition: color 0.15s, gap 0.2s;
+  }
+  .events-view-all a:hover { color: var(--ink); gap: var(--s3); }
+  .events-view-all svg { width: 13px; height: 13px; }
 
   /* ════════════════════════════════════════════════════════════════
      MEMBERSHIP CTA — Full width band
@@ -1019,37 +1093,202 @@
   .footer-bottom__links a:hover { color: rgba(255,255,255,0.7); }
 
   /* ════════════════════════════════════════════════════════════════
-     RESPONSIVE
+     RESPONSIVE — Tablet (≤1024px)
      ════════════════════════════════════════════════════════════════ */
   @media (max-width: 1024px) {
+    .container { padding: 0 var(--s6); }
+
+    /* Mosaic: 2-col on tablet */
     .mosaic-grid { grid-template-columns: 1fr 1fr; }
     .m-card--lead { grid-column: span 2; }
+    .m-card--lead .m-card__img { height: 340px; }
     .m-card--stack { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
+    /* Stack: 3rd small card goes full width on 2-col grid */
+    .m-card--stack .m-card--sm:nth-child(3) { grid-column: span 2; }
     .m-card--mid { grid-column: span 1; }
-    .video-layout { grid-template-columns: 1fr; }
+
+    /* Video: hide desktop grid, show scroll strip */
+    .video-layout { display: none; }
+    .video-scroll-strip {
+      display: flex;
+    }
+    /* Tablet cards slightly wider */
+    .vsc-card { flex: 0 0 44%; max-width: 380px; }
+    .vsc-card:first-child { flex: 0 0 52%; max-width: 460px; }
+
+    /* Events: 3-col on tablet */
+    .events-strip { grid-template-columns: repeat(3, 1fr); }
+
+    /* Stories: no sidebar */
     .stories-layout { grid-template-columns: 1fr; }
     .sidebar { display: none; }
-    .on-air-band .container { grid-template-columns: 1fr; gap: var(--s5); }
-    .on-air-divider { display: none; }
+
+    /* Footer: 2-col */
     .footer-grid { grid-template-columns: 1fr 1fr; }
   }
 
-  @media (max-width: 768px) {
-    .container { padding: 0 var(--s5); }
+  /* ════════════════════════════════════════════════════════════════
+     RESPONSIVE — Mobile (≤767px)
+     ════════════════════════════════════════════════════════════════ */
+  @media (max-width: 767px) {
+    .container { padding: 0 var(--s4); }
+
+    /* ── Header ── */
+    .header-nav-row { height: 52px; }
+    .header-logo svg { height: 26px; }
+    .header-nav-row .container { gap: 0; }
     .header-nav-primary { display: none; }
-    .header-nav-secondary { display: none; }
-    .header-np-info__show { display: none; }
-    .header-np-info__album { display: none; }
-    .header-now-playing { height: 64px; }
-    .header-nav-row { height: 44px; }
-    .mosaic-grid { grid-template-columns: 1fr; }
-    .m-card--lead { grid-column: span 1; }
-    .m-card--lead .m-card__img { height: 260px; }
-    .m-card--stack { grid-column: span 1; grid-template-columns: 1fr; }
-    .m-card--mid { grid-column: span 1; }
-    .story-row { grid-template-columns: 1fr; gap: var(--s5); }
-    .footer-grid { grid-template-columns: 1fr; }
-    .footer-bottom { flex-direction: column; gap: var(--s3); text-align: center; }
+    .header-nav-secondary { display: flex; gap: var(--s3); }
+    /* Hide everything except Playlist and Donate on mobile */
+    .header-nav-secondary a:not(.nav-playlist):not(.nav-donate) { display: none; }
+    .header-nav-secondary a.nav-playlist { font-size: 0.95rem; margin-left: 0; }
+    .header-nav-secondary a.nav-donate { font-size: 0.95rem; }
+    .header-menu-btn { margin-right: auto; }
+
+    /* ── Ad slots ── */
+    .ad-slot--leaderboard { max-width: 100%; height: 60px; font-size: 0.55rem; }
+    .ad-slot--rectangle { width: 100%; max-width: 320px; }
+
+    /* ── Mosaic ── */
+    .mosaic { padding: var(--s5) 0 var(--s6); }
+    .mosaic-grid { grid-template-columns: 1fr; gap: 0; }
+
+    /* Lead card: NPR-style full-bleed overlay — image fills the card,
+       text overlaid at bottom with gradient scrim */
+    .m-card--lead {
+      grid-column: span 1;
+      position: relative;
+      /* Use aspect ratio to give the card natural proportions */
+      aspect-ratio: 4 / 3;
+      border-radius: 8px;
+      overflow: hidden;
+      /* Override default flex-direction so body sits at bottom */
+      justify-content: flex-end;
+    }
+    /* Image stretches to fill entire card */
+    .m-card--lead .m-card__img {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      border-radius: 0;
+    }
+    .m-card--lead .m-card__img .ph {
+      height: 100%;
+    }
+    /* Dark gradient scrim */
+    .m-card--lead::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    /* Body sits on top of scrim */
+    .m-card--lead .m-card__body {
+      position: relative;
+      z-index: 2;
+      padding: var(--s4);
+      background: none;
+    }
+    .m-card--lead .m-card__tag { color: #FFB347; }
+    .m-card--lead .m-card__headline {
+      font-size: clamp(1.3rem, 5vw, 1.65rem);
+      color: #fff;
+    }
+    .m-card--lead .m-card__excerpt { color: rgba(255,255,255,0.78); font-size: 0.85rem; }
+    .m-card--lead .m-card__meta { color: rgba(255,255,255,0.5); }
+
+    /* Stack: vertical list of horizontal-thumb cards, with dividers */
+    .m-card--stack {
+      grid-column: span 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: var(--s2);
+    }
+    .m-card--stack .m-card--sm {
+      border-bottom: 1px solid var(--ink-faint);
+      padding: var(--s4) 0;
+    }
+    .m-card--stack .m-card--sm:last-child { border-bottom: none; }
+
+    /* Small cards: tighter thumb */
+    .m-card--sm { grid-template-columns: 96px 1fr; gap: var(--s3); }
+    .m-card--sm .m-card__img { height: 72px; border-radius: 4px; }
+    .m-card--sm .m-card__headline { font-size: 0.88rem; }
+    .m-card--stack .m-card--sm:nth-child(3) { grid-column: span 1; }
+
+    /* Mid cards: single column with fixed image height, divided by lines */
+    .m-card--mid {
+      grid-column: span 1;
+      border-bottom: 1px solid var(--ink-faint);
+      padding-bottom: var(--s4);
+      margin-bottom: var(--s1);
+    }
+    .m-card--mid .m-card__img { height: 190px; }
+
+    /* ── Section headers ── */
+    .sec-head { padding: var(--s5) 0 var(--s4); margin-bottom: var(--s4); }
+    .sec-head__title { font-size: 1.5rem; }
+
+    /* ── Video section: NPR-style horizontal scroll strip ── */
+    .video-section { padding-bottom: var(--s6); }
+    /* Hide the desktop grid layout */
+    .video-layout { display: none; }
+    /* Show the scroll strip */
+    .video-scroll-strip { display: flex; }
+
+    /* ── Stories section ── */
+    .stories-section { padding-bottom: var(--s7); }
+    .story-row {
+      grid-template-columns: 1fr;
+      gap: var(--s4);
+      padding: var(--s4) 0;
+    }
+    .story-item__title { font-size: 0.95rem; }
+
+    /* ── Events ── */
+    .events-section { padding: 0 0 var(--s7); }
+    .events-strip { grid-template-columns: repeat(2, 1fr); }
+
+    /* ── Membership ── */
+    .membership-band { padding: var(--s7) 0; }
+    .membership-band__headline { font-size: clamp(1.7rem, 7vw, 2.4rem); }
+    .membership-band__text { font-size: 0.9rem; }
+    .newsletter-inline { margin-top: var(--s5); padding-top: var(--s5); }
+    /* Newsletter: stack input + button vertically */
+    .newsletter-form { flex-direction: column; gap: var(--s3); }
+    .newsletter-form input { width: 100%; }
+    .newsletter-form button { width: 100%; padding: 0.8em 1em; }
+    .btn-join { width: 100%; justify-content: center; }
+
+    /* ── Footer ── */
+    .site-footer { padding: var(--s7) 0 var(--s5); }
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: var(--s5);
+      margin-bottom: var(--s6);
+    }
+    .footer-bottom {
+      flex-direction: column;
+      gap: var(--s3);
+      text-align: center;
+      font-size: 0.68rem;
+    }
+    .footer-bottom__links { flex-wrap: wrap; justify-content: center; gap: var(--s3); }
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     RESPONSIVE — Small mobile (≤400px)
+     ════════════════════════════════════════════════════════════════ */
+  @media (max-width: 400px) {
+    .container { padding: 0 var(--s3); }
+    .header-logo svg { height: 22px; }
+    .m-card--sm { grid-template-columns: 84px 1fr; }
+    .m-card--sm .m-card__img { height: 70px; }
+    .video-thumb { grid-template-columns: 100px 1fr; }
+    .event-card { flex: 0 0 200px; }
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -1062,12 +1301,12 @@
     letter-spacing: 0.1em; text-transform: uppercase;
     color: rgba(0,0,0,0.15);
   }
-  .ph--a { background: linear-gradient(135deg, #E8D5C4 0%, #D4C0AD 100%); }
-  .ph--b { background: linear-gradient(135deg, #C9D5DC 0%, #B0BCC4 100%); }
-  .ph--c { background: linear-gradient(135deg, #D5C9B8 0%, #C4B8A6 100%); }
-  .ph--d { background: linear-gradient(135deg, #BDC9C6 0%, #A8B5B2 100%); }
-  .ph--e { background: linear-gradient(135deg, #D8CFC4 0%, #C6BBAF 100%); }
-  .ph--dark { background: linear-gradient(135deg, #333 0%, #222 100%); color: rgba(255,255,255,0.15); }
+  .ph--a { background: linear-gradient(135deg, #C8D6E0 0%, #A8BBC8 100%); }
+  .ph--b { background: linear-gradient(135deg, #C5CED8 0%, #9DAAB6 100%); }
+  .ph--c { background: linear-gradient(135deg, #B8C5CF 0%, #96A5B0 100%); }
+  .ph--d { background: linear-gradient(135deg, #C0C8D0 0%, #9FAAB2 100%); }
+  .ph--e { background: linear-gradient(135deg, #BAC6CE 0%, #9CAAB4 100%); }
+  .ph--dark { background: linear-gradient(135deg, #2A2A2A 0%, #1A1A1A 100%); color: rgba(255,255,255,0.15); }
 
   /* ════════════════════════════════════════════════════════════════
      BANNER AD SPACES
@@ -1106,39 +1345,14 @@
 </head>
 <body>
 
-<!-- ═════════════ HEADER — KEXP-style ═════════════ -->
+<!-- ═════════════ HEADER ═════════════ -->
 <header class="site-header">
-  <!-- Row 1: Now Playing -->
-  <div class="header-now-playing">
+  <div class="header-nav-row">
     <div class="container">
-      <a href="/" class="header-logo">
+      <a href="/" class="header-logo" style="margin-right:var(--s6);">
         <svg viewBox="0 0 196 62" xmlns="http://www.w3.org/2000/svg"><g fill="#FFFFFF" fill-rule="evenodd"><path d="M138.902234,21.2979581 C138.902234,21.0187442 138.913866,20.7395303 138.900489,20.4608993 C138.774281,17.8372213 138.445676,15.2607591 137.052157,12.9518525 C135.200916,9.88574581 131.063397,9.04285793 128.258329,11.1838864 C126.704287,12.3701083 125.951112,14.0716226 125.492228,15.9077892 C124.603539,19.465289 124.580857,23.0571805 125.250863,26.6467404 C125.600406,28.5184644 126.237261,30.2969229 127.634269,31.6772538 C130.471326,34.4787193 135.406222,33.6200929 137.375528,29.9862318 C138.850471,27.2663737 138.990637,24.297613 138.902234,21.2979581 L138.902234,21.2979581 Z M137.758804,0.000174873004 C138.099041,0.28638369 138.536406,0.224012319 138.927824,0.316695011 C144.453628,1.62824254 148.115979,5.08140147 150.247551,10.2553108 C151.877201,14.2086065 152.259314,18.3700011 152.12729,22.5978474 C151.998756,26.7405889 151.253723,30.7457636 149.327456,34.4629808 C145.861106,41.153039 139.272133,44.0081322 132.432489,42.6027362 C129.764679,42.053635 127.488287,40.7712329 125.478851,38.9653777 C125.33345,38.8342229 125.215967,38.5526774 124.987397,38.6686765 C124.773949,38.7765149 124.905973,39.0510655 124.905973,39.2457574 C124.896667,46.2861446 124.88678,53.3259488 124.910044,60.366336 C124.91237,61.0460091 124.71986,61.215053 124.05567,61.2109726 C120.125201,61.1847416 116.194732,61.1975657 112.263682,61.222668 C111.759433,61.2255453 111.653581,61.0576673 111.654163,60.5825956 C111.66405,40.9542667 111.663468,21.3253548 111.650091,1.69702593 C111.650091,1.14559305 111.752453,0.933413806 112.367789,0.938659996 C116.089462,0.969554227 119.811136,0.968971317 123.532228,0.939242906 C124.135931,0.933996716 124.284821,1.12111083 124.258068,1.68711646 C124.215611,2.58712952 124.246436,3.49064004 124.246436,4.37491453 C124.515718,4.48216997 124.599468,4.28398057 124.701249,4.19188079 C127.18818,1.93835067 130.083979,0.573175417 133.411907,0.134244176 C133.524157,0.119088516 133.646293,0.123168886 133.710851,0.000174873004 L137.758804,0.000174873004 Z"/><path d="M19.7668617,24.6345933 C20.331016,23.0543242 20.6183276,21.5241854 21.0161436,20.0272725 C21.6780071,17.5359151 22.2817104,15.0288192 22.9255442,12.5327985 C23.8654136,8.88902798 24.8297104,5.25166948 25.7521318,1.6032357 C25.8725234,1.12816404 26.0446777,0.957371408 26.5367134,0.960285958 C29.9559537,0.978356168 33.3751941,0.976607438 36.7944344,0.959678021 C37.2556451,0.957371408 37.4376866,1.11767166 37.5487727,1.562432 C38.7468736,6.36502761 39.964749,11.1617941 41.1808795,15.9591435 C41.8776392,18.7052326 42.5807964,21.449573 43.2839537,24.1933304 C43.3118706,24.3023346 43.3706125,24.4037609 43.4851881,24.6724824 C43.8294967,23.4955871 44.1249507,22.4650022 44.4314552,21.4379148 C45.455657,18.0074893 46.4943988,14.5811443 47.5075501,11.1478043 C48.3369151,8.33934383 49.1389448,5.52388846 49.9502801,2.71076473 C50.066019,2.31030555 50.1666362,1.905766 50.2742326,1.50297518 C50.3684522,1.15089753 50.5522386,0.959120138 50.9616866,0.960285958 C54.8229448,0.972527068 58.684203,0.971361248 62.5454611,0.963200508 C63.0223751,0.962034688 63.1607964,1.09610399 63.007835,1.58516549 C61.7015561,5.75588665 60.4098172,9.93185399 59.121568,14.1084042 C58.0531644,17.5720556 57.0033721,21.040953 55.9308973,24.5028556 C54.5001555,29.1195029 53.0537104,33.731487 51.6171525,38.3469685 C51.3059953,39.3466591 50.9901852,40.345184 50.708108,41.3524525 C50.5836451,41.796047 50.3882267,41.9913219 49.8892119,41.9884073 C46.0744819,41.9685884 42.2597519,41.9779149 38.445022,41.9831611 C38.1030398,41.9831611 37.8093306,41.977332 37.6953365,41.550059 C36.8147905,38.2496225 35.9191228,34.9532664 35.0315976,31.6539957 C33.9690101,27.7041974 32.9104938,23.7526504 31.8490694,19.8022693 C31.8252237,19.7154157 31.786838,19.6320595 31.701924,19.4006443 C31.4454374,20.2487783 31.2098884,20.9628431 31.0133068,21.6874003 C29.9018647,25.7916697 28.798565,29.8988536 27.6946837,34.0060376 C27.0560843,36.3819788 26.4081792,38.7550055 25.7957519,41.1379416 C25.6404641,41.7424193 25.4049151,42.0053117 24.7157163,41.9984526 C20.9242504,41.958096 17.1327846,41.9703371 13.3413187,41.9895731 C12.8440487,41.9919048 12.5962861,41.8537551 12.4439062,41.3594474 C10.2425412,34.2257947 8.0272178,27.0962223 5.80607834,19.9683986 C4.68474896,16.3712609 3.53841068,12.782284 2.41417329,9.18631208 C1.62319407,6.6553168 0.860131751,4.11616078 0.0627548961,1.58808004 C-0.0890433234,1.10776219 0.0249507418,0.962617598 0.515823145,0.963783418 C4.37708131,0.974275798 8.23833947,0.974275798 12.0995976,0.962617598 C12.5084641,0.961451778 12.726565,1.07745087 12.8487015,1.49598026 C13.7589092,4.61688048 14.6888914,7.7319516 15.6177104,10.8470227 C16.9460902,15.3039527 18.2785412,19.7602997 19.6104107,24.2160639 C19.640654,24.3180731 19.6848558,24.416002 19.7668617,24.6345933" opacity="0.746117001"/><path d="M170.413799,5.79476675 C171.615972,4.45057625 172.734974,3.33896685 174.081384,2.4803404 C177.249954,0.461140112 180.730262,-0.0424941401 184.388541,0.3614625 C186.813823,0.629601107 189.043687,1.43751439 190.996126,2.93559312 C193.77793,5.07079251 195.065598,7.99175459 195.409325,11.4064415 C195.563449,12.9389119 195.584969,14.4754627 195.584969,16.0137622 C195.583224,24.4047519 195.577408,32.7963244 195.597201,41.1873141 C195.598927,41.8057816 195.481443,42.0156292 194.809111,42.0093592 C190.925752,41.9730768 187.04123,41.978323 183.157871,42.0063027 C182.557657,42.0098001 182.373289,41.8833087 182.375615,41.246188 C182.400043,34.5100799 182.414001,27.7733888 182.370963,21.0372807 C182.359912,19.3450929 182.388411,17.6307546 181.933598,15.9682952 C181.123426,13.0071124 178.592292,11.4554059 175.578428,12.0732905 C172.537811,12.6958384 170.990749,14.5180151 170.719722,17.8475971 C170.632482,18.9149054 170.583627,19.9880427 170.581882,21.0588484 C170.57025,27.7949565 170.568506,34.5316476 170.589443,41.2677557 C170.59177,41.842505 170.458001,42.0098001 169.86942,42.0063027 C165.915687,41.978323 161.961954,41.9812375 158.008221,42.0004736 C157.493503,42.0028052 157.343449,41.8786454 157.344029,41.3417853 C157.361479,28.1487829 157.363224,14.9557805 157.346357,1.76277817 C157.345776,1.14431065 157.473147,0.933297224 158.13501,0.938543414 C161.995687,0.971769285 165.856363,0.964191455 169.71704,0.943789604 C170.24688,0.940875054 170.448114,1.0539596 170.427758,1.63162342 C170.382393,2.95074878 170.413799,4.27162288 170.413799,5.79476675"/><path d="M106.018668,0.951892054 C105.428923,1.84316147 104.938633,2.59744702 104.435547,3.34298893 C100.751677,8.79902667 97.0689709,14.2562302 93.371143,19.7023585 C93.0983715,20.1039835 93.0721994,20.3884436 93.3531134,20.8046413 C95.4858493,23.9686769 97.5924131,27.1507827 99.7082825,30.3258935 C102.185909,34.0431107 104.664698,37.7597449 107.139998,41.477545 C107.22433,41.6040365 107.40579,41.7241159 107.291214,41.9019035 C107.187689,42.0627866 106.994597,41.9875913 106.840472,41.9881742 C102.397612,41.9910887 97.9547513,41.9852596 93.5118908,42.0015811 C93.1204724,42.0033298 92.9355228,41.8342859 92.7412677,41.5410822 C90.609695,38.3199214 88.4664902,35.1075044 86.3285199,31.890424 C85.863238,31.1903491 85.8754516,31.1920978 85.420057,31.8764341 C83.2797602,35.0911829 81.1295763,38.2989367 78.9991668,41.5212632 C78.7665258,41.8739238 78.5193448,42.0004153 78.0976831,41.9986665 C73.6548226,41.9840938 69.211962,41.9916716 64.7691015,41.9875913 C64.595784,41.9870083 64.3654694,42.0936809 64.2555466,41.9036522 C64.1357365,41.6949704 64.3805911,41.5760568 64.4748107,41.4349926 C67.6800214,36.6364773 70.8927929,31.8432083 74.103238,27.0487734 C75.5008285,24.9613726 76.8844605,22.8646453 78.3029887,20.7924002 C78.5885555,20.3744537 78.5484249,20.0981544 78.2785614,19.6953636 C74.2503834,13.6861442 70.2390718,7.66526669 66.2306682,1.64322333 C66.1091134,1.4607725 65.8281994,1.2806533 65.9503359,1.05273549 C66.0718908,0.825983491 66.3731608,0.961801524 66.5935881,0.961218614 C70.8974457,0.955389514 75.2007217,0.966464804 79.503416,0.941399673 C80.0815288,0.938485123 80.4159501,1.10986067 80.7346682,1.6065 C82.3933982,4.18704263 84.0974932,6.73843977 85.8562588,9.4064189 C86.5309175,8.40439659 87.1602113,7.4734893 87.7854338,6.54083327 C88.9393329,4.82066582 90.0967217,3.1022471 91.2360807,1.37333599 C91.4041638,1.11918723 91.55887,0.947811684 91.8868938,0.947811684 C96.5373864,0.953640784 101.188461,0.951892054 106.018668,0.951892054"/></g></svg>
       </a>
 
-      <button class="header-play-btn" aria-label="Play">
-        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-      </button>
-
-      <div class="header-album-art">
-        <div class="ph ph--dark" style="height:56px;font-size:0.4rem;">Art</div>
-      </div>
-
-      <div class="header-np-info">
-        <span class="header-np-info__label">Now Playing</span>
-        <span class="header-np-info__show">The World Cafe with Raina Douris</span>
-        <span class="header-np-info__track"><strong>Dove Ellis</strong> <span>&mdash; Little Left Hope</span></span>
-        <span class="header-np-info__album">Blizzard</span>
-      </div>
-
-      <button class="header-search-btn" aria-label="Search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- Row 2: Navigation -->
-  <div class="header-nav-row">
-    <div class="container">
       <button class="header-menu-btn" aria-label="Menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         <span class="header-menu-btn__text">Menu</span>
@@ -1156,6 +1370,9 @@
         <a href="#">Concert Calendar</a>
         <a href="#" class="nav-playlist">Playlist</a>
         <a href="#" class="nav-donate">Donate</a>
+        <button class="header-search-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
       </nav>
     </div>
   </div>
@@ -1268,6 +1485,75 @@
       </a>
     </div>
 
+    <!-- NPR-style horizontal scroll strip (shown on tablet + mobile, hidden on desktop) -->
+    <div class="video-scroll-strip">
+      <!-- Card 1: Featured -->
+      <div class="vsc-card">
+        <div class="vsc-card__thumb">
+          <div class="ph ph--dark" style="position:absolute;inset:0;height:100%;">Featured</div>
+          <div class="vsc-card__play">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="vsc-card__duration">18:00</span>
+        </div>
+        <div class="vsc-card__label">World Cafe Session</div>
+        <div class="vsc-card__title">Hurray for the Riff Raff — Full Session</div>
+        <div class="vsc-card__meta">Recorded Feb 5, 2026</div>
+      </div>
+      <!-- Card 2 -->
+      <div class="vsc-card">
+        <div class="vsc-card__thumb">
+          <div class="ph ph--dark" style="position:absolute;inset:0;height:100%;">Thumb</div>
+          <div class="vsc-card__play">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="vsc-card__duration">24:10</span>
+        </div>
+        <div class="vsc-card__label">Free at Noon</div>
+        <div class="vsc-card__title">Japanese Breakfast</div>
+        <div class="vsc-card__meta">Jan 31, 2026</div>
+      </div>
+      <!-- Card 3 -->
+      <div class="vsc-card">
+        <div class="vsc-card__thumb">
+          <div class="ph ph--dark" style="position:absolute;inset:0;height:100%;">Thumb</div>
+          <div class="vsc-card__play">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="vsc-card__duration">32:45</span>
+        </div>
+        <div class="vsc-card__label">Indie Rock Hit Parade</div>
+        <div class="vsc-card__title">The War on Drugs</div>
+        <div class="vsc-card__meta">Jan 24, 2026</div>
+      </div>
+      <!-- Card 4 -->
+      <div class="vsc-card">
+        <div class="vsc-card__thumb">
+          <div class="ph ph--dark" style="position:absolute;inset:0;height:100%;">Thumb</div>
+          <div class="vsc-card__play">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="vsc-card__duration">19:30</span>
+        </div>
+        <div class="vsc-card__label">World Cafe Session</div>
+        <div class="vsc-card__title">Faye Webster</div>
+        <div class="vsc-card__meta">Jan 17, 2026</div>
+      </div>
+      <!-- Card 5 -->
+      <div class="vsc-card">
+        <div class="vsc-card__thumb">
+          <div class="ph ph--dark" style="position:absolute;inset:0;height:100%;">Thumb</div>
+          <div class="vsc-card__play">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="vsc-card__duration">28:15</span>
+        </div>
+        <div class="vsc-card__label">Free at Noon</div>
+        <div class="vsc-card__title">Bartees Strange</div>
+        <div class="vsc-card__meta">Jan 10, 2026</div>
+      </div>
+    </div>
+
     <div class="video-layout">
       <!-- Featured video -->
       <div class="video-featured">
@@ -1337,51 +1623,6 @@
 <div class="container">
   <div class="ad-slot ad-slot--rectangle">Ad — 300&times;250</div>
 </div>
-
-<!-- ═════════════ ON AIR BAND ═════════════ -->
-<section class="on-air-band">
-  <div class="container">
-    <div class="on-air-now">
-      <div class="on-air-art">
-        <div class="ph ph--dark" style="height:88px">Art</div>
-      </div>
-      <div class="on-air-details">
-        <div class="on-air-details__live"><span class="dot"></span> On Air</div>
-        <div class="on-air-details__song">Landslide</div>
-        <div class="on-air-details__artist">Fleetwood Mac</div>
-        <div class="on-air-details__show"><strong>World Cafe</strong> with Raina Douris</div>
-      </div>
-    </div>
-    <div class="on-air-divider"></div>
-    <div class="on-air-schedule">
-      <div class="sched-slot sched-slot--active">
-        <div class="sched-slot__time">Now — 2:00 PM</div>
-        <div class="sched-slot__name">World Cafe</div>
-        <div class="sched-slot__host">Raina Douris</div>
-      </div>
-      <div class="sched-slot">
-        <div class="sched-slot__time">2:00 PM</div>
-        <div class="sched-slot__name">Press Play</div>
-        <div class="sched-slot__host">Kristen Kurtis</div>
-      </div>
-      <div class="sched-slot">
-        <div class="sched-slot__time">6:00 PM</div>
-        <div class="sched-slot__name">Funky Friday</div>
-        <div class="sched-slot__host">Robert Drake</div>
-      </div>
-      <div class="sched-slot">
-        <div class="sched-slot__time">9:00 PM</div>
-        <div class="sched-slot__name">Rhythm & Roots</div>
-        <div class="sched-slot__host">Helen Leicht</div>
-      </div>
-      <div class="sched-slot">
-        <div class="sched-slot__time">12:00 AM</div>
-        <div class="sched-slot__name">Sleepy Hollow</div>
-        <div class="sched-slot__host">Dan Reed</div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ═════════════ STORIES + SIDEBAR ═════════════ -->
 <section class="stories-section">
@@ -1514,7 +1755,8 @@
 <!-- ═════════════ EVENTS ═════════════ -->
 <section class="events-section">
   <div class="container">
-    <div class="sec-head" style="border-bottom-color: var(--ink);">
+    <hr class="section-rule">
+    <div class="sec-head">
       <h2 class="sec-head__title">Upcoming Events</h2>
       <a href="#" class="sec-head__link">
         Full Calendar
@@ -1522,56 +1764,137 @@
       </a>
     </div>
 
-    <div class="events-scroll">
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--a">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Tue, Feb 18</div>
-          <div class="event-card__name">Free at Noon: Hurray for the Riff Raff</div>
-          <div class="event-card__venue">World Cafe Live</div>
+    <!-- Category filter chips -->
+    <div class="events-filters">
+      <button class="events-filter-btn events-filter-btn--active">All</button>
+      <button class="events-filter-btn">Free at Noon</button>
+      <button class="events-filter-btn">XPN Welcomes</button>
+      <button class="events-filter-btn">XPN Concerts</button>
+      <button class="events-filter-btn">Festivals</button>
+    </div>
+
+    <!-- Compact tile grid -->
+    <div class="events-strip-wrap">
+      <div class="events-strip">
+
+        <!-- Tile 1 -->
+        <div class="ev-tile">
+          <div class="ev-tile__date">
+            <div class="ev-tile__day">18</div>
+            <div class="ev-tile__month-wrap">
+              <span class="ev-tile__month">Feb</span>
+              <span class="ev-tile__dow">Wed</span>
+            </div>
+          </div>
+          <div class="ev-tile__body">
+            <div class="ev-tile__type">Free at Noon</div>
+            <div class="ev-tile__artist">Hurray for the Riff Raff</div>
+            <div class="ev-tile__venue">World Cafe Live</div>
+            <div class="ev-tile__time">Noon – 1:00 PM</div>
+          </div>
+          <a href="#" class="ev-tile__cta ev-tile__cta--free">Free RSVP</a>
         </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--b">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Sat, Feb 22</div>
-          <div class="event-card__name">XPN Welcomes: Julien Baker</div>
-          <div class="event-card__venue">Union Transfer</div>
+
+        <!-- Tile 2 -->
+        <div class="ev-tile">
+          <div class="ev-tile__date">
+            <div class="ev-tile__day">22</div>
+            <div class="ev-tile__month-wrap">
+              <span class="ev-tile__month">Feb</span>
+              <span class="ev-tile__dow">Sun</span>
+            </div>
+          </div>
+          <div class="ev-tile__body">
+            <div class="ev-tile__type">XPN Welcomes</div>
+            <div class="ev-tile__artist">Julien Baker &amp; Torres</div>
+            <div class="ev-tile__venue">Union Transfer</div>
+            <div class="ev-tile__time">8:00 PM Doors</div>
+          </div>
+          <a href="#" class="ev-tile__cta">Get Tickets</a>
         </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--c">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Wed, Mar 5</div>
-          <div class="event-card__name">XPN Concert: The National</div>
-          <div class="event-card__venue">The Met Philadelphia</div>
+
+        <!-- Tile 3 -->
+        <div class="ev-tile">
+          <div class="ev-tile__date">
+            <div class="ev-tile__day">5</div>
+            <div class="ev-tile__month-wrap">
+              <span class="ev-tile__month">Mar</span>
+              <span class="ev-tile__dow">Thu</span>
+            </div>
+          </div>
+          <div class="ev-tile__body">
+            <div class="ev-tile__type">XPN Concert</div>
+            <div class="ev-tile__artist">The National</div>
+            <div class="ev-tile__venue">The Met Philadelphia</div>
+            <div class="ev-tile__time">8:00 PM</div>
+          </div>
+          <a href="#" class="ev-tile__cta">Get Tickets</a>
         </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--d">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Fri, Mar 14</div>
-          <div class="event-card__name">Free at Noon: Faye Webster</div>
-          <div class="event-card__venue">World Cafe Live</div>
+
+        <!-- Tile 4 -->
+        <div class="ev-tile">
+          <div class="ev-tile__date">
+            <div class="ev-tile__day">14</div>
+            <div class="ev-tile__month-wrap">
+              <span class="ev-tile__month">Mar</span>
+              <span class="ev-tile__dow">Fri</span>
+            </div>
+          </div>
+          <div class="ev-tile__body">
+            <div class="ev-tile__type">Free at Noon</div>
+            <div class="ev-tile__artist">Faye Webster</div>
+            <div class="ev-tile__venue">World Cafe Live</div>
+            <div class="ev-tile__time">Noon – 1:00 PM</div>
+          </div>
+          <a href="#" class="ev-tile__cta ev-tile__cta--free">Free RSVP</a>
         </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--e">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Sat, Mar 22</div>
-          <div class="event-card__name">XPN Welcomes: Big Thief</div>
-          <div class="event-card__venue">The Fillmore Philadelphia</div>
+
+        <!-- Tile 5 -->
+        <div class="ev-tile">
+          <div class="ev-tile__date">
+            <div class="ev-tile__day">22</div>
+            <div class="ev-tile__month-wrap">
+              <span class="ev-tile__month">Mar</span>
+              <span class="ev-tile__dow">Sat</span>
+            </div>
+          </div>
+          <div class="ev-tile__body">
+            <div class="ev-tile__type">XPN Welcomes</div>
+            <div class="ev-tile__artist">Big Thief</div>
+            <div class="ev-tile__venue">The Fillmore Philadelphia</div>
+            <div class="ev-tile__time">8:00 PM</div>
+          </div>
+          <a href="#" class="ev-tile__cta">Get Tickets</a>
         </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--a">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Fri, Apr 4</div>
-          <div class="event-card__name">XPN Concert: Bon Iver</div>
-          <div class="event-card__venue">The Mann Center</div>
+
+        <!-- Tile 6 -->
+        <div class="ev-tile">
+          <div class="ev-tile__date">
+            <div class="ev-tile__day">4</div>
+            <div class="ev-tile__month-wrap">
+              <span class="ev-tile__month">Apr</span>
+              <span class="ev-tile__dow">Sat</span>
+            </div>
+          </div>
+          <div class="ev-tile__body">
+            <div class="ev-tile__type">XPN Concert</div>
+            <div class="ev-tile__artist">Bon Iver</div>
+            <div class="ev-tile__venue">The Mann Center</div>
+            <div class="ev-tile__time">7:30 PM</div>
+          </div>
+          <a href="#" class="ev-tile__cta">Get Tickets</a>
         </div>
+
       </div>
     </div>
+
+    <div class="events-view-all">
+      <a href="#">
+        View full concert calendar
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
   </div>
 </section>
 
