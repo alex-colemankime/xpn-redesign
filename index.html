@@ -71,6 +71,16 @@
     z-index: 1000;
   }
 
+  /* ── Scroll collapse: Now Playing row slides up ── */
+  .header-now-playing {
+    transition: height 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+  }
+  .site-header.is-collapsed .header-now-playing {
+    height: 0 !important;
+    opacity: 0;
+  }
+
   /* ── Row 1: Now Playing ── */
   .header-now-playing {
     background: #292119;
@@ -1350,7 +1360,7 @@
 
       <nav class="header-nav-secondary">
         <a href="#">Events</a>
-        <a href="#">Visit WXPN</a>
+        <a href="#">Schedule</a>
         <a href="#">Concert Calendar</a>
         <a href="#" class="nav-playlist">Playlist</a>
         <a href="#" class="nav-donate">Donate</a>
@@ -1830,6 +1840,33 @@
 
   </div>
 </footer>
+
+<script>
+  (function() {
+    const header = document.querySelector('.site-header');
+    const npRow  = document.querySelector('.header-now-playing');
+    let lastY = 0;
+    let ticking = false;
+
+    function onScroll() {
+      const y = window.scrollY;
+      if (y > 60 && y > lastY) {
+        header.classList.add('is-collapsed');
+      } else if (y < lastY || y <= 60) {
+        header.classList.remove('is-collapsed');
+      }
+      lastY = y;
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(onScroll);
+        ticking = true;
+      }
+    }, { passive: true });
+  })();
+</script>
 
 </body>
 </html>
