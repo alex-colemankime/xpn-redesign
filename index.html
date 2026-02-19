@@ -21,16 +21,16 @@
   @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap');
 
   :root {
-    /* Warm neutral palette — closer to XPN's earthy tones */
-    --cream: #F0EBE3;
-    --cream-dark: #E5DED4;
-    --cream-deep: #D9D0C4;
-    --white: #FDFCFA;
-    --ink: #1A1714;
-    --ink-medium: #3D3833;
-    --ink-light: #6B6560;
-    --ink-muted: #9E9890;
-    --ink-faint: #C8C2BA;
+    /* Crisp, cool-white palette */
+    --cream: #FFFFFF;
+    --cream-dark: #F4F5F7;
+    --cream-deep: #E6E8EC;
+    --white: #FFFFFF;
+    --ink: #0D0D0F;
+    --ink-medium: #2C2D30;
+    --ink-light: #4B4D52;
+    --ink-muted: #85878E;
+    --ink-faint: #D1D3D9;
     /* Single accent */
     --xpn-red: #D93E01;
     --xpn-red-hover: #C23600;
@@ -649,102 +649,6 @@
   }
 
   /* ════════════════════════════════════════════════════════════════
-     ON AIR + SCHEDULE — Horizontal band
-     ════════════════════════════════════════════════════════════════ */
-  .on-air-band {
-    background: var(--ink);
-    color: white;
-    padding: var(--s6) 0;
-  }
-  .on-air-band .container {
-    display: grid;
-    grid-template-columns: auto 1px 1fr;
-    gap: var(--s7);
-    align-items: center;
-  }
-  .on-air-now {
-    display: flex;
-    align-items: center;
-    gap: var(--s5);
-  }
-  .on-air-art {
-    width: 88px; height: 88px;
-    border-radius: 6px;
-    overflow: hidden;
-    flex-shrink: 0;
-    background: #222;
-  }
-  .on-air-art img { width: 100%; height: 100%; object-fit: cover; }
-
-  .on-air-details__live {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--font);
-    font-size: 0.6rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--xpn-red);
-    margin-bottom: var(--s2);
-  }
-  .on-air-details__live .dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--xpn-red);
-    animation: pulse-dot 1.5s ease-in-out infinite;
-  }
-  @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
-  .on-air-details__song {
-    font-family: var(--font);
-    font-weight: 600;
-    font-size: 1.1rem;
-  }
-  .on-air-details__artist {
-    font-size: 0.85rem;
-    color: var(--header-muted);
-    margin-top: 2px;
-  }
-  .on-air-details__show {
-    font-size: 0.78rem;
-    color: var(--header-muted);
-    margin-top: var(--s2);
-  }
-  .on-air-details__show strong { color: white; font-weight: 500; }
-
-  .on-air-divider { background: rgba(255,255,255,0.1); width: 1px; align-self: stretch; }
-
-  .on-air-schedule {
-    display: flex;
-    gap: var(--s6);
-    overflow-x: auto;
-  }
-  .sched-slot {
-    flex-shrink: 0;
-    min-width: 140px;
-  }
-  .sched-slot__time {
-    font-family: var(--font);
-    font-size: 0.62rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--header-muted);
-    margin-bottom: 4px;
-  }
-  .sched-slot__name {
-    font-family: var(--font);
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-  .sched-slot__host {
-    font-size: 0.78rem;
-    color: var(--header-muted);
-  }
-  .sched-slot--active .sched-slot__time { color: var(--xpn-red); }
-  .sched-slot--active .sched-slot__name { color: white; }
-
-  /* ════════════════════════════════════════════════════════════════
      STORIES SECTION — Three-column + sidebar
      ════════════════════════════════════════════════════════════════ */
   .stories-section { padding-bottom: var(--s7); }
@@ -913,62 +817,156 @@
      ════════════════════════════════════════════════════════════════ */
   .events-section {
     padding: var(--s6) 0 var(--s7);
-    background: var(--cream-dark);
   }
 
-  .events-scroll {
+  /* Filter chips */
+  .events-filters {
     display: flex;
-    gap: var(--s4);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: var(--s4);
-    -webkit-overflow-scrolling: touch;
+    gap: var(--s2);
+    margin-bottom: var(--s5);
+    flex-wrap: wrap;
   }
-  .events-scroll::-webkit-scrollbar { height: 4px; }
-  .events-scroll::-webkit-scrollbar-track { background: transparent; }
-  .events-scroll::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 2px; }
+  .events-filter-btn {
+    font-family: var(--font);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.35em 0.95em;
+    border-radius: 100px;
+    border: 1px solid var(--ink-faint);
+    background: none;
+    color: var(--ink-medium);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .events-filter-btn:hover { border-color: var(--ink-medium); color: var(--ink); }
+  .events-filter-btn--active { background: var(--ink); border-color: var(--ink); color: #fff; }
 
-  .event-card {
-    flex: 0 0 280px;
-    scroll-snap-align: start;
-    background: var(--white);
+  /* 6-column tile grid */
+  .events-strip {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--s3);
+  }
+
+  .ev-tile {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--ink-faint);
     border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
-    transition: box-shadow 0.2s;
-    border: 1px solid rgba(0,0,0,0.04);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: var(--white);
   }
-  .event-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-
-  .event-card__img {
-    height: 160px;
-    background: var(--cream-deep);
-    overflow: hidden;
+  .ev-tile:hover {
+    border-color: var(--ink-medium);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
   }
-  .event-card__img img { width: 100%; height: 100%; object-fit: cover; }
 
-  .event-card__body { padding: var(--s4); }
-
-  .event-card__date {
+  .ev-tile__date {
+    background: var(--ink);
+    color: #fff;
+    padding: var(--s3) var(--s4);
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+  }
+  .ev-tile__day {
     font-family: var(--font);
-    font-size: 0.62rem;
-    font-weight: 600;
+    font-size: 1.6rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .ev-tile__month-wrap { display: flex; flex-direction: column; gap: 1px; }
+  .ev-tile__month {
+    font-family: var(--font);
+    font-size: 0.6rem;
+    font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--xpn-red);
-    margin-bottom: var(--s2);
+    color: rgba(255,255,255,0.55);
+    line-height: 1;
   }
-  .event-card__name {
+  .ev-tile__dow {
     font-family: var(--font);
+    font-size: 0.58rem;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .ev-tile__body {
+    padding: var(--s3) var(--s4) var(--s2);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: var(--s1);
+  }
+  .ev-tile__type {
+    font-family: var(--font);
+    font-size: 0.55rem;
     font-weight: 700;
-    font-size: 1.05rem;
-    line-height: 1.25;
-    margin-bottom: var(--s1);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--xpn-red);
   }
-  .event-card__venue {
-    font-size: 0.78rem;
+  .ev-tile__artist {
+    font-family: var(--font);
+    font-size: 0.92rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--ink);
+    transition: color 0.15s;
+  }
+  .ev-tile:hover .ev-tile__artist { color: var(--xpn-red); }
+  .ev-tile__venue {
+    font-size: 0.7rem;
     color: var(--ink-muted);
+    line-height: 1.35;
   }
+  .ev-tile__time {
+    font-size: 0.67rem;
+    color: var(--ink-faint);
+  }
+
+  .ev-tile__cta {
+    display: block;
+    margin: var(--s2) var(--s4) var(--s4);
+    padding: 0.45em 0;
+    text-align: center;
+    font-family: var(--font);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 4px;
+    border: 1px solid var(--ink-faint);
+    color: var(--ink-medium);
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .ev-tile:hover .ev-tile__cta { background: var(--xpn-red); border-color: var(--xpn-red); color: #fff; }
+  .ev-tile__cta--free { border-color: rgba(217,62,1,0.3); color: var(--xpn-red); }
+
+  .events-view-all {
+    margin-top: var(--s5);
+    display: flex;
+    justify-content: flex-end;
+  }
+  .events-view-all a {
+    font-family: var(--font);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink-medium);
+    display: flex;
+    align-items: center;
+    gap: var(--s2);
+    transition: color 0.15s, gap 0.2s;
+  }
+  .events-view-all a:hover { color: var(--ink); gap: var(--s3); }
+  .events-view-all svg { width: 13px; height: 13px; }
 
   /* ════════════════════════════════════════════════════════════════
      FOOTER — Light, clean
@@ -1071,13 +1069,13 @@
     .video-layout { grid-template-columns: 1fr; }
     .stories-layout { grid-template-columns: 1fr; }
     .sidebar { display: none; }
-    .on-air-band .container { grid-template-columns: 1fr; gap: var(--s5); }
-    .on-air-divider { display: none; }
+    .events-strip { grid-template-columns: repeat(3, 1fr); }
     .footer-grid { grid-template-columns: 1fr 1fr; }
   }
 
   @media (max-width: 768px) {
     .container { padding: 0 var(--s5); }
+    .events-strip { grid-template-columns: repeat(2, 1fr); }
     .header-nav-primary { display: none; }
     .header-nav-secondary { display: none; }
     .header-np-info__show { display: none; }
@@ -1306,56 +1304,106 @@
       </a>
     </div>
 
-    <div class="events-scroll">
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--a">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Tue, Feb 18</div>
-          <div class="event-card__name">Free at Noon: Hurray for the Riff Raff</div>
-          <div class="event-card__venue">World Cafe Live</div>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--b">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Sat, Feb 22</div>
-          <div class="event-card__name">XPN Welcomes: Julien Baker</div>
-          <div class="event-card__venue">Union Transfer</div>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--c">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Wed, Mar 5</div>
-          <div class="event-card__name">XPN Concert: The National</div>
-          <div class="event-card__venue">The Met Philadelphia</div>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--d">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Fri, Mar 14</div>
-          <div class="event-card__name">Free at Noon: Faye Webster</div>
-          <div class="event-card__venue">World Cafe Live</div>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--e">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Sat, Mar 22</div>
-          <div class="event-card__name">XPN Welcomes: Big Thief</div>
-          <div class="event-card__venue">The Fillmore Philadelphia</div>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="event-card__img"><div class="ph ph--a">Photo</div></div>
-        <div class="event-card__body">
-          <div class="event-card__date">Fri, Apr 4</div>
-          <div class="event-card__name">XPN Concert: Bon Iver</div>
-          <div class="event-card__venue">The Mann Center</div>
-        </div>
-      </div>
+    <div class="events-filters">
+      <button class="events-filter-btn events-filter-btn--active">All</button>
+      <button class="events-filter-btn">Free at Noon</button>
+      <button class="events-filter-btn">XPN Welcomes</button>
+      <button class="events-filter-btn">XPN Concerts</button>
+      <button class="events-filter-btn">Festivals</button>
     </div>
+
+    <div class="events-strip">
+
+      <div class="ev-tile">
+        <div class="ev-tile__date">
+          <div class="ev-tile__day">18</div>
+          <div class="ev-tile__month-wrap"><span class="ev-tile__month">Feb</span><span class="ev-tile__dow">Wed</span></div>
+        </div>
+        <div class="ev-tile__body">
+          <div class="ev-tile__type">Free at Noon</div>
+          <div class="ev-tile__artist">Hurray for the Riff Raff</div>
+          <div class="ev-tile__venue">World Cafe Live</div>
+          <div class="ev-tile__time">Noon – 1:00 PM</div>
+        </div>
+        <a href="#" class="ev-tile__cta ev-tile__cta--free">Free RSVP</a>
+      </div>
+
+      <div class="ev-tile">
+        <div class="ev-tile__date">
+          <div class="ev-tile__day">22</div>
+          <div class="ev-tile__month-wrap"><span class="ev-tile__month">Feb</span><span class="ev-tile__dow">Sun</span></div>
+        </div>
+        <div class="ev-tile__body">
+          <div class="ev-tile__type">XPN Welcomes</div>
+          <div class="ev-tile__artist">Julien Baker &amp; Torres</div>
+          <div class="ev-tile__venue">Union Transfer</div>
+          <div class="ev-tile__time">8:00 PM Doors</div>
+        </div>
+        <a href="#" class="ev-tile__cta">Get Tickets</a>
+      </div>
+
+      <div class="ev-tile">
+        <div class="ev-tile__date">
+          <div class="ev-tile__day">5</div>
+          <div class="ev-tile__month-wrap"><span class="ev-tile__month">Mar</span><span class="ev-tile__dow">Thu</span></div>
+        </div>
+        <div class="ev-tile__body">
+          <div class="ev-tile__type">XPN Concert</div>
+          <div class="ev-tile__artist">The National</div>
+          <div class="ev-tile__venue">The Met Philadelphia</div>
+          <div class="ev-tile__time">8:00 PM</div>
+        </div>
+        <a href="#" class="ev-tile__cta">Get Tickets</a>
+      </div>
+
+      <div class="ev-tile">
+        <div class="ev-tile__date">
+          <div class="ev-tile__day">14</div>
+          <div class="ev-tile__month-wrap"><span class="ev-tile__month">Mar</span><span class="ev-tile__dow">Fri</span></div>
+        </div>
+        <div class="ev-tile__body">
+          <div class="ev-tile__type">Free at Noon</div>
+          <div class="ev-tile__artist">Faye Webster</div>
+          <div class="ev-tile__venue">World Cafe Live</div>
+          <div class="ev-tile__time">Noon – 1:00 PM</div>
+        </div>
+        <a href="#" class="ev-tile__cta ev-tile__cta--free">Free RSVP</a>
+      </div>
+
+      <div class="ev-tile">
+        <div class="ev-tile__date">
+          <div class="ev-tile__day">22</div>
+          <div class="ev-tile__month-wrap"><span class="ev-tile__month">Mar</span><span class="ev-tile__dow">Sat</span></div>
+        </div>
+        <div class="ev-tile__body">
+          <div class="ev-tile__type">XPN Welcomes</div>
+          <div class="ev-tile__artist">Big Thief</div>
+          <div class="ev-tile__venue">The Fillmore Philadelphia</div>
+          <div class="ev-tile__time">8:00 PM</div>
+        </div>
+        <a href="#" class="ev-tile__cta">Get Tickets</a>
+      </div>
+
+      <div class="ev-tile">
+        <div class="ev-tile__date">
+          <div class="ev-tile__day">4</div>
+          <div class="ev-tile__month-wrap"><span class="ev-tile__month">Apr</span><span class="ev-tile__dow">Sat</span></div>
+        </div>
+        <div class="ev-tile__body">
+          <div class="ev-tile__type">XPN Concert</div>
+          <div class="ev-tile__artist">Bon Iver</div>
+          <div class="ev-tile__venue">The Mann Center</div>
+          <div class="ev-tile__time">7:30 PM</div>
+        </div>
+        <a href="#" class="ev-tile__cta">Get Tickets</a>
+      </div>
+
+    </div>
+
+    <div class="events-view-all">
+      <a href="#">View full concert calendar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
   </div>
 </section>
 
@@ -1440,51 +1488,6 @@
 <div class="container">
   <div class="ad-slot ad-slot--leaderboard">Ad — 728&times;90</div>
 </div>
-
-<!-- ═════════════ ON AIR BAND ═════════════ -->
-<section class="on-air-band">
-  <div class="container">
-    <div class="on-air-now">
-      <div class="on-air-art">
-        <div class="ph ph--dark" style="height:88px">Art</div>
-      </div>
-      <div class="on-air-details">
-        <div class="on-air-details__live"><span class="dot"></span> On Air</div>
-        <div class="on-air-details__song">Landslide</div>
-        <div class="on-air-details__artist">Fleetwood Mac</div>
-        <div class="on-air-details__show"><strong>World Cafe</strong> with Raina Douris</div>
-      </div>
-    </div>
-    <div class="on-air-divider"></div>
-    <div class="on-air-schedule">
-      <div class="sched-slot sched-slot--active">
-        <div class="sched-slot__time">Now — 2:00 PM</div>
-        <div class="sched-slot__name">World Cafe</div>
-        <div class="sched-slot__host">Raina Douris</div>
-      </div>
-      <div class="sched-slot">
-        <div class="sched-slot__time">2:00 PM</div>
-        <div class="sched-slot__name">Press Play</div>
-        <div class="sched-slot__host">Kristen Kurtis</div>
-      </div>
-      <div class="sched-slot">
-        <div class="sched-slot__time">6:00 PM</div>
-        <div class="sched-slot__name">Funky Friday</div>
-        <div class="sched-slot__host">Robert Drake</div>
-      </div>
-      <div class="sched-slot">
-        <div class="sched-slot__time">9:00 PM</div>
-        <div class="sched-slot__name">Rhythm & Roots</div>
-        <div class="sched-slot__host">Helen Leicht</div>
-      </div>
-      <div class="sched-slot">
-        <div class="sched-slot__time">12:00 AM</div>
-        <div class="sched-slot__name">Sleepy Hollow</div>
-        <div class="sched-slot__host">Dan Reed</div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ═════════════ STORIES + SIDEBAR ═════════════ -->
 <section id="read" class="stories-section">
