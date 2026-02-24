@@ -283,13 +283,27 @@
   .header-nav-secondary a.nav-playlist:hover { color: var(--xpn-red); }
 
   .header-nav-secondary a.nav-donate {
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
     text-transform: none;
-    color: var(--xpn-red);
+    color: #fff;
+    background: var(--xpn-red);
+    padding: 0.45em 1.1em;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    transition: background 0.15s;
   }
-  .header-nav-secondary a.nav-donate:hover { color: var(--xpn-red-hover); }
+  .header-nav-secondary a.nav-donate::before {
+    content: "♥";
+    font-size: 0.85em;
+  }
+  .header-nav-secondary a.nav-donate:hover {
+    background: var(--xpn-red-hover);
+    color: #fff;
+  }
 
   /* ════════════════════════════════════════════════════════════════
      TOP STORIES — NPR-inspired clean layout
