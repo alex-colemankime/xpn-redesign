@@ -1307,6 +1307,14 @@
     line-height: 1.6;
   }
 
+  /* Scroll hint — mobile carousel affordance (hidden on desktop) */
+  .scroll-hint { display: none; }
+
+  @keyframes hint-nudge {
+    0%, 60%, 100% { transform: translateX(0); }
+    80%            { transform: translateX(5px); }
+  }
+
   /* ════════════════════════════════════════════════════════════════
      RESPONSIVE
      ════════════════════════════════════════════════════════════════ */
@@ -1381,11 +1389,49 @@
       margin-right: calc(-1 * var(--s4));
       padding-left: var(--s4);
       padding-right: var(--s4);
+      /* Fade right edge to signal more content */
+      -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 64px), transparent 100%);
+              mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 64px), transparent 100%);
+      transition: mask-image 0.3s, -webkit-mask-image 0.3s;
+    }
+    .ts-cards.is-scrolled-end {
+      -webkit-mask-image: none;
+              mask-image: none;
     }
     .ts-cards::-webkit-scrollbar { display: none; }
     .ts-card {
       flex: 0 0 280px;
       scroll-snap-align: start;
+    }
+
+    /* Scroll hint label — fades out once user starts swiping */
+    .scroll-hint {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 5px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-top: var(--s2);
+      margin-bottom: var(--s1);
+      opacity: 1;
+      transition: opacity 0.4s;
+    }
+    .scroll-hint::after {
+      content: '→';
+      font-size: 0.9rem;
+      line-height: 1;
+      animation: hint-nudge 1.2s ease-in-out 0.8s 3;
+    }
+    .scroll-hint--dark { color: rgba(255,255,255,0.45); }
+    /* Fade hint out once user has scrolled */
+    .ts-cards.is-scrolled + .scroll-hint,
+    .video-sidebar.is-scrolled + .scroll-hint {
+      opacity: 0;
+      pointer-events: none;
     }
 
     /* ──────────────────────────────────────────
@@ -1438,6 +1484,13 @@
       margin-right: calc(-1 * var(--s4));
       padding-left: var(--s4);
       padding-right: var(--s4);
+      /* Fade right edge to signal more content */
+      -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 64px), transparent 100%);
+              mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 64px), transparent 100%);
+    }
+    .video-sidebar.is-scrolled-end {
+      -webkit-mask-image: none;
+              mask-image: none;
     }
     .video-sidebar::-webkit-scrollbar { display: none; }
     .video-thumb {
@@ -1458,8 +1511,30 @@
        STORIES
        Tighter rows + reveal newsletter signup
     ────────────────────────────────────────── */
+    /* Lead photo: compact banner crop — reads as a landscape accent not a hero slab */
+    .ts-featured__img { aspect-ratio: 5/2; }
+
     .stories-section { padding-bottom: var(--s5); }
-    .story-row { grid-template-columns: 1fr; gap: var(--s4); padding: var(--s4) 0; }
+    .story-row { grid-template-columns: 1fr; gap: var(--s2); padding: var(--s4) 0; }
+
+    /* Story items: horizontal thumbnail layout (thumbnail left, text right)
+       Matches standard mobile news pattern — images stay compact */
+    .story-item {
+      display: grid;
+      grid-template-columns: 108px 1fr;
+      grid-template-rows: auto auto auto;
+      column-gap: var(--s3);
+      align-items: start;
+    }
+    .story-item__img {
+      grid-column: 1;
+      grid-row: 1 / 4;
+      aspect-ratio: 1;
+      margin-bottom: 0;
+    }
+    .story-item__tag  { grid-column: 2; grid-row: 1; }
+    .story-item__title { grid-column: 2; grid-row: 2; font-size: 0.92rem; }
+    .story-item__meta { grid-column: 2; grid-row: 3; }
     /* Show newsletter signup below stories on mobile */
     .sidebar {
       display: block;
@@ -1706,6 +1781,7 @@
         </div>
       </article>
     </div>
+    <p class="scroll-hint" aria-hidden="true">Swipe for more</p>
 
     <!-- Promo strip — Vox-style -->
     <div class="promo-strip">
@@ -1925,6 +2001,7 @@
           </div>
         </div>
       </div>
+      <p class="scroll-hint" aria-hidden="true">Swipe for more</p>
     </div>
   </div>
 </section>
@@ -2149,6 +2226,20 @@
     menuBtns.forEach(b => b.addEventListener('click', openDrawer));
     if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
     if (overlay)  overlay.addEventListener('click', closeDrawer);
+  })();
+
+  // Carousel scroll affordance — fade hint out once user swipes; remove edge-mask at end
+  (function() {
+    document.querySelectorAll('.ts-cards, .video-sidebar').forEach(function(el) {
+      function update() {
+        var scrolled = el.scrollLeft > 24;
+        var atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 8;
+        el.classList.toggle('is-scrolled', scrolled);
+        el.classList.toggle('is-scrolled-end', atEnd);
+      }
+      el.addEventListener('scroll', update, { passive: true });
+      update(); // initial state
+    });
   })();
 
   // Match video sidebar height to featured video height (desktop only)
