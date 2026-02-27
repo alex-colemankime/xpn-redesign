@@ -1393,14 +1393,6 @@
       margin-right: calc(-1 * var(--s4));
       padding-left: var(--s4);
       padding-right: var(--s4);
-      /* Fade right edge to signal more content */
-      -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 64px), transparent 100%);
-              mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 64px), transparent 100%);
-      transition: mask-image 0.3s, -webkit-mask-image 0.3s;
-    }
-    .ts-cards.is-scrolled-end {
-      -webkit-mask-image: none;
-              mask-image: none;
     }
     .ts-cards::-webkit-scrollbar { display: none; }
     .ts-card {
@@ -1457,6 +1449,8 @@
        Featured full-width + show sidebar list
     ────────────────────────────────────────── */
     .events-section { padding: var(--s3) 0 var(--s5); }
+    /* Stack title + button so "Upcoming Events" stays on one line */
+    .events-section .sec-head { flex-direction: column; align-items: flex-start; gap: var(--s3); }
     .events-strip { grid-template-columns: 1fr; gap: var(--s3); }
     .ev-tile--featured { grid-template-columns: 1fr; min-height: auto; }
     .ev-tile--featured .ev-tile__thumb { aspect-ratio: 16/9; position: relative; }
@@ -1488,13 +1482,6 @@
       margin-right: calc(-1 * var(--s4));
       padding-left: var(--s4);
       padding-right: var(--s4);
-      /* Fade right edge to signal more content */
-      -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 64px), transparent 100%);
-              mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 64px), transparent 100%);
-    }
-    .video-sidebar.is-scrolled-end {
-      -webkit-mask-image: none;
-              mask-image: none;
     }
     .video-sidebar::-webkit-scrollbar { display: none; }
     .video-thumb {
@@ -1515,9 +1502,6 @@
        STORIES
        Tighter rows + reveal newsletter signup
     ────────────────────────────────────────── */
-    /* Lead photo: compact banner crop — reads as a landscape accent not a hero slab */
-    .ts-featured__img { aspect-ratio: 5/2; }
-
     .stories-section { padding-bottom: var(--s5); }
     .story-row { grid-template-columns: 1fr; gap: var(--s2); padding: var(--s4) 0; }
 
@@ -2232,17 +2216,12 @@
     if (overlay)  overlay.addEventListener('click', closeDrawer);
   })();
 
-  // Carousel scroll affordance — fade hint out once user swipes; remove edge-mask at end
+  // Carousel scroll hint — fade out "Swipe for more" label once user starts swiping
   (function() {
     document.querySelectorAll('.ts-cards, .video-sidebar').forEach(function(el) {
-      function update() {
-        var scrolled = el.scrollLeft > 24;
-        var atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 8;
-        el.classList.toggle('is-scrolled', scrolled);
-        el.classList.toggle('is-scrolled-end', atEnd);
-      }
-      el.addEventListener('scroll', update, { passive: true });
-      update(); // initial state
+      el.addEventListener('scroll', function() {
+        if (el.scrollLeft > 24) el.classList.add('is-scrolled');
+      }, { passive: true });
     });
   })();
 
