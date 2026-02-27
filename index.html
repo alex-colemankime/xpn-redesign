@@ -325,21 +325,25 @@
     padding: var(--s6) 0 var(--s7);
   }
 
-  /* Featured story: image right, text left — side by side */
+  /* Featured story: text left, image right — white card matching sub-cards */
   .ts-featured {
     display: grid;
-    grid-template-columns: 2fr 3fr;
-    gap: var(--s8);
-    align-items: center;
-    padding-bottom: var(--s6);
-    border-bottom: 1px solid var(--ink-faint);
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: stretch;
+    background: var(--white);
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 0 7px rgba(0,0,0,0.05);
+    margin-bottom: var(--s5);
     cursor: pointer;
   }
+  .ts-featured:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
   .ts-featured:hover .ts-featured__headline { color: var(--xpn-red); }
   .ts-featured:hover .ts-featured__img img { transform: scale(1.02); }
 
   .ts-featured__text {
-    padding: var(--s5) 0;
+    padding: var(--s6);
   }
   .ts-featured__tag {
     font-family: var(--font);
@@ -374,9 +378,8 @@
   }
   .ts-featured__img {
     overflow: hidden;
-    border-radius: 2px;
     background: var(--cream-dark);
-    aspect-ratio: 16/9;
+    /* No aspect-ratio on desktop — image fills the card height naturally */
   }
   .ts-featured__img img {
     width: 100%; height: 100%; object-fit: cover;
@@ -388,7 +391,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--s5);
-    padding-top: var(--s6);
+    padding-top: var(--s3);
   }
 
   .ts-card {
@@ -1369,8 +1372,9 @@
        Tighter vertical rhythm, no wasted space
     ────────────────────────────────────────── */
     .top-stories { padding: var(--s4) 0 var(--s5); }
-    .ts-featured { gap: var(--s4); padding-bottom: var(--s4); }
-    .ts-featured__text { padding: 0; }
+    /* On mobile the featured stacks; keep box, use compact inner padding */
+    .ts-featured { gap: 0; margin-bottom: var(--s4); }
+    .ts-featured__text { padding: var(--s4); }
     .ts-featured__headline { font-size: clamp(1.4rem, 6vw, 1.75rem); }
     .ts-featured__excerpt { font-size: 0.9rem; }
 
