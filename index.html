@@ -1310,6 +1310,8 @@
   /* ════════════════════════════════════════════════════════════════
      RESPONSIVE
      ════════════════════════════════════════════════════════════════ */
+
+  /* ── Tablet ── */
   @media (max-width: 1024px) {
     .ts-featured { grid-template-columns: 1fr; }
     .ts-featured__img { aspect-ratio: 16/9; }
@@ -1322,71 +1324,179 @@
     .footer-cta { grid-column: 2; grid-row: 1; }
   }
 
+  /* ── Mobile ── */
   @media (max-width: 768px) {
-    .container { padding: 0 var(--s5); }
-    .events-strip { grid-template-columns: 1fr; }
+
+    /* Global: remove tap flash, kill 300ms delay, tighten container */
+    *, *::before, *::after { -webkit-tap-highlight-color: transparent; }
+    button, a, [role="button"] { touch-action: manipulation; }
+    .container { padding: 0 var(--s4); }
+
+    /* Hide desktop leaderboard ads — wrong format for mobile */
+    .ad-slot.ad-slot--leaderboard { display: none; }
+
+    /* ──────────────────────────────────────────
+       HEADER
+       44×44px tap targets, decluttered bar
+    ────────────────────────────────────────── */
+    .header-row1 { height: 56px; }
+    .header-row1__inner { height: 56px; gap: var(--s2); }
+    .header-logo svg { height: 24px; }
+    .header-album-wrap { width: 44px; height: 44px; }
+    .header-album-art { width: 44px; height: 44px; }
+    /* Strip "ON AIR: WXPN" label — keep only track name */
+    .header-np-info__label { display: none; }
+    .header-np-info__show { display: none; }
+    .header-np-info__track { font-size: 0.82rem; }
+    /* Remove search & donate from header bar on mobile — in drawer */
+    .header-search-btn { display: none; }
+    .nav-donate { display: none; }
+    .header-row2 { display: none; }
+    .header-menu-btn--row1 { display: flex; width: 44px; height: 44px; }
+    /* Prevent header vanishing on scroll — no nav bar to fall back to */
+    .site-header.is-collapsed .header-row1 { height: 56px; opacity: 1; }
+
+    /* ──────────────────────────────────────────
+       TOP STORIES
+       Tighter vertical rhythm, no wasted space
+    ────────────────────────────────────────── */
+    .top-stories { padding: var(--s4) 0 var(--s5); }
+    .ts-featured { gap: var(--s4); padding-bottom: var(--s4); }
+    .ts-featured__text { padding: 0; }
+    .ts-featured__headline { font-size: clamp(1.4rem, 6vw, 1.75rem); }
+    .ts-featured__excerpt { font-size: 0.9rem; }
+
+    /* Card row → horizontal scroll carousel with scroll-snap + peek */
+    .ts-cards {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: visible;
+      grid-template-columns: unset;
+      scroll-snap-type: x mandatory;
+      overscroll-behavior-x: contain;
+      gap: var(--s3);
+      padding-bottom: var(--s3);
+      /* Full-bleed: extend to viewport edges, pad first card back in */
+      margin-left: calc(-1 * var(--s4));
+      margin-right: calc(-1 * var(--s4));
+      padding-left: var(--s4);
+      padding-right: var(--s4);
+    }
+    .ts-cards::-webkit-scrollbar { display: none; }
+    .ts-card {
+      flex: 0 0 280px;
+      scroll-snap-align: start;
+    }
+
+    /* ──────────────────────────────────────────
+       PROMO STRIP
+       Compact single-column list
+    ────────────────────────────────────────── */
+    .promo-strip { grid-template-columns: 1fr; margin-top: var(--s5); }
+    .promo-strip__item { padding: var(--s3) var(--s4); }
+    .promo-strip__item:not(:last-child) { border-right: none; border-bottom: 1px dotted var(--ink-muted); }
+
+    /* ──────────────────────────────────────────
+       SECTION HEADERS
+       Reduce vertical breathing room on mobile
+    ────────────────────────────────────────── */
+    .sec-head { padding: var(--s4) 0 var(--s3); }
+
+    /* ──────────────────────────────────────────
+       EVENTS
+       Featured full-width + show sidebar list
+    ────────────────────────────────────────── */
+    .events-section { padding: var(--s3) 0 var(--s5); }
+    .events-strip { grid-template-columns: 1fr; gap: var(--s3); }
     .ev-tile--featured { grid-template-columns: 1fr; min-height: auto; }
     .ev-tile--featured .ev-tile__thumb { aspect-ratio: 16/9; position: relative; }
-    .ev-sidebar { display: none; }
-    .donate-band .container { grid-template-columns: 1fr; gap: var(--s5); }
-    .donate-band__actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
-    /* Header mobile */
-    .header-row1 { height: 64px; }
-    .header-row1__inner { height: 64px; gap: var(--s3); }
-    .header-np-info__show { display: none; }
-    .header-np-info__track { font-size: 0.85rem; }
-    .header-album-wrap { width: 46px; height: 46px; }
-    .header-album-art { width: 46px; height: 46px; }
-    .header-logo svg { height: 26px; }
-    .nav-donate { padding: 0.4em 0.8em; font-size: 0.8rem; }
-    .nav-donate::before { display: none; }
-    .header-row2 { display: none; }
-    .header-menu-btn--row1 { display: flex; }
-    .ts-cards { grid-template-columns: 1fr; }
-    .promo-strip { grid-template-columns: 1fr; }
-    .promo-strip__item:not(:last-child) { border-right: none; border-bottom: 1px dotted var(--ink-muted); }
-    .story-row { grid-template-columns: 1fr; gap: var(--s5); }
-    .footer-top { grid-template-columns: 1fr; }
-    .footer-cta { align-items: flex-start; }
-    .footer-nav { grid-template-columns: 1fr 1fr; }
-    /* Watch section: stacked on mobile — video above, horizontal scroll below */
-    .video-layout {
-      grid-template-columns: 1fr;
-    }
+    /* Body below image: start from top, not pushed to bottom */
+    .ev-tile--featured .ev-tile__body { padding: var(--s4); justify-content: flex-start; }
+    /* Reveal sidebar events as a stacked list below featured */
+    .ev-sidebar { display: flex; flex-direction: column; gap: var(--s2); }
+    .ev-list-item { grid-template-columns: 80px 1fr; min-height: 72px; }
+
+    /* ──────────────────────────────────────────
+       WATCH
+       Full-width video + snappable carousel
+    ────────────────────────────────────────── */
+    .video-section { padding-bottom: var(--s5); }
+    .video-layout { grid-template-columns: 1fr; }
     .video-sidebar {
       display: flex;
       flex-direction: row;
       overflow-x: auto;
       overflow-y: visible;
+      scroll-snap-type: x mandatory;
+      overscroll-behavior-x: contain;
       max-height: none;
       gap: var(--s3);
-      border: none;
-      border-radius: 0;
+      border: none; border-radius: 0;
       background: transparent;
-      padding-bottom: var(--s2);
+      padding-bottom: var(--s3);
+      margin-left: calc(-1 * var(--s4));
+      margin-right: calc(-1 * var(--s4));
+      padding-left: var(--s4);
+      padding-right: var(--s4);
     }
-    .video-sidebar::-webkit-scrollbar { height: 3px; }
-    .video-sidebar::-webkit-scrollbar-track { background: transparent; }
-    .video-sidebar::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 2px; }
+    .video-sidebar::-webkit-scrollbar { display: none; }
     .video-thumb {
-      flex: 0 0 200px;
-      display: flex;
-      flex-direction: column;
+      flex: 0 0 240px;
+      display: flex; flex-direction: column;
       grid-template-columns: unset;
       border: 1px solid var(--ink-faint);
       border-radius: 2px;
       background: var(--white);
-      gap: 0;
-      padding: 0;
+      gap: 0; padding: 0;
+      scroll-snap-align: start;
     }
     .video-thumb:last-child { border-bottom: 1px solid var(--ink-faint); }
-    .video-thumb__img {
-      border-radius: 0;
-      width: 100%;
+    .video-thumb__img { border-radius: 0; width: 100%; }
+    .video-thumb__body { padding: var(--s2) var(--s3) var(--s3); }
+
+    /* ──────────────────────────────────────────
+       STORIES
+       Tighter rows + reveal newsletter signup
+    ────────────────────────────────────────── */
+    .stories-section { padding-bottom: var(--s5); }
+    .story-row { grid-template-columns: 1fr; gap: var(--s4); padding: var(--s4) 0; }
+    /* Show newsletter signup below stories on mobile */
+    .sidebar {
+      display: block;
+      padding-top: var(--s5);
+      border-top: 1px solid var(--ink-faint);
     }
-    .video-thumb__body {
-      padding: var(--s2) var(--s3) var(--s3);
-    }
+    .sidebar__block { padding-bottom: 0; margin-bottom: 0; border-bottom: none; }
+    /* Single-column form on mobile; prevent iOS auto-zoom on input focus */
+    .newsletter-signup__form { grid-template-columns: 1fr; }
+    .ns-field--half { grid-column: 1 / -1; }
+    .ns-input { font-size: 1rem; }
+
+    /* ──────────────────────────────────────────
+       DONATE BAND
+       Full-width stacked buttons, easy to tap
+    ────────────────────────────────────────── */
+    .donate-band { padding: var(--s5) 0; }
+    .donate-band .container { grid-template-columns: 1fr; gap: var(--s4); }
+    .donate-band__actions { align-items: stretch; flex-direction: column; gap: var(--s3); }
+    .donate-band__btn { text-align: center; justify-content: center; }
+
+    /* ──────────────────────────────────────────
+       FOOTER
+       Single column + safe-area bottom padding
+    ────────────────────────────────────────── */
+    .footer-top { grid-template-columns: 1fr; gap: var(--s4); }
+    .footer-cta { align-items: flex-start; }
+    .footer-nav { grid-template-columns: 1fr 1fr; }
+    .site-footer { padding-bottom: calc(var(--s4) + env(safe-area-inset-bottom, 0px)); }
+  }
+
+  /* ── Small phones (≤ 390px) ── */
+  @media (max-width: 390px) {
+    .container { padding: 0 var(--s3); }
+    .ts-card { flex: 0 0 260px; }
+    .ts-featured__headline { font-size: 1.35rem; }
+    .ev-list-item { grid-template-columns: 70px 1fr; }
   }
 
   /* ═══════════════════════════════════════════════════════════════
