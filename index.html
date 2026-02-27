@@ -385,7 +385,8 @@
   }
   .ts-featured__img {
     overflow: hidden;
-    background: var(--cream-dark);
+    background: var(--white);
+    padding: var(--s5);
     /* No aspect-ratio on desktop — image fills the card height naturally */
   }
   .ts-featured__img img {
@@ -1332,7 +1333,7 @@
   /* ── Tablet ── */
   @media (max-width: 1024px) {
     .ts-featured { grid-template-columns: 1fr; }
-    .ts-featured__img { aspect-ratio: 16/9; }
+    .ts-featured__img { aspect-ratio: 16/9; padding: 0; background: var(--cream-dark); }
     .ts-cards { grid-template-columns: 1fr 1fr; }
     .video-layout { grid-template-columns: 1fr 280px; }
     .stories-layout { grid-template-columns: 1fr; }
