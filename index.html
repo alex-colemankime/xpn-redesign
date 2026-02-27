@@ -308,6 +308,13 @@
     line-height: 1;
   }
   .header-drawer__close:hover { color: #fff; }
+  /* Primary nav group — hidden on desktop, shown on mobile via display:contents */
+  .drawer-primary { display: none; }
+  .drawer-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    margin: var(--s2) 0;
+  }
   .header-drawer-overlay {
     display: none;
     position: fixed;
@@ -1362,8 +1369,11 @@
     /* Remove search & donate from header bar on mobile — in drawer */
     .header-search-btn { display: none; }
     .nav-donate { display: none; }
+    .header-drawer .nav-donate { display: flex; }
     .header-row2 { display: none; }
     .header-menu-btn--row1 { display: flex; width: 44px; height: 44px; }
+    /* Reveal primary nav group inside drawer on mobile */
+    .drawer-primary { display: contents; }
     /* Prevent header vanishing on scroll — no nav bar to fall back to */
     .site-header.is-collapsed .header-row1 { height: 56px; opacity: 1; }
 
@@ -1679,16 +1689,28 @@
     </div>
   </div>
 
-  <!-- Mobile drawer -->
+  <!-- Drawer nav -->
   <nav class="header-drawer" id="header-drawer" aria-hidden="true">
     <button class="header-drawer__close" aria-label="Close menu">&times;</button>
-    <a href="#">Read</a>
-    <a href="#watch">Watch</a>
-    <a href="#">Listen</a>
-    <a href="#">Connect</a>
-    <a href="#">Playlist</a>
-    <a href="#">Concert Calendar</a>
-    <a href="#" class="nav-donate">Donate</a>
+
+    <!-- Primary nav — mobile only (desktop uses header-row2 instead) -->
+    <div class="drawer-primary">
+      <a href="#">Read</a>
+      <a href="#watch">Watch</a>
+      <a href="#">Listen</a>
+      <a href="#">Connect</a>
+      <a href="#">Playlist</a>
+      <a href="#">Concert Calendar</a>
+      <a href="#" class="nav-donate">Donate</a>
+      <hr class="drawer-divider">
+    </div>
+
+    <!-- Utility links — always visible -->
+    <a href="#">Newsletters</a>
+    <a href="#">Membership</a>
+    <a href="#">Support WXPN</a>
+    <a href="#">Volunteer</a>
+    <a href="#">Contact Us</a>
   </nav>
 
 </header>
