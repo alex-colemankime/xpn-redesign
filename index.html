@@ -853,73 +853,117 @@
   }
 
   /* ════════════════════════════════════════════════════════════════
-     STORIES SECTION — Three-column + sidebar
+     READ SECTION — Horizontal carousel (Pitchfork-style)
      ════════════════════════════════════════════════════════════════ */
   .stories-section { padding-bottom: var(--s7); }
 
-  .stories-layout {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: var(--s7);
+  .read-nav { display: flex; gap: 2px; align-items: center; }
+  .read-nav__btn {
+    width: 32px; height: 32px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-medium);
+    transition: background 0.15s, color 0.15s;
+    padding: 0;
   }
+  .read-nav__btn:hover { background: color-mix(in srgb, var(--ink) 8%, transparent); color: var(--ink); }
+  .read-nav__btn:focus-visible { outline: 2px solid var(--xpn-red); outline-offset: 2px; }
+  .read-nav__btn:disabled { opacity: 0.3; cursor: default; pointer-events: none; }
+  .read-nav__btn svg { width: 18px; height: 18px; stroke-width: 1.75; }
 
-  .stories-list {
+  /* Carousel track */
+  .read-carousel {
+    display: flex;
+    gap: var(--s5);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    /* Bleed right edge to hint at next card */
+    margin-right: calc(-1 * var(--s5));
+    padding-right: var(--s5);
+    padding-bottom: var(--s2);
+  }
+  .read-carousel::-webkit-scrollbar { display: none; }
+
+  /* Cards */
+  .read-card {
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    cursor: pointer;
+    background: var(--white);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    transition: box-shadow 0.2s, transform 0.2s;
     display: flex;
     flex-direction: column;
   }
-
-  .story-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: var(--s5);
-    padding: var(--s6) 0;
-    border-bottom: 1px solid var(--ink-faint);
+  .read-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.11);
+    transform: translateY(-2px);
   }
-  .story-row:first-child { padding-top: 0; }
-
-  .story-item { cursor: pointer; }
-  .story-item:hover .story-item__title { color: var(--xpn-red); }
-
-  .story-item__img {
-    border-radius: 2px;
-    overflow: hidden;
+  .read-card__img {
     aspect-ratio: 16/9;
-    margin-bottom: var(--s3);
+    overflow: hidden;
     background: var(--cream-dark);
+    flex-shrink: 0;
   }
-  .story-item__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
-  .story-item:hover .story-item__img img { transform: scale(1.03); }
-
-  .story-item__tag {
-    font-family: var(--font);
-    font-size: 0.58rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+  .read-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .read-card:hover .read-card__img img { transform: scale(1.03); }
+  .read-card__body { padding: var(--s4); display: flex; flex-direction: column; }
+  .read-card__tag {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--xpn-red);
-    margin-bottom: var(--s1);
-    display: inline-block;
+    margin-bottom: var(--s2);
   }
-  .story-item__title {
+  .read-card__title {
     font-family: var(--font);
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    line-height: 1.3;
+    line-height: 1.25;
+    margin-bottom: var(--s2);
     transition: color 0.15s;
   }
-  .story-item__meta {
-    font-size: 0.72rem;
+  .read-card:hover .read-card__title { color: var(--xpn-red); }
+  .read-card__byline {
+    font-size: 0.75rem;
+    font-weight: 600;
     color: var(--ink-muted);
-    margin-top: var(--s2);
+    margin-bottom: var(--s2);
+  }
+  .read-card__desc {
+    font-size: 0.8rem;
+    line-height: 1.55;
+    color: var(--ink-light);
   }
 
-  /* Sidebar */
-  .sidebar__block {
-    padding-bottom: var(--s6);
-    margin-bottom: var(--s6);
-    border-bottom: 1px solid var(--ink-faint);
+  /* Pagination dots */
+  .read-dots {
+    display: flex;
+    justify-content: center;
+    gap: var(--s2);
+    margin-top: var(--s5);
   }
-  .sidebar__block:last-child { border-bottom: none; }
+  .read-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: var(--ink-faint);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s;
+  }
+  .read-dot--active { background: var(--ink); }
 
   /* ── Newsletter Signup Widget ── */
   .newsletter-signup {
@@ -1333,7 +1377,8 @@
   /* ── Tablet ── */
   @media (max-width: 1024px) {
     .ts-featured { grid-template-columns: 1fr; }
-    .ts-featured__img { aspect-ratio: 16/9; padding: 0; background: var(--cream-dark); }
+    /* Image rises to top when stacked — NPR pattern */
+    .ts-featured__img { order: -1; aspect-ratio: 16/9; padding: 0; background: var(--cream-dark); }
     .ts-cards { grid-template-columns: 1fr 1fr; }
     .video-layout { grid-template-columns: 1fr 280px; }
     .stories-layout { grid-template-columns: 1fr; }
@@ -1383,8 +1428,16 @@
        Tighter vertical rhythm, no wasted space
     ────────────────────────────────────────── */
     .top-stories { padding: var(--s4) 0 var(--s5); }
-    /* On mobile the featured stacks; keep box, use compact inner padding */
-    .ts-featured { gap: 0; margin-bottom: var(--s4); }
+    /* NPR-style mobile: flat card, full-bleed image, text below */
+    .ts-featured {
+      gap: 0;
+      margin-bottom: var(--s4);
+      box-shadow: none;
+      border-radius: 0;
+      /* Break out of container to bleed edge-to-edge */
+      margin-left: calc(-1 * var(--s4));
+      margin-right: calc(-1 * var(--s4));
+    }
     .ts-featured__text { padding: var(--s4); }
     .ts-featured__headline { font-size: clamp(1.4rem, 6vw, 1.75rem); }
     .ts-featured__excerpt { font-size: 0.9rem; }
@@ -1510,37 +1563,10 @@
     .video-thumb__body { padding: var(--s2) var(--s3) var(--s3); }
 
     /* ──────────────────────────────────────────
-       STORIES
-       Tighter rows + reveal newsletter signup
+       READ SECTION — mobile/tablet
     ────────────────────────────────────────── */
     .stories-section { padding-bottom: var(--s5); }
-    .story-row { grid-template-columns: 1fr; gap: var(--s2); padding: var(--s4) 0; }
-
-    /* Story items: horizontal thumbnail layout (thumbnail left, text right)
-       Matches standard mobile news pattern — images stay compact */
-    .story-item {
-      display: grid;
-      grid-template-columns: 108px 1fr;
-      grid-template-rows: auto auto auto;
-      column-gap: var(--s3);
-      align-items: start;
-    }
-    .story-item__img {
-      grid-column: 1;
-      grid-row: 1 / 4;
-      aspect-ratio: 16/9;
-      margin-bottom: 0;
-    }
-    .story-item__tag  { grid-column: 2; grid-row: 1; }
-    .story-item__title { grid-column: 2; grid-row: 2; font-size: 0.92rem; }
-    .story-item__meta { grid-column: 2; grid-row: 3; }
-    /* Show newsletter signup below stories on mobile */
-    .sidebar {
-      display: block;
-      padding-top: var(--s5);
-      border-top: 1px solid var(--ink-faint);
-    }
-    .sidebar__block { padding-bottom: 0; margin-bottom: 0; border-bottom: none; }
+    .read-card { flex: 0 0 260px; }
     /* Single-column form on mobile; prevent iOS auto-zoom on input focus */
     .newsletter-signup__form { grid-template-columns: 1fr; }
     .ns-field--half { grid-column: 1 / -1; }
@@ -2026,86 +2052,93 @@
 <section id="read" class="stories-section">
   <div class="container">
     <hr class="section-rule">
+
+    <!-- Header: title left, all stories + nav arrows right -->
     <div class="sec-head">
       <h2 class="sec-head__title">Read</h2>
-      <a href="#" class="sec-head__link">
-        All Stories
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-
-    <div class="stories-layout">
-      <div class="stories-list">
-        <div class="story-row">
-          <article class="story-item">
-            <div class="story-item__img"><div class="ph ph--c">Photo</div></div>
-            <span class="story-item__tag">World Cafe</span>
-            <h3 class="story-item__title">How Mdou Moctar Is Rewriting the Guitar Hero Playbook</h3>
-            <div class="story-item__meta">XPN Staff · Feb 6</div>
-          </article>
-          <article class="story-item">
-            <div class="story-item__img"><div class="ph ph--d">Photo</div></div>
-            <span class="story-item__tag">Press Play</span>
-            <h3 class="story-item__title">The Rise of Philly's DIY Venue Scene After the Pandemic</h3>
-            <div class="story-item__meta">XPN Staff · Feb 5</div>
-          </article>
-          <article class="story-item">
-            <div class="story-item__img"><div class="ph ph--e">Photo</div></div>
-            <span class="story-item__tag">Opinion</span>
-            <h3 class="story-item__title">Why We Still Need College Radio in 2026</h3>
-            <div class="story-item__meta">XPN Staff · Feb 4</div>
-          </article>
-        </div>
-        <div class="story-row">
-          <article class="story-item">
-            <div class="story-item__img"><div class="ph ph--a">Photo</div></div>
-            <span class="story-item__tag">Album Review</span>
-            <h3 class="story-item__title">Arooj Aftab's New Record Is a Hymn to Patience</h3>
-            <div class="story-item__meta">XPN Staff · Feb 3</div>
-          </article>
-          <article class="story-item">
-            <div class="story-item__img"><div class="ph ph--b">Photo</div></div>
-            <span class="story-item__tag">Feature</span>
-            <h3 class="story-item__title">Inside the Making of XPN's New Podcast Series</h3>
-            <div class="story-item__meta">XPN Staff · Feb 2</div>
-          </article>
-          <article class="story-item">
-            <div class="story-item__img"><div class="ph ph--c">Photo</div></div>
-            <span class="story-item__tag">Interview</span>
-            <h3 class="story-item__title">Sharon Van Etten on Motherhood, Memory, and Making Music</h3>
-            <div class="story-item__meta">XPN Staff · Feb 1</div>
-          </article>
+      <div style="display:flex;align-items:center;gap:var(--s4);">
+        <a href="#" class="sec-head__link">All Stories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="read-nav">
+          <button class="read-nav__btn" id="readPrev" aria-label="Previous stories">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          </button>
+          <button class="read-nav__btn" id="readNext" aria-label="Next stories">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
         </div>
       </div>
+    </div>
 
-      <!-- Sidebar: Newsletter Signup -->
-      <aside class="sidebar">
-        <div class="sidebar__block" style="border-bottom:none; padding-bottom:0;">
-          <div class="newsletter-signup">
-            <h3 class="newsletter-signup__heading">Never miss a beat</h3>
-            <p class="newsletter-signup__desc">Subscribe to WXPN Top Stories newsletter and stay in the loop with the latest in music!</p>
-            <form class="newsletter-signup__form" action="https://xpn.org/signup-xpn-top-stories/" method="post" novalidate>
-              <div class="ns-field ns-field--half">
-                <label class="ns-label" for="ns-first">First Name</label>
-                <input class="ns-input" type="text" id="ns-first" name="first_name" autocomplete="given-name">
-              </div>
-              <div class="ns-field ns-field--half">
-                <label class="ns-label" for="ns-last">Last Name</label>
-                <input class="ns-input" type="text" id="ns-last" name="last_name" autocomplete="family-name">
-              </div>
-              <div class="ns-field">
-                <label class="ns-label" for="ns-email">Email Address <span class="ns-required">*</span></label>
-                <input class="ns-input" type="email" id="ns-email" name="email" required autocomplete="email">
-              </div>
-              <div class="ns-field">
-                <label class="ns-label" for="ns-zip">Zip Code</label>
-                <input class="ns-input" type="text" id="ns-zip" name="zip" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code">
-              </div>
-              <button type="submit" class="ns-submit">Subscribe</button>
-            </form>
-          </div>
+    <!-- Carousel -->
+    <div class="read-carousel" id="readCarousel">
+
+      <article class="read-card">
+        <div class="read-card__img"><div class="ph ph--c">Photo</div></div>
+        <div class="read-card__body">
+          <span class="read-card__tag">World Cafe</span>
+          <h3 class="read-card__title">How Mdou Moctar Is Rewriting the Guitar Hero Playbook</h3>
+          <div class="read-card__byline">XPN Staff</div>
+          <p class="read-card__desc">The Niger-born guitarist brings blazing Tuareg desert blues to a new generation, redefining what a guitar hero looks like in 2026.</p>
         </div>
-      </aside>
+      </article>
+
+      <article class="read-card">
+        <div class="read-card__img"><div class="ph ph--d">Photo</div></div>
+        <div class="read-card__body">
+          <span class="read-card__tag">Press Play</span>
+          <h3 class="read-card__title">The Rise of Philly's DIY Venue Scene After the Pandemic</h3>
+          <div class="read-card__byline">XPN Staff</div>
+          <p class="read-card__desc">From basements in Fishtown to repurposed warehouses in Kensington, Philly's independent venues are back — and more vital than ever.</p>
+        </div>
+      </article>
+
+      <article class="read-card">
+        <div class="read-card__img"><div class="ph ph--e">Photo</div></div>
+        <div class="read-card__body">
+          <span class="read-card__tag">Opinion</span>
+          <h3 class="read-card__title">Why We Still Need College Radio in 2026</h3>
+          <div class="read-card__byline">XPN Staff</div>
+          <p class="read-card__desc">Streaming algorithms can't replace the serendipity of a late-night college broadcast. Here's why student-run radio still matters.</p>
+        </div>
+      </article>
+
+      <article class="read-card">
+        <div class="read-card__img"><div class="ph ph--a">Photo</div></div>
+        <div class="read-card__body">
+          <span class="read-card__tag">Album Review</span>
+          <h3 class="read-card__title">Arooj Aftab's New Record Is a Hymn to Patience</h3>
+          <div class="read-card__byline">XPN Staff</div>
+          <p class="read-card__desc">On her most fully realized album yet, Aftab weaves Urdu poetry and jazz improvisation into something profoundly still and searching.</p>
+        </div>
+      </article>
+
+      <article class="read-card">
+        <div class="read-card__img"><div class="ph ph--b">Photo</div></div>
+        <div class="read-card__body">
+          <span class="read-card__tag">Feature</span>
+          <h3 class="read-card__title">Inside the Making of XPN's New Podcast Series</h3>
+          <div class="read-card__byline">XPN Staff</div>
+          <p class="read-card__desc">A behind-the-scenes look at the months of reporting, recording, and editing that went into our most ambitious audio project yet.</p>
+        </div>
+      </article>
+
+      <article class="read-card">
+        <div class="read-card__img"><div class="ph ph--c">Photo</div></div>
+        <div class="read-card__body">
+          <span class="read-card__tag">Interview</span>
+          <h3 class="read-card__title">Sharon Van Etten on Motherhood, Memory, and Making Music</h3>
+          <div class="read-card__byline">XPN Staff</div>
+          <p class="read-card__desc">The New Jersey singer-songwriter talks about how becoming a mother changed the way she hears her own songs — and writes new ones.</p>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Pagination dots -->
+    <div class="read-dots" id="readDots">
+      <button class="read-dot read-dot--active" aria-label="Page 1"></button>
+      <button class="read-dot" aria-label="Page 2"></button>
+      <button class="read-dot" aria-label="Page 3"></button>
     </div>
   </div>
 </section>
@@ -2246,6 +2279,34 @@
         if (el.scrollLeft > 24) el.classList.add('is-scrolled');
       }, { passive: true });
     });
+  })();
+
+  // Read carousel — arrow navigation + dot pagination
+  (function() {
+    var carousel = document.getElementById('readCarousel');
+    var prevBtn  = document.getElementById('readPrev');
+    var nextBtn  = document.getElementById('readNext');
+    var dots     = document.querySelectorAll('#readDots .read-dot');
+    if (!carousel) return;
+
+    function cardStep() {
+      var card = carousel.querySelector('.read-card');
+      return card ? card.offsetWidth + 24 : 324;
+    }
+
+    prevBtn && prevBtn.addEventListener('click', function() {
+      carousel.scrollBy({ left: -cardStep(), behavior: 'smooth' });
+    });
+    nextBtn && nextBtn.addEventListener('click', function() {
+      carousel.scrollBy({ left: cardStep(), behavior: 'smooth' });
+    });
+
+    carousel.addEventListener('scroll', function() {
+      var max = carousel.scrollWidth - carousel.clientWidth;
+      if (max <= 0 || !dots.length) return;
+      var idx = Math.round((carousel.scrollLeft / max) * (dots.length - 1));
+      dots.forEach(function(d, i) { d.classList.toggle('read-dot--active', i === idx); });
+    }, { passive: true });
   })();
 
   // Match video sidebar height to featured video height (desktop only)
