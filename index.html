@@ -120,7 +120,6 @@
     background: rgba(0,0,0,0.45);
     color: #fff;
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
     transition: background 0.15s;
   }
   .header-play-btn:hover { background: rgba(213,78,27,0.82); }
@@ -175,7 +174,6 @@
     display: flex; align-items: center; justify-content: center;
     border: none; background: none;
     color: rgba(255,255,255,0.6);
-    cursor: pointer;
     border-radius: 4px;
     transition: color 0.15s;
   }
@@ -303,7 +301,6 @@
     top: var(--s4); right: var(--s4);
     background: none; border: none;
     color: rgba(255,255,255,0.5);
-    cursor: pointer;
     font-size: 1.6rem;
     line-height: 1;
   }
@@ -353,7 +350,6 @@
     padding: var(--s6);
   }
   .ts-featured__tag {
-    font-family: var(--font);
     font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -363,7 +359,6 @@
     display: inline-block;
   }
   .ts-featured__headline {
-    font-family: var(--font);
     font-size: clamp(1.6rem, 2.5vw, 2.2rem);
     font-weight: 700;
     line-height: 1.18;
@@ -379,7 +374,6 @@
     margin-bottom: var(--s3);
   }
   .ts-featured__meta {
-    font-family: var(--font);
     font-size: 0.72rem;
     color: var(--ink-muted);
   }
@@ -435,7 +429,6 @@
     flex: 1;
   }
   .ts-card__tag {
-    font-family: var(--font);
     font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -447,7 +440,6 @@
     gap: 5px;
   }
   .ts-card__headline {
-    font-family: var(--font);
     font-size: 1rem;
     font-weight: 700;
     line-height: 1.3;
@@ -455,7 +447,6 @@
     transition: color 0.15s;
   }
   .ts-card__meta {
-    font-family: var(--font);
     font-size: 0.68rem;
     color: var(--ink-muted);
     margin-top: var(--s2);
@@ -558,7 +549,6 @@
     letter-spacing: 0.07em;
     text-transform: uppercase;
     color: var(--xpn-red);
-    text-decoration: none;
     transition: gap 0.15s;
   }
   .ts-card__cta-link:hover { gap: 8px; }
@@ -587,11 +577,9 @@
     display: flex;
     align-items: center;
     gap: var(--s4);
-    padding: var(--s5) var(--s5);
+    padding: var(--s5);
     cursor: pointer;
     transition: background 0.15s;
-    text-decoration: none;
-    color: inherit;
   }
   .promo-strip__item:hover { background: var(--cream-dark); }
   .promo-strip__item:not(:last-child) {
@@ -624,7 +612,6 @@
     min-width: 0;
   }
   .promo-strip__title {
-    font-family: var(--font);
     font-size: 1.05rem;
     font-weight: 700;
     color: var(--ink);
@@ -636,7 +623,6 @@
     color: var(--ink-light);
   }
   .promo-strip__desc {
-    font-family: var(--font);
     font-size: 0.8rem;
     color: var(--ink-muted);
     margin-top: 2px;
@@ -662,13 +648,11 @@
     margin-bottom: var(--s5);
   }
   .sec-head__title {
-    font-family: var(--font);
     font-size: clamp(1.6rem, 2.5vw, 2.4rem);
     font-weight: 500;
     letter-spacing: -0.02em;
   }
   .sec-head__link {
-    font-family: var(--font);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.06em;
@@ -741,7 +725,6 @@
   .video-featured__play svg { width: 22px; height: 22px; fill: white; margin-left: 3px; }
 
   .video-featured__tag {
-    font-family: var(--font);
     font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -750,7 +733,6 @@
     margin-bottom: var(--s2);
   }
   .video-featured__title {
-    font-family: var(--font);
     font-size: 1.4rem;
     font-weight: 700;
     color: white;
@@ -787,8 +769,6 @@
     border-bottom: 1px solid var(--ink-faint);
     cursor: pointer;
     transition: background 0.15s;
-    text-decoration: none;
-    color: inherit;
     flex-shrink: 0;
   }
   .video-thumb:last-child { border-bottom: none; }
@@ -807,7 +787,6 @@
   .video-thumb__duration {
     position: absolute;
     bottom: 4px; right: 4px;
-    font-family: var(--font);
     font-size: 0.58rem;
     font-weight: 600;
     background: rgba(0,0,0,0.75);
@@ -824,7 +803,6 @@
     padding-top: 2px;
   }
   .video-thumb__show {
-    font-family: var(--font);
     font-size: 0.58rem;
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -836,7 +814,6 @@
     text-overflow: ellipsis;
   }
   .video-thumb__title {
-    font-family: var(--font);
     font-size: 0.88rem;
     font-weight: 700;
     line-height: 1.3;
@@ -863,7 +840,6 @@
     border: none;
     border-radius: 6px;
     background: transparent;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -927,7 +903,6 @@
     margin-bottom: var(--s2);
   }
   .read-card__title {
-    font-family: var(--font);
     font-size: 1.2rem;
     font-weight: 700;
     line-height: 1.25;
@@ -959,87 +934,11 @@
     border-radius: 50%;
     border: none;
     background: var(--ink-faint);
-    cursor: pointer;
     padding: 0;
     transition: background 0.2s;
   }
   .read-dot--active { background: var(--ink); }
 
-  /* ── Newsletter Signup Widget ── */
-  .newsletter-signup {
-    background: var(--white);
-    border: 1px solid rgba(0,0,0,0.08);
-    padding: var(--s5);
-    box-shadow: 5px 5px 0 0 #F5C088;
-  }
-  .newsletter-signup__heading {
-    font-size: 1.35rem;
-    font-weight: 800;
-    color: var(--ink);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    margin-bottom: var(--s2);
-  }
-  .newsletter-signup__desc {
-    font-size: 0.82rem;
-    color: var(--ink-light);
-    line-height: 1.5;
-    padding-bottom: var(--s4);
-    margin-bottom: var(--s4);
-    border-bottom: 1px solid var(--ink-faint);
-  }
-  .newsletter-signup__form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s3);
-  }
-  .ns-field {
-    grid-column: 1 / -1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .ns-field--half { grid-column: span 1; }
-  .ns-label {
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-  }
-  .ns-required { color: var(--xpn-red); }
-  .ns-input {
-    border: 1px solid var(--ink-faint);
-    border-radius: 2px;
-    padding: 8px 10px;
-    font-size: 0.88rem;
-    font-family: var(--font);
-    color: var(--ink);
-    background: var(--cream);
-    width: 100%;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .ns-input:focus {
-    outline: none;
-    border-color: var(--xpn-red);
-    background: var(--white);
-  }
-  .ns-submit {
-    grid-column: 1 / -1;
-    background: var(--xpn-red);
-    color: #fff;
-    border: none;
-    border-radius: 2px;
-    padding: 0.65em 1.4em;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.15s;
-    margin-top: var(--s1);
-  }
-  .ns-submit:hover { background: var(--xpn-red-hover); }
 
   /* ════════════════════════════════════════════════════════════════
      EVENTS — Light two-column layout (featured + sidebar list)
@@ -1095,7 +994,6 @@
     top: 0; right: 0; z-index: 2;
     background: var(--xpn-red);
     color: #fff;
-    font-family: var(--font);
     font-weight: 900;
     font-size: 0.95rem;
     letter-spacing: 0.06em;
@@ -1115,7 +1013,7 @@
     text-transform: uppercase; margin-bottom: var(--s2);
   }
   .ev-tile--featured .ev-tile__artist {
-    color: var(--ink); font-family: var(--font);
+    color: var(--ink);
     font-size: 1.5rem; font-weight: 900;
     line-height: 1.1; letter-spacing: -0.01em;
     margin-bottom: var(--s2);
@@ -1132,9 +1030,9 @@
     display: inline-flex; width: fit-content;
     background: var(--xpn-red); color: #fff;
     padding: 0.55em 1.2em; border-radius: 2px;
-    font-family: var(--font); font-size: 0.68rem;
+    font-size: 0.68rem;
     font-weight: 800; letter-spacing: 0.1em;
-    text-transform: uppercase; text-decoration: none;
+    text-transform: uppercase;
     transition: background 0.15s;
   }
   .ev-tile--featured .ev-tile__cta:hover { background: var(--xpn-red-hover); }
@@ -1146,8 +1044,6 @@
     background: var(--white);
     border-radius: 2px;
     overflow: hidden;
-    text-decoration: none;
-    color: inherit;
     transition: background 0.15s;
     min-height: 96px;
   }
@@ -1169,7 +1065,7 @@
     letter-spacing: 0.1em; text-transform: uppercase;
   }
   .ev-list-item__title {
-    font-family: var(--font); font-size: 0.9rem;
+    font-size: 0.9rem;
     font-weight: 800; color: var(--ink); line-height: 1.25;
   }
   .ev-list-item:hover .ev-list-item__title { color: var(--ink-medium); }
@@ -1187,7 +1083,7 @@
     overflow: hidden;
     isolation: isolate;
   }
-  /* Film-grain noise texture — warm analog feel over the flat red */
+  /* Layer 1: film-grain noise — overlay blend creates lights + darks from the noise */
   .donate-band::before {
     content: '';
     position: absolute;
@@ -1195,9 +1091,21 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 220px 220px;
     background-repeat: repeat;
-    opacity: 0.09;
+    opacity: 0.22;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 0;
+  }
+  /* Layer 2: diagonal hatch lines — screen-print / concert poster texture */
+  .donate-band::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath d='M-1,11 l12,-12 M-1,1 l2,-2 M9,11 l2,-2' stroke='black' stroke-width='0.7' stroke-opacity='0.13'/%3E%3C/svg%3E");
+    background-repeat: repeat;
     mix-blend-mode: multiply;
     pointer-events: none;
+    z-index: 0;
   }
   .donate-band .container {
     position: relative;
@@ -1217,7 +1125,6 @@
     margin-bottom: var(--s2);
   }
   .donate-band__headline {
-    font-family: var(--font);
     font-size: clamp(1.5rem, 2.8vw, 2.2rem);
     font-weight: 900;
     line-height: 1.1;
@@ -1242,7 +1149,6 @@
     display: inline-flex;
     align-items: center;
     gap: var(--s2);
-    font-family: var(--font);
     font-size: 0.88rem;
     font-weight: 700;
     letter-spacing: 0.02em;
@@ -1251,10 +1157,8 @@
     background: #fff;
     color: var(--xpn-red);
     border: none;
-    cursor: pointer;
     transition: background 0.15s, transform 0.15s;
     white-space: nowrap;
-    text-decoration: none;
   }
   .donate-band__btn:hover { background: rgba(255,255,255,0.88); transform: translateY(-1px); }
   .donate-band__btn--ghost {
@@ -1288,7 +1192,6 @@
 
   /* Wordmark */
   .footer-brand__wordmark {
-    font-family: var(--font);
     font-weight: 900;
     font-size: clamp(1.6rem, 2.2vw, 2rem);
     letter-spacing: -0.04em;
@@ -1328,12 +1231,10 @@
     gap: var(--s2);
     background: var(--xpn-red);
     color: #fff;
-    font-family: var(--font);
     font-weight: 700;
     font-size: 0.82rem;
     padding: var(--s2) var(--s4);
     border-radius: 3px;
-    text-decoration: none;
     transition: background 0.15s;
     white-space: nowrap;
   }
@@ -1376,13 +1277,11 @@
 
   /* ── Tablet ── */
   @media (max-width: 1024px) {
-    .ts-featured { grid-template-columns: 1fr; }
-    /* Image rises to top when stacked — NPR pattern */
-    .ts-featured__img { order: -1; aspect-ratio: 16/9; padding: 0; background: var(--cream-dark); }
+    /* Keep side-by-side on tablet, just tighten padding */
+    .ts-featured__text { padding: var(--s4); }
+    .ts-featured__img { padding: var(--s3); }
     .ts-cards { grid-template-columns: 1fr 1fr; }
     .video-layout { grid-template-columns: 1fr 280px; }
-    .stories-layout { grid-template-columns: 1fr; }
-    .sidebar { display: none; }
     .events-strip { grid-template-columns: 1fr 300px; }
     .footer-top { grid-template-columns: 1fr 1fr; }
     .footer-cta { grid-column: 2; grid-row: 1; }
@@ -1428,8 +1327,9 @@
        Tighter vertical rhythm, no wasted space
     ────────────────────────────────────────── */
     .top-stories { padding: var(--s4) 0 var(--s5); }
-    /* NPR-style mobile: flat card, full-bleed image, text below */
+    /* NPR-style mobile: stack to single column, image on top, flat full-bleed card */
     .ts-featured {
+      grid-template-columns: 1fr;
       gap: 0;
       margin-bottom: var(--s4);
       box-shadow: none;
@@ -1438,6 +1338,7 @@
       margin-left: calc(-1 * var(--s4));
       margin-right: calc(-1 * var(--s4));
     }
+    .ts-featured__img { order: -1; aspect-ratio: 16/9; padding: 0; }
     .ts-featured__text { padding: var(--s4); }
     .ts-featured__headline { font-size: clamp(1.4rem, 6vw, 1.75rem); }
     .ts-featured__excerpt { font-size: 0.9rem; }
@@ -1486,7 +1387,6 @@
       line-height: 1;
       animation: hint-nudge 1.2s ease-in-out 0.8s 3;
     }
-    .scroll-hint--dark { color: rgba(255,255,255,0.45); }
     /* Fade hint out once user has scrolled */
     .ts-cards.is-scrolled + .scroll-hint,
     .video-sidebar.is-scrolled + .scroll-hint {
@@ -1567,10 +1467,6 @@
     ────────────────────────────────────────── */
     .stories-section { padding-bottom: var(--s5); }
     .read-card { flex: 0 0 260px; }
-    /* Single-column form on mobile; prevent iOS auto-zoom on input focus */
-    .newsletter-signup__form { grid-template-columns: 1fr; }
-    .ns-field--half { grid-column: 1 / -1; }
-    .ns-input { font-size: 1rem; }
 
     /* ──────────────────────────────────────────
        DONATE BAND
@@ -1605,7 +1501,7 @@
   .ph {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--font); font-size: 0.6rem; font-weight: 600;
+    font-size: 0.6rem; font-weight: 600;
     letter-spacing: 0.1em; text-transform: uppercase;
     color: rgba(0,0,0,0.15);
   }
@@ -1628,7 +1524,6 @@
     background: var(--cream-dark);
     border: 1px dashed var(--ink-faint);
     color: var(--ink-muted);
-    font-family: var(--font);
     font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -1639,11 +1534,6 @@
     height: 90px;
     margin-top: var(--s5);
     margin-bottom: var(--s2);
-  }
-  .ad-slot--sidebar {
-    width: 100%;
-    height: 250px;
-    margin-bottom: var(--s6);
   }
 </style>
 </head>
