@@ -871,17 +871,16 @@
   .events-section .sec-head__link:hover { background: var(--xpn-red-hover); }
   .events-section .sec-head__link svg { width: 13px; height: 13px; vertical-align: middle; }
 
-  /* ── 3-column grid; featured spans col 1 across both rows ── */
+  /* ── Single-row, 5-col grid: featured (2fr) + 4 sidebar cards (1fr each) ── */
   .events-strip {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
     gap: var(--s3);
+    align-items: stretch;
   }
 
-  /* ── Featured tile: left column, spans both rows ── */
+  /* ── Featured tile: first column, image shown at true 2:1 ratio ── */
   .ev-tile--featured {
-    grid-column: 1;
-    grid-row: 1 / 3;
     position: relative;
     overflow: hidden;
     background: var(--white);
@@ -890,8 +889,8 @@
     flex-direction: column;
   }
   .ev-tile--featured .ev-tile__thumb {
-    flex: 1 1 0;    /* fills remaining height; sidebar cards drive row heights */
-    min-height: 0;
+    flex: 0 0 auto;   /* never stretch — lock to 2:1 so nothing is cropped */
+    aspect-ratio: 2 / 1;
     overflow: hidden;
   }
   .ev-tile--featured .ev-tile__thumb img {
@@ -908,6 +907,7 @@
   }
   .ev-tile--featured .ev-tile__body {
     flex: 0 0 auto;
+    margin-top: auto;   /* push info strip to bottom of card */
     padding: 12px 14px 13px;
     display: flex; flex-direction: row; align-items: center; gap: 14px;
     border-top: 1px solid #ebebeb;
@@ -953,7 +953,7 @@
   }
   .ev-list-item:hover { background: var(--cream); }
   .ev-list-item__photo {
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 1 / 1;   /* square photo fills the narrow column nicely */
     flex-shrink: 0;
     position: relative;
     overflow: hidden;
@@ -1189,7 +1189,9 @@
     .ts-featured__img { padding: var(--s3); }
     .ts-cards { grid-template-columns: 1fr 1fr; }
     .video-layout { grid-template-columns: 1fr 280px; }
-    /* events-strip: 2fr 1fr 1fr scales naturally, no override needed */
+    /* On tablet: featured full-width on row 1, 4 sidebar cards in a row below */
+    .events-strip { grid-template-columns: repeat(4, 1fr); }
+    .ev-tile--featured { grid-column: 1 / 5; }
     .footer-top { grid-template-columns: 1fr 1fr; }
     .footer-cta { grid-column: 2; grid-row: 1; }
   }
@@ -1321,11 +1323,10 @@
     ────────────────────────────────────────── */
     .events-section { padding: var(--s3) 0 var(--s5); }
     .events-section .sec-head { flex-direction: column; align-items: flex-start; gap: var(--s3); }
-    /* Featured spans full width; sidebar cards form 2×2 below */
+    /* Featured full-width; sidebar cards form 2×2 below */
     .events-strip { grid-template-columns: 1fr 1fr; gap: var(--s2); }
-    .ev-tile--featured { grid-column: 1 / 3; grid-row: auto; }
-    .ev-tile--featured .ev-tile__thumb { flex: 0 0 auto; aspect-ratio: 2 / 1; }
-    .ev-tile--featured .ev-tile__body { gap: 10px; }
+    .ev-tile--featured { grid-column: 1 / 3; }
+    .ev-tile--featured .ev-tile__body { gap: 10px; margin-top: 0; }
     .ev-tile--featured .ev-tile__time { white-space: normal; }
 
     /* ──────────────────────────────────────────
