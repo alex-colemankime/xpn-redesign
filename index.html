@@ -853,7 +853,7 @@
 
 
   /* ════════════════════════════════════════════════════════════════
-     EVENTS — Light two-column layout (featured + sidebar list)
+     EVENTS — 3-col grid: featured spans both rows, 2×2 side cards
      ════════════════════════════════════════════════════════════════ */
   .events-section {
     background: var(--cream-deep);
@@ -871,32 +871,27 @@
   .events-section .sec-head__link:hover { background: var(--xpn-red-hover); }
   .events-section .sec-head__link svg { width: 13px; height: 13px; vertical-align: middle; }
 
-  /* ── Grid: featured left, sidebar right ── */
+  /* ── 3-column grid; featured spans col 1 across both rows ── */
   .events-strip {
     display: grid;
-    grid-template-columns: minmax(0, 660px) 360px;
-    gap: var(--s4);
-    align-items: start;
-    justify-content: center;
-  }
-  .ev-sidebar {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: 2fr 1fr 1fr;
     gap: var(--s3);
   }
 
-  /* ── Featured tile ── */
+  /* ── Featured tile: left column, spans both rows ── */
   .ev-tile--featured {
+    grid-column: 1;
+    grid-row: 1 / 3;
     position: relative;
     overflow: hidden;
     background: var(--white);
     border-radius: 2px;
     display: flex;
     flex-direction: column;
-    /* Height stretches to match sidebar via align-items:stretch */
   }
   .ev-tile--featured .ev-tile__thumb {
-    flex: 1 1 auto;   /* image's natural 2:1 height drives tile height — no cropping */
+    flex: 1 1 0;    /* fills remaining height; sidebar cards drive row heights */
+    min-height: 0;
     overflow: hidden;
   }
   .ev-tile--featured .ev-tile__thumb img {
@@ -905,36 +900,25 @@
   .ev-tile__date-badge {
     position: absolute;
     top: 0; right: 0; z-index: 2;
-    background: var(--xpn-red);
-    color: #fff;
-    font-weight: 900;
-    font-size: 0.95rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 10px 20px 10px 38px;
+    background: var(--xpn-red); color: #fff;
+    font-weight: 900; font-size: 0.9rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 8px 18px 8px 34px;
     clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
   }
-  /* Single-row info strip: [type · artist · time] [button] */
   .ev-tile--featured .ev-tile__body {
     flex: 0 0 auto;
-    padding: 11px 14px 12px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 14px;
+    padding: 12px 14px 13px;
+    display: flex; flex-direction: row; align-items: center; gap: 14px;
     border-top: 1px solid #ebebeb;
   }
   .ev-tile--featured .ev-tile__info {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column; gap: 2px;
   }
   .ev-tile--featured .ev-tile__type {
     color: var(--xpn-red); font-size: 0.55rem;
-    font-weight: 700; letter-spacing: 0.14em;
-    text-transform: uppercase;
+    font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
   }
   .ev-tile--featured .ev-tile__artist {
     color: var(--ink);
@@ -950,48 +934,50 @@
     display: inline-flex;
     background: var(--xpn-red); color: #fff;
     padding: 0.6em 1.15em; border-radius: 2px;
-    font-size: 0.65rem;
-    font-weight: 800; letter-spacing: 0.1em;
-    text-transform: uppercase;
-    white-space: nowrap;
+    font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; white-space: nowrap;
     transition: background 0.15s;
   }
   .ev-tile--featured .ev-tile__cta:hover { background: var(--xpn-red-hover); }
 
-  /* ── Sidebar list items ── */
+  /* ── Sidebar cards: display:contents makes them direct grid children
+        so they auto-place into the 4 remaining cells (2×2 on the right) ── */
+  .ev-sidebar { display: contents; }
   .ev-list-item {
-    display: grid;
-    grid-template-columns: 110px 1fr;
+    display: flex;
+    flex-direction: column;
     background: var(--white);
     border-radius: 2px;
     overflow: hidden;
     transition: background 0.15s;
-    min-height: 96px;
   }
   .ev-list-item:hover { background: var(--cream); }
   .ev-list-item__photo {
-    position: relative; overflow: hidden;
+    aspect-ratio: 3 / 2;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
   }
   .ev-list-item__photo .ph {
     position: absolute; inset: 0; width: 100%; height: 100%;
   }
   .ev-list-item__body {
-    padding: var(--s3) var(--s4);
+    flex: 1;
+    padding: 10px 12px;
     display: flex; flex-direction: column;
     justify-content: center; gap: 3px;
   }
   .ev-list-item__date {
     font-size: 0.6rem; font-weight: 700;
-    color: var(--ink-muted);
-    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-muted); letter-spacing: 0.1em; text-transform: uppercase;
   }
   .ev-list-item__title {
-    font-size: 0.9rem;
-    font-weight: 800; color: var(--ink); line-height: 1.25;
+    font-size: 0.85rem; font-weight: 800;
+    color: var(--ink); line-height: 1.25;
   }
   .ev-list-item:hover .ev-list-item__title { color: var(--ink-medium); }
   .ev-list-item__time {
-    font-size: 0.68rem; color: var(--ink-muted);
+    font-size: 0.65rem; color: var(--ink-muted);
   }
 
   /* ════════════════════════════════════════════════════════════════
@@ -1203,7 +1189,7 @@
     .ts-featured__img { padding: var(--s3); }
     .ts-cards { grid-template-columns: 1fr 1fr; }
     .video-layout { grid-template-columns: 1fr 280px; }
-    .events-strip { grid-template-columns: 1fr 300px; }
+    /* events-strip: 2fr 1fr 1fr scales naturally, no override needed */
     .footer-top { grid-template-columns: 1fr 1fr; }
     .footer-cta { grid-column: 2; grid-row: 1; }
   }
@@ -1334,15 +1320,13 @@
        Featured full-width + show sidebar list
     ────────────────────────────────────────── */
     .events-section { padding: var(--s3) 0 var(--s5); }
-    /* Stack title + button so "Upcoming Events" stays on one line */
     .events-section .sec-head { flex-direction: column; align-items: flex-start; gap: var(--s3); }
-    .events-strip { grid-template-columns: 1fr; gap: var(--s3); }
-    .ev-tile--featured { min-height: 260px; }
+    /* Featured spans full width; sidebar cards form 2×2 below */
+    .events-strip { grid-template-columns: 1fr 1fr; gap: var(--s2); }
+    .ev-tile--featured { grid-column: 1 / 3; grid-row: auto; }
+    .ev-tile--featured .ev-tile__thumb { flex: 0 0 auto; aspect-ratio: 2 / 1; }
     .ev-tile--featured .ev-tile__body { gap: 10px; }
     .ev-tile--featured .ev-tile__time { white-space: normal; }
-    /* Reveal sidebar events as a stacked list below featured */
-    .ev-sidebar { display: flex; flex-direction: column; gap: var(--s2); }
-    .ev-list-item { grid-template-columns: 80px 1fr; min-height: 72px; }
 
     /* ──────────────────────────────────────────
        WATCH
