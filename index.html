@@ -895,7 +895,7 @@
     /* Height stretches to match sidebar via align-items:stretch */
   }
   .ev-tile--featured .ev-tile__thumb {
-    flex: 1 1 auto;   /* fills all space above the info strip */
+    flex: 1 1 0;      /* 0 basis so image's intrinsic height doesn't drive row height */
     overflow: hidden;
     min-height: 0;    /* lets flex shrink correctly */
   }
