@@ -891,12 +891,15 @@
     background: var(--white);
     border-radius: 2px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 320px;
+    grid-template-columns: 1fr;
   }
   .ev-tile--featured .ev-tile__thumb {
     position: relative;
     overflow: hidden;
+    aspect-ratio: 2/1;
+  }
+  .ev-tile--featured .ev-tile__thumb img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
   }
   .ev-tile--featured .ev-tile__thumb .ph {
     position: absolute; inset: 0; width: 100%; height: 100%;
@@ -916,7 +919,7 @@
   .ev-tile--featured .ev-tile__body {
     padding: var(--s6) var(--s5) var(--s5);
     display: flex; flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
     position: relative;
   }
   .ev-tile--featured .ev-tile__type {
@@ -1329,7 +1332,7 @@
     .events-section .sec-head { flex-direction: column; align-items: flex-start; gap: var(--s3); }
     .events-strip { grid-template-columns: 1fr; gap: var(--s3); }
     .ev-tile--featured { grid-template-columns: 1fr; min-height: auto; }
-    .ev-tile--featured .ev-tile__thumb { aspect-ratio: 16/9; position: relative; }
+    .ev-tile--featured .ev-tile__thumb { aspect-ratio: 2/1; position: relative; }
     /* Body below image: start from top, not pushed to bottom */
     .ev-tile--featured .ev-tile__body { padding: var(--s4); justify-content: flex-start; }
     /* Reveal sidebar events as a stacked list below featured */
@@ -1668,15 +1671,17 @@
 
       <!-- Featured event -->
       <article class="ev-tile--featured">
-        <div class="ev-tile__thumb"><div class="ph ph--b">Photo</div></div>
+        <div class="ev-tile__thumb">
+          <img src="https://cdn.evbuc.com/images/1178567770/1097053199463/1/original.20260226-232024" alt="Bar Dust Free at Noon at World Cafe Live" loading="lazy">
+        </div>
         <div class="ev-tile__body">
           <div class="ev-tile__type">Free at Noon</div>
-          <h3 class="ev-tile__artist">Ben Arnold &amp; The 48 Hour Orchestra</h3>
-          <div class="ev-tile__desc">Upcoming Free at Noon &middot; Friday, February 20</div>
-          <div class="ev-tile__time">Friday, February 20, 2026 &middot; 12:00 PM &middot; World Cafe Live</div>
-          <a href="#" class="ev-tile__cta">More Information</a>
+          <h3 class="ev-tile__artist">Bar Dust</h3>
+          <div class="ev-tile__desc">Upcoming Free at Noon &middot; Friday, March 6</div>
+          <div class="ev-tile__time">Friday, March 6, 2026 &middot; 12:00 PM &middot; World Cafe Live</div>
+          <a href="https://www.eventbrite.com/e/wxpn-free-at-noon-with-bar-dust-tickets-1980654195015" class="ev-tile__cta" target="_blank" rel="noopener">More Information</a>
         </div>
-        <div class="ev-tile__date-badge" aria-hidden="true">FEB 20</div>
+        <div class="ev-tile__date-badge" aria-hidden="true">MAR 6</div>
       </article>
 
       <!-- Sidebar list -->
