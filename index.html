@@ -876,7 +876,7 @@
     display: grid;
     grid-template-columns: 1fr 360px;
     gap: var(--s4);
-    align-items: start;
+    align-items: stretch;
   }
   .ev-sidebar {
     display: flex;
@@ -892,11 +892,12 @@
     border-radius: 2px;
     display: flex;
     flex-direction: column;
+    /* Height stretches to match sidebar via align-items:stretch */
   }
   .ev-tile--featured .ev-tile__thumb {
-    flex: 0 0 auto;
+    flex: 1 1 auto;   /* fills all space above the info strip */
     overflow: hidden;
-    aspect-ratio: 2/1;
+    min-height: 0;    /* lets flex shrink correctly */
   }
   .ev-tile--featured .ev-tile__thumb img {
     width: 100%; height: 100%; object-fit: cover; display: block;
@@ -913,11 +914,22 @@
     padding: 10px 20px 10px 38px;
     clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
   }
+  /* Single-row info strip: [type · artist · time] [button] */
   .ev-tile--featured .ev-tile__body {
+    flex: 0 0 auto;
+    padding: 11px 14px 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    border-top: 1px solid #ebebeb;
+  }
+  .ev-tile--featured .ev-tile__info {
     flex: 1;
-    padding: 12px 16px 14px;
-    display: flex; flex-direction: column;
-    gap: 4px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
   .ev-tile--featured .ev-tile__type {
     color: var(--xpn-red); font-size: 0.55rem;
@@ -926,18 +938,18 @@
   }
   .ev-tile--featured .ev-tile__artist {
     color: var(--ink);
-    font-size: 1.1rem; font-weight: 900;
-    line-height: 1.1; letter-spacing: -0.01em;
-    margin-bottom: auto; /* pushes date + CTA to the bottom of the strip */
+    font-size: 1.05rem; font-weight: 900;
+    line-height: 1.15; letter-spacing: -0.01em;
   }
   .ev-tile--featured .ev-tile__time {
-    color: var(--ink-muted); font-size: 0.7rem;
-    line-height: 1.35; margin-bottom: 7px;
+    color: var(--ink-muted); font-size: 0.69rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .ev-tile--featured .ev-tile__cta {
-    display: inline-flex; width: fit-content;
+    flex: 0 0 auto;
+    display: inline-flex;
     background: var(--xpn-red); color: #fff;
-    padding: 0.5em 1.1em; border-radius: 2px;
+    padding: 0.6em 1.15em; border-radius: 2px;
     font-size: 0.65rem;
     font-weight: 800; letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -1325,7 +1337,9 @@
     /* Stack title + button so "Upcoming Events" stays on one line */
     .events-section .sec-head { flex-direction: column; align-items: flex-start; gap: var(--s3); }
     .events-strip { grid-template-columns: 1fr; gap: var(--s3); }
-    .ev-tile--featured .ev-tile__body { padding: 10px 14px 12px; }
+    .ev-tile--featured { min-height: 260px; }
+    .ev-tile--featured .ev-tile__body { gap: 10px; }
+    .ev-tile--featured .ev-tile__time { white-space: normal; }
     /* Reveal sidebar events as a stacked list below featured */
     .ev-sidebar { display: flex; flex-direction: column; gap: var(--s2); }
     .ev-list-item { grid-template-columns: 80px 1fr; min-height: 72px; }
@@ -1666,9 +1680,11 @@
           <img src="https://cdn.evbuc.com/images/1178567770/1097053199463/1/original.20260226-232024" alt="Bar Dust Free at Noon at World Cafe Live" loading="lazy">
         </div>
         <div class="ev-tile__body">
-          <div class="ev-tile__type">Free at Noon</div>
-          <h3 class="ev-tile__artist">Bar Dust</h3>
-          <div class="ev-tile__time">Mar 6, 2026 &middot; 12:00 PM &middot; World Cafe Live</div>
+          <div class="ev-tile__info">
+            <div class="ev-tile__type">Free at Noon</div>
+            <h3 class="ev-tile__artist">Bar Dust</h3>
+            <div class="ev-tile__time">Mar 6, 2026 &middot; 12:00 PM &middot; World Cafe Live</div>
+          </div>
           <a href="https://www.eventbrite.com/e/wxpn-free-at-noon-with-bar-dust-tickets-1980654195015" class="ev-tile__cta" target="_blank" rel="noopener">More Information</a>
         </div>
         <div class="ev-tile__date-badge" aria-hidden="true">MAR 6</div>
