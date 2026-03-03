@@ -876,7 +876,7 @@
     display: grid;
     grid-template-columns: 1fr 360px;
     gap: var(--s4);
-    align-items: start;
+    align-items: stretch;
   }
   .ev-sidebar {
     display: flex;
@@ -888,21 +888,19 @@
   .ev-tile--featured {
     position: relative;
     overflow: hidden;
-    background: var(--white);
+    background: #111;
     border-radius: 2px;
-    display: grid;
-    grid-template-columns: 1fr 170px;
+    /* Height is determined by align-items:stretch in the events-strip grid,
+       matching the sidebar's height automatically */
   }
   .ev-tile--featured .ev-tile__thumb {
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: 2/1;
+    position: absolute;
+    inset: 0;
   }
   .ev-tile--featured .ev-tile__thumb img {
-    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
-  }
-  .ev-tile--featured .ev-tile__thumb .ph {
-    position: absolute; inset: 0; width: 100%; height: 100%;
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    /* Anchor to right so the band photo shows clearly on the right half */
+    object-position: right center;
   }
   .ev-tile__date-badge {
     position: absolute;
@@ -916,30 +914,33 @@
     padding: 10px 20px 10px 38px;
     clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
   }
+  /* Left-side text panel: dark on left, fades to transparent revealing the photo */
   .ev-tile--featured .ev-tile__body {
-    padding: var(--s6) var(--s5) var(--s5);
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 52%;
+    z-index: 1;
+    padding: 20px 40px 20px 22px;
     display: flex; flex-direction: column;
     justify-content: flex-end;
-    position: relative;
+    gap: 5px;
+    background: linear-gradient(to right, rgba(14,14,20,0.95) 55%, transparent 100%);
   }
   .ev-tile--featured .ev-tile__type {
     color: var(--xpn-red); font-size: 0.58rem;
     font-weight: 700; letter-spacing: 0.14em;
-    text-transform: uppercase; margin-bottom: var(--s2);
+    text-transform: uppercase;
   }
   .ev-tile--featured .ev-tile__artist {
-    color: var(--ink);
-    font-size: 1.5rem; font-weight: 900;
-    line-height: 1.1; letter-spacing: -0.01em;
-    margin-bottom: var(--s2);
-  }
-  .ev-tile--featured .ev-tile__desc {
-    color: var(--ink-light); font-size: 0.78rem;
-    margin-bottom: var(--s2); line-height: 1.45;
+    color: #fff;
+    font-size: 1.55rem; font-weight: 900;
+    line-height: 1.1; letter-spacing: -0.02em;
+    margin-bottom: 1px;
   }
   .ev-tile--featured .ev-tile__time {
-    color: var(--ink-muted); font-size: 0.73rem;
-    margin-bottom: var(--s5);
+    color: rgba(255,255,255,0.7); font-size: 0.72rem;
+    line-height: 1.4;
+    margin-bottom: 10px;
   }
   .ev-tile--featured .ev-tile__cta {
     display: inline-flex; width: fit-content;
@@ -948,6 +949,7 @@
     font-size: 0.68rem;
     font-weight: 800; letter-spacing: 0.1em;
     text-transform: uppercase;
+    white-space: nowrap;
     transition: background 0.15s;
   }
   .ev-tile--featured .ev-tile__cta:hover { background: var(--xpn-red-hover); }
@@ -1331,10 +1333,8 @@
     /* Stack title + button so "Upcoming Events" stays on one line */
     .events-section .sec-head { flex-direction: column; align-items: flex-start; gap: var(--s3); }
     .events-strip { grid-template-columns: 1fr; gap: var(--s3); }
-    .ev-tile--featured { grid-template-columns: 1fr; min-height: auto; }
-    .ev-tile--featured .ev-tile__thumb { aspect-ratio: 2/1; position: relative; }
-    /* Body below image: start from top, not pushed to bottom */
-    .ev-tile--featured .ev-tile__body { padding: var(--s4); justify-content: flex-start; }
+    .ev-tile--featured { min-height: 240px; }
+    .ev-tile--featured .ev-tile__body { width: 65%; padding: 16px 32px 18px 16px; }
     /* Reveal sidebar events as a stacked list below featured */
     .ev-sidebar { display: flex; flex-direction: column; gap: var(--s2); }
     .ev-list-item { grid-template-columns: 80px 1fr; min-height: 72px; }
@@ -1677,8 +1677,7 @@
         <div class="ev-tile__body">
           <div class="ev-tile__type">Free at Noon</div>
           <h3 class="ev-tile__artist">Bar Dust</h3>
-          <div class="ev-tile__desc">Upcoming Free at Noon &middot; Friday, March 6</div>
-          <div class="ev-tile__time">Friday, March 6, 2026 &middot; 12:00 PM &middot; World Cafe Live</div>
+          <div class="ev-tile__time">Mar 6, 2026 &middot; 12:00 PM<br>World Cafe Live, Philadelphia</div>
           <a href="https://www.eventbrite.com/e/wxpn-free-at-noon-with-bar-dust-tickets-1980654195015" class="ev-tile__cta" target="_blank" rel="noopener">More Information</a>
         </div>
         <div class="ev-tile__date-badge" aria-hidden="true">MAR 6</div>
