@@ -876,7 +876,7 @@
     display: grid;
     grid-template-columns: 1fr 360px;
     gap: var(--s4);
-    align-items: stretch;
+    align-items: start;
   }
   .ev-sidebar {
     display: flex;
@@ -888,19 +888,18 @@
   .ev-tile--featured {
     position: relative;
     overflow: hidden;
-    background: #111;
+    background: var(--white);
     border-radius: 2px;
-    /* Height is determined by align-items:stretch in the events-strip grid,
-       matching the sidebar's height automatically */
+    display: flex;
+    flex-direction: column;
   }
   .ev-tile--featured .ev-tile__thumb {
-    position: absolute;
-    inset: 0;
+    flex: 0 0 auto;
+    overflow: hidden;
+    aspect-ratio: 2/1;
   }
   .ev-tile--featured .ev-tile__thumb img {
     width: 100%; height: 100%; object-fit: cover; display: block;
-    /* Anchor to right so the band photo shows clearly on the right half */
-    object-position: right center;
   }
   .ev-tile__date-badge {
     position: absolute;
@@ -914,39 +913,32 @@
     padding: 10px 20px 10px 38px;
     clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
   }
-  /* Left-side text panel: dark on left, fades to transparent revealing the photo */
   .ev-tile--featured .ev-tile__body {
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 52%;
-    z-index: 1;
-    padding: 20px 40px 20px 22px;
+    flex: 1;
+    padding: 12px 16px 14px;
     display: flex; flex-direction: column;
-    justify-content: flex-end;
-    gap: 5px;
-    background: linear-gradient(to right, rgba(14,14,20,0.95) 55%, transparent 100%);
+    gap: 4px;
   }
   .ev-tile--featured .ev-tile__type {
-    color: var(--xpn-red); font-size: 0.58rem;
+    color: var(--xpn-red); font-size: 0.55rem;
     font-weight: 700; letter-spacing: 0.14em;
     text-transform: uppercase;
   }
   .ev-tile--featured .ev-tile__artist {
-    color: #fff;
-    font-size: 1.55rem; font-weight: 900;
-    line-height: 1.1; letter-spacing: -0.02em;
-    margin-bottom: 1px;
+    color: var(--ink);
+    font-size: 1.1rem; font-weight: 900;
+    line-height: 1.1; letter-spacing: -0.01em;
+    margin-bottom: auto; /* pushes date + CTA to the bottom of the strip */
   }
   .ev-tile--featured .ev-tile__time {
-    color: rgba(255,255,255,0.7); font-size: 0.72rem;
-    line-height: 1.4;
-    margin-bottom: 10px;
+    color: var(--ink-muted); font-size: 0.7rem;
+    line-height: 1.35; margin-bottom: 7px;
   }
   .ev-tile--featured .ev-tile__cta {
     display: inline-flex; width: fit-content;
     background: var(--xpn-red); color: #fff;
-    padding: 0.55em 1.2em; border-radius: 2px;
-    font-size: 0.68rem;
+    padding: 0.5em 1.1em; border-radius: 2px;
+    font-size: 0.65rem;
     font-weight: 800; letter-spacing: 0.1em;
     text-transform: uppercase;
     white-space: nowrap;
@@ -1333,8 +1325,7 @@
     /* Stack title + button so "Upcoming Events" stays on one line */
     .events-section .sec-head { flex-direction: column; align-items: flex-start; gap: var(--s3); }
     .events-strip { grid-template-columns: 1fr; gap: var(--s3); }
-    .ev-tile--featured { min-height: 240px; }
-    .ev-tile--featured .ev-tile__body { width: 65%; padding: 16px 32px 18px 16px; }
+    .ev-tile--featured .ev-tile__body { padding: 10px 14px 12px; }
     /* Reveal sidebar events as a stacked list below featured */
     .ev-sidebar { display: flex; flex-direction: column; gap: var(--s2); }
     .ev-list-item { grid-template-columns: 80px 1fr; min-height: 72px; }
@@ -1677,7 +1668,7 @@
         <div class="ev-tile__body">
           <div class="ev-tile__type">Free at Noon</div>
           <h3 class="ev-tile__artist">Bar Dust</h3>
-          <div class="ev-tile__time">Mar 6, 2026 &middot; 12:00 PM<br>World Cafe Live, Philadelphia</div>
+          <div class="ev-tile__time">Mar 6, 2026 &middot; 12:00 PM &middot; World Cafe Live</div>
           <a href="https://www.eventbrite.com/e/wxpn-free-at-noon-with-bar-dust-tickets-1980654195015" class="ev-tile__cta" target="_blank" rel="noopener">More Information</a>
         </div>
         <div class="ev-tile__date-badge" aria-hidden="true">MAR 6</div>
