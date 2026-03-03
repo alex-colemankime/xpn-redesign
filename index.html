@@ -876,7 +876,7 @@
     display: grid;
     grid-template-columns: minmax(0, 660px) 360px;
     gap: var(--s4);
-    align-items: stretch;
+    align-items: start;
   }
   .ev-sidebar {
     display: flex;
@@ -895,9 +895,8 @@
     /* Height stretches to match sidebar via align-items:stretch */
   }
   .ev-tile--featured .ev-tile__thumb {
-    flex: 1 1 0;      /* 0 basis so image's intrinsic height doesn't drive row height */
+    flex: 1 1 auto;   /* image's natural 2:1 height drives tile height — no cropping */
     overflow: hidden;
-    min-height: 0;    /* lets flex shrink correctly */
   }
   .ev-tile--featured .ev-tile__thumb img {
     width: 100%; height: 100%; object-fit: cover; display: block;
