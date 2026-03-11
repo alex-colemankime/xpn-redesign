@@ -749,45 +749,99 @@
     .load-more-btn:hover { background: var(--ink); color: #fff; }
     .load-more-btn[hidden] { display: none; }
 
-    /* ===== PROMO BAND ===== */
-    .promo-band {
-      background: var(--xpn-red); padding: var(--s7) 0;
-      position: relative; overflow: hidden;
-    }
-    .promo-band::before {
-      content: '';
-      position: absolute; inset: 0; pointer-events: none;
-      background-image: repeating-linear-gradient(
-        -45deg,
-        transparent, transparent 10px,
-        rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 11px
-      );
-    }
-    .promo-band__inner {
+    /* ===== DONATE BAND ===== */
+    .donate-band {
+      background: var(--xpn-red);
+      padding: var(--s7) 0;
       position: relative;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: var(--s6); flex-wrap: wrap;
+      overflow: hidden;
+      isolation: isolate;
     }
-    .promo-band__text { max-width: 560px; }
-    .promo-band__title {
-      font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 900;
-      color: #fff; line-height: 1.1; margin-bottom: var(--s2);
+    /* Layer 1: film-grain noise — overlay blend creates lights + darks from the noise */
+    .donate-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+      background-repeat: repeat;
+      opacity: 0.22;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+      z-index: 0;
     }
-    .promo-band__desc { font-size: 0.92rem; color: rgba(255,255,255,0.72); }
-    .promo-band__actions { display: flex; align-items: center; gap: var(--s3); flex-shrink: 0; }
-    .promo-btn {
-      display: inline-flex; align-items: center; gap: var(--s2);
-      padding: 0.85em 2.2em; border-radius: var(--radius);
-      font-size: 0.875rem; font-weight: 800; letter-spacing: 0.04em;
-      white-space: nowrap; transition: all 0.15s;
+    /* Layer 2: diagonal hatch lines — screen-print / concert poster texture */
+    .donate-band::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath d='M-1,11 l12,-12 M-1,1 l2,-2 M9,11 l2,-2' stroke='black' stroke-width='0.7' stroke-opacity='0.13'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 0;
     }
-    .promo-btn--solid { background: #fff; color: var(--xpn-red); }
-    .promo-btn--solid:hover { background: rgba(255,255,255,0.88); transform: translateY(-1px); }
-    .promo-btn--ghost {
-      background: transparent; color: rgba(255,255,255,0.75);
-      border: 1.5px solid rgba(255,255,255,0.35); font-size: 0.8rem;
+    .donate-band .container {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--s7);
+      align-items: center;
+      max-width: 860px;
     }
-    .promo-btn--ghost:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.6); }
+    .donate-band__eyebrow {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: var(--s2);
+    }
+    .donate-band__headline {
+      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--s3);
+    }
+    .donate-band__sub {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 520px;
+      line-height: 1.6;
+    }
+    .donate-band__actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--s3);
+      flex-shrink: 0;
+    }
+    .donate-band__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s2);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 0.85em 2.2em;
+      border-radius: 4px;
+      background: #fff;
+      color: var(--xpn-red);
+      border: none;
+      transition: background 0.15s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .donate-band__btn:hover { background: rgba(255,255,255,0.88); transform: translateY(-1px); }
+    .donate-band__btn--ghost {
+      background: transparent;
+      color: rgba(255,255,255,0.75);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      font-size: 0.78rem;
+    }
+    .donate-band__btn--ghost:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.6); transform: none; }
 
     /* ════════════════════════════════════════════════════════════════
        FOOTER — matches main site exactly
@@ -977,7 +1031,10 @@
       .footer-nav__list a { display: block; padding: 11px 0; font-size: 0.88rem; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
       .footer-nav__list li:last-child a { border-bottom: none; padding-bottom: 14px; }
       .footer-bottom { font-size: 0.65rem; padding-top: var(--s4); }
-      .promo-band__actions { width: 100%; }
+      .donate-band { padding: var(--s5) 0; }
+      .donate-band .container { grid-template-columns: 1fr; gap: var(--s4); }
+      .donate-band__actions { align-items: stretch; flex-direction: column; gap: var(--s3); }
+      .donate-band__btn { text-align: center; justify-content: center; }
     }
 
     @media (max-width: 520px) {
@@ -999,7 +1056,7 @@
     /* ===== PRINT ===== */
     @media print {
       .site-header, .cal-filters, .action-row, .load-more-wrap,
-      .promo-band, .site-footer { display: none !important; }
+      .donate-band, .site-footer { display: none !important; }
       .cal-hero { background: none; padding: 0; }
       .cal-hero__title { color: #000; font-size: 2rem; }
     }
@@ -1311,22 +1368,20 @@
       </div>
     </section>
 
-    <!-- Promo / membership band -->
-    <section class="promo-band" aria-label="Support WXPN">
-      <div class="container promo-band__inner">
-        <div class="promo-band__text">
-          <h2 class="promo-band__title">Support the music you love.</h2>
-          <p class="promo-band__desc">
-            WXPN is member-supported public radio. Your contribution keeps free concerts,
-            discoveries, and 40+ years of independent music alive.
-          </p>
-        </div>
-        <div class="promo-band__actions">
-          <a href="#" class="promo-btn promo-btn--solid">Become a Member</a>
-          <a href="#" class="promo-btn promo-btn--ghost">One-Time Gift</a>
-        </div>
-      </div>
-    </section>
+<!-- ═════════════ DONATE BAND ═════════════ -->
+<section class="donate-band">
+  <div class="container">
+    <div class="donate-band__copy">
+      <div class="donate-band__eyebrow">Support Independent Radio</div>
+      <h2 class="donate-band__headline">WXPN is listener-funded.<br>And listeners like you make it possible.</h2>
+      <p class="donate-band__sub">Public radio has never needed your support more. Every dollar keeps the music on, the sessions recorded, and the stories told — free from algorithms, free from ads.</p>
+    </div>
+    <div class="donate-band__actions">
+      <a href="../membership.html" class="donate-band__btn">Become a Member</a>
+      <a href="#" class="donate-band__btn donate-band__btn--ghost">Make a One-Time Gift</a>
+    </div>
+  </div>
+</section>
 
   </main><!-- /main -->
 
