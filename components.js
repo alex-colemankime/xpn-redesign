@@ -208,14 +208,20 @@ function initHeaderCollapse() {
   var header = document.querySelector('.site-header');
   if (!header) return;
   var collapsed = false;
+  var transitioning = false;
   window.addEventListener('scroll', function() {
+    if (transitioning) return;
     var y = window.scrollY;
     if (!collapsed && y > 80) {
       collapsed = true;
+      transitioning = true;
       header.classList.add('is-collapsed');
+      setTimeout(function() { transitioning = false; }, 350);
     } else if (collapsed && y < 50) {
       collapsed = false;
+      transitioning = true;
       header.classList.remove('is-collapsed');
+      setTimeout(function() { transitioning = false; }, 350);
     }
   }, { passive: true });
 }
