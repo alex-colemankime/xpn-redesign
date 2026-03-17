@@ -8,47 +8,12 @@
 <style>
   /* ════════════════════════════════════════════════════════════════
      MUSIC NEWS PAGE — page-specific styles only
+     (uses shared: .page-header, .featured-card, .article-card,
+      .eyebrow, .pill, .btn--outline, .load-more, .card-link)
      ════════════════════════════════════════════════════════════════ */
 
-  /* ── Page header ── */
-  .page-header {
-    padding: var(--s7) 0 var(--s5);
-    border-bottom: 2px solid var(--ink);
-    margin-bottom: 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: var(--s4);
-    flex-wrap: wrap;
-  }
-  .page-header h1 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
-  }
-  .page-header__sub {
-    color: var(--ink-muted);
-    font-size: 0.875rem;
-    margin-top: 5px;
-    font-weight: 500;
-  }
-  .page-header__rss {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--ink-muted);
-    font-size: 0.78rem;
-    font-weight: 600;
-    border: 1.5px solid var(--ink-faint);
-    padding: 6px 14px;
-    border-radius: 100px;
-    transition: border-color 0.15s, color 0.15s;
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
-  .page-header__rss:hover { border-color: var(--xpn-red); color: var(--xpn-red); }
-  .page-header__rss svg { width: 13px; height: 13px; fill: currentColor; }
+  /* Page header margin override */
+  .page-header { margin-bottom: 0; }
 
   /* ── Filter bar ── */
   .filter-bar {
@@ -69,80 +34,12 @@
     margin-right: var(--s1);
     flex-shrink: 0;
   }
-  .filter-btn {
-    padding: 5px 14px;
-    border-radius: 100px;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--ink-light);
-    border: 1.5px solid var(--ink-faint);
-    background: transparent;
-    transition: border-color 0.15s, color 0.15s, background 0.15s;
-    line-height: 1.4;
-    font-family: var(--font);
-  }
-  .filter-btn:hover { border-color: var(--xpn-red); color: var(--xpn-red); }
-  .filter-btn.is-active {
-    background: var(--xpn-red);
-    border-color: var(--xpn-red);
-    color: #fff;
-  }
 
-  /* ── Featured hero article ── */
-  .news-featured {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    align-items: stretch;
-    background: var(--white);
-    border-radius: 2px;
-    overflow: hidden;
-    box-shadow: 0 0 7px rgba(0,0,0,0.05);
-    margin-bottom: var(--s5);
-    cursor: pointer;
-    position: relative;
-  }
-  .news-featured:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
-  .news-featured:hover .news-featured__headline { color: var(--xpn-red); }
-  .news-featured:hover .news-featured__img img { transform: scale(1.02); }
-
-  .news-featured__text { padding: var(--s6); }
-  .news-featured__tag {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--xpn-red);
-    margin-bottom: var(--s3);
-    display: inline-block;
-  }
-  .news-featured__headline {
-    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-    font-weight: 700;
-    line-height: 1.18;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    transition: color 0.2s;
-    margin-bottom: var(--s3);
-  }
-  .news-featured__headline a { color: inherit; text-decoration: none; }
-  .news-featured__headline a::after { content: ''; position: absolute; inset: 0; z-index: 1; }
-  .news-featured__excerpt {
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: var(--ink-light);
-    margin-bottom: var(--s3);
-  }
-  .news-featured__meta { font-size: 0.72rem; color: var(--ink-muted); }
-  .news-featured__img {
-    overflow: hidden;
-    background: var(--cream-dark);
-    aspect-ratio: 16/9;
-  }
-  .news-featured__img img {
-    width: 100%; height: 100%; object-fit: cover;
-    transition: transform 0.5s ease;
-  }
+  /* Featured card spacing overrides */
+  .featured-card { margin-bottom: var(--s5); }
+  .featured-card .eyebrow--sm { margin-bottom: var(--s3); }
+  .featured-card .featured-card__headline { margin-bottom: var(--s3); }
+  .featured-card .featured-card__excerpt { margin-bottom: var(--s3); }
 
   /* ── Article card grid ── */
   .news-grid {
@@ -151,94 +48,16 @@
     gap: var(--s5);
   }
 
-  .news-card {
-    cursor: pointer;
-    background: var(--white);
-    border-radius: 2px;
-    overflow: hidden;
-    box-shadow: 0 0 7px rgba(0,0,0,0.05);
-    transition: box-shadow 0.2s;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-  .news-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
-  .news-card:hover .news-card__headline { color: var(--xpn-red); }
-  .news-card__img {
-    overflow: hidden;
-    background: var(--cream-dark);
-    aspect-ratio: 16/10;
-  }
-  .news-card__img img {
-    width: 100%; height: 100%; object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-  .news-card:hover .news-card__img img { transform: scale(1.04); }
-  .news-card__body { padding: var(--s4); display: flex; flex-direction: column; flex: 1; }
-  .news-card__tag {
-    font-size: 0.6rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--xpn-red);
-    margin-bottom: var(--s1);
-    display: inline-block;
-  }
-  .news-card__headline {
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--ink);
-    transition: color 0.15s;
-    margin-bottom: var(--s2);
-  }
-  .news-card__headline a { color: inherit; text-decoration: none; }
-  .news-card__headline a::after { content: ''; position: absolute; inset: 0; z-index: 1; }
-  .news-card__excerpt {
-    font-size: 0.82rem;
-    line-height: 1.55;
-    color: var(--ink-light);
-    margin-bottom: var(--s2);
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .news-card__meta { font-size: 0.68rem; color: var(--ink-muted); margin-top: auto; padding-top: var(--s2); }
+  /* Card spacing overrides */
+  .article-card .eyebrow--sm { margin-bottom: var(--s1); }
+  .article-card .article-card__headline { margin-bottom: var(--s2); }
+  .article-card .article-card__excerpt { margin-bottom: var(--s2); }
 
-  /* ── Load More ── */
-  .load-more {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--s3);
-    margin-top: var(--s7);
-    margin-bottom: var(--s8);
-    padding-top: var(--s6);
-    border-top: 1px solid var(--ink-faint);
-  }
-  .load-more__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--s2);
-    background: transparent;
-    border: 2px solid var(--ink);
-    color: var(--ink);
-    font-weight: 700;
-    font-size: 0.875rem;
-    padding: 0.75em 2em;
-    border-radius: 3px;
-    letter-spacing: 0.02em;
-    transition: background 0.15s, color 0.15s;
-    font-family: var(--font);
-  }
-  .load-more__btn:hover { background: var(--ink); color: var(--cream); }
-  .load-more__btn:disabled { opacity: 0.45; cursor: default; }
-  .load-more__btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-  .load-more__count { font-size: 0.75rem; color: var(--ink-muted); }
+  /* ── Load More override ── */
+  .load-more { margin-bottom: var(--s8); }
 
   /* Hidden for filter */
-  .news-card[hidden], .news-featured[hidden] { display: none; }
+  .article-card[hidden], .featured-card[hidden] { display: none; }
 
   /* ════════════════════════════════════════════════════════════════
      PAGE-SPECIFIC RESPONSIVE
@@ -248,12 +67,6 @@
   }
 
   @media (max-width: 768px) {
-    /* Page content mobile */
-    .page-header { padding: var(--s5) 0 var(--s4); flex-direction: column; align-items: flex-start; gap: var(--s3); }
-    .news-featured { grid-template-columns: 1fr; }
-    .news-featured__img { order: -1; aspect-ratio: 16/9; padding: 0; }
-    .news-featured__text { padding: var(--s4); }
-    .news-featured__headline { font-size: clamp(1.4rem, 6vw, 1.75rem); }
     .news-grid { grid-template-columns: 1fr; }
   }
 </style>
@@ -277,22 +90,22 @@
     <!-- Page header -->
     <div class="page-header">
       <div>
-        <h1>Music News</h1>
+        <h1 class="page-header__title">Music News</h1>
         <p class="page-header__sub">Stories, features &amp; reviews from WXPN 88.5</p>
       </div>
     </div>
 
     <!-- Featured article -->
-    <article class="news-featured" data-category="press-play">
-      <div class="news-featured__text">
-        <span class="news-featured__tag">Press Play</span>
-        <h2 class="news-featured__headline">
+    <article class="featured-card card-link" data-category="press-play">
+      <div class="featured-card__text">
+        <span class="eyebrow--sm">Press Play</span>
+        <h2 class="featured-card__headline card-link">
           <a href="https://xpn.org/press-play/">Press Play: New Albums out March 6th</a>
         </h2>
-        <p class="news-featured__excerpt">A weekly roundup of the most exciting new releases hitting shelves — from genre-bending indie records to roots music, jazz, and everything in between. Here's what we're spinning at WXPN this week.</p>
-        <div class="news-featured__meta">WXPN Staff &middot; Mar 6, 2026</div>
+        <p class="featured-card__excerpt">A weekly roundup of the most exciting new releases hitting shelves — from genre-bending indie records to roots music, jazz, and everything in between. Here's what we're spinning at WXPN this week.</p>
+        <div class="featured-card__meta">WXPN Staff &middot; Mar 6, 2026</div>
       </div>
-      <div class="news-featured__img">
+      <div class="featured-card__img">
         <img src="https://backend.xpn.org/app/uploads/2026/03/help_damon_choir_Charlie-Barclay-Harris-1392x884-1-820x514.jpg" alt="New albums March 2026" loading="eager">
       </div>
     </article>
@@ -303,75 +116,75 @@
     <!-- Article grid -->
     <div class="news-grid" id="news-grid">
 
-      <article class="news-card" data-category="concert-reviews">
-        <div class="news-card__img">
+      <article class="article-card card-link" data-category="concert-reviews">
+        <div class="article-card__img">
           <img src="https://backend.xpn.org/app/uploads/2026/02/SHAME_STKILDA_MAR2025_WDZ-152_2.jpg" alt="Peaches at Union Transfer" loading="lazy">
         </div>
-        <div class="news-card__body">
-          <span class="news-card__tag">Concert Reviews</span>
-          <h3 class="news-card__headline"><a href="https://xpn.org/the-teaches-of-peaches-converted-union-transfer-into-one-wild-classroom/">The Teaches of Peaches Pull No Punches at Union Transfer</a></h3>
-          <p class="news-card__excerpt">Peaches transformed Philadelphia's Union Transfer into one wild, boundary-defying classroom — exactly the show you'd expect.</p>
-          <div class="news-card__meta">Danielle Ciampaglia &middot; Mar 5, 2026</div>
+        <div class="article-card__body">
+          <span class="eyebrow--sm">Concert Reviews</span>
+          <h3 class="article-card__headline card-link"><a href="https://xpn.org/the-teaches-of-peaches-converted-union-transfer-into-one-wild-classroom/">The Teaches of Peaches Pull No Punches at Union Transfer</a></h3>
+          <p class="article-card__excerpt">Peaches transformed Philadelphia's Union Transfer into one wild, boundary-defying classroom — exactly the show you'd expect.</p>
+          <div class="article-card__meta">Danielle Ciampaglia &middot; Mar 5, 2026</div>
         </div>
       </article>
 
-      <article class="news-card" data-category="world-cafe">
-        <div class="news-card__img">
+      <article class="article-card card-link" data-category="world-cafe">
+        <div class="article-card__img">
           <img src="https://backend.xpn.org/app/uploads/2026/02/d5e68953-6739-4980-a981-3bfd2010f4b3-1024x576.jpeg" alt="Kashus Culpepper" loading="lazy">
         </div>
-        <div class="news-card__body">
-          <span class="news-card__tag">World Cafe</span>
-          <h3 class="news-card__headline"><a href="https://xpn.org/kashus-culpeppers-first-act-started-just-6-years-ago-when-he-picked-up-a-guitar/">Kashus Culpepper's first 'Act' started just 6 years ago, when he picked up a guitar</a></h3>
-          <p class="news-card__excerpt">The rising artist talks about his rapid ascent from picking up his first guitar to releasing his debut.</p>
-          <div class="news-card__meta">Raina Douris &middot; Mar 4, 2026</div>
+        <div class="article-card__body">
+          <span class="eyebrow--sm">World Cafe</span>
+          <h3 class="article-card__headline card-link"><a href="https://xpn.org/kashus-culpeppers-first-act-started-just-6-years-ago-when-he-picked-up-a-guitar/">Kashus Culpepper's first 'Act' started just 6 years ago, when he picked up a guitar</a></h3>
+          <p class="article-card__excerpt">The rising artist talks about his rapid ascent from picking up his first guitar to releasing his debut.</p>
+          <div class="article-card__meta">Raina Douris &middot; Mar 4, 2026</div>
         </div>
       </article>
 
-      <article class="news-card" data-category="music-news">
-        <div class="news-card__img">
+      <article class="article-card card-link" data-category="music-news">
+        <div class="article-card__img">
           <img src="https://backend.xpn.org/app/uploads/2026/02/LogoSelects-5.jpg" alt="Lilith Fair" loading="lazy">
         </div>
-        <div class="news-card__body">
-          <span class="news-card__tag">Music News</span>
-          <h3 class="news-card__headline"><a href="https://xpn.org/xpn-honors-lilith-fair-on-international-womens-day/">XPN Honors Lilith Fair On International Women's Day</a></h3>
-          <p class="news-card__excerpt">WXPN celebrates the groundbreaking Lilith Fair festival and its enduring legacy on women in music.</p>
-          <div class="news-card__meta">WXPN &middot; Mar 8, 2026</div>
+        <div class="article-card__body">
+          <span class="eyebrow--sm">Music News</span>
+          <h3 class="article-card__headline card-link"><a href="https://xpn.org/xpn-honors-lilith-fair-on-international-womens-day/">XPN Honors Lilith Fair On International Women's Day</a></h3>
+          <p class="article-card__excerpt">WXPN celebrates the groundbreaking Lilith Fair festival and its enduring legacy on women in music.</p>
+          <div class="article-card__meta">WXPN &middot; Mar 8, 2026</div>
         </div>
       </article>
 
-      <article class="news-card" data-category="world-cafe">
-        <div class="news-card__img">
+      <article class="article-card card-link" data-category="world-cafe">
+        <div class="article-card__img">
           <img src="https://backend.xpn.org/app/uploads/2026/02/image001-820x514.webp" alt="Andrina Turenne" loading="lazy">
         </div>
-        <div class="news-card__body">
-          <span class="news-card__tag">World Cafe</span>
-          <h3 class="news-card__headline"><a href="https://xpn.org/acadiana-music-showcase-andrina-turenne/">Acadiana Music Showcase: Andrina Turenne</a></h3>
-          <p class="news-card__excerpt">Franco-Manitoban singer-songwriter Andrina Turenne brings her beautiful blend of Francophone folk and pop to the World Cafe stage.</p>
-          <div class="news-card__meta">Stephen Kallao &middot; Mar 3, 2026</div>
+        <div class="article-card__body">
+          <span class="eyebrow--sm">World Cafe</span>
+          <h3 class="article-card__headline card-link"><a href="https://xpn.org/acadiana-music-showcase-andrina-turenne/">Acadiana Music Showcase: Andrina Turenne</a></h3>
+          <p class="article-card__excerpt">Franco-Manitoban singer-songwriter Andrina Turenne brings her beautiful blend of Francophone folk and pop to the World Cafe stage.</p>
+          <div class="article-card__meta">Stephen Kallao &middot; Mar 3, 2026</div>
         </div>
       </article>
 
-      <article class="news-card" data-category="artist-to-watch">
-        <div class="news-card__img">
+      <article class="article-card card-link" data-category="artist-to-watch">
+        <div class="article-card__img">
           <img src="https://backend.xpn.org/app/uploads/2026/03/ATW_March-2026_Ratboys_slide.jpg" alt="Ratboys" loading="lazy">
         </div>
-        <div class="news-card__body">
-          <span class="news-card__tag">Artist To Watch</span>
-          <h3 class="news-card__headline"><a href="https://xpn.org/ratboys-artist-to-watch-march-2026/">Ratboys | Artist to Watch – March 2026</a></h3>
-          <p class="news-card__excerpt">Chicago indie rock duo Ratboys are our Artist to Watch for March 2026, with sweeping guitar textures and raw songwriting.</p>
-          <div class="news-card__meta">Joey Sweeney &middot; Mar 2, 2026</div>
+        <div class="article-card__body">
+          <span class="eyebrow--sm">Artist To Watch</span>
+          <h3 class="article-card__headline card-link"><a href="https://xpn.org/ratboys-artist-to-watch-march-2026/">Ratboys | Artist to Watch – March 2026</a></h3>
+          <p class="article-card__excerpt">Chicago indie rock duo Ratboys are our Artist to Watch for March 2026, with sweeping guitar textures and raw songwriting.</p>
+          <div class="article-card__meta">Joey Sweeney &middot; Mar 2, 2026</div>
         </div>
       </article>
 
-      <article class="news-card" data-category="world-cafe">
-        <div class="news-card__img">
+      <article class="article-card card-link" data-category="world-cafe">
+        <div class="article-card__img">
           <img src="https://backend.xpn.org/app/uploads/2026/02/SHAME_STKILDA_MAR2025_WDZ-152_2.jpg" alt="Shame" loading="lazy">
         </div>
-        <div class="news-card__body">
-          <span class="news-card__tag">World Cafe</span>
-          <h3 class="news-card__headline"><a href="https://xpn.org/on-cutthroat-south-london-band-shame-thrives-in-moral-ambiguity/">On 'Cutthroat,' South London band Shame thrives in moral ambiguity</a></h3>
-          <p class="news-card__excerpt">With 'Cutthroat,' post-punk outfit Shame leans into the gray areas of modern life, creating their most ambitious record yet.</p>
-          <div class="news-card__meta">Raina Douris &middot; Feb 27, 2026</div>
+        <div class="article-card__body">
+          <span class="eyebrow--sm">World Cafe</span>
+          <h3 class="article-card__headline card-link"><a href="https://xpn.org/on-cutthroat-south-london-band-shame-thrives-in-moral-ambiguity/">On 'Cutthroat,' South London band Shame thrives in moral ambiguity</a></h3>
+          <p class="article-card__excerpt">With 'Cutthroat,' post-punk outfit Shame leans into the gray areas of modern life, creating their most ambitious record yet.</p>
+          <div class="article-card__meta">Raina Douris &middot; Feb 27, 2026</div>
         </div>
       </article>
 
@@ -382,7 +195,7 @@
 
     <!-- Load More -->
     <div class="load-more">
-      <button class="load-more__btn" id="loadMoreBtn">
+      <button class="btn btn--outline" id="loadMoreBtn">
         Load More Stories
         <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
@@ -402,17 +215,17 @@
 <script>
   // ── Category filter ──
   (function() {
-    var filterBtns = document.querySelectorAll('.filter-btn');
-    var cards      = document.querySelectorAll('.news-card');
-    var featured   = document.querySelector('.news-featured');
+    var filterBtns = document.querySelectorAll('.pill');
+    var cards      = document.querySelectorAll('.article-card');
+    var featured   = document.querySelector('.featured-card');
 
     filterBtns.forEach(function(btn) {
       btn.addEventListener('click', function() {
         filterBtns.forEach(function(b) {
-          b.classList.remove('is-active');
+          b.classList.remove('active');
           b.setAttribute('aria-pressed', 'false');
         });
-        this.classList.add('is-active');
+        this.classList.add('active');
         this.setAttribute('aria-pressed', 'true');
 
         var filter = this.dataset.filter;
@@ -435,7 +248,7 @@
       this.disabled = true;
       var self = this;
       setTimeout(function() {
-        self.innerHTML = 'Load More Stories <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
+        self.innerHTML = 'Load More Stories <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
         self.disabled = false;
       }, 900);
     });

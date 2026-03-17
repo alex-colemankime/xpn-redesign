@@ -146,17 +146,8 @@
       overflow-x: auto; scrollbar-width: none;
     }
     .cal-filters__row2::-webkit-scrollbar { display: none; }
-    .qf-pill {
-      display: inline-flex; align-items: center; gap: 5px;
-      height: 30px; padding: 0 var(--s4);
-      border: 1.5px solid var(--ink-faint); border-radius: 100px;
-      background: transparent; font-size: 0.75rem; font-weight: 700;
-      color: var(--ink-medium); cursor: pointer; white-space: nowrap;
-      transition: all 0.15s; flex-shrink: 0;
-    }
-    .qf-pill:hover { border-color: var(--xpn-red); color: var(--xpn-red); }
-    .qf-pill.active { background: var(--xpn-red); border-color: var(--xpn-red); color: #fff; }
-    .qf-pill--all.active { background: var(--ink); border-color: var(--ink); }
+    /* pill overrides (uses shared .pill from styles.css) */
+    .pill--all.active { background: var(--ink); border-color: var(--ink); }
 
     /* Filter divider */
     .filter-divider {
@@ -413,26 +404,11 @@
       font-size: 1.25rem; font-weight: 900; color: var(--ink); margin-bottom: var(--s2);
     }
     .empty-state__desc { font-size: 0.9rem; color: var(--ink-muted); margin-bottom: var(--s5); }
-    .empty-state__clear {
-      display: inline-flex; align-items: center; gap: var(--s2);
-      border: 2px solid var(--ink); border-radius: var(--radius);
-      padding: 0.75em 2em;
-      font-size: 0.875rem; font-weight: 700; color: var(--ink);
-      transition: all 0.15s;
-    }
-    .empty-state__clear:hover { background: var(--ink); color: #fff; }
+    /* empty-state clear uses shared .btn.btn--outline */
 
     /* ===== LOAD MORE ===== */
     .load-more-wrap { text-align: center; padding: var(--s7) 0 0; }
-    .load-more-btn {
-      display: inline-flex; align-items: center; gap: var(--s2);
-      border: 2px solid var(--ink); border-radius: var(--radius);
-      padding: 0.85em 2.5em; background: transparent;
-      font-size: 0.875rem; font-weight: 700; color: var(--ink);
-      transition: all 0.15s;
-    }
-    .load-more-btn:hover { background: var(--ink); color: #fff; }
-    .load-more-btn[hidden] { display: none; }
+    .load-more-wrap .btn[hidden] { display: none; }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
@@ -618,15 +594,15 @@
 
         <!-- Row 2: quick filter pills -->
         <div class="cal-filters__row2" role="group" aria-label="Quick filters">
-          <button class="qf-pill qf-pill--all active" data-qf="all">All Events</button>
+          <button class="pill pill--all active" data-qf="all">All Events</button>
           <div class="filter-divider" role="separator" aria-hidden="true"></div>
-          <button class="qf-pill" data-qf="wxpn-welcomes">WXPN Welcomes</button>
-          <button class="qf-pill" data-qf="free-noon">Free at Noon</button>
-          <button class="qf-pill" data-qf="this-weekend">This Weekend</button>
+          <button class="pill" data-qf="wxpn-welcomes">WXPN Welcomes</button>
+          <button class="pill" data-qf="free-noon">Free at Noon</button>
+          <button class="pill" data-qf="this-weekend">This Weekend</button>
           <div class="filter-divider" role="separator" aria-hidden="true"></div>
-          <button class="qf-pill" data-qf="free">Free Events</button>
-          <button class="qf-pill" data-qf="all-ages-only">All Ages</button>
-          <button class="qf-pill" data-qf="philadelphia">Philadelphia</button>
+          <button class="pill" data-qf="free">Free Events</button>
+          <button class="pill" data-qf="all-ages-only">All Ages</button>
+          <button class="pill" data-qf="philadelphia">Philadelphia</button>
         </div>
 
       </div>
@@ -681,7 +657,7 @@
           </div>
           <h2 class="empty-state__title">No events found</h2>
           <p class="empty-state__desc">Try adjusting your filters or broadening your search.</p>
-          <button class="empty-state__clear" id="emptyStateClear">
+          <button class="btn btn--outline" id="emptyStateClear">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
               <path d="M18 6 6 18M6 6l12 12"/>
             </svg>
@@ -691,7 +667,7 @@
 
         <!-- Load more -->
         <div class="load-more-wrap">
-          <button class="load-more-btn" id="loadMoreBtn">
+          <button class="btn btn--outline" id="loadMoreBtn">
             Load More Events
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
               <path d="M12 5v14M5 12l7 7 7-7"/>
@@ -749,9 +725,9 @@
       <div class="filter-section">
         <div class="filter-section__label">Event Type</div>
         <div class="filter-section__pills" role="group" aria-label="Event type filters">
-          <button class="qf-pill" data-dialog-type="wxpn-welcomes">WXPN Welcomes</button>
-          <button class="qf-pill" data-dialog-type="free-noon">Free at Noon</button>
-          <button class="qf-pill" data-dialog-type="featured">Featured</button>
+          <button class="pill" data-dialog-type="wxpn-welcomes">WXPN Welcomes</button>
+          <button class="pill" data-dialog-type="free-noon">Free at Noon</button>
+          <button class="pill" data-dialog-type="featured">Featured</button>
         </div>
       </div>
 
@@ -790,9 +766,9 @@
       <div class="filter-section">
         <div class="filter-section__label">Age Restriction</div>
         <div class="filter-section__pills" role="group" aria-label="Age restriction filters">
-          <button class="qf-pill" data-dialog-age="all-ages">All Ages</button>
-          <button class="qf-pill" data-dialog-age="18plus">18+</button>
-          <button class="qf-pill" data-dialog-age="21plus">21+</button>
+          <button class="pill" data-dialog-age="all-ages">All Ages</button>
+          <button class="pill" data-dialog-age="18plus">18+</button>
+          <button class="pill" data-dialog-age="21plus">21+</button>
         </div>
       </div>
 
@@ -1089,7 +1065,7 @@
 
   /* ─── PILL SYNC ─── */
   function syncPills() {
-    $$('.qf-pill[data-qf]').forEach(btn => {
+    $$('.pill[data-qf]').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.qf === state.quickFilter);
     });
   }
@@ -1247,7 +1223,7 @@
   });
 
   // Quick filter pills
-  $$('.qf-pill[data-qf]').forEach(btn => {
+  $$('.pill[data-qf]').forEach(btn => {
     btn.addEventListener('click', () => {
       state.quickFilter = btn.dataset.qf;
       state.shown = PAGE_SIZE;

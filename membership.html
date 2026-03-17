@@ -7,52 +7,24 @@
 <link rel="stylesheet" href="styles.css">
 <style>
   /* ════════════════════ MEMBERSHIP PAGE-SPECIFIC STYLES ════════════════════ */
+  /* Uses shared: .breadcrumb, .btn, .section, .section-head, .eyebrow */
 
   .container--wide { max-width:1280px; }
-
-  /* Breadcrumb */
-  .page-breadcrumb { background:var(--cream-dark); border-bottom:1px solid var(--cream-deep); padding:var(--s2) 0; }
-  .page-breadcrumb__inner { display:flex; align-items:center; gap:var(--s2); font-size:0.72rem; color:var(--ink-muted); }
-  .page-breadcrumb__inner a { color:var(--ink-light); font-weight:500; }
-  .page-breadcrumb__inner a:hover { color:var(--xpn-red); }
-  .page-breadcrumb__sep { color:var(--ink-faint); }
-  .page-breadcrumb__current { color:var(--ink); font-weight:600; }
 
   /* Hero */
   .mem-hero { background:var(--cream); padding:var(--s8) 0 var(--s7); border-bottom:2px solid var(--cream-deep); }
   .mem-hero__inner { max-width:760px; margin:0 auto; text-align:center; }
-  .mem-hero__tag { font-size:0.65rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--xpn-red); margin-bottom:var(--s4); }
+  .mem-hero .eyebrow { margin-bottom:var(--s4); }
   .mem-hero h1 { font-size:clamp(2.4rem,6vw,4.2rem); font-weight:800; line-height:1.05; letter-spacing:-0.03em; color:var(--ink); margin-bottom:var(--s4); }
   .mem-hero__sub { font-size:1.2rem; font-weight:600; color:var(--ink-medium); line-height:1.5; margin-bottom:var(--s4); }
   .mem-hero__body { font-size:0.97rem; color:var(--ink-light); line-height:1.75; margin-bottom:var(--s3); text-align:left; }
   .mem-hero__body:last-of-type { margin-bottom:0; }
   .mem-hero__cta { display:flex; gap:var(--s3); justify-content:center; flex-wrap:wrap; margin-top:var(--s6); }
 
-  /* Buttons */
-  .btn-primary { display:inline-flex; align-items:center; gap:var(--s2); padding:0.9em 2.4em; background:var(--xpn-red); color:#fff; border:2px solid var(--xpn-red); font-weight:700; font-size:0.95rem; border-radius:4px; text-decoration:none; transition:background 0.15s, border-color 0.15s, transform 0.15s; white-space:nowrap; }
-  .btn-primary:hover { background:var(--xpn-red-hover); border-color:var(--xpn-red-hover); transform:translateY(-1px); }
-  .btn-primary:active { transform:translateY(0); }
-  .btn-primary--large { padding:1.05em 2.8em; font-size:1.05rem; }
-  .btn-secondary { display:inline-flex; align-items:center; gap:var(--s2); padding:0.9em 2.4em; background:transparent; color:var(--ink-medium); border:2px solid var(--ink-faint); font-weight:700; font-size:0.95rem; border-radius:4px; text-decoration:none; transition:border-color 0.15s, background 0.15s; }
-  .btn-secondary:hover { border-color:var(--ink-medium); background:var(--cream-dark); }
-
-  /* Sections */
-  .mem-section { padding:var(--s7) 0; }
-  .mem-section--tight { padding-top:var(--s3); }
-  .mem-section--cream { background:var(--cream-dark); }
-  .mem-section--dark { background:var(--ink); }
-
-  /* Section headers */
-  .mem-sec-head { text-align:center; max-width:640px; margin:0 auto var(--s6); }
-  .mem-sec-head h2 { font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:800; letter-spacing:-0.03em; color:var(--ink); line-height:1.1; }
-  .mem-sec-head p { margin-top:var(--s3); font-size:1.05rem; color:var(--ink-light); line-height:1.6; }
-  .mem-sec-head--light h2 { color:#fff; }
-  .mem-sec-head--light p { color:rgba(255,255,255,0.7); }
-
   /* Testimonials */
   .mem-testimonials { background:#EAE0CC; padding:var(--s7) 0; }
-  .mem-testimonials .mem-sec-head--light h2 { color:var(--ink); }
-  .mem-testimonials .mem-sec-head--light p { color:var(--ink-light); }
+  .mem-testimonials .section-head--light h2 { color:var(--ink); }
+  .mem-testimonials .section-head--light p { color:var(--ink-light); }
   .carousel { position:relative; max-width:760px; margin:0 auto; }
   .carousel__slides { position:relative; min-height:170px; }
   .carousel__slide { position:absolute; inset:0; opacity:0; pointer-events:none; transition:opacity 0.4s; }
@@ -152,8 +124,7 @@
     .mem-hero { padding:var(--s7) 0 var(--s6); }
     .mem-hero h1 { font-size:clamp(2rem,8vw,2.8rem); }
     .mem-hero__cta { flex-direction:column; align-items:stretch; }
-    .mem-hero__cta .btn-primary, .mem-hero__cta .btn-secondary { text-align:center; justify-content:center; }
-    .mem-section { padding:var(--s6) 0; }
+    .mem-hero__cta .btn { text-align:center; justify-content:center; }
     .tier-header, .benefit-row { grid-template-columns:1.5fr repeat(4,1fr); }
     .ways-grid { grid-template-columns:1fr 1fr; }
     .manage-grid { grid-template-columns:1fr; }
@@ -179,12 +150,12 @@
 <main id="main-content" tabindex="-1">
 
 <!-- Breadcrumb -->
-<nav class="page-breadcrumb" aria-label="Breadcrumb">
+<nav class="breadcrumb" aria-label="Breadcrumb">
   <div class="container">
-    <div class="page-breadcrumb__inner">
+    <div class="breadcrumb__inner">
       <a href="index.html">Home</a>
-      <span class="page-breadcrumb__sep" aria-hidden="true">/</span>
-      <span class="page-breadcrumb__current" aria-current="page">Membership</span>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <span class="breadcrumb__current" aria-current="page">Membership</span>
     </div>
   </div>
 </nav>
@@ -193,14 +164,14 @@
 <section class="mem-hero">
   <div class="container">
     <div class="mem-hero__inner">
-      <div class="mem-hero__tag">We are 30,000+ Strong!</div>
+      <div class="eyebrow">We are 30,000+ Strong!</div>
       <h1>WXPN Belongs<br>to the Members</h1>
       <p class="mem-hero__sub">WXPN is yours. Everything we do is made possible by people like you.</p>
       <p class="mem-hero__body">When you play or stream your favorite on-air program like Middays with Mike V, The Morning Show, Funky Friday, Land of the Lost, Sleepy Hollow (etcetera, etcetera…) that's thanks to members. Ever attend a Free At Noon concert on your Friday lunch break? That's thanks to members. Do you reference our concert calendar? Read local music reviews? Enjoy the annual XPoNential Music Festival? Members. Members. Members.</p>
       <p class="mem-hero__body">There isn't a thing we do that could happen without our member community. And they're also a pretty awesome group of music-loving folks…if we say so ourselves.</p>
       <div class="mem-hero__cta">
-        <a href="#membership" class="btn-primary btn-primary--large">Become a Member</a>
-        <a href="#manage" class="btn-secondary">Already a Member?</a>
+        <a href="#membership" class="btn btn--primary btn--primary--lg">Become a Member</a>
+        <a href="#manage" class="btn btn--secondary">Already a Member?</a>
       </div>
     </div>
   </div>
@@ -209,7 +180,7 @@
 <!-- ═════════════ TESTIMONIALS ═════════════ -->
 <section class="mem-testimonials">
   <div class="container">
-    <div class="mem-sec-head mem-sec-head--light">
+    <div class="section-head section-head--light">
       <h2>What Our Members Say</h2>
     </div>
     <div class="carousel" aria-label="Member testimonials" aria-roledescription="carousel">
@@ -247,9 +218,9 @@
 </section>
 
 <!-- ═════════════ MEMBERSHIP BENEFITS ═════════════ -->
-<section class="mem-section" id="membership">
+<section class="section" id="membership">
   <div class="container container--wide">
-    <div class="mem-sec-head">
+    <div class="section-head">
       <h2>Benefits of Membership</h2>
       <p>Support the music you love and receive special benefits at each level.</p>
     </div>
@@ -275,7 +246,7 @@
 </section>
 
 <!-- ═════════════ VINYL CLUB ═════════════ -->
-<section class="mem-section mem-section--tight">
+<section class="section section--tight">
   <div class="container">
     <a href="#" class="vinyl-club-card">
       <div class="vinyl-club-card__content">
@@ -289,7 +260,7 @@
 </section>
 
 <!-- ═════════════ LEADERSHIP CIRCLE ═════════════ -->
-<section class="mem-section">
+<section class="section">
   <div class="container container--wide">
     <details class="leadership-accordion">
       <summary>
@@ -322,9 +293,9 @@
 </section>
 
 <!-- ═════════════ OTHER WAYS TO GIVE ═════════════ -->
-<section class="mem-section mem-section--cream" id="ways-to-give">
+<section class="section section--alt" id="ways-to-give">
   <div class="container">
-    <div class="mem-sec-head">
+    <div class="section-head">
       <h2>Other Ways to Give</h2>
       <p>Choose the method that works best for you.</p>
     </div>
@@ -358,9 +329,9 @@
 </section>
 
 <!-- ═════════════ MANAGE MEMBERSHIP ═════════════ -->
-<section class="mem-section" id="manage">
+<section class="section" id="manage">
   <div class="container">
-    <div class="mem-sec-head">
+    <div class="section-head">
       <h2>Manage Your Membership</h2>
       <p>Current members: thank you for your support! Here are tools to help you manage your membership.</p>
     </div>
@@ -391,9 +362,9 @@
 </section>
 
 <!-- ═════════════ FAQ ═════════════ -->
-<section class="mem-section mem-section--cream" id="faq">
+<section class="section section--alt" id="faq">
   <div class="container">
-    <div class="mem-sec-head">
+    <div class="section-head">
       <h2>Frequently Asked Questions</h2>
     </div>
     <div class="faq-list">
