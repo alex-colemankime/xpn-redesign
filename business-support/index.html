@@ -9,8 +9,8 @@
   /* ══════════════════════════════════════
      PAGE-SPECIFIC OVERRIDES
      ══════════════════════════════════════ */
-  p { margin-bottom: var(--s4); }
-  ul { padding-left: var(--s5); }
+  main p { margin-bottom: var(--s4); }
+  main ul { padding-left: var(--s5); }
 
   /* ══════════════════════════════════════
      BUSINESS SUPPORT — page styles
@@ -47,6 +47,7 @@
   /* Two-col layout */
   .bs-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s8); align-items: start; }
   .bs-two-col h3 { font-size: 1.15rem; font-weight: 700; color: var(--ink); margin-bottom: var(--s4); letter-spacing: -0.01em; }
+  .bs-two-col p { color: var(--ink-light); font-size: 0.95rem; line-height: 1.7; }
 
   /* Stats list */
   .bs-list { list-style: none; padding: 0; }
@@ -94,13 +95,13 @@
 
   /* Form */
   .bs-form-box { background: var(--white); padding: var(--s6); border-radius: 3px; border: 1px solid var(--ink-faint); box-shadow: 0 1px 6px rgba(0,0,0,0.05); }
-  form { display: flex; flex-direction: column; gap: var(--s4); }
+  .bs-form-box form { display: flex; flex-direction: column; gap: var(--s4); }
   .bs-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); }
   .bs-form-group { display: flex; flex-direction: column; gap: var(--s2); }
-  label { font-size: 0.8rem; font-weight: 600; color: var(--ink-light); letter-spacing: 0.02em; }
-  input, textarea { padding: 0.8rem var(--s4); border: 1.5px solid var(--ink-faint); border-radius: 3px; font-family: var(--font); font-size: 0.9rem; color: var(--ink); background: var(--cream); transition: border-color 0.15s, background 0.15s; }
-  input:focus, textarea:focus { outline: none; border-color: var(--xpn-red); background: var(--white); }
-  textarea { resize: vertical; min-height: 100px; }
+  .bs-form-group label { font-size: 0.8rem; font-weight: 600; color: var(--ink-light); letter-spacing: 0.02em; }
+  .bs-form-box input, .bs-form-box textarea { padding: 0.8rem var(--s4); border: 1.5px solid var(--ink-faint); border-radius: 3px; font-family: var(--font); font-size: 0.9rem; color: var(--ink); background: var(--cream); transition: border-color 0.15s, background 0.15s; }
+  .bs-form-box input:focus, .bs-form-box textarea:focus { outline: none; border-color: var(--xpn-red); background: var(--white); }
+  .bs-form-box textarea { resize: vertical; min-height: 100px; }
   .bs-btn { align-self: flex-start; display: inline-flex; align-items: center; gap: var(--s2); background: var(--xpn-red); color: #fff; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.02em; padding: 0.9em 2.2em; border: none; border-radius: 4px; transition: background 0.15s, transform 0.15s; font-family: var(--font); }
   .bs-btn:hover { background: var(--xpn-red-hover); transform: translateY(-1px); }
 
@@ -222,7 +223,7 @@
           </div>
           <div>
             <h3>Why They Listen</h3>
-            <p style="color:var(--ink-light);font-size:0.95rem;line-height:1.7;">WXPN listeners are music fans who value independent voices. They discover new artists here, rely on us for concert info, and support the businesses that support the station.</p>
+            <p>WXPN listeners are music fans who value independent voices. They discover new artists here, rely on us for concert info, and support the businesses that support the station.</p>
             <ul class="bs-list">
               <li><strong>xx%</strong> have a more positive opinion of sponsors</li>
               <li><strong>xx%</strong> prefer to buy from sponsors <span class="muted">(when quality/price equal)</span></li>

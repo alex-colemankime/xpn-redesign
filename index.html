@@ -420,10 +420,10 @@
      ════════════════════════════════════════════════════════════════ */
   .stories-section { padding-bottom: var(--s7); }
 
+  .sec-head__actions { display: flex; align-items: center; gap: var(--s4); }
   .read-nav { display: flex; gap: 2px; align-items: center; }
   .read-nav__btn {
     width: 32px; height: 32px;
-    border: none;
     border-radius: 6px;
     background: transparent;
     display: flex;
@@ -1125,7 +1125,7 @@
     <!-- Header: title left, all stories + nav arrows right -->
     <div class="sec-head">
       <h2 class="sec-head__title">Read</h2>
-      <div style="display:flex;align-items:center;gap:var(--s4);">
+      <div class="sec-head__actions">
         <a href="#" class="sec-head__link">All Stories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         <div class="read-nav" role="group" aria-label="Browse stories">
           <button class="read-nav__btn" id="readPrev" aria-label="Previous stories">
