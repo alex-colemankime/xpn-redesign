@@ -559,20 +559,38 @@
     background: var(--white);
     border-radius: 2px;
     overflow: hidden;
+    overflow-y: auto;
+    max-height: 520px;
   }
+  .ev-sidebar::-webkit-scrollbar { width: 4px; }
+  .ev-sidebar::-webkit-scrollbar-track { background: transparent; }
+  .ev-sidebar::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 2px; }
   .ev-list-item {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 0 0 auto;
     justify-content: center;
     gap: 4px;
-    padding: 16px 20px;
+    padding: 14px 20px;
     border-bottom: 1px solid var(--cream-deep);
     text-decoration: none;
     transition: background 0.15s;
   }
   .ev-list-item:last-child { border-bottom: none; }
   .ev-list-item:hover { background: var(--cream); }
+  .ev-list-item__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: var(--xpn-red);
+    color: #fff;
+    font-size: 0.53rem; font-weight: 800;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 2px 7px 2px 5px;
+    border-radius: 2px;
+    margin-bottom: 2px;
+    width: fit-content;
+  }
   .ev-list-item__date {
     font-size: 0.7rem; font-weight: 700;
     color: var(--xpn-red); letter-spacing: 0.12em; text-transform: uppercase;
@@ -916,27 +934,65 @@
       <div class="ev-sidebar">
 
         <a href="#" class="ev-list-item">
-          <div class="ev-list-item__date">Mar 17 &middot; Tue</div>
-          <div class="ev-list-item__title">John Moreland / Patterson Hood</div>
-          <div class="ev-list-item__time">White Eagle Hall &middot; New Jersey</div>
+          <div class="ev-list-item__badge">&#9733; XPN Welcomes</div>
+          <div class="ev-list-item__date">Apr 01 &middot; Wed</div>
+          <div class="ev-list-item__title">JOSEPH</div>
+          <div class="ev-list-item__time">Ardmore Music Hall &middot; 21+ &middot; Philadelphia Area</div>
         </a>
 
         <a href="#" class="ev-list-item">
-          <div class="ev-list-item__date">Mar 17 &middot; Tue</div>
-          <div class="ev-list-item__title">Sticky Fingers</div>
-          <div class="ev-list-item__time">The Fillmore &middot; Philadelphia Area</div>
+          <div class="ev-list-item__date">Apr 01 &middot; Wed</div>
+          <div class="ev-list-item__title">Cory Branan</div>
+          <div class="ev-list-item__time">MilkBoy &middot; 21+ &middot; Philadelphia Area</div>
         </a>
 
         <a href="#" class="ev-list-item">
-          <div class="ev-list-item__date">Mar 18 &middot; Wed</div>
-          <div class="ev-list-item__title">Gary Numan</div>
-          <div class="ev-list-item__time">Keswick Theatre &middot; Philadelphia Area</div>
+          <div class="ev-list-item__badge">&#9733; XPN Welcomes</div>
+          <div class="ev-list-item__date">Apr 01 &middot; Wed</div>
+          <div class="ev-list-item__title">Perfume Genius</div>
+          <div class="ev-list-item__time">The Sanctuary @ The First Unitarian Church &middot; AA &middot; Philadelphia Area</div>
         </a>
 
         <a href="#" class="ev-list-item">
-          <div class="ev-list-item__date">Mar 18 &middot; Wed</div>
-          <div class="ev-list-item__title">Alexander Stewart</div>
-          <div class="ev-list-item__time">The Foundry &middot; Philadelphia Area</div>
+          <div class="ev-list-item__date">Apr 01 &middot; Wed</div>
+          <div class="ev-list-item__title">kwn</div>
+          <div class="ev-list-item__time">Theatre of Living Arts &middot; AA &middot; Philadelphia Area</div>
+        </a>
+
+        <a href="#" class="ev-list-item">
+          <div class="ev-list-item__date">Apr 01 &middot; Wed</div>
+          <div class="ev-list-item__title">Thursday / Chris Conley</div>
+          <div class="ev-list-item__time">Union Transfer &middot; AA &middot; Philadelphia Area</div>
+        </a>
+
+        <a href="#" class="ev-list-item">
+          <div class="ev-list-item__date">Apr 01 &middot; Wed</div>
+          <div class="ev-list-item__title">Carlos Ni&#241;o + Friends</div>
+          <div class="ev-list-item__time">Solar Myth &middot; 21+ &middot; Philadelphia Area</div>
+        </a>
+
+        <a href="#" class="ev-list-item">
+          <div class="ev-list-item__date">Apr 02 &middot; Thu</div>
+          <div class="ev-list-item__title">Divorce / MacBuck</div>
+          <div class="ev-list-item__time">Milkboy &middot; 21+ &middot; Philadelphia Area</div>
+        </a>
+
+        <a href="#" class="ev-list-item">
+          <div class="ev-list-item__date">Apr 02 &middot; Thu</div>
+          <div class="ev-list-item__title">Dirty Three</div>
+          <div class="ev-list-item__time">Underground Arts &middot; 21+ &middot; Philadelphia Area</div>
+        </a>
+
+        <a href="#" class="ev-list-item">
+          <div class="ev-list-item__date">Apr 02 &middot; Thu</div>
+          <div class="ev-list-item__title">Hudson Freeman</div>
+          <div class="ev-list-item__time">Ukie Club &middot; AA &middot; Philadelphia Area</div>
+        </a>
+
+        <a href="#" class="ev-list-item">
+          <div class="ev-list-item__date">Apr 02 &middot; Thu</div>
+          <div class="ev-list-item__title">Sheer Terror / School Drugs</div>
+          <div class="ev-list-item__time">Kung Fu Necktie &middot; 21+ &middot; Philadelphia Area</div>
         </a>
 
       </div>
