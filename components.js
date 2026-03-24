@@ -6,7 +6,7 @@
 
 /* ── 1. Path detection ── */
 var BASE = location.pathname.includes('/music-news/') ||
-           location.pathname.includes('/business-support/') ||
+           location.pathname.includes('/sponsorship/') ||
            location.pathname.includes('/concert-calendar/') ? '../' : '';
 
 /* ── 2. Shared SVG constants ── */
@@ -173,7 +173,7 @@ function injectFooter() {
             '</button>' +
             '<ul class="footer-nav__list">' +
               '<li><a href="https://xpn.org/about/">About WXPN</a></li>' +
-              '<li><a href="' + BASE + 'business-support/">Business Support</a></li>' +
+              '<li><a href="' + BASE + 'sponsorship/">Sponsorship</a></li>' +
               '<li><a href="https://xpn.org/musicians-on-call/">Musicians On Call</a></li>' +
               '<li><a href="https://xpn.org/press/">Press Room</a></li>' +
               '<li><a href="https://xpn.org/public-file/">Public Inspection File</a></li>' +

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tell Me More — WXPN 88.5</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    --cream: #F8F7F5; --cream-dark: #F0EFED; --cream-deep: #E4E2DF;
+    --white: #FFFFFF;
+    --ink: #0D0D0F; --ink-medium: #2C2D30; --ink-light: #4B4D52;
+    --ink-muted: #85878E; --ink-faint: #D1D3D9;
+    --xpn-red: #d54e1b; --xpn-red-hover: #be4317;
+    --font: 'Figtree', system-ui, -apple-system, sans-serif;
+    --s1:4px; --s2:8px; --s3:12px; --s4:16px;
+    --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { font-size:16px; scroll-behavior:smooth; }
+  body { background:var(--cream); color:var(--ink); font-family:var(--font); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  img { display:block; max-width:100%; }
+  button { cursor:pointer; font-family:inherit; }
+
+  /* ── Accessibility ── */
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .skip-link { position:absolute; top:-100%; left:var(--s4); z-index:9999; background:var(--xpn-red); color:#fff; font-weight:700; font-size:0.9rem; padding:var(--s3) var(--s5); border-radius:0 0 4px 4px; text-decoration:none; transition:top 0.1s; }
+  .skip-link:focus { top:0; }
+  a:focus-visible, button:focus-visible { outline:3px solid var(--xpn-red); outline-offset:3px; border-radius:2px; }
+  .site-header a:focus-visible, .site-header button:focus-visible { outline-color:#fff; }
+
+  .container { max-width:1360px; margin:0 auto; padding:0 var(--s7); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  }
+
+  /* ════════════════════ HEADER ════════════════════ */
+  .site-header { position:sticky; top:0; z-index:1000; }
+  .header-row1 { background:#292119; height:110px; overflow:hidden; transition:height 0.3s ease, opacity 0.2s ease; }
+  .site-header.is-collapsed .header-row1 { height:0; opacity:0; }
+  .header-row1__inner { display:flex; align-items:center; height:110px; gap:var(--s4); }
+  .header-logo { display:flex; align-items:center; flex-shrink:0; }
+  .header-logo svg { height:40px; width:auto; }
+  .header-album-wrap { position:relative; width:80px; height:80px; flex-shrink:0; border-radius:2px; overflow:hidden; }
+  .header-album-art { width:80px; height:80px; background:#1a1510; }
+  .header-album-art img { width:100%; height:100%; object-fit:cover; display:block; }
+  .header-play-btn { position:absolute; inset:0; width:100%; height:100%; border-radius:0; border:none; background:rgba(0,0,0,0.48); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background 0.15s; }
+  .header-play-btn:hover { background:rgba(213,78,27,0.82); }
+  .header-play-btn::before { content:''; position:absolute; width:46px; height:46px; border-radius:50%; border:2.5px solid rgba(255,255,255,0.85); pointer-events:none; }
+  .header-play-btn svg { width:28px; height:28px; margin-left:4px; position:relative; }
+  .header-np-info { display:flex; flex-direction:column; gap:3px; min-width:0; flex:1; }
+  .header-np-info__label { font-size:0.63rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--xpn-red); line-height:1; }
+  .header-np-info__show { font-size:0.88rem; color:rgba(255,255,255,0.62); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1.3; }
+  .header-np-info__track { font-size:1.3rem; font-weight:700; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1.2; letter-spacing:-0.02em; }
+  .header-np-info__track span { color:rgba(255,255,255,0.5); font-weight:400; }
+  .header-row1__right { display:flex; align-items:center; gap:var(--s3); flex-shrink:0; }
+  .header-search-btn { width:36px; height:36px; display:flex; align-items:center; justify-content:center; border:none; background:none; color:rgba(255,255,255,0.6); border-radius:4px; transition:color 0.15s; }
+  .header-search-btn:hover { color:#fff; }
+  .header-search-btn svg { width:18px; height:18px; }
+  .nav-donate { font-size:0.88rem; font-weight:700; color:#fff; background:var(--xpn-red); padding:0.45em 1.1em; border-radius:4px; display:inline-flex; align-items:center; gap:0.35em; white-space:nowrap; transition:background 0.15s; }
+  .nav-donate::before { content:"♥"; font-size:0.8em; }
+  .nav-donate:hover { background:var(--xpn-red-hover); color:#fff; }
+  .header-row2 { background:#1e1610; border-bottom:1px solid rgba(0,0,0,0.35); height:46px; display:flex; align-items:center; }
+  .header-row2__inner { display:flex; align-items:center; height:46px; width:100%; }
+  .header-logo--nav { display:none; align-items:center; flex-shrink:0; margin-right:var(--s5); border-right:1px solid rgba(255,255,255,0.1); padding-right:var(--s5); height:100%; }
+  .header-logo--nav svg { height:26px; width:auto; }
+  .site-header.is-collapsed .header-logo--nav { display:flex; }
+  .header-nav { display:flex; align-items:center; height:46px; }
+  .header-nav a { font-size:0.88rem; font-weight:600; color:rgba(255,255,255,0.7); padding:0 var(--s5); height:100%; display:flex; align-items:center; white-space:nowrap; border-right:1px solid rgba(255,255,255,0.08); transition:color 0.15s, background 0.15s; }
+  .header-nav a:first-child { border-left:1px solid rgba(255,255,255,0.08); }
+  .header-nav a:hover { color:#fff; background:rgba(255,255,255,0.06); }
+  .header-nav--right { margin-left:auto; }
+  .header-menu-btn { display:flex; align-items:center; justify-content:center; width:40px; height:40px; border:none; background:none; color:rgba(255,255,255,0.75); cursor:pointer; flex-shrink:0; transition:color 0.15s; }
+  .header-menu-btn:hover { color:#fff; }
+  .header-menu-btn svg { width:20px; height:20px; }
+  .header-menu-btn--row1 { display:none; }
+  .header-drawer { display:flex; flex-direction:column; position:fixed; top:0; left:0; width:280px; height:100vh; background:#1e1710; z-index:1100; padding:var(--s7) var(--s5) var(--s5); gap:0; transform:translateX(-100%); transition:transform 0.3s ease; overflow-y:auto; }
+  .header-drawer.is-open { transform:translateX(0); }
+  .header-drawer a { font-size:1.05rem; font-weight:600; color:rgba(255,255,255,0.8); padding:var(--s3) 0; border-bottom:1px solid rgba(255,255,255,0.08); transition:color 0.15s; }
+  .header-drawer a:hover { color:#fff; }
+  .header-drawer a[aria-current="page"] { color:#fff; border-left:3px solid var(--xpn-red); padding-left:var(--s3); }
+  .header-drawer a.nav-donate { margin-top:var(--s4); border-bottom:none; border-radius:4px; padding:var(--s3) var(--s4); justify-content:center; border-left:none; }
+  .header-drawer__close { position:absolute; top:var(--s4); right:var(--s4); background:none; border:none; color:rgba(255,255,255,0.5); font-size:1.6rem; line-height:1; }
+  .header-drawer__close:hover { color:#fff; }
+  .drawer-primary { display:none; }
+  .drawer-divider { border:none; border-top:1px solid rgba(255,255,255,0.12); margin:var(--s2) 0; }
+  .header-drawer-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:1050; }
+  .header-drawer-overlay.is-open { display:block; }
+
+  /* ════════════════════ DONATE BAND ════════════════════ */
+  .donate-band { background:var(--xpn-red); padding:var(--s7) 0; position:relative; overflow:hidden; isolation:isolate; }
+  .donate-band::before { content:''; position:absolute; inset:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:220px 220px; opacity:0.22; mix-blend-mode:overlay; pointer-events:none; z-index:0; }
+  .donate-band .container { position:relative; z-index:1; display:grid; grid-template-columns:1fr auto; gap:var(--s7); align-items:center; max-width:860px; }
+  .donate-band__eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:var(--s2); }
+  .donate-band__headline { font-size:clamp(1.5rem,2.8vw,2.2rem); font-weight:900; line-height:1.1; color:#fff; letter-spacing:-0.02em; margin-bottom:var(--s3); }
+  .donate-band__sub { font-size:0.9rem; color:rgba(255,255,255,0.7); max-width:520px; line-height:1.6; }
+  .donate-band__actions { display:flex; flex-direction:column; align-items:flex-end; gap:var(--s3); flex-shrink:0; }
+  .donate-band__btn { display:inline-flex; align-items:center; gap:var(--s2); font-size:0.88rem; font-weight:700; padding:0.85em 2.2em; border-radius:4px; background:#fff; color:var(--xpn-red); border:none; transition:background 0.15s, transform 0.15s; white-space:nowrap; }
+  .donate-band__btn:hover { background:rgba(255,255,255,0.88); transform:translateY(-1px); }
+  .donate-band__btn--ghost { background:transparent; color:rgba(255,255,255,0.75); border:1.5px solid rgba(255,255,255,0.35); font-size:0.78rem; }
+  .donate-band__btn--ghost:hover { background:rgba(255,255,255,0.1); color:#fff; border-color:rgba(255,255,255,0.6); transform:none; }
+
+  /* ════════════════════ FOOTER ════════════════════ */
+  .site-footer { background:var(--ink-medium); color:rgba(255,255,255,0.72); padding:var(--s6) 0 var(--s4); font-size:0.88rem; line-height:1.6; }
+  .footer-meta { display:flex; align-items:center; justify-content:space-between; padding:var(--s4) 0; border-bottom:1px solid rgba(255,255,255,0.1); }
+  .footer-brand__wordmark { font-weight:900; font-size:clamp(1.4rem,2vw,1.8rem); letter-spacing:-0.04em; color:#fff; line-height:1; text-transform:lowercase; }
+  .footer-cta { display:flex; align-items:center; gap:var(--s5); }
+  .footer-donate-btn { display:inline-flex; align-items:center; gap:var(--s2); background:var(--xpn-red); color:#fff; font-weight:700; font-size:0.82rem; padding:var(--s2) var(--s4); border-radius:3px; transition:background 0.15s; white-space:nowrap; }
+  .footer-donate-btn:hover { background:var(--xpn-red-hover); }
+  .footer-donate-btn svg { width:13px; height:13px; stroke:currentColor; fill:none; flex-shrink:0; }
+  .footer-social { display:flex; align-items:center; gap:var(--s4); }
+  .footer-social a { color:rgba(255,255,255,0.5); transition:color 0.15s; line-height:0; }
+  .footer-social a:hover { color:#fff; }
+  .footer-social a svg { width:15px; height:15px; fill:currentColor; display:block; }
+  .footer-nav { display:flex; flex-wrap:wrap; justify-content:center; padding:var(--s4) 0; border-bottom:1px solid rgba(255,255,255,0.1); }
+  .footer-nav__col { display:contents; }
+  .footer-nav__toggle { display:none; }
+  .footer-nav__list { display:flex; flex-wrap:wrap; list-style:none; align-items:center; justify-content:center; }
+  .footer-nav__list a { display:block; padding:4px 14px; color:rgba(255,255,255,0.55); font-size:0.8rem; white-space:nowrap; border-right:1px solid rgba(255,255,255,0.2); transition:color 0.15s; }
+  .footer-nav__list a:hover { color:#fff; }
+  .footer-nav__col:last-child .footer-nav__list li:last-child a { border-right:none; }
+  .footer-bottom { padding-top:var(--s4); text-align:center; font-size:0.68rem; color:rgba(255,255,255,0.3); line-height:1.6; }
+
+  /* ════════════════════ BREADCRUMB ════════════════════ */
+  .page-breadcrumb { background:var(--cream-dark); border-bottom:1px solid var(--cream-deep); padding:var(--s2) 0; }
+  .page-breadcrumb__inner { display:flex; align-items:center; gap:var(--s2); font-size:0.72rem; color:var(--ink-muted); }
+  .page-breadcrumb__inner a { color:var(--ink-light); font-weight:500; }
+  .page-breadcrumb__inner a:hover { color:var(--xpn-red); }
+  .page-breadcrumb__sep { color:var(--ink-faint); }
+  .page-breadcrumb__current { color:var(--ink); font-weight:600; }
+
+  /* ════════════════════ PAGE HEADER ════════════════════ */
+  .page-header { background:var(--cream); border-bottom:2px solid var(--cream-deep); padding:var(--s7) 0 var(--s6); }
+  .page-header__inner { max-width:760px; }
+  .page-header__tag { font-size:0.65rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--xpn-red); margin-bottom:var(--s3); }
+  .page-header h1 { font-size:clamp(2.4rem,6vw,4rem); font-weight:900; line-height:1.05; letter-spacing:-0.04em; color:var(--ink); margin-bottom:var(--s3); }
+  .page-header__sub { font-size:1.1rem; color:var(--ink-light); line-height:1.6; }
+
+  /* ════════════════════ PAGE BODY ════════════════════ */
+  .page-body { padding:var(--s7) 0; max-width:860px; margin:0 auto; }
+
+  /* Prose */
+  .prose h2 { font-size:clamp(1.4rem,2.5vw,1.9rem); font-weight:800; letter-spacing:-0.03em; color:var(--ink); line-height:1.15; margin-top:var(--s7); margin-bottom:var(--s4); }
+  .prose h2:first-child { margin-top:0; }
+  .prose p { font-size:0.97rem; color:var(--ink-light); line-height:1.75; margin-bottom:var(--s4); }
+  .prose p:last-child { margin-bottom:0; }
+  .prose a { color:var(--xpn-red); text-decoration:underline; text-underline-offset:3px; }
+  .prose a:hover { color:var(--xpn-red-hover); }
+
+  /* Form embed */
+  .form-embed { margin:var(--s6) 0; background:var(--white); border:1px solid var(--cream-deep); border-radius:4px; border-top:3px solid var(--xpn-red); overflow:hidden; }
+  .form-embed__label { font-size:0.62rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--xpn-red); padding:var(--s3) var(--s5); background:var(--cream-dark); border-bottom:1px solid var(--cream-deep); }
+  .form-embed iframe { display:block; width:100%; border:none; }
+
+  /* Divider */
+  .section-rule { border:none; border-top:2px solid var(--cream-deep); margin:var(--s7) 0; }
+
+  /* ── Project cards ── */
+  .project-tiles { padding:var(--s7) 0; background:var(--cream-dark); border-top:1px solid var(--cream-deep); border-bottom:1px solid var(--cream-deep); margin:var(--s7) calc(-1 * var(--s7)); padding-left:var(--s7); padding-right:var(--s7); }
+  .project-tiles__head { margin-bottom:var(--s5); }
+  .project-tiles__label { font-size:0.62rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--xpn-red); margin-bottom:var(--s2); }
+  .project-tiles__title { font-size:1.3rem; font-weight:800; letter-spacing:-0.03em; color:var(--ink); line-height:1.15; }
+  .ptiles-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--s4); }
+  .ptile { background:var(--white); border-radius:2px; overflow:hidden; box-shadow:0 0 7px rgba(0,0,0,0.05); transition:box-shadow 0.2s; display:flex; flex-direction:column; position:relative; }
+  .ptile:hover { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+  .ptile:hover .ptile__headline { color:var(--xpn-red); }
+  .ptile:hover .ptile__img img { transform:scale(1.03); }
+  .ptile__img { aspect-ratio:16/9; overflow:hidden; background:var(--cream-dark); flex-shrink:0; }
+  .ptile__img img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease; display:block; }
+  .ptile__body { padding:var(--s3) var(--s4) var(--s5); display:flex; flex-direction:column; flex:1; }
+  .ptile__tag { font-size:0.6rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--xpn-red); margin-bottom:var(--s1); }
+  .ptile__headline { font-size:1rem; font-weight:700; line-height:1.3; color:var(--ink); margin-bottom:var(--s2); transition:color 0.15s; }
+  .ptile__desc { font-size:0.82rem; color:var(--ink-light); line-height:1.6; flex:1; }
+
+  /* Artist to Watch */
+  .atw-label { font-size:0.62rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--xpn-red); margin-bottom:var(--s3); display:flex; align-items:center; gap:var(--s2); }
+  .atw-label::before { content:''; display:inline-block; width:20px; height:2px; background:var(--xpn-red); }
+  .atw-artist { font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; letter-spacing:-0.04em; color:var(--ink); line-height:1; margin-bottom:var(--s2); }
+  .atw-hometown { font-size:0.82rem; color:var(--ink-muted); font-weight:500; margin-bottom:var(--s5); }
+  .atw-video { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:4px; background:var(--ink); margin:var(--s5) 0; }
+  .atw-video iframe { position:absolute; inset:0; width:100%; height:100%; border:none; }
+  .atw-pullquote { border-left:3px solid var(--xpn-red); padding:var(--s4) var(--s5); background:var(--cream-dark); margin:var(--s5) 0; border-radius:0 4px 4px 0; }
+  .atw-pullquote p { font-size:1rem; font-style:italic; color:var(--ink-medium); line-height:1.6; margin:0 0 var(--s2); }
+  .atw-pullquote cite { font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); font-style:normal; }
+
+  /* ════════════════════ RESPONSIVE ════════════════════ */
+  @media (max-width: 900px) {
+    .page-body__layout { grid-template-columns:1fr; }
+    .page-body__sidebar { position:static; }
+  }
+  @media (max-width: 768px) {
+    *, *::before, *::after { -webkit-tap-highlight-color:transparent; }
+    .container { padding:0 var(--s4); }
+    .header-row1 { height:64px; }
+    .header-row1__inner { height:64px; gap:var(--s2); }
+    .header-logo svg { height:24px; }
+    .header-album-wrap { width:44px; height:44px; }
+    .header-album-art { width:44px; height:44px; }
+    .header-np-info__label, .header-np-info__show { display:none; }
+    .header-np-info__track { font-size:0.88rem; }
+    .header-search-btn, .nav-donate { display:none; }
+    .header-drawer .nav-donate { display:flex; }
+    .header-row2 { display:none; }
+    .header-menu-btn--row1 { display:flex; width:44px; height:44px; }
+    .drawer-primary { display:contents; }
+    .site-header.is-collapsed .header-row1 { height:56px; opacity:1; }
+    .donate-band { padding:var(--s5) 0; }
+    .donate-band .container { grid-template-columns:1fr; gap:var(--s4); }
+    .donate-band__actions { align-items:stretch; }
+    .donate-band__btn { text-align:center; justify-content:center; }
+    .site-footer { padding:var(--s5) 0 calc(var(--s5) + env(safe-area-inset-bottom,0px)); }
+    .footer-meta { flex-wrap:wrap; gap:var(--s3); }
+    .footer-nav { display:block; padding:0; border-bottom:none; }
+    .footer-nav__col { display:block; border-bottom:1px solid rgba(255,255,255,0.1); }
+    .footer-nav__list { display:block; max-height:0; overflow:hidden; transition:max-height 0.3s ease; }
+    .footer-nav__toggle { display:flex; align-items:center; justify-content:space-between; width:100%; padding:15px 0; background:none; border:none; color:rgba(255,255,255,0.8); font-size:0.92rem; font-weight:600; cursor:pointer; font-family:inherit; }
+    .footer-nav__toggle svg { width:16px; height:16px; transition:transform 0.25s; flex-shrink:0; }
+    .footer-nav__col.is-open .footer-nav__toggle svg { transform:rotate(180deg); }
+    .footer-nav__col.is-open .footer-nav__list { max-height:400px; }
+    .footer-nav__list a { display:block; padding:11px 0; border-right:none; border-bottom:1px solid rgba(255,255,255,0.06); }
+    .footer-nav__list li:last-child a { border-bottom:none; padding-bottom:14px; }
+    .footer-bottom { font-size:0.65rem; padding-top:var(--s4); }
+    .page-header { padding:var(--s6) 0 var(--s5); }
+    .page-body { padding:var(--s5) 0; }
+  }
+  @media (max-width: 390px) {
+    .container { padding:0 var(--s3); }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<!-- ═════════════ HEADER ═════════════ -->
+<header class="site-header">
+  <div class="header-row1">
+    <div class="container header-row1__inner">
+      <a href="../index.html" class="header-logo">
+        <svg viewBox="0 0 196 62" xmlns="http://www.w3.org/2000/svg"><g fill="#FFFFFF" fill-rule="evenodd"><path d="M138.902234,21.2979581 C138.902234,21.0187442 138.913866,20.7395303 138.900489,20.4608993 C138.774281,17.8372213 138.445676,15.2607591 137.052157,12.9518525 C135.200916,9.88574581 131.063397,9.04285793 128.258329,11.1838864 C126.704287,12.3701083 125.951112,14.0716226 125.492228,15.9077892 C124.603539,19.465289 124.580857,23.0571805 125.250863,26.6467404 C125.600406,28.5184644 126.237261,30.2969229 127.634269,31.6772538 C130.471326,34.4787193 135.406222,33.6200929 137.375528,29.9862318 C138.850471,27.2663737 138.990637,24.297613 138.902234,21.2979581 L138.902234,21.2979581 Z M137.758804,0.000174873004 C138.099041,0.28638369 138.536406,0.224012319 138.927824,0.316695011 C144.453628,1.62824254 148.115979,5.08140147 150.247551,10.2553108 C151.877201,14.2086065 152.259314,18.3700011 152.12729,22.5978474 C151.998756,26.7405889 151.253723,30.7457636 149.327456,34.4629808 C145.861106,41.153039 139.272133,44.0081322 132.432489,42.6027362 C129.764679,42.053635 127.488287,40.7712329 125.478851,38.9653777 C125.33345,38.8342229 125.215967,38.5526774 124.987397,38.6686765 C124.773949,38.7765149 124.905973,39.0510655 124.905973,39.2457574 C124.896667,46.2861446 124.88678,53.3259488 124.910044,60.366336 C124.91237,61.0460091 124.71986,61.215053 124.05567,61.2109726 C120.125201,61.1847416 116.194732,61.1975657 112.263682,61.222668 C111.759433,61.2255453 111.653581,61.0576673 111.654163,60.5825956 C111.66405,40.9542667 111.663468,21.3253548 111.650091,1.69702593 C111.650091,1.14559305 111.752453,0.933413806 112.367789,0.938659996 C116.089462,0.969554227 119.811136,0.968971317 123.532228,0.939242906 C124.135931,0.933996716 124.284821,1.12111083 124.258068,1.68711646 C124.215611,2.58712952 124.246436,3.49064004 124.246436,4.37491453 C124.515718,4.48216997 124.599468,4.28398057 124.701249,4.19188079 C127.18818,1.93835067 130.083979,0.573175417 133.411907,0.134244176 C133.524157,0.119088516 133.646293,0.123168886 133.710851,0.000174873004 L137.758804,0.000174873004 Z"/><path d="M19.7668617,24.6345933 C20.331016,23.0543242 20.6183276,21.5241854 21.0161436,20.0272725 C21.6780071,17.5359151 22.2817104,15.0288192 22.9255442,12.5327985 C23.8654136,8.88902798 24.8297104,5.25166948 25.7521318,1.6032357 C25.8725234,1.12816404 26.0446777,0.957371408 26.5367134,0.960285958 C29.9559537,0.978356168 33.3751941,0.976607438 36.7944344,0.959678021 C37.2556451,0.957371408 37.4376866,1.11767166 37.5487727,1.562432 C38.7468736,6.36502761 39.964749,11.1617941 41.1808795,15.9591435 C41.8776392,18.7052326 42.5807964,21.449573 43.2839537,24.1933304 C43.3118706,24.3023346 43.3706125,24.4037609 43.4851881,24.6724824 C43.8294967,23.4955871 44.1249507,22.4650022 44.4314552,21.4379148 C45.455657,18.0074893 46.4943988,14.5811443 47.5075501,11.1478043 C48.3369151,8.33934383 49.1389448,5.52388846 49.9502801,2.71076473 C50.066019,2.31030555 50.1666362,1.905766 50.2742326,1.50297518 C50.3684522,1.15089753 50.5522386,0.959120138 50.9616866,0.960285958 C54.8229448,0.972527068 58.684203,0.971361248 62.5454611,0.963200508 C63.0223751,0.962034688 63.1607964,1.09610399 63.007835,1.58516549 C61.7015561,5.75588665 60.4098172,9.93185399 59.121568,14.1084042 C58.0531644,17.5720556 57.0033721,21.040953 55.9308973,24.5028556 C54.5001555,29.1195029 53.0537104,33.731487 51.6171525,38.3469685 C51.3059953,39.3466591 50.9901852,40.345184 50.708108,41.3524525 C50.5836451,41.796047 50.3882267,41.9913219 49.8892119,41.9884073 C46.0744819,41.9685884 42.2597519,41.9779149 38.445022,41.9831611 C38.1030398,41.9831611 37.8093306,41.977332 37.6953365,41.550059 C36.8147905,38.2496225 35.9191228,34.9532664 35.0315976,31.6539957 C33.9690101,27.7041974 32.9104938,23.7526504 31.8490694,19.8022693 C31.8252237,19.7154157 31.786838,19.6320595 31.701924,19.4006443 C31.4454374,20.2487783 31.2098884,20.9628431 31.0133068,21.6874003 C29.9018647,25.7916697 28.798565,29.8988536 27.6946837,34.0060376 C27.0560843,36.3819788 26.4081792,38.7550055 25.7957519,41.1379416 C25.6404641,41.7424193 25.4049151,42.0053117 24.7157163,41.9984526 C20.9242504,41.958096 17.1327846,41.9703371 13.3413187,41.9895731 C12.8440487,41.9919048 12.5962861,41.8537551 12.4439062,41.3594474 C10.2425412,34.2257947 8.0272178,27.0962223 5.80607834,19.9683986 C4.68474896,16.3712609 3.53841068,12.782284 2.41417329,9.18631208 C1.62319407,6.6553168 0.860131751,4.11616078 0.0627548961,1.58808004 C-0.0890433234,1.10776219 0.0249507418,0.962617598 0.515823145,0.963783418 C4.37708131,0.974275798 8.23833947,0.974275798 12.0995976,0.962617598 C12.5084641,0.961451778 12.726565,1.07745087 12.8487015,1.49598026 C13.7589092,4.61688048 14.6888914,7.7319516 15.6177104,10.8470227 C16.9460902,15.3039527 18.2785412,19.7602997 19.6104107,24.2160639 C19.640654,24.3180731 19.6848558,24.416002 19.7668617,24.6345933" opacity="0.746117001"/><path d="M170.413799,5.79476675 C171.615972,4.45057625 172.734974,3.33896685 174.081384,2.4803404 C177.249954,0.461140112 180.730262,-0.0424941401 184.388541,0.3614625 C186.813823,0.629601107 189.043687,1.43751439 190.996126,2.93559312 C193.77793,5.07079251 195.065598,7.99175459 195.409325,11.4064415 C195.563449,12.9389119 195.584969,14.4754627 195.584969,16.0137622 C195.583224,24.4047519 195.577408,32.7963244 195.597201,41.1873141 C195.598927,41.8057816 195.481443,42.0156292 194.809111,42.0093592 C190.925752,41.9730768 187.04123,41.978323 183.157871,42.0063027 C182.557657,42.0098001 182.373289,41.8833087 182.375615,41.246188 C182.400043,34.5100799 182.414001,27.7733888 182.370963,21.0372807 C182.359912,19.3450929 182.388411,17.6307546 181.933598,15.9682952 C181.123426,13.0071124 178.592292,11.4554059 175.578428,12.0732905 C172.537811,12.6958384 170.990749,14.5180151 170.719722,17.8475971 C170.632482,18.9149054 170.583627,19.9880427 170.581882,21.0588484 C170.57025,27.7949565 170.568506,34.5316476 170.589443,41.2677557 C170.59177,41.842505 170.458001,42.0098001 169.86942,42.0063027 C165.915687,41.978323 161.961954,41.9812375 158.008221,42.0004736 C157.493503,42.0028052 157.343449,41.8786454 157.344029,41.3417853 C157.361479,28.1487829 157.363224,14.9557805 157.346357,1.76277817 C157.345776,1.14431065 157.473147,0.933297224 158.13501,0.938543414 C161.995687,0.971769285 165.856363,0.964191455 169.71704,0.943789604 C170.24688,0.940875054 170.448114,1.0539596 170.427758,1.63162342 C170.382393,2.95074878 170.413799,4.27162288 170.413799,5.79476675"/><path d="M106.018668,0.951892054 C105.428923,1.84316147 104.938633,2.59744702 104.435547,3.34298893 C100.751677,8.79902667 97.0689709,14.2562302 93.371143,19.7023585 C93.0983715,20.1039835 93.0721994,20.3884436 93.3531134,20.8046413 C95.4858493,23.9686769 97.5924131,27.1507827 99.7082825,30.3258935 C102.185909,34.0431107 104.664698,37.7597449 107.139998,41.477545 C107.22433,41.6040365 107.40579,41.7241159 107.291214,41.9019035 C107.187689,42.0627866 106.994597,41.9875913 106.840472,41.9881742 C102.397612,41.9910887 97.9547513,41.9852596 93.5118908,42.0015811 C93.1204724,42.0033298 92.9355228,41.8342859 92.7412677,41.5410822 C90.609695,38.3199214 88.4664902,35.1075044 86.3285199,31.890424 C85.863238,31.1903491 85.8754516,31.1920978 85.420057,31.8764341 C83.2797602,35.0911829 81.1295763,38.2989367 78.9991668,41.5212632 C78.7665258,41.8739238 78.5193448,42.0004153 78.0976831,41.9986665 C73.6548226,41.9840938 69.211962,41.9916716 64.7691015,41.9875913 C64.595784,41.9870083 64.3654694,42.0936809 64.2555466,41.9036522 C64.1357365,41.6949704 64.3805911,41.5760568 64.4748107,41.4349926 C67.6800214,36.6364773 70.8927929,31.8432083 74.103238,27.0487734 C75.5008285,24.9613726 76.8844605,22.8646453 78.3029887,20.7924002 C78.5885555,20.3744537 78.5484249,20.0981544 78.2785614,19.6953636 C74.2503834,13.6861442 70.2390718,7.66526669 66.2306682,1.64322333 C66.1091134,1.4607725 65.8281994,1.2806533 65.9503359,1.05273549 C66.0718908,0.825983491 66.3731608,0.961801524 66.5935881,0.961218614 C70.8974457,0.955389514 75.2007217,0.966464804 79.503416,0.941399673 C80.0815288,0.938485123 80.4159501,1.10986067 80.7346682,1.6065 C82.3933982,4.18704263 84.0974932,6.73843977 85.8562588,9.4064189 C86.5309175,8.40439659 87.1602113,7.4734893 87.7854338,6.54083327 C88.9393329,4.82066582 90.0967217,3.1022471 91.2360807,1.37333599 C91.4041638,1.11918723 91.55887,0.947811684 91.8868938,0.947811684 C96.5373864,0.953640784 101.188461,0.951892054 106.018668,0.951892054"/></g></svg>
+      </a>
+      <div class="header-album-wrap">
+        <div class="header-album-art">
+          <img src="https://i.scdn.co/image/ab67616d00001e02305780793d5f230df33937b6" alt="Album art">
+        </div>
+        <button class="header-play-btn" aria-label="Play live stream">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+        </button>
+      </div>
+      <div class="header-np-info">
+        <span class="header-np-info__label">Now Playing</span>
+        <span class="header-np-info__show">WXPN Middays with Mike Vasilikos</span>
+        <span class="header-np-info__track"><strong>Dove Ellis</strong> <span>&mdash; Little Left Hope</span></span>
+      </div>
+      <div class="header-row1__right">
+        <button class="header-search-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="#" class="nav-donate">Donate</a>
+        <button class="header-menu-btn header-menu-btn--row1" aria-label="Open menu" aria-expanded="false" aria-controls="header-drawer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-row2">
+    <div class="container header-row2__inner">
+      <button class="header-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="header-drawer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <a href="../index.html" class="header-logo header-logo--nav" aria-hidden="true" tabindex="-1">
+        <svg viewBox="0 0 196 62" xmlns="http://www.w3.org/2000/svg"><g fill="#FFFFFF" fill-rule="evenodd"><path d="M138.902234,21.2979581 C138.902234,21.0187442 138.913866,20.7395303 138.900489,20.4608993 C138.774281,17.8372213 138.445676,15.2607591 137.052157,12.9518525 C135.200916,9.88574581 131.063397,9.04285793 128.258329,11.1838864 C126.704287,12.3701083 125.951112,14.0716226 125.492228,15.9077892 C124.603539,19.465289 124.580857,23.0571805 125.250863,26.6467404 C125.600406,28.5184644 126.237261,30.2969229 127.634269,31.6772538 C130.471326,34.4787193 135.406222,33.6200929 137.375528,29.9862318 C138.850471,27.2663737 138.990637,24.297613 138.902234,21.2979581 L138.902234,21.2979581 Z M137.758804,0.000174873004 C138.099041,0.28638369 138.536406,0.224012319 138.927824,0.316695011 C144.453628,1.62824254 148.115979,5.08140147 150.247551,10.2553108 C151.877201,14.2086065 152.259314,18.3700011 152.12729,22.5978474 C151.998756,26.7405889 151.253723,30.7457636 149.327456,34.4629808 C145.861106,41.153039 139.272133,44.0081322 132.432489,42.6027362 C129.764679,42.053635 127.488287,40.7712329 125.478851,38.9653777 C125.33345,38.8342229 125.215967,38.5526774 124.987397,38.6686765 C124.773949,38.7765149 124.905973,39.0510655 124.905973,39.2457574 C124.896667,46.2861446 124.88678,53.3259488 124.910044,60.366336 C124.91237,61.0460091 124.71986,61.215053 124.05567,61.2109726 C120.125201,61.1847416 116.194732,61.1975657 112.263682,61.222668 C111.759433,61.2255453 111.653581,61.0576673 111.654163,60.5825956 C111.66405,40.9542667 111.663468,21.3253548 111.650091,1.69702593 C111.650091,1.14559305 111.752453,0.933413806 112.367789,0.938659996 C116.089462,0.969554227 119.811136,0.968971317 123.532228,0.939242906 C124.135931,0.933996716 124.284821,1.12111083 124.258068,1.68711646 C124.215611,2.58712952 124.246436,3.49064004 124.246436,4.37491453 C124.515718,4.48216997 124.599468,4.28398057 124.701249,4.19188079 C127.18818,1.93835067 130.083979,0.573175417 133.411907,0.134244176 C133.524157,0.119088516 133.646293,0.123168886 133.710851,0.000174873004 L137.758804,0.000174873004 Z"/><path d="M19.7668617,24.6345933 C20.331016,23.0543242 20.6183276,21.5241854 21.0161436,20.0272725 C21.6780071,17.5359151 22.2817104,15.0288192 22.9255442,12.5327985 C23.8654136,8.88902798 24.8297104,5.25166948 25.7521318,1.6032357 C25.8725234,1.12816404 26.0446777,0.957371408 26.5367134,0.960285958 C29.9559537,0.978356168 33.3751941,0.976607438 36.7944344,0.959678021 C37.2556451,0.957371408 37.4376866,1.11767166 37.5487727,1.562432 C38.7468736,6.36502761 39.964749,11.1617941 41.1808795,15.9591435 C41.8776392,18.7052326 42.5807964,21.449573 43.2839537,24.1933304 C43.3118706,24.3023346 43.3706125,24.4037609 43.4851881,24.6724824 C43.8294967,23.4955871 44.1249507,22.4650022 44.4314552,21.4379148 C45.455657,18.0074893 46.4943988,14.5811443 47.5075501,11.1478043 C48.3369151,8.33934383 49.1389448,5.52388846 49.9502801,2.71076473 C50.066019,2.31030555 50.1666362,1.905766 50.2742326,1.50297518 C50.3684522,1.15089753 50.5522386,0.959120138 50.9616866,0.960285958 C54.8229448,0.972527068 58.684203,0.971361248 62.5454611,0.963200508 C63.0223751,0.962034688 63.1607964,1.09610399 63.007835,1.58516549 C61.7015561,5.75588665 60.4098172,9.93185399 59.121568,14.1084042 C58.0531644,17.5720556 57.0033721,21.040953 55.9308973,24.5028556 C54.5001555,29.1195029 53.0537104,33.731487 51.6171525,38.3469685 C51.3059953,39.3466591 50.9901852,40.345184 50.708108,41.3524525 C50.5836451,41.796047 50.3882267,41.9913219 49.8892119,41.9884073 C46.0744819,41.9685884 42.2597519,41.9779149 38.445022,41.9831611 C38.1030398,41.9831611 37.8093306,41.977332 37.6953365,41.550059 C36.8147905,38.2496225 35.9191228,34.9532664 35.0315976,31.6539957 C33.9690101,27.7041974 32.9104938,23.7526504 31.8490694,19.8022693 C31.8252237,19.7154157 31.786838,19.6320595 31.701924,19.4006443 C31.4454374,20.2487783 31.2098884,20.9628431 31.0133068,21.6874003 C29.9018647,25.7916697 28.798565,29.8988536 27.6946837,34.0060376 C27.0560843,36.3819788 26.4081792,38.7550055 25.7957519,41.1379416 C25.6404641,41.7424193 25.4049151,42.0053117 24.7157163,41.9984526 C20.9242504,41.958096 17.1327846,41.9703371 13.3413187,41.9895731 C12.8440487,41.9919048 12.5962861,41.8537551 12.4439062,41.3594474 C10.2425412,34.2257947 8.0272178,27.0962223 5.80607834,19.9683986 C4.68474896,16.3712609 3.53841068,12.782284 2.41417329,9.18631208 C1.62319407,6.6553168 0.860131751,4.11616078 0.0627548961,1.58808004 C-0.0890433234,1.10776219 0.0249507418,0.962617598 0.515823145,0.963783418 C4.37708131,0.974275798 8.23833947,0.974275798 12.0995976,0.962617598 C12.5084641,0.961451778 12.726565,1.07745087 12.8487015,1.49598026 C13.7589092,4.61688048 14.6888914,7.7319516 15.6177104,10.8470227 C16.9460902,15.3039527 18.2785412,19.7602997 19.6104107,24.2160639 C19.640654,24.3180731 19.6848558,24.416002 19.7668617,24.6345933" opacity="0.746117001"/><path d="M170.413799,5.79476675 C171.615972,4.45057625 172.734974,3.33896685 174.081384,2.4803404 C177.249954,0.461140112 180.730262,-0.0424941401 184.388541,0.3614625 C186.813823,0.629601107 189.043687,1.43751439 190.996126,2.93559312 C193.77793,5.07079251 195.065598,7.99175459 195.409325,11.4064415 C195.563449,12.9389119 195.584969,14.4754627 195.584969,16.0137622 C195.583224,24.4047519 195.577408,32.7963244 195.597201,41.1873141 C195.598927,41.8057816 195.481443,42.0156292 194.809111,42.0093592 C190.925752,41.9730768 187.04123,41.978323 183.157871,42.0063027 C182.557657,42.0098001 182.373289,41.8833087 182.375615,41.246188 C182.400043,34.5100799 182.414001,27.7733888 182.370963,21.0372807 C182.359912,19.3450929 182.388411,17.6307546 181.933598,15.9682952 C181.123426,13.0071124 178.592292,11.4554059 175.578428,12.0732905 C172.537811,12.6958384 170.990749,14.5180151 170.719722,17.8475971 C170.632482,18.9149054 170.583627,19.9880427 170.581882,21.0588484 C170.57025,27.7949565 170.568506,34.5316476 170.589443,41.2677557 C170.59177,41.842505 170.458001,42.0098001 169.86942,42.0063027 C165.915687,41.978323 161.961954,41.9812375 158.008221,42.0004736 C157.493503,42.0028052 157.343449,41.8786454 157.344029,41.3417853 C157.361479,28.1487829 157.363224,14.9557805 157.346357,1.76277817 C157.345776,1.14431065 157.473147,0.933297224 158.13501,0.938543414 C161.995687,0.971769285 165.856363,0.964191455 169.71704,0.943789604 C170.24688,0.940875054 170.448114,1.0539596 170.427758,1.63162342 C170.382393,2.95074878 170.413799,4.27162288 170.413799,5.79476675"/><path d="M106.018668,0.951892054 C105.428923,1.84316147 104.938633,2.59744702 104.435547,3.34298893 C100.751677,8.79902667 97.0689709,14.2562302 93.371143,19.7023585 C93.0983715,20.1039835 93.0721994,20.3884436 93.3531134,20.8046413 C95.4858493,23.9686769 97.5924131,27.1507827 99.7082825,30.3258935 C102.185909,34.0431107 104.664698,37.7597449 107.139998,41.477545 C107.22433,41.6040365 107.40579,41.7241159 107.291214,41.9019035 C107.187689,42.0627866 106.994597,41.9875913 106.840472,41.9881742 C102.397612,41.9910887 97.9547513,41.9852596 93.5118908,42.0015811 C93.1204724,42.0033298 92.9355228,41.8342859 92.7412677,41.5410822 C90.609695,38.3199214 88.4664902,35.1075044 86.3285199,31.890424 C85.863238,31.1903491 85.8754516,31.1920978 85.420057,31.8764341 C83.2797602,35.0911829 81.1295763,38.2989367 78.9991668,41.5212632 C78.7665258,41.8739238 78.5193448,42.0004153 78.0976831,41.9986665 C73.6548226,41.9840938 69.211962,41.9916716 64.7691015,41.9875913 C64.595784,41.9870083 64.3654694,42.0936809 64.2555466,41.9036522 C64.1357365,41.6949704 64.3805911,41.5760568 64.4748107,41.4349926 C67.6800214,36.6364773 70.8927929,31.8432083 74.103238,27.0487734 C75.5008285,24.9613726 76.8844605,22.8646453 78.3029887,20.7924002 C78.5885555,20.3744537 78.5484249,20.0981544 78.2785614,19.6953636 C74.2503834,13.6861442 70.2390718,7.66526669 66.2306682,1.64322333 C66.1091134,1.4607725 65.8281994,1.2806533 65.9503359,1.05273549 C66.0718908,0.825983491 66.3731608,0.961801524 66.5935881,0.961218614 C70.8974457,0.955389514 75.2007217,0.966464804 79.503416,0.941399673 C80.0815288,0.938485123 80.4159501,1.10986067 80.7346682,1.6065 C82.3933982,4.18704263 84.0974932,6.73843977 85.8562588,9.4064189 C86.5309175,8.40439659 87.1602113,7.4734893 87.7854338,6.54083327 C88.9393329,4.82066582 90.0967217,3.1022471 91.2360807,1.37333599 C91.4041638,1.11918723 91.55887,0.947811684 91.8868938,0.947811684 C96.5373864,0.953640784 101.188461,0.951892054 106.018668,0.951892054"/></g></svg>
+      </a>
+      <nav class="header-nav" aria-label="Primary navigation">
+        <a href="../index.html">Read</a>
+        <a href="../index.html#watch">Watch</a>
+        <a href="#">Listen</a>
+        <a href="#">Connect</a>
+      </nav>
+      <nav class="header-nav header-nav--right" aria-label="Secondary navigation">
+        <a href="#">Playlist</a>
+        <a href="../concert-calendar/index.html">Concert Calendar</a>
+      </nav>
+    </div>
+  </div>
+
+  <nav class="header-drawer" id="header-drawer" aria-hidden="true" aria-label="Mobile navigation">
+    <button class="header-drawer__close" aria-label="Close menu">&times;</button>
+    <div class="drawer-primary">
+      <a href="../index.html">Read</a>
+      <a href="../index.html#watch">Watch</a>
+      <a href="#">Listen</a>
+      <a href="#">Connect</a>
+      <a href="#">Playlist</a>
+      <a href="../concert-calendar/index.html">Concert Calendar</a>
+      <a href="#" class="nav-donate">Donate</a>
+      <hr class="drawer-divider">
+    </div>
+    <a href="#">Newsletters</a>
+    <a href="../membership.html">Membership</a>
+    <a href="#">Support WXPN</a>
+    <a href="#">Volunteer</a>
+    <a href="#">Contact Us</a>
+  </nav>
+</header>
+
+<div class="header-drawer-overlay" id="drawer-overlay"></div>
+
+<main id="main-content" tabindex="-1">
+
+<!-- Breadcrumb -->
+<nav class="page-breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <div class="page-breadcrumb__inner">
+      <a href="../index.html">Home</a>
+      <span class="page-breadcrumb__sep" aria-hidden="true">/</span>
+      <span class="page-breadcrumb__current" aria-current="page">Tell Me More</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ═════════════ PAGE HEADER ═════════════ -->
+<div class="page-header">
+  <div class="container">
+    <div class="page-header__inner">
+      <div class="page-header__tag">WXPN 88.5</div>
+      <h1>Tell Me More</h1>
+      <p class="page-header__sub">Hear a promo on WXPN? Find it here.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════════ PAGE BODY ═════════════ -->
+<div class="page-body">
+  <div class="container">
+    <div class="page-body__layout">
+
+      <!-- ── Main content ── -->
+      <div class="page-body__main">
+        <div class="prose">
+
+          <h2>Philly 250</h2>
+
+          <p>The nation's 250th anniversary celebration is upon us, and here at XPN we're commemorating in four ways. At the center of all of them, we want your input.</p>
+
+          <p>We're asking you to submit two categories of things:</p>
+
+          <ul>
+            <li><strong>Pivotal Philly music moments</strong> — like David Bowie recording "Young Americans" at Sigma Sound Studios, the inaugural Roots Picnic in 2008, or Sister Rosetta Tharpe's legendary 1957 arrival at 30th Street Station.</li>
+            <li><strong>Songs for, by, and about Philadelphia</strong> — like Bruce Springsteen's "Streets of Philadelphia," or songs by G Love, Hall &amp; Oates, Patti LaBelle, Japanese Breakfast, Ween, Joan Jett, Elton John, or Dr. Dog that are tied to this city.</li>
+          </ul>
+
+          <p>Drop your submissions for consideration using the form here:</p>
+
+        </div>
+
+        <!-- Embedded submission form -->
+        <div class="form-embed">
+          <div class="form-embed__label">Submit Your Nominations &mdash; Deadline March 19</div>
+          <iframe
+            src="https://forms.monday.com/forms/embed/placeholder"
+            width="100%"
+            height="500"
+            title="Philly 250 Submission Form"
+            loading="lazy"
+            aria-label="Philly 250 nomination form">
+          </iframe>
+        </div>
+
+        <div class="prose">
+
+          <p>We'll compile a comprehensive list of submissions and whittle it down to a curated 250-song playlist running 4th of July weekend. Additionally, we'll release a list of more than 40 essential moments in Philly music history.</p>
+
+          <p>This is just one of four Philly 250 projects we're working on. Here's what's coming:</p>
+
+          <ul>
+            <li><strong>Philly Anthems</strong> — An original music project with Eric Bazilian (The Hooters), Eliza Hardy Jones (The War On Drugs), Devon Gilfillian, and Christian McBride. Supported by The Pew Center for Arts &amp; Heritage.</li>
+            <li><strong>World Cafe: Sense of Place</strong> — A deep dive into Philadelphia's musical DNA.</li>
+            <li><strong>Sound of History</strong> — A Juneteenth performance by Zeek Burse and Laurin Talese.</li>
+          </ul>
+
+        </div>
+
+        <hr class="section-rule">
+
+        <!-- Artist to Watch -->
+        <div class="atw-label">WXPN Artist to Watch</div>
+        <div class="atw-artist">Ratboys</div>
+        <div class="atw-hometown">Chicago, IL</div>
+
+        <div class="prose">
+          <p>Chicago indie rock band Ratboys have spent a decade quietly becoming one of the most emotionally precise bands working today. Vocalist and rhythm guitarist Julia Steiner and lead guitarist Dave Sagan met as Notre Dame freshmen and have since built a catalog of heartfelt, Midwestern-tinged rock that keeps finding new emotional territory.</p>
+        </div>
+
+        <div class="atw-video">
+          <iframe
+            src="https://www.youtube.com/embed/placeholder"
+            title="Ratboys music video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <div class="atw-pullquote">
+          <p>"Not only do Chicago stalwarts Ratboys continue to fine-tune their approach to the genre with each record, they also sound increasingly inspired."</p>
+          <cite>— Pitchfork</cite>
+        </div>
+
+        <div class="prose">
+          <p>Their sixth album <em>Singin' to an Empty Chair</em>, produced by Chris Walla at Chicago's Electrical Audio and Rosebud Studios, is 11 tracks of introspective, unhurried indie rock — "about as good as American indie rock gets," per Stereogum.</p>
+
+          <p>Steiner and Sagan built Ratboys slowly, releasing records that feel considered rather than rushed. The new album sits with the weight of contemporary life without flinching. "One of the most exciting bands working right now," says Aquarium Drunkard.</p>
+        </div>
+
+        <div class="atw-video">
+          <iframe
+            src="https://www.youtube.com/embed/placeholder2"
+            title="Ratboys live session"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <div class="prose">
+          <p><strong>Essential tracks:</strong> "The Window," "It's Alive," "Hetty Green," "My Drag," "I Go Out at Night"</p>
+          <p>Catch Ratboys live at First Unitarian Church with Philadelphia's Florry opening. <a href="../concert-calendar/index.html">See the concert calendar &rarr;</a></p>
+        </div>
+
+      </div><!-- /main -->
+
+      <!-- ── Sidebar ── -->
+      <aside class="page-body__sidebar" aria-label="Station sidebar">
+
+        <div class="sidebar-card sidebar-np">
+          <span class="sidebar-card__label">Now Playing on WXPN</span>
+          <div class="sidebar-np__track">Little Left Hope</div>
+          <div class="sidebar-np__artist">Dove Ellis</div>
+          <button class="sidebar-np__play" aria-label="Play WXPN live stream">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+            Listen Live
+          </button>
+        </div>
+
+        <div class="sidebar-card">
+          <span class="sidebar-card__label">On This Page</span>
+          <ul class="sidebar-links">
+            <li>
+              <a href="#philly-250">
+                Philly 250
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="#submit">
+                Submit Your Nominations
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="#ratboys">
+                Artist to Watch: Ratboys
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <span class="sidebar-card__label">More From WXPN</span>
+          <ul class="sidebar-links">
+            <li>
+              <a href="../music-news/index.html">
+                Music News
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="../concert-calendar/index.html">
+                Concert Calendar
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="../membership.html">
+                Membership
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                Newsletters
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </aside><!-- /sidebar -->
+
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- ═════════════ DONATE BAND ═════════════ -->
+<aside class="donate-band" aria-label="Support WXPN">
+  <div class="container">
+    <div>
+      <div class="donate-band__eyebrow">Listener-Supported Radio</div>
+      <div class="donate-band__headline">WXPN is yours.<br>Help keep it that way.</div>
+      <p class="donate-band__sub">Everything we do is made possible by members like you.</p>
+    </div>
+    <div class="donate-band__actions">
+      <a href="../membership.html" class="donate-band__btn">Become a Member</a>
+      <a href="#" class="donate-band__btn donate-band__btn--ghost">One-Time Gift</a>
+    </div>
+  </div>
+</aside>
+
+<!-- ═════════════ FOOTER ═════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-meta">
+      <div class="footer-brand">
+        <div class="footer-brand__wordmark">wxpn</div>
+      </div>
+      <div class="footer-cta">
+        <a href="#" class="footer-donate-btn">
+          Donate
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <div class="footer-nav__col">
+        <button class="footer-nav__toggle" aria-expanded="false">
+          Get Involved
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="footer-nav__list">
+          <li><a href="../membership.html">Membership</a></li>
+          <li><a href="#">Volunteer</a></li>
+          <li><a href="#">Internships &amp; Work Study</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav__col">
+        <button class="footer-nav__toggle" aria-expanded="false">
+          About
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="footer-nav__list">
+          <li><a href="#">About WXPN</a></li>
+          <li><a href="../sponsorship/">Sponsorship</a></li>
+          <li><a href="#">Musicians On Call</a></li>
+          <li><a href="#">Press Room</a></li>
+          <li><a href="#">Public Inspection File</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="footer-bottom">
+      Copyright &copy;2026 WXPN / The Trustees of The University of Pennsylvania, All Rights Reserved &middot; XPN.org is made possible with the generous support of XPN Members and our Business Sponsors.
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  var header = document.querySelector('.site-header');
+  var collapsed = false;
+  window.addEventListener('scroll', function() {
+    var y = window.scrollY;
+    if (!collapsed && y > 80) { collapsed = true; header.classList.add('is-collapsed'); }
+    else if (collapsed && y < 50) { collapsed = false; header.classList.remove('is-collapsed'); }
+  }, { passive: true });
+
+  var menuBtns = document.querySelectorAll('.header-menu-btn');
+  var closeBtn = document.querySelector('.header-drawer__close');
+  var drawer   = document.getElementById('header-drawer');
+  var overlay  = document.getElementById('drawer-overlay');
+  var lastFocused = null;
+
+  function openDrawer() {
+    lastFocused = document.activeElement;
+    drawer.classList.add('is-open');
+    overlay.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    menuBtns.forEach(function(b) { b.setAttribute('aria-expanded', 'true'); });
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeDrawer() {
+    drawer.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    menuBtns.forEach(function(b) { b.setAttribute('aria-expanded', 'false'); });
+    if (lastFocused) lastFocused.focus();
+  }
+  drawer.addEventListener('keydown', function(e) {
+    if (!drawer.classList.contains('is-open')) return;
+    var focusable = Array.from(drawer.querySelectorAll('a, button')).filter(function(el) { return !el.hasAttribute('disabled'); });
+    if (!focusable.length) return;
+    var first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.key === 'Tab') {
+      if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
+      else { if (document.activeElement === last) { e.preventDefault(); first.focus(); } }
+    }
+    if (e.key === 'Escape') closeDrawer();
+  });
+  menuBtns.forEach(function(b) { b.addEventListener('click', openDrawer); });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (overlay)  overlay.addEventListener('click', closeDrawer);
+})();
+
+(function() {
+  document.querySelectorAll('.footer-nav__toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var col = this.closest('.footer-nav__col');
+      var isOpen = col.classList.toggle('is-open');
+      this.setAttribute('aria-expanded', isOpen);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

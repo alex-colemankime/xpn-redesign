@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Business Support | WXPN 88.5</title>
+<meta name="description" content="Sponsor WXPN 88.5 and reach Philadelphia's engaged music audience across on-air, digital, and live events.">
+<meta property="og:title" content="Sponsorship | WXPN 88.5">
+<meta property="og:description" content="Align your brand with Philadelphia's passionate music community. Explore on-air, digital, and event sponsorship opportunities.">
+<meta property="og:type" content="website">
+<meta name="color-scheme" content="light">
+<title>Sponsorship | WXPN 88.5</title>
 <link rel="stylesheet" href="../styles.css">
 <style>
   /* ══════════════════════════════════════
@@ -13,7 +18,7 @@
   main ul { padding-left: var(--s5); }
 
   /* ══════════════════════════════════════
-     BUSINESS SUPPORT — page styles
+     SPONSORSHIP — page styles
      ══════════════════════════════════════ */
 
   /* Narrower content wrap inside the global 1360px container */
@@ -28,12 +33,11 @@
   .bs-intro { font-size: 1rem; color: var(--ink-light); margin-bottom: var(--s6); max-width: 640px; line-height: 1.7; }
 
   /* Hero */
-  .bs-hero { background: var(--header-bg); padding: var(--s9) 0 var(--s8); position: relative; overflow: hidden; }
-  .bs-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 15% 55%, rgba(213,78,27,0.22) 0%, transparent 55%), radial-gradient(circle at 88% 20%, rgba(213,78,27,0.09) 0%, transparent 45%); pointer-events: none; }
-  .bs-hero .container { position: relative; z-index: 1; }
-  .bs-hero__h1 { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: #fff; max-width: 820px; margin-bottom: var(--s4); }
-  .bs-hero__sub { font-size: 1.075rem; color: rgba(255,255,255,0.7); max-width: 580px; line-height: 1.65; margin-bottom: var(--s6); }
-  /* Hero button inherits from .btn--primary */
+  .bs-hero { padding: var(--s6) 0 var(--s5); }
+  .bs-hero__h1 { font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--ink); max-width: 820px; margin-bottom: var(--s3); }
+  .bs-hero__sub { font-size: 1rem; color: var(--ink-light); max-width: 580px; line-height: 1.65; margin-bottom: var(--s5); }
+  .bs-hero__btn { display: inline-flex; align-items: center; gap: var(--s2); background: var(--xpn-red); color: #fff; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.02em; padding: 0.9em 2.2em; border-radius: 4px; transition: background 0.15s, transform 0.15s; }
+  .bs-hero__btn:hover { background: var(--xpn-red-hover); transform: translateY(-1px); }
 
   /* Stats grid */
   .bs-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s6); margin-top: var(--s5); }
@@ -138,7 +142,7 @@
   <section class="bs-hero">
     <div class="container">
       <div class="bs-wrap">
-        <span class="eyebrow">Business Support</span>
+        <span class="eyebrow">Sponsorship</span>
         <h1 class="bs-hero__h1">Your customers are listening to WXPN — we'll help you reach them.</h1>
         <p class="bs-hero__sub">Align your brand with Philadelphia's passionate music community across on-air, digital, and events.</p>
         <a href="#contact" class="btn btn--primary">Get in Touch</a>
@@ -351,21 +355,21 @@
               <div class="bs-form-row">
                 <div class="bs-form-group">
                   <label for="name">Name *</label>
-                  <input type="text" id="name" name="name" required>
+                  <input type="text" id="name" name="name" autocomplete="name" required>
                 </div>
                 <div class="bs-form-group">
                   <label for="company">Company *</label>
-                  <input type="text" id="company" name="company" required>
+                  <input type="text" id="company" name="company" autocomplete="organization" required>
                 </div>
               </div>
               <div class="bs-form-row">
                 <div class="bs-form-group">
                   <label for="email">Email *</label>
-                  <input type="email" id="email" name="email" required>
+                  <input type="email" id="email" name="email" autocomplete="email" required>
                 </div>
                 <div class="bs-form-group">
                   <label for="phone">Phone</label>
-                  <input type="tel" id="phone" name="phone">
+                  <input type="tel" id="phone" name="phone" autocomplete="tel">
                 </div>
               </div>
               <div class="bs-form-group">
