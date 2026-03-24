@@ -62,13 +62,15 @@
   .bs-coverage { margin-top: var(--s6); padding-top: var(--s6); border-top: 1px solid var(--ink-faint); }
   .bs-coverage h3 { font-size: 1.15rem; font-weight: 700; color: var(--ink); margin-bottom: var(--s4); letter-spacing: -0.01em; }
   .bs-coverage-grid { display: flex; flex-direction: column; gap: var(--s3); margin-top: var(--s4); }
-  .bs-coverage-item { background: var(--white); padding: var(--s4) var(--s5); border-radius: 3px; border-left: 3px solid var(--xpn-red); display: flex; align-items: baseline; gap: var(--s4); box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+  .bs-coverage-item { padding: var(--s4) 0; border-bottom: 1px solid var(--ink-faint); display: flex; align-items: baseline; gap: var(--s4); }
+  .bs-coverage-item:last-child { border-bottom: none; }
   .bs-coverage-item h4 { color: var(--ink); font-size: 0.95rem; font-weight: 700; min-width: 240px; flex-shrink: 0; line-height: 1.4; margin: 0; }
   .bs-coverage-item p { color: var(--ink-light); font-size: 0.9rem; margin: 0; line-height: 1.55; }
 
   /* Benefits */
-  .bs-benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s5); margin-top: var(--s5); }
-  .bs-benefit { background: var(--white); padding: var(--s5); border-radius: 3px; box-shadow: 0 1px 5px rgba(0,0,0,0.05); border-top: 3px solid var(--xpn-red); }
+  .bs-benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s5); margin-top: var(--s5); counter-reset: benefit; }
+  .bs-benefit { background: var(--white); padding: var(--s5); border-radius: 3px; box-shadow: 0 1px 5px rgba(0,0,0,0.05); counter-increment: benefit; }
+  .bs-benefit::before { content: counter(benefit, decimal-leading-zero); display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: var(--s3); }
   .bs-benefit h3 { font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: var(--s3); }
   .bs-benefit p { color: var(--ink-light); font-size: 0.925rem; line-height: 1.65; margin: 0; }
 
@@ -80,7 +82,7 @@
   .bs-opportunity ul { padding-left: var(--s5); margin: var(--s3) 0; }
   .bs-opportunity ul li { margin-bottom: var(--s2); color: var(--ink-light); font-size: 0.93rem; line-height: 1.6; }
   .bs-opportunity ul strong { color: var(--ink); font-weight: 700; }
-  .bs-highlight { background: var(--cream-deep); padding: var(--s4) var(--s5); border-left: 3px solid var(--xpn-red); border-radius: 0 3px 3px 0; font-style: italic; color: var(--ink-light); margin: var(--s4) 0; font-size: 0.95rem; line-height: 1.65; }
+  .bs-highlight { background: var(--cream-deep); padding: var(--s4) var(--s5); border-radius: 3px; color: var(--ink); margin: var(--s4) 0; font-size: 0.95rem; line-height: 1.65; }
   .bs-custom-pkg { background: var(--white); border: 1.5px solid var(--ink-faint); padding: var(--s5) var(--s6); border-radius: 3px; }
   .bs-custom-pkg h3 { font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: var(--s3); letter-spacing: -0.01em; }
   .bs-custom-pkg p { color: var(--ink-light); font-size: 0.95rem; line-height: 1.65; margin: 0; }
@@ -88,7 +90,7 @@
   /* Contact */
   .bs-contact-wrap { display: grid; grid-template-columns: 1fr 1.65fr; gap: var(--s7); align-items: start; margin-top: var(--s6); }
   .bs-contact-intro p { color: var(--ink-light); font-size: 0.975rem; line-height: 1.7; margin-bottom: var(--s5); }
-  .bs-contact-person { background: var(--white); padding: var(--s5); border-radius: 3px; border-left: 3px solid var(--xpn-red); box-shadow: 0 1px 5px rgba(0,0,0,0.06); }
+  .bs-contact-person { background: var(--white); padding: var(--s5); border-radius: 3px; border: 1px solid var(--ink-faint); box-shadow: 0 1px 5px rgba(0,0,0,0.06); }
   .bs-contact-person strong { font-size: 1rem; font-weight: 700; color: var(--ink); display: block; margin-bottom: 2px; }
   .bs-contact-person .bs-title { font-size: 0.875rem; color: var(--ink-muted); display: block; margin-bottom: var(--s4); }
   .bs-contact-links { display: flex; flex-direction: column; gap: var(--s2); }
@@ -123,7 +125,7 @@
     .bs-contact-wrap { grid-template-columns: 1fr; gap: var(--s5); }
     .bs-form-row { grid-template-columns: 1fr; }
     .bs-form-box { padding: var(--s4); }
-    .bs-coverage-item { flex-direction: column; gap: var(--s2); }
+    .bs-coverage-item { flex-direction: column; gap: var(--s1); }
     .bs-coverage-item h4 { min-width: auto; }
   }
 </style>
