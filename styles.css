@@ -66,18 +66,16 @@ input, select { font-family: inherit; }
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: top 0.28s ease;
+}
+.site-header.is-collapsed {
+  top: -110px; /* slide row1 above viewport; DOM height unchanged so no page jump */
 }
 
 /* ── Row 1: Now Playing ── */
 .header-row1 {
   background: var(--header-bg);
   height: 110px;
-  overflow: hidden;
-  transition: height 0.3s ease, opacity 0.2s ease;
-}
-.site-header.is-collapsed .header-row1 {
-  height: 0;
-  opacity: 0;
 }
 .header-row1__inner {
   display: flex;
@@ -873,8 +871,8 @@ input, select { font-family: inherit; }
   .header-menu-btn--row1 { display: flex; width: 44px; height: 44px; }
   /* Reveal primary nav group inside drawer on mobile */
   .drawer-primary { display: contents; }
-  /* Prevent header vanishing on scroll — no nav bar to fall back to */
-  .site-header.is-collapsed .header-row1 { height: 56px; opacity: 1; }
+  /* On mobile row2 is hidden, so don't collapse at all */
+  .site-header.is-collapsed { top: 0; }
 
   /* ──────────────────────────────────────────
      FOOTER — mobile
