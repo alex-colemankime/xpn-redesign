@@ -470,139 +470,187 @@
   .read-dot--active { background: var(--ink); }
 
   /* ════════════════════════════════════════════════════════════════
-     EVENTS — Featured poster card + text-only event list
+     EVENTS — Poster card + date-grouped agenda
      ════════════════════════════════════════════════════════════════ */
   .events-section {
-    background: var(--cream-deep);
-    padding: var(--s4) 0 var(--s6);
+    background: var(--white);
+    padding: var(--s5) 0 var(--s7);
   }
-  .events-section .sec-head { border-bottom: none; margin-bottom: var(--s3); }
-  .events-section .sec-head__link {
-    display: inline-flex; align-items: center; gap: 6px;
+  .events-section .sec-head { border-bottom: none; padding-bottom: 0; margin-bottom: var(--s5); }
+  .ev-cal-btn {
+    display: inline-flex; align-items: center; gap: 7px;
     background: var(--xpn-red); color: #fff;
     padding: 0.5em 1.1em; border-radius: 2px;
     font-size: 0.68rem; font-weight: 700;
     letter-spacing: 0.1em; text-transform: uppercase;
     text-decoration: none; transition: background 0.15s;
+    flex-shrink: 0;
   }
-  .events-section .sec-head__link:hover { background: var(--xpn-red-hover); }
-  .events-section .sec-head__link svg { width: 13px; height: 13px; vertical-align: middle; }
+  .ev-cal-btn:hover { background: var(--xpn-red-hover); }
+  .ev-cal-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
 
-  .events-strip {
+  /* Two-column layout: poster + agenda */
+  .ev-layout {
     display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: var(--s3);
-    align-items: stretch;
-    max-width: 1000px;
-    margin: 0 auto;
+    grid-template-columns: 5fr 7fr;
+    gap: var(--s6);
+    align-items: start;
   }
 
-  .ev-tile--featured {
+  /* Featured event: full-bleed poster card */
+  .ev-poster {
     position: relative;
-    background: var(--white);
-    border-radius: 2px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-  .ev-tile--featured .ev-tile__thumb {
-    flex: 0 0 auto;
-  }
-  .ev-tile--featured .ev-tile__thumb img {
-    width: 100%; height: auto; display: block;
-  }
-  .ev-tile__date-badge {
-    position: absolute;
-    top: 0; right: 0; z-index: 2;
-    background: var(--xpn-red); color: #fff;
-    font-weight: 900; font-size: 0.9rem;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    padding: 8px 18px 8px 34px;
-    clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
-  }
-  .ev-tile--featured .ev-tile__body {
-    flex: 0 0 auto;
-    padding: 13px 16px 14px;
-    display: flex; flex-direction: row; align-items: center; gap: 14px;
-    border-top: 1px solid var(--cream-deep);
-  }
-  .ev-tile--featured .ev-tile__info {
-    flex: 1; min-width: 0;
-    display: flex; flex-direction: column; gap: 3px;
-  }
-  .ev-tile--featured .ev-tile__type {
-    color: var(--xpn-red); font-size: 0.58rem;
-    font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-  }
-  .ev-tile--featured .ev-tile__artist {
-    color: var(--ink);
-    font-size: 1.1rem; font-weight: 900;
-    line-height: 1.15; letter-spacing: -0.01em;
-  }
-  .ev-tile--featured .ev-tile__time {
-    color: var(--ink-muted); font-size: 0.7rem;
-  }
-  .ev-tile--featured .ev-tile__cta {
-    flex: 0 0 auto;
-    display: inline-flex;
-    background: var(--xpn-red); color: #fff;
-    padding: 0.65em 1.3em; border-radius: 2px;
-    font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em;
-    text-transform: uppercase; white-space: nowrap;
-    text-decoration: none; transition: background 0.15s;
-  }
-  .ev-tile--featured .ev-tile__cta:hover { background: var(--xpn-red-hover); }
-
-  .ev-sidebar {
-    display: flex;
-    flex-direction: column;
-    background: var(--white);
-    border-radius: 2px;
-    overflow: hidden;
-    overflow-y: auto;
-    max-height: 520px;
-  }
-  .ev-sidebar::-webkit-scrollbar { width: 4px; }
-  .ev-sidebar::-webkit-scrollbar-track { background: transparent; }
-  .ev-sidebar::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 2px; }
-  .ev-list-item {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 auto;
-    justify-content: center;
-    gap: 4px;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--cream-deep);
+    display: block;
     text-decoration: none;
-    transition: background 0.15s;
+    border-radius: 3px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    background: var(--ink);
   }
-  .ev-list-item:last-child { border-bottom: none; }
-  .ev-list-item:hover { background: var(--cream); }
-  .ev-list-item__badge {
+  .ev-poster__img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .ev-poster:hover .ev-poster__img { transform: scale(1.03); }
+  .ev-poster__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(13,13,15,0.92) 0%,
+      rgba(13,13,15,0.55) 42%,
+      rgba(13,13,15,0.12) 70%,
+      transparent 100%
+    );
+  }
+  .ev-poster__content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: var(--s5);
+    color: #fff;
+  }
+  .ev-poster__type {
+    display: inline-flex;
+    align-self: flex-start;
+    background: var(--xpn-red);
+    color: #fff;
+    font-size: 0.57rem; font-weight: 800;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 2px;
+  }
+  .ev-poster__bottom {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+  }
+  .ev-poster__date-row {
+    font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+  .ev-poster__artist {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #fff;
+    margin: 0;
+  }
+  .ev-poster__venue {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.62);
+    line-height: 1.35;
+  }
+  .ev-poster__cta {
+    display: inline-flex;
+    align-self: flex-start;
+    background: #fff;
+    color: var(--ink);
+    padding: 0.62em 1.4em;
+    border-radius: 2px;
+    font-size: 0.65rem; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-top: var(--s2);
+    transition: background 0.2s, color 0.2s;
+  }
+  .ev-poster:hover .ev-poster__cta { background: var(--xpn-red); color: #fff; }
+
+  /* Date-grouped agenda */
+  .ev-agenda { display: flex; flex-direction: column; }
+  .ev-agenda__group {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 0 var(--s4);
+    padding: var(--s4) 0;
+    border-top: 1px solid var(--ink-faint);
+  }
+  .ev-agenda__group:first-child { border-top: 2px solid var(--ink); }
+  .ev-agenda__day {
+    padding-top: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .ev-agenda__dow {
+    font-size: 0.6rem; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--xpn-red);
+  }
+  .ev-agenda__date {
+    font-size: 1.05rem; font-weight: 800;
+    color: var(--ink); letter-spacing: -0.01em;
+  }
+  .ev-agenda__items { display: flex; flex-direction: column; gap: 0; }
+  .ev-agenda__item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 9px 10px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.12s;
+  }
+  .ev-agenda__item:hover { background: var(--cream-dark); }
+  .ev-agenda__badge {
     display: inline-flex;
     align-items: center;
     gap: 3px;
-    background: var(--xpn-red);
-    color: #fff;
-    font-size: 0.53rem; font-weight: 800;
+    align-self: flex-start;
+    background: var(--xpn-red); color: #fff;
+    font-size: 0.5rem; font-weight: 800;
     letter-spacing: 0.12em; text-transform: uppercase;
-    padding: 2px 7px 2px 5px;
-    border-radius: 2px;
+    padding: 2px 7px; border-radius: 2px;
     margin-bottom: 2px;
-    width: fit-content;
   }
-  .ev-list-item__date {
-    font-size: 0.7rem; font-weight: 700;
-    color: var(--xpn-red); letter-spacing: 0.12em; text-transform: uppercase;
-  }
-  .ev-list-item__title {
-    font-size: 1.15rem; font-weight: 800;
+  .ev-agenda__artist {
+    font-size: 0.98rem; font-weight: 700;
     color: var(--ink); line-height: 1.25;
+    transition: color 0.12s;
   }
-  .ev-list-item:hover .ev-list-item__title { color: var(--ink-medium); }
-  .ev-list-item__time {
-    font-size: 0.8rem; color: var(--ink-muted);
+  .ev-agenda__item:hover .ev-agenda__artist { color: var(--xpn-red); }
+  .ev-agenda__venue { font-size: 0.72rem; color: var(--ink-muted); }
+  .ev-agenda__footer {
+    padding: var(--s4) 10px 0;
+    border-top: 1px solid var(--ink-faint);
+    margin-top: var(--s1);
   }
+  .ev-agenda__more-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--xpn-red); text-decoration: none;
+    transition: gap 0.2s;
+  }
+  .ev-agenda__more-link:hover { gap: 10px; }
+  .ev-agenda__more-link svg { width: 14px; height: 14px; transition: transform 0.2s; }
+  .ev-agenda__more-link:hover svg { transform: translateX(3px); }
 
   /* Scroll hint — mobile carousel affordance (hidden on desktop) */
   .scroll-hint { display: none; }
@@ -639,7 +687,7 @@
     .ts-featured__img { padding: var(--s3); }
     .ts-cards { grid-template-columns: 1fr 1fr; }
     .video-layout { grid-template-columns: 1fr 280px; }
-    .events-strip { grid-template-columns: 1fr 1fr; }
+    .ev-layout { grid-template-columns: 1fr 1.2fr; }
   }
 
   /* ── Mobile ── */
@@ -720,11 +768,11 @@
     /* ──────────────────────────────────────────
        EVENTS
     ────────────────────────────────────────── */
-    .events-section { padding: var(--s3) 0 var(--s5); }
+    .events-section { padding: var(--s3) 0 var(--s6); }
     .events-section .sec-head { flex-direction: column; align-items: flex-start; gap: var(--s3); }
-    .events-strip { grid-template-columns: 1fr; gap: var(--s2); }
-    .ev-tile--featured .ev-tile__body { gap: 10px; }
-    .ev-list-item { padding: 14px 16px; }
+    .ev-layout { grid-template-columns: 1fr; gap: var(--s5); }
+    .ev-poster { aspect-ratio: 16 / 9; }
+    .ev-agenda__group { grid-template-columns: 56px 1fr; gap: 0 var(--s3); }
 
     /* ──────────────────────────────────────────
        WATCH
@@ -779,7 +827,6 @@
   @media (max-width: 390px) {
     .ts-card { flex: 0 0 260px; }
     .ts-featured__headline { font-size: 1.35rem; }
-    .ev-list-item { grid-template-columns: 70px 1fr; }
   }
 </style>
 </head>
@@ -906,97 +953,104 @@
   <div class="container">
     <div class="sec-head">
       <h2 class="sec-head__title">Upcoming Events</h2>
-      <a href="#" class="sec-head__link">
+      <a href="/concert-calendar/" class="ev-cal-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         View Full Calendar
       </a>
     </div>
 
-    <div class="events-strip">
+    <div class="ev-layout">
 
-      <!-- Featured event: Free at Noon with poster image -->
-      <article class="ev-tile--featured">
-        <div class="ev-tile__thumb">
-          <img src="https://cdn.evbuc.com/images/1178567770/1097053199463/1/original.20260226-232024" alt="Bar Dust Free at Noon at World Cafe Live" loading="lazy">
-        </div>
-        <div class="ev-tile__body">
-          <div class="ev-tile__info">
-            <div class="ev-tile__type">WXPN Free At Noon</div>
-            <h3 class="ev-tile__artist">Bar Dust</h3>
-            <div class="ev-tile__time">March 06 &middot; The Music Hall at World Cafe Live</div>
+      <!-- Featured event: poster-style card -->
+      <a href="https://www.eventbrite.com/e/wxpn-free-at-noon-with-bar-dust-tickets-1980654195015"
+         class="ev-poster"
+         target="_blank" rel="noopener"
+         aria-label="WXPN Free At Noon with Bar Dust – March 6 at World Cafe Live (opens in new window)">
+        <img src="https://cdn.evbuc.com/images/1178567770/1097053199463/1/original.20260226-232024"
+             alt="" class="ev-poster__img" loading="lazy">
+        <div class="ev-poster__overlay" aria-hidden="true"></div>
+        <div class="ev-poster__content">
+          <span class="ev-poster__type">WXPN Free At Noon</span>
+          <div class="ev-poster__bottom">
+            <div class="ev-poster__date-row" aria-hidden="true">MAR 6</div>
+            <h3 class="ev-poster__artist">Bar Dust</h3>
+            <p class="ev-poster__venue">The Music Hall at World Cafe Live</p>
+            <span class="ev-poster__cta" aria-hidden="true">RSVP Free</span>
           </div>
-          <a href="https://www.eventbrite.com/e/wxpn-free-at-noon-with-bar-dust-tickets-1980654195015" class="ev-tile__cta" target="_blank" rel="noopener" aria-label="RSVP for Bar Dust – WXPN Free At Noon (opens in new window)">RSVP</a>
         </div>
-        <div class="ev-tile__date-badge" aria-hidden="true">MAR 6</div>
-      </article>
+      </a>
 
-      <!-- Sidebar: text-only upcoming events -->
-      <div class="ev-sidebar">
+      <!-- Upcoming events: date-grouped agenda -->
+      <div class="ev-agenda">
 
-        <a href="#" class="ev-list-item">
-          <div class="ev-list-item__badge">&#9733; XPN Welcomes</div>
-          <div class="ev-list-item__date">Apr 01 &middot; Wed</div>
-          <div class="ev-list-item__title">JOSEPH</div>
-          <div class="ev-list-item__time">Ardmore Music Hall &middot; 21+ &middot; Philadelphia Area</div>
-        </a>
+        <div class="ev-agenda__group">
+          <div class="ev-agenda__day" aria-hidden="true">
+            <span class="ev-agenda__dow">Wed</span>
+            <span class="ev-agenda__date">Apr 1</span>
+          </div>
+          <div class="ev-agenda__items">
+            <a href="#" class="ev-agenda__item">
+              <span class="ev-agenda__badge">&#9733; XPN Welcomes</span>
+              <span class="ev-agenda__artist">JOSEPH</span>
+              <span class="ev-agenda__venue">Ardmore Music Hall &middot; 21+</span>
+            </a>
+            <a href="#" class="ev-agenda__item">
+              <span class="ev-agenda__artist">Cory Branan</span>
+              <span class="ev-agenda__venue">MilkBoy &middot; 21+</span>
+            </a>
+            <a href="#" class="ev-agenda__item">
+              <span class="ev-agenda__badge">&#9733; XPN Welcomes</span>
+              <span class="ev-agenda__artist">Perfume Genius</span>
+              <span class="ev-agenda__venue">The Sanctuary @ First Unitarian Church &middot; All Ages</span>
+            </a>
+            <a href="#" class="ev-agenda__item">
+              <span class="ev-agenda__artist">kwn</span>
+              <span class="ev-agenda__venue">Theatre of Living Arts &middot; All Ages</span>
+            </a>
+            <a href="#" class="ev-agenda__item">
+              <span class="ev-agenda__artist">Thursday / Chris Conley</span>
+              <span class="ev-agenda__venue">Union Transfer &middot; All Ages</span>
+            </a>
+            <a href="#" class="ev-agenda__item">
+              <span class="ev-agenda__artist">Carlos Ni&#241;o + Friends</span>
+              <span class="ev-agenda__venue">Solar Myth &middot; 21+</span>
+            </a>
+          </div>
+        </div>
 
-        <a href="#" class="ev-list-item">
-          <div class="ev-list-item__date">Apr 01 &middot; Wed</div>
-          <div class="ev-list-item__title">Cory Branan</div>
-          <div class="ev-list-item__time">MilkBoy &middot; 21+ &middot; Philadelphia Area</div>
-        </a>
+        <div class="ev-agenda__group">
+          <div class="ev-agenda__day" aria-hidden="true">
+            <span class="ev-agenda__dow">Thu</span>
+            <span class="ev-agenda__date">Apr 2</span>
+          </div>
+          <div class="ev-agenda__items">
+            <a href="#" class="ev-agenda__item">
+              <span class="ev-agenda__artist">Divorce / MacBuck</span>
+              <span class="ev-agenda__venue">Milkboy &middot; 21+</span>
+            </a>
+            <a href="#" class="ev-agenda__item">
+              <span class="ev-agenda__artist">Dirty Three</span>
+              <span class="ev-agenda__venue">Underground Arts &middot; 21+</span>
+            </a>
+            <a href="#" class="ev-agenda__item">
+              <span class="ev-agenda__artist">Hudson Freeman</span>
+              <span class="ev-agenda__venue">Ukie Club &middot; All Ages</span>
+            </a>
+            <a href="#" class="ev-agenda__item">
+              <span class="ev-agenda__artist">Sheer Terror / School Drugs</span>
+              <span class="ev-agenda__venue">Kung Fu Necktie &middot; 21+</span>
+            </a>
+          </div>
+        </div>
 
-        <a href="#" class="ev-list-item">
-          <div class="ev-list-item__badge">&#9733; XPN Welcomes</div>
-          <div class="ev-list-item__date">Apr 01 &middot; Wed</div>
-          <div class="ev-list-item__title">Perfume Genius</div>
-          <div class="ev-list-item__time">The Sanctuary @ The First Unitarian Church &middot; AA &middot; Philadelphia Area</div>
-        </a>
-
-        <a href="#" class="ev-list-item">
-          <div class="ev-list-item__date">Apr 01 &middot; Wed</div>
-          <div class="ev-list-item__title">kwn</div>
-          <div class="ev-list-item__time">Theatre of Living Arts &middot; AA &middot; Philadelphia Area</div>
-        </a>
-
-        <a href="#" class="ev-list-item">
-          <div class="ev-list-item__date">Apr 01 &middot; Wed</div>
-          <div class="ev-list-item__title">Thursday / Chris Conley</div>
-          <div class="ev-list-item__time">Union Transfer &middot; AA &middot; Philadelphia Area</div>
-        </a>
-
-        <a href="#" class="ev-list-item">
-          <div class="ev-list-item__date">Apr 01 &middot; Wed</div>
-          <div class="ev-list-item__title">Carlos Ni&#241;o + Friends</div>
-          <div class="ev-list-item__time">Solar Myth &middot; 21+ &middot; Philadelphia Area</div>
-        </a>
-
-        <a href="#" class="ev-list-item">
-          <div class="ev-list-item__date">Apr 02 &middot; Thu</div>
-          <div class="ev-list-item__title">Divorce / MacBuck</div>
-          <div class="ev-list-item__time">Milkboy &middot; 21+ &middot; Philadelphia Area</div>
-        </a>
-
-        <a href="#" class="ev-list-item">
-          <div class="ev-list-item__date">Apr 02 &middot; Thu</div>
-          <div class="ev-list-item__title">Dirty Three</div>
-          <div class="ev-list-item__time">Underground Arts &middot; 21+ &middot; Philadelphia Area</div>
-        </a>
-
-        <a href="#" class="ev-list-item">
-          <div class="ev-list-item__date">Apr 02 &middot; Thu</div>
-          <div class="ev-list-item__title">Hudson Freeman</div>
-          <div class="ev-list-item__time">Ukie Club &middot; AA &middot; Philadelphia Area</div>
-        </a>
-
-        <a href="#" class="ev-list-item">
-          <div class="ev-list-item__date">Apr 02 &middot; Thu</div>
-          <div class="ev-list-item__title">Sheer Terror / School Drugs</div>
-          <div class="ev-list-item__time">Kung Fu Necktie &middot; 21+ &middot; Philadelphia Area</div>
-        </a>
+        <div class="ev-agenda__footer">
+          <a href="/concert-calendar/" class="ev-agenda__more-link">
+            View full concert calendar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
 
       </div>
-
     </div>
 
   </div>
