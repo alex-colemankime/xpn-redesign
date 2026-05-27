@@ -586,3 +586,19 @@ button:focus-visible,
 @media (max-width: 390px) {
   .container { padding: 0 var(--s3); }
 }
+
+/* ── Eyebrow label ── */
+.eyebrow { font-size:0.65rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--xpn-red); display:block; }
+.eyebrow--sm { font-size:0.6rem; letter-spacing:0.1em; font-weight:600; display:inline-block; }
+.eyebrow--inline { display:inline-block; }
+
+/* ── Buttons ── */
+.btn { display:inline-flex; align-items:center; gap:var(--s2); font-weight:700; font-size:0.9rem; letter-spacing:0.02em; padding:0.9em 2.2em; border-radius:4px; transition:background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s; white-space:nowrap; font-family:var(--font); }
+.btn--primary { background:var(--xpn-red); color:#fff; border:2px solid var(--xpn-red); }
+.btn--primary:hover { background:var(--xpn-red-hover); border-color:var(--xpn-red-hover); transform:translateY(-1px); }
+.btn--primary:active { transform:translateY(0); }
+.btn--secondary { background:transparent; color:var(--ink-medium); border:2px solid var(--ink-faint); }
+.btn--secondary:hover { border-color:var(--ink-medium); background:var(--cream-dark); }
+.btn--outline { background:transparent; border:2px solid var(--ink); color:var(--ink); }
+.btn--outline:hover { background:var(--ink); color:var(--cream); }
+.btn--outline:disabled { opacity:0.45; cursor:default; }
