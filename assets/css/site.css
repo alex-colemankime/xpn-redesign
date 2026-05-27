@@ -587,6 +587,14 @@ button:focus-visible,
   .container { padding: 0 var(--s3); }
 }
 
+/* ── Breadcrumb ── */
+.page-breadcrumb { background: var(--cream-dark); border-bottom: 1px solid var(--cream-deep); padding: var(--s2) 0; }
+.page-breadcrumb__inner { display: flex; align-items: center; gap: var(--s2); font-size: 0.72rem; color: var(--ink-muted); }
+.page-breadcrumb__inner a { color: var(--ink-light); font-weight: 500; text-decoration: none; }
+.page-breadcrumb__inner a:hover { color: var(--xpn-red); }
+.page-breadcrumb__sep { color: var(--ink-faint); }
+.page-breadcrumb__current { color: var(--ink); font-weight: 600; }
+
 /* ── Eyebrow label ── */
 .eyebrow { font-size:0.65rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--xpn-red); display:block; }
 .eyebrow--sm { font-size:0.6rem; letter-spacing:0.1em; font-weight:600; display:inline-block; }

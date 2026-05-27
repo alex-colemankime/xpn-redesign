@@ -50,14 +50,14 @@
   .mem-hero__sub { font-size: 1.05rem; color: var(--ink-light); line-height: 1.65; margin-bottom: var(--s5); max-width: 42ch; }
   .mem-hero__cta { display: flex; gap: var(--s3); flex-wrap: wrap; align-items: center; }
   .mem-hero__cta .btn--secondary { font-size: 0.9rem; }
-  .mem-hero__photo { aspect-ratio: 4 / 3; background: linear-gradient(145deg, #EDE5D7 0%, #D8CFBE 100%); border-radius: 3px; display: flex; align-items: flex-end; justify-content: flex-start; color: rgba(13,13,15,0.3); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; position: relative; overflow: hidden; padding: var(--s4); }
+  .mem-hero__photo { aspect-ratio: 4 / 3; background: var(--cream-deep); border-radius: 3px; display: flex; align-items: flex-end; justify-content: flex-start; color: rgba(13,13,15,0.3); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; position: relative; overflow: hidden; padding: var(--s4); }
   .mem-hero__photo::after { content: ''; position: absolute; top: var(--s4); left: var(--s4); width: 18px; height: 18px; border-top: 1.5px solid rgba(13,13,15,0.2); border-left: 1.5px solid rgba(13,13,15,0.2); }
   .mem-hero__photo span { position: relative; z-index: 1; }
 
   /* ────────────────────────────────────────────────────────
      TESTIMONIALS
   ──────────────────────────────────────────────────────── */
-  .testimonials { padding: var(--s7) 0; background: #EAE0CC; border-top: 1px solid rgba(0,0,0,0.06); border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .testimonials { padding: var(--s7) 0; background: var(--cream-deep); border-top: 1px solid rgba(0,0,0,0.05); border-bottom: 1px solid rgba(0,0,0,0.05); }
   .testimonials__band { min-height: 180px; padding: var(--s6) var(--s7); display: grid; align-content: center; }
   .testimonials .eyebrow { display: block; text-align: center; margin-bottom: var(--s4); color: rgba(0,0,0,0.45); }
   .carousel { position: relative; max-width: 880px; margin: 0 auto; text-align: center; }
@@ -141,7 +141,7 @@
   .vinyl-club { padding: var(--s7) 0; border-bottom: 1px solid var(--cream-deep); }
   .vinyl-card { position: relative; overflow: hidden; background: #ffffff; border: 1px solid var(--cream-deep); box-shadow: 0 10px 24px rgba(13,13,15,0.04); border-radius: 4px; padding: var(--s5) var(--s6); isolation: isolate; }
   .vinyl-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 85% 50%, rgba(213,78,27,0.06), transparent 60%); pointer-events: none; }
-  .vinyl-card::after { content: 'Background image placeholder'; position: absolute; top: var(--s5); right: var(--s6); bottom: var(--s5); width: min(320px, 34%); display: grid; place-items: center; padding: var(--s4); border: 1px dashed var(--cream-deep); border-radius: 4px; background: var(--cream); color: var(--ink-muted); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; line-height: 1.6; text-align: center; text-transform: uppercase; pointer-events: none; }
+  .vinyl-card::after { content: 'Background image placeholder'; position: absolute; top: var(--s5); right: var(--s6); bottom: var(--s5); width: min(320px, 34%); display: grid; place-items: center; padding: var(--s4); border: 1px dashed var(--cream-deep); border-radius: 4px; background: var(--cream-deep); color: var(--ink-muted); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; line-height: 1.6; text-align: center; text-transform: uppercase; pointer-events: none; }
   .vinyl-card__content { position: relative; z-index: 2; max-width: min(560px, calc(100% - 380px)); color: var(--ink); }
   .vinyl-card__eyebrow { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--xpn-red); margin-bottom: var(--s3); }
   .vinyl-card h2 { font-size: clamp(2rem, 3.2vw, 2.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: var(--s3); }
@@ -198,11 +198,16 @@
   .faq-answer { padding: 0 0 var(--s4); color: var(--ink-light); font-size: 0.95rem; line-height: 1.65; max-width: 68ch; }
 
   /* ────────────────────────────────────────────────────────
-     CROSS-LINK
+     GOING DEEPER — two-column CTA
   ──────────────────────────────────────────────────────── */
-  .cross-link-wrap { padding: var(--s8) 0; text-align: center; background: var(--cream-dark); border-top: 1px solid var(--cream-deep); border-bottom: 1px solid var(--cream-deep); }
-  .cross-link-wrap p { font-size: clamp(1.1rem, 1.8vw, 1.4rem); font-weight: 400; color: var(--ink-light); line-height: 1.65; letter-spacing: 0; max-width: 52ch; margin: 0 auto var(--s5); }
-  .cross-link-wrap h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; letter-spacing: -0.03em; color: var(--ink); margin-bottom: var(--s4); }
+  .going-deeper { padding: var(--s7) 0; background: var(--cream-dark); border-top: 1px solid var(--cream-deep); border-bottom: 1px solid var(--cream-deep); }
+  .going-deeper__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7); align-items: center; }
+  .going-deeper__photo { aspect-ratio: 4 / 3; background: var(--cream-deep); border-radius: 3px; display: flex; align-items: flex-end; justify-content: flex-start; color: rgba(13,13,15,0.3); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; position: relative; overflow: hidden; padding: var(--s4); }
+  .going-deeper__photo::after { content: ''; position: absolute; top: var(--s4); left: var(--s4); width: 18px; height: 18px; border-top: 1.5px solid rgba(13,13,15,0.2); border-left: 1.5px solid rgba(13,13,15,0.2); }
+  .going-deeper__photo span { position: relative; z-index: 1; }
+  .going-deeper__content .eyebrow { margin-bottom: var(--s3); }
+  .going-deeper__content h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--ink); margin-bottom: var(--s4); }
+  .going-deeper__content p { font-size: 1rem; color: var(--ink-light); line-height: 1.65; max-width: 44ch; margin-bottom: var(--s5); }
 
   /* ────────────────────────────────────────────────────────
      WAYS TO GIVE
@@ -217,10 +222,12 @@
   .ways > summary:hover h3 { color: var(--xpn-red); }
   .ways > summary::after { content: "+"; font-size: 1.6rem; line-height: 1; color: var(--xpn-red); font-weight: 400; transition: transform 0.2s; flex-shrink: 0; }
   .ways[open] > summary::after { transform: rotate(45deg); }
-  .ways-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--s8); list-style: none; padding: 0 0 var(--s5); margin: 0; }
-  .ways-list li { padding: var(--s3) 0; border-top: 1px solid var(--cream-deep); font-size: 0.92rem; color: var(--ink-medium); line-height: 1.5; }
-  .ways-list strong { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--xpn-red); margin-bottom: 4px; }
-  .ways-list a { color: var(--xpn-red); text-decoration: underline; text-underline-offset: 2px; }
+  .ways-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; padding-bottom: var(--s5); }
+  .way-item { padding: var(--s5) var(--s5) var(--s5) 0; border-top: 1px solid var(--cream-deep); }
+  .way-item:nth-child(even) { padding-left: var(--s5); border-left: 1px solid var(--cream-deep); }
+  .way-item__eyebrow { display: block; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--xpn-red); margin-bottom: var(--s2); }
+  .way-item h3 { font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: var(--s2); letter-spacing: -0.01em; }
+  .way-item p { font-size: 0.88rem; color: var(--ink-light); line-height: 1.6; margin: 0; }
 
   /* ────────────────────────────────────────────────────────
      RESPONSIVE
@@ -297,12 +304,17 @@
     .faq { padding: var(--s5) 0; }
     .faq__head h2 { font-size: 1.75rem; }
     .faq-item > summary { font-size: 0.95rem; }
-    .cross-link-wrap { padding: var(--s5) 0 var(--s4); }
-    .cross-link-wrap p { font-size: 1.05rem; margin-bottom: var(--s4); }
-    .cross-link-wrap .btn { display: block; width: 100%; text-align: center; justify-content: center; }
+    .going-deeper { padding: var(--s5) 0; }
+    .going-deeper__grid { grid-template-columns: 1fr; gap: var(--s5); }
+    .going-deeper__photo { aspect-ratio: 16 / 9; }
+    .going-deeper__content h2 { font-size: 1.75rem; }
+    .going-deeper__content .btn { display: block; width: 100%; text-align: center; justify-content: center; }
     .ways-wrap { padding: 0 0 var(--s5); }
     .ways > summary h3 { font-size: 1.15rem; }
     .ways__header p { font-size: 0.85rem; }
+    .ways-grid { grid-template-columns: 1fr; }
+    .way-item { padding: var(--s4) 0; }
+    .way-item:nth-child(even) { padding-left: 0; border-left: none; border-top: 1px solid var(--cream-deep); }
   }
 
   @media (max-width: 390px) {
@@ -828,11 +840,22 @@
   <!-- ═══════════════════════════════════════════════════════════
        CROSS-LINK
        ═══════════════════════════════════════════════════════════ -->
-  <section class="cross-link-wrap">
+  <!-- ═══════════════════════════════════════════════════════════
+       GOING DEEPER — two-column CTA
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="going-deeper">
     <div class="container container--wide">
-      <h2>Going deeper?</h2>
-      <p>Leadership Circle, Musicians On Call, planned giving, employer matching, and more ways to support WXPN.</p>
-      <a href="contribution/" class="btn btn--primary btn--primary--lg">Make a Contribution</a>
+      <div class="going-deeper__grid">
+        <div class="going-deeper__photo" aria-label="Photo placeholder">
+          <span>Photo Placeholder</span>
+        </div>
+        <div class="going-deeper__content">
+          <span class="eyebrow">Going Deeper</span>
+          <h2>Leadership Circle &amp; More</h2>
+          <p>Leadership Circle, Musicians On Call, planned giving, employer matching, and other ways to make a lasting impact at WXPN.</p>
+          <a href="contribution/" class="btn btn--primary">Make a Contribution &rarr;</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -845,18 +868,51 @@
         <summary>
           <div class="ways__header">
             <h3>Ways to Give</h3>
-            <p>Every giving method in one place &mdash; check, DAF, IRA, stock, vehicle, international, and more.</p>
+            <p>Every giving method in one place &mdash; check, DAF, IRA, planned giving, and more.</p>
           </div>
         </summary>
-        <ul class="ways-list">
-          <li><strong>Online</strong>Through the donation form.</li>
-          <li><strong>By Check</strong>Payable to WXPN, Attn Kate Brett, 3025 Walnut St., Philadelphia PA 19104.</li>
-          <li><strong>Donor-Advised Fund</strong>UPenn EIN 23-1352685. Note designation WXPN and notify us.</li>
-          <li><strong>IRA / QCD</strong>Available at 70&frac12;, satisfies RMDs up to $100,000/year.</li>
-          <li><strong>Stock or Wire</strong>Contact Kate Brett.</li>
-          <li><strong>Vehicle Donation</strong>Through wxpn.careasy.org.</li>
-          <li><strong>International</strong>Via the University of Pennsylvania Giving Portal.</li>
-        </ul>
+        <div class="ways-grid">
+          <div class="way-item">
+            <span class="way-item__eyebrow">Bequest Intention</span>
+            <h3>Leave a Legacy</h3>
+            <p>Leave a gift to WXPN in your will or estate plan &mdash; a lasting way to secure the future of music discovery for the next generation.</p>
+          </div>
+          <div class="way-item">
+            <span class="way-item__eyebrow">Life Insurance</span>
+            <h3>Name WXPN as Beneficiary</h3>
+            <p>Naming WXPN as a beneficiary of a life insurance policy or annuity is a simple way to make a meaningful future gift that costs nothing today.</p>
+          </div>
+          <div class="way-item">
+            <span class="way-item__eyebrow">IRA / QCD</span>
+            <h3>Qualified Charitable Distribution</h3>
+            <p>If you&rsquo;re 70&frac12; or older, direct a QCD from your IRA to WXPN &mdash; it satisfies your RMD and isn&rsquo;t counted as taxable income. Up to $100,000/year.</p>
+          </div>
+          <div class="way-item">
+            <span class="way-item__eyebrow">Charitable Gift Annuity</span>
+            <h3>Give &amp; Receive Fixed Income</h3>
+            <p>Contribute cash or securities and receive fixed income for life. After your lifetime, remaining funds support WXPN.</p>
+          </div>
+          <div class="way-item">
+            <span class="way-item__eyebrow">Employer Matching</span>
+            <h3>Double Your Impact</h3>
+            <p>Many employers match charitable contributions. Check with your HR department &mdash; doubling your gift costs you nothing extra.</p>
+          </div>
+          <div class="way-item">
+            <span class="way-item__eyebrow">Donor-Advised Fund</span>
+            <h3>Give from Your DAF</h3>
+            <p>UPenn EIN 23-1352685. Note the designation as WXPN and notify us so we can acknowledge your gift.</p>
+          </div>
+          <div class="way-item">
+            <span class="way-item__eyebrow">Trusts &amp; Real Estate</span>
+            <h3>Appreciate Your Assets</h3>
+            <p>Gifts of appreciated property, charitable remainder trusts, or real estate can provide tax benefits and lasting support for WXPN.</p>
+          </div>
+          <div class="way-item">
+            <span class="way-item__eyebrow">By Check</span>
+            <h3>Give by Mail</h3>
+            <p>Make your check payable to WXPN and send to:<br><strong>WXPN &middot; Attn Kate Brett &middot; PO Box 8419 &middot; Philadelphia, PA 19101-8419</strong></p>
+          </div>
+        </div>
       </details>
     </div>
   </section>

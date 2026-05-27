@@ -2,8 +2,8 @@
   'use strict';
 
   const header = document.querySelector('.site-header');
-  const COLLAPSE_AT = 80;
-  const EXPAND_AT = 50;
+  const COLLAPSE_AT = 300;
+  const EXPAND_AT = 120;
   let collapsed = false;
   let ticking = false;
 
