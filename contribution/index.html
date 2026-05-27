@@ -21,7 +21,7 @@
   .contrib-hero h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.035em; color: var(--ink); margin-bottom: var(--s4); }
   .contrib-hero__sub { font-size: 1.1rem; color: var(--ink-light); line-height: 1.65; max-width: 54ch; margin-bottom: var(--s5); }
   .contrib-hero__cta { display: flex; gap: var(--s3); flex-wrap: wrap; }
-  .contrib-hero__photo { aspect-ratio: 4 / 3; background: linear-gradient(145deg, #EDE5D7 0%, #D8CFBE 100%); border-radius: 3px; display: flex; align-items: flex-end; justify-content: flex-start; color: rgba(13,13,15,0.3); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; position: relative; overflow: hidden; padding: var(--s4); }
+  .contrib-hero__photo { aspect-ratio: 4 / 3; background: var(--cream-deep); border-radius: 3px; display: flex; align-items: flex-end; justify-content: flex-start; color: rgba(13,13,15,0.3); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; position: relative; overflow: hidden; padding: var(--s4); }
   .contrib-hero__photo::after { content: ''; position: absolute; top: var(--s4); left: var(--s4); width: 18px; height: 18px; border-top: 1.5px solid rgba(13,13,15,0.2); border-left: 1.5px solid rgba(13,13,15,0.2); }
   .contrib-hero__photo span { position: relative; z-index: 1; }
 
@@ -82,22 +82,26 @@
   /* ────────────────────────────────────────────────────────
      MUSICIANS ON CALL — dark full-width callout
   ──────────────────────────────────────────────────────── */
-  .moc-band { background: var(--ink-medium); padding: var(--s6) 0; color: #fff; }
+  .moc-band { background: var(--cream-dark); padding: var(--s6) 0; border-top: 3px solid var(--xpn-red); border-bottom: 1px solid var(--cream-deep); }
   .moc-band__inner { display: grid; grid-template-columns: 1fr auto; gap: var(--s7); align-items: center; max-width: 900px; }
-  .moc-band__eyebrow { display: block; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: var(--s3); }
-  .moc-band h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: #fff; margin-bottom: var(--s3); }
-  .moc-band p { font-size: 0.95rem; color: rgba(255,255,255,0.72); line-height: 1.6; max-width: 52ch; }
-  .moc-band__btn { display: inline-flex; align-items: center; gap: var(--s2); font-size: 0.88rem; font-weight: 700; padding: 0.85em 2em; border-radius: 4px; background: transparent; color: rgba(255,255,255,0.85); border: 1.5px solid rgba(255,255,255,0.3); text-decoration: none; white-space: nowrap; transition: background 0.15s, border-color 0.15s; flex-shrink: 0; }
-  .moc-band__btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); color: #fff; }
+  .moc-band__eyebrow { display: block; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--xpn-red); margin-bottom: var(--s3); }
+  .moc-band h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--ink); margin-bottom: var(--s3); }
+  .moc-band p { font-size: 0.95rem; color: var(--ink-light); line-height: 1.6; max-width: 52ch; }
+  .moc-band__btn { display: inline-flex; align-items: center; gap: var(--s2); font-size: 0.88rem; font-weight: 700; padding: 0.85em 2em; border-radius: 4px; background: transparent; color: var(--xpn-red); border: 1.5px solid var(--xpn-red); text-decoration: none; white-space: nowrap; transition: background 0.15s, color 0.15s; flex-shrink: 0; }
+  .moc-band__btn:hover { background: var(--xpn-red); color: #fff; }
 
   /* ────────────────────────────────────────────────────────
-     CONTACT
+     CONTACT — two-column
   ──────────────────────────────────────────────────────── */
-  .contrib-contact { padding: var(--s7) 0 var(--s6); text-align: center; }
-  .contrib-contact .eyebrow { margin-bottom: var(--s4); }
-  .contrib-contact h2 { font-size: clamp(1.6rem, 2.5vw, 2rem); font-weight: 800; letter-spacing: -0.025em; color: var(--ink); margin-bottom: var(--s3); }
-  .contrib-contact > .container > p { font-size: 0.95rem; color: var(--ink-light); line-height: 1.6; max-width: 46ch; margin: 0 auto var(--s6); }
-  .contact-grid { display: flex; justify-content: center; gap: var(--s7); flex-wrap: wrap; list-style: none; padding: 0; margin: 0 0 var(--s6); }
+  .contrib-contact { padding: var(--s7) 0 var(--s6); }
+  .contrib-contact__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7); align-items: center; }
+  .contrib-contact__photo { aspect-ratio: 4 / 3; background: var(--cream-deep); border-radius: 3px; display: flex; align-items: flex-end; justify-content: flex-start; color: rgba(13,13,15,0.3); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; position: relative; overflow: hidden; padding: var(--s4); }
+  .contrib-contact__photo::after { content: ''; position: absolute; top: var(--s4); left: var(--s4); width: 18px; height: 18px; border-top: 1.5px solid rgba(13,13,15,0.2); border-left: 1.5px solid rgba(13,13,15,0.2); }
+  .contrib-contact__photo span { position: relative; z-index: 1; }
+  .contrib-contact__content .eyebrow { margin-bottom: var(--s3); }
+  .contrib-contact__content h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 800; letter-spacing: -0.025em; color: var(--ink); margin-bottom: var(--s3); line-height: 1.1; }
+  .contrib-contact__content > p { font-size: 0.95rem; color: var(--ink-light); line-height: 1.6; max-width: 46ch; margin-bottom: var(--s5); }
+  .contact-grid { display: flex; flex-direction: column; gap: var(--s4); list-style: none; padding: 0; margin: 0 0 var(--s5); }
   .contact-grid li { display: flex; flex-direction: column; gap: 3px; }
   .contact-grid small { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-muted); }
   .contact-grid a, .contact-grid span { font-size: 1rem; font-weight: 600; color: var(--xpn-red); text-decoration: none; }
@@ -126,6 +130,8 @@
     .way-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--cream-deep); }
     .way-item:last-child { border-bottom: none; }
     .moc-band__inner { grid-template-columns: 1fr; gap: var(--s4); }
+    .contrib-contact__grid { grid-template-columns: 1fr; gap: var(--s5); }
+    .contrib-contact__photo { aspect-ratio: 16 / 9; }
   }
 
   @media (max-width: 640px) {
@@ -135,7 +141,6 @@
     .contrib-hero__cta .btn { justify-content: center; width: 100%; }
     .section-header { flex-direction: column; gap: var(--s2); }
     .section-header__sub { text-align: left; }
-    .contact-grid { flex-direction: column; gap: var(--s4); align-items: center; }
   }
 </style>
 </head>
@@ -441,25 +446,32 @@
 
   <!-- ═════════════ CONTACT ═════════════ -->
   <section class="contrib-contact">
-    <div class="container">
-      <span class="eyebrow">Get in Touch</span>
-      <h2>Questions about giving?</h2>
-      <p>Our team is happy to help with any contribution method, planned giving question, or special arrangement.</p>
-      <ul class="contact-grid">
-        <li>
-          <small>Email</small>
-          <a href="mailto:memberservices@xpn.org">memberservices@xpn.org</a>
-        </li>
-        <li>
-          <small>Phone</small>
-          <a href="tel:+18005659976">1-800-565-9976</a>
-        </li>
-        <li>
-          <small>Hours</small>
-          <span>Mon&ndash;Fri, 9am&ndash;5pm ET</span>
-        </li>
-      </ul>
-      <a href="../membership.html" class="btn btn--secondary">&larr; Back to Membership</a>
+    <div class="container container--wide">
+      <div class="contrib-contact__grid">
+        <div class="contrib-contact__photo" aria-label="Photo placeholder">
+          <span>Photo Placeholder</span>
+        </div>
+        <div class="contrib-contact__content">
+          <span class="eyebrow">Get in Touch</span>
+          <h2>Questions about giving?</h2>
+          <p>Our team is happy to help with any contribution method, planned giving question, or special arrangement.</p>
+          <ul class="contact-grid">
+            <li>
+              <small>Email</small>
+              <a href="mailto:memberservices@xpn.org">memberservices@xpn.org</a>
+            </li>
+            <li>
+              <small>Phone</small>
+              <a href="tel:+18005659976">1-800-565-9976</a>
+            </li>
+            <li>
+              <small>Hours</small>
+              <span>Mon&ndash;Fri, 9am&ndash;5pm ET</span>
+            </li>
+          </ul>
+          <a href="../membership.html" class="btn btn--secondary">&larr; Back to Membership</a>
+        </div>
+      </div>
     </div>
   </section>
 
