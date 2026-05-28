@@ -86,4 +86,36 @@
       toggle.setAttribute('aria-expanded', String(expanded));
     });
   });
+
+  // Leadership Circle — single-select giving tier feeding one consolidated CTA
+  const tierGroup = document.querySelector('.matrix-row--header[role="radiogroup"]');
+  if (tierGroup) {
+    const radios = Array.from(tierGroup.querySelectorAll('[role="radio"]'));
+    const ctaBtn = document.querySelector('.leadership-cta__btn');
+    const ctaText = ctaBtn && ctaBtn.querySelector('.leadership-cta__btn-text');
+    const hint = document.querySelector('.leadership-cta__hint');
+
+    function selectTier(radio) {
+      radios.forEach(r => {
+        const isOn = r === radio;
+        r.setAttribute('aria-checked', String(isOn));
+        r.tabIndex = isOn ? 0 : -1;
+      });
+      if (ctaText && radio.dataset.tier) ctaText.textContent = 'Join as ' + radio.dataset.tier;
+      if (hint) hint.hidden = true;
+    }
+
+    radios.forEach((radio, i) => {
+      radio.addEventListener('click', () => selectTier(radio));
+      radio.addEventListener('keydown', e => {
+        let next = -1;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % radios.length;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i - 1 + radios.length) % radios.length;
+        if (next < 0) return;
+        e.preventDefault();
+        radios[next].focus();
+        selectTier(radios[next]);
+      });
+    });
+  }
 })();
