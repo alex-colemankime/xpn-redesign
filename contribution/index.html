@@ -33,7 +33,9 @@
   .contrib-intro__item { padding: 0 var(--s6) 0 0; border-right: 1px solid var(--cream-deep); }
   .contrib-intro__item:last-child { border-right: none; padding-right: 0; padding-left: var(--s6); }
   .contrib-intro__item:nth-child(2) { padding-left: var(--s6); }
-  .contrib-intro__eyebrow { display: block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--xpn-red); margin-bottom: var(--s3); }
+  .contrib-intro__num { display: block; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; color: var(--ink-faint); margin-bottom: var(--s3); line-height: 1; }
+  .contrib-intro__num::before { content: ''; display: inline-block; width: 20px; height: 1.5px; background: var(--xpn-red); vertical-align: middle; margin-right: 6px; }
+  .contrib-intro__eyebrow { display: block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--xpn-red); margin-bottom: var(--s2); }
   .contrib-intro__item h3 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin-bottom: var(--s2); line-height: 1.2; }
   .contrib-intro__item p { font-size: 0.9rem; color: var(--ink-light); line-height: 1.6; margin-bottom: var(--s3); }
   .contrib-intro__link { font-size: 0.82rem; font-weight: 700; color: var(--xpn-red); display: inline-flex; align-items: center; gap: 5px; text-decoration: none; transition: gap 0.2s; white-space: nowrap; }
@@ -44,27 +46,42 @@
      LEADERSHIP CIRCLE — tier table
   ──────────────────────────────────────────────────────── */
   .leadership { padding: var(--s7) 0; }
-  .section-header { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: var(--s4); margin-bottom: 0; }
+  .section-header { padding-bottom: var(--s4); margin-bottom: 0; }
   .section-header h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 500; letter-spacing: -0.02em; color: var(--ink); }
-  .section-header__sub { font-size: 0.88rem; color: var(--ink-muted); max-width: 44ch; text-align: right; }
+  .section-header__sub { font-size: 0.88rem; color: var(--ink-muted); max-width: 44ch; margin-top: var(--s2); }
+  /* Leadership Circle keeps its inline layout — sub sits to the right of the h2 */
+  .leadership .section-header { display: flex; align-items: baseline; justify-content: space-between; }
+  .leadership .section-header__sub { text-align: right; margin-top: 0; }
 
   .matrix { overflow-x: auto; border-top: 3px solid var(--xpn-red); }
   .matrix-row { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); border-bottom: 1px solid var(--cream-deep); min-width: 780px; }
   .matrix-row.matrix-row--header { align-items: end; padding: var(--s4) 0 var(--s3); }
   .matrix-col { padding: var(--s2) var(--s3); }
   .matrix-col:first-child { padding-left: 0; }
-  .matrix-col--tier { display: flex; flex-direction: column; gap: 4px; text-align: center; }
-  .matrix-col--tier h3 { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); }
+  /* Tier headers double as a single-select giving-level picker */
+  .matrix-col--tier { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; font-family: inherit; background: transparent; border: none; width: 100%; padding: var(--s3); cursor: pointer; transition: background 0.15s, box-shadow 0.15s; }
+  .matrix-col--tier:hover { background: var(--cream-dark); }
+  .matrix-col--tier .tier-name { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); }
   .matrix-col--label { display: flex; align-items: flex-end; padding-bottom: var(--s3); }
   .matrix-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); }
-  .matrix-col--tier .price { font-size: 1rem; font-weight: 800; color: var(--ink); }
+  .matrix-col--tier .price { font-size: 1rem; font-weight: 800; color: var(--ink); transition: color 0.15s; }
   .matrix-col--tier .freq { font-size: 0.62rem; color: var(--ink-muted); letter-spacing: 0.06em; text-transform: uppercase; }
-  .matrix-col--tier .tier-btn { display: inline-block; margin-top: var(--s2); padding: 7px 12px; background: transparent; color: var(--xpn-red); font-size: 0.72rem; font-weight: 700; border: 1.5px solid var(--xpn-red); border-radius: 3px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: all 0.15s; white-space: nowrap; }
-  .matrix-col--tier .tier-btn:hover { background: var(--xpn-red); color: #fff; }
+  .tier-dot { width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid var(--ink-faint); margin-top: 6px; transition: border-color 0.15s, background 0.15s, box-shadow 0.15s; }
+  .matrix-col--tier:hover .tier-dot { border-color: var(--xpn-red); }
+  .matrix-col--tier[aria-checked="true"] { background: var(--cream-dark); box-shadow: inset 0 -3px 0 var(--xpn-red); }
+  .matrix-col--tier[aria-checked="true"] .tier-name,
+  .matrix-col--tier[aria-checked="true"] .price { color: var(--xpn-red); }
+  .matrix-col--tier[aria-checked="true"] .tier-dot { border-color: var(--xpn-red); background: var(--xpn-red); box-shadow: inset 0 0 0 2px var(--cream); }
   .matrix-row--benefit { align-items: center; }
   .matrix-row--benefit .matrix-col { padding: var(--s3); font-size: 0.85rem; color: var(--ink-light); text-align: center; }
   .matrix-row--benefit .matrix-col:first-child { text-align: left; font-weight: 500; color: var(--ink); font-size: 0.9rem; }
   .matrix-row--benefit .matrix-col.empty { color: var(--ink-faint); font-size: 1rem; }
+
+  /* Single consolidated call to action — replaces the per-tier buttons */
+  .leadership-cta { display: flex; align-items: center; justify-content: space-between; gap: var(--s5); flex-wrap: wrap; margin-top: var(--s5); padding-top: var(--s5); border-top: 1px solid var(--cream-deep); }
+  .leadership-cta__text { font-size: 0.92rem; color: var(--ink-light); line-height: 1.5; max-width: 56ch; margin: 0; }
+  .leadership-cta__hint { color: var(--ink-muted); }
+  .leadership-cta__btn { flex-shrink: 0; }
 
   /* ────────────────────────────────────────────────────────
      WAYS TO GIVE — 2-col grid of method items
@@ -139,8 +156,10 @@
     .contrib-hero h1 { font-size: 2.2rem; }
     .contrib-hero__cta { flex-direction: column; align-items: stretch; }
     .contrib-hero__cta .btn { justify-content: center; width: 100%; }
-    .section-header { flex-direction: column; gap: var(--s2); }
-    .section-header__sub { text-align: left; }
+    .leadership .section-header { flex-direction: column; gap: var(--s2); }
+    .leadership .section-header__sub { text-align: left; margin-top: 0; }
+    .leadership-cta { flex-direction: column; align-items: stretch; }
+    .leadership-cta__btn { justify-content: center; }
   }
 </style>
 </head>
@@ -256,18 +275,21 @@
     <div class="container container--wide">
       <div class="contrib-intro__grid">
         <div class="contrib-intro__item">
+          <span class="contrib-intro__num">01</span>
           <span class="contrib-intro__eyebrow">Leadership Circle</span>
           <h3>Lorem ipsum dolor sit amet.</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
           <a href="#leadership-circle" class="contrib-intro__link">See Giving Levels</a>
         </div>
         <div class="contrib-intro__item">
+          <span class="contrib-intro__num">02</span>
           <span class="contrib-intro__eyebrow">Planned Giving</span>
           <h3>Lorem ipsum dolor sit amet.</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
           <a href="#ways-to-give" class="contrib-intro__link">Explore Options</a>
         </div>
         <div class="contrib-intro__item">
+          <span class="contrib-intro__num">03</span>
           <span class="contrib-intro__eyebrow">Musicians On Call</span>
           <h3>Lorem ipsum dolor sit amet.</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
@@ -286,32 +308,32 @@
       </div>
 
       <div class="matrix">
-        <div class="matrix-row matrix-row--header">
+        <div class="matrix-row matrix-row--header" role="radiogroup" aria-label="Choose your giving level">
           <div class="matrix-col matrix-col--label"><span class="matrix-label">Benefit</span></div>
-          <div class="matrix-col matrix-col--tier">
-            <h3>Program Partner</h3>
-            <div class="price">$125&ndash;$249</div>
-            <div class="freq">per month</div>
-            <a href="#" class="tier-btn">Join</a>
-          </div>
-          <div class="matrix-col matrix-col--tier">
-            <h3>Special Producer</h3>
-            <div class="price">$250&ndash;$416</div>
-            <div class="freq">per month</div>
-            <a href="#" class="tier-btn">Join</a>
-          </div>
-          <div class="matrix-col matrix-col--tier">
-            <h3>Executive Producer</h3>
-            <div class="price">$417&ndash;$832</div>
-            <div class="freq">per month</div>
-            <a href="#" class="tier-btn">Join</a>
-          </div>
-          <div class="matrix-col matrix-col--tier">
-            <h3>General Manager</h3>
-            <div class="price">$833+</div>
-            <div class="freq">per month</div>
-            <a href="#" class="tier-btn">Join</a>
-          </div>
+          <button type="button" class="matrix-col matrix-col--tier" role="radio" aria-checked="false" tabindex="0" data-tier="Program Partner">
+            <span class="tier-name">Program Partner</span>
+            <span class="price">$125&ndash;$249</span>
+            <span class="freq">per month</span>
+            <span class="tier-dot" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="matrix-col matrix-col--tier" role="radio" aria-checked="false" tabindex="-1" data-tier="Special Producer">
+            <span class="tier-name">Special Producer</span>
+            <span class="price">$250&ndash;$416</span>
+            <span class="freq">per month</span>
+            <span class="tier-dot" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="matrix-col matrix-col--tier" role="radio" aria-checked="false" tabindex="-1" data-tier="Executive Producer">
+            <span class="tier-name">Executive Producer</span>
+            <span class="price">$417&ndash;$832</span>
+            <span class="freq">per month</span>
+            <span class="tier-dot" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="matrix-col matrix-col--tier" role="radio" aria-checked="false" tabindex="-1" data-tier="General Manager">
+            <span class="tier-name">General Manager</span>
+            <span class="price">$833+</span>
+            <span class="freq">per month</span>
+            <span class="tier-dot" aria-hidden="true"></span>
+          </button>
         </div>
         <div class="matrix-row matrix-row--benefit">
           <div class="matrix-col">All Platinum Member benefits</div>
@@ -376,6 +398,14 @@
           <div class="matrix-col empty">—</div>
           <div class="matrix-col">✓</div>
         </div>
+      </div>
+
+      <div class="leadership-cta">
+        <p class="leadership-cta__text">Every level includes all Platinum Member benefits. <span class="leadership-cta__hint">Select a level above to get started, or give any amount you choose.</span></p>
+        <a href="#" class="btn btn--primary leadership-cta__btn">
+          <span class="leadership-cta__btn-text">Join the Leadership Circle</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
       </div>
     </div>
   </section>
