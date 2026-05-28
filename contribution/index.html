@@ -33,7 +33,9 @@
   .contrib-intro__item { padding: 0 var(--s6) 0 0; border-right: 1px solid var(--cream-deep); }
   .contrib-intro__item:last-child { border-right: none; padding-right: 0; padding-left: var(--s6); }
   .contrib-intro__item:nth-child(2) { padding-left: var(--s6); }
-  .contrib-intro__eyebrow { display: block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--xpn-red); margin-bottom: var(--s3); }
+  .contrib-intro__num { display: block; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; color: var(--ink-faint); margin-bottom: var(--s3); line-height: 1; }
+  .contrib-intro__num::before { content: ''; display: inline-block; width: 20px; height: 1.5px; background: var(--xpn-red); vertical-align: middle; margin-right: 6px; }
+  .contrib-intro__eyebrow { display: block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--xpn-red); margin-bottom: var(--s2); }
   .contrib-intro__item h3 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin-bottom: var(--s2); line-height: 1.2; }
   .contrib-intro__item p { font-size: 0.9rem; color: var(--ink-light); line-height: 1.6; margin-bottom: var(--s3); }
   .contrib-intro__link { font-size: 0.82rem; font-weight: 700; color: var(--xpn-red); display: inline-flex; align-items: center; gap: 5px; text-decoration: none; transition: gap 0.2s; white-space: nowrap; }
@@ -44,9 +46,12 @@
      LEADERSHIP CIRCLE — tier table
   ──────────────────────────────────────────────────────── */
   .leadership { padding: var(--s7) 0; }
-  .section-header { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: var(--s4); margin-bottom: 0; }
+  .section-header { padding-bottom: var(--s4); margin-bottom: 0; }
   .section-header h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 500; letter-spacing: -0.02em; color: var(--ink); }
-  .section-header__sub { font-size: 0.88rem; color: var(--ink-muted); max-width: 44ch; text-align: right; }
+  .section-header__sub { font-size: 0.88rem; color: var(--ink-muted); max-width: 44ch; margin-top: var(--s2); }
+  /* Leadership Circle keeps its inline layout — sub sits to the right of the h2 */
+  .leadership .section-header { display: flex; align-items: baseline; justify-content: space-between; }
+  .leadership .section-header__sub { text-align: right; margin-top: 0; }
 
   .matrix { overflow-x: auto; border-top: 3px solid var(--xpn-red); }
   .matrix-row { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); border-bottom: 1px solid var(--cream-deep); min-width: 780px; }
@@ -151,8 +156,8 @@
     .contrib-hero h1 { font-size: 2.2rem; }
     .contrib-hero__cta { flex-direction: column; align-items: stretch; }
     .contrib-hero__cta .btn { justify-content: center; width: 100%; }
-    .section-header { flex-direction: column; gap: var(--s2); }
-    .section-header__sub { text-align: left; }
+    .leadership .section-header { flex-direction: column; gap: var(--s2); }
+    .leadership .section-header__sub { text-align: left; margin-top: 0; }
     .leadership-cta { flex-direction: column; align-items: stretch; }
     .leadership-cta__btn { justify-content: center; }
   }
@@ -270,18 +275,21 @@
     <div class="container container--wide">
       <div class="contrib-intro__grid">
         <div class="contrib-intro__item">
+          <span class="contrib-intro__num">01</span>
           <span class="contrib-intro__eyebrow">Leadership Circle</span>
           <h3>Lorem ipsum dolor sit amet.</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
           <a href="#leadership-circle" class="contrib-intro__link">See Giving Levels</a>
         </div>
         <div class="contrib-intro__item">
+          <span class="contrib-intro__num">02</span>
           <span class="contrib-intro__eyebrow">Planned Giving</span>
           <h3>Lorem ipsum dolor sit amet.</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
           <a href="#ways-to-give" class="contrib-intro__link">Explore Options</a>
         </div>
         <div class="contrib-intro__item">
+          <span class="contrib-intro__num">03</span>
           <span class="contrib-intro__eyebrow">Musicians On Call</span>
           <h3>Lorem ipsum dolor sit amet.</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
