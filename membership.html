@@ -45,7 +45,6 @@
   ──────────────────────────────────────────────────────── */
   .mem-hero { padding: var(--s7) 0 var(--s6); border-bottom: 1px solid var(--cream-deep); }
   .mem-hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s7); align-items: center; }
-  .mem-hero .eyebrow { margin-bottom: var(--s4); }
   .mem-hero h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.035em; color: var(--ink); margin-bottom: var(--s4); }
   .mem-hero__sub { font-size: 1.05rem; color: var(--ink-light); line-height: 1.65; margin-bottom: var(--s5); max-width: 42ch; }
   .mem-hero__cta { display: flex; gap: var(--s3); flex-wrap: wrap; align-items: center; }
@@ -153,7 +152,6 @@
   .vinyl-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 85% 50%, rgba(213,78,27,0.06), transparent 60%); pointer-events: none; }
   .vinyl-card::after { content: 'Background image placeholder'; position: absolute; top: var(--s5); right: var(--s6); bottom: var(--s5); width: min(320px, 34%); display: grid; place-items: center; padding: var(--s4); border: 1px dashed var(--cream-deep); border-radius: 4px; background: var(--cream-deep); color: var(--ink-muted); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; line-height: 1.6; text-align: center; text-transform: uppercase; pointer-events: none; }
   .vinyl-card__content { position: relative; z-index: 2; max-width: min(560px, calc(100% - 380px)); color: var(--ink); }
-  .vinyl-card__eyebrow { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--xpn-red); margin-bottom: var(--s3); }
   .vinyl-card h2 { font-size: clamp(2rem, 3.2vw, 2.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: var(--s3); }
   .vinyl-card p { color: var(--ink-light); font-size: 1.05rem; line-height: 1.55; margin-bottom: var(--s4); }
   .vinyl-card .vinyl-details { margin: var(--s4) 0; display: grid; gap: var(--s3); }
@@ -173,11 +171,12 @@
   .ms-head h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; color: var(--ink); }
   .ms-sections { display: grid; gap: var(--s7); margin-bottom: var(--s6); }
   .ms-section { display: grid; gap: var(--s4); padding-top: var(--s5); border-top: 3px solid var(--xpn-red); }
-  .ms-section__eyebrow { display: block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--xpn-red); margin-bottom: var(--s2); }
   .ms-section h3 { font-size: clamp(1.45rem, 2.4vw, 1.95rem); font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: var(--s2); }
   .ms-section p { font-size: 0.95rem; color: var(--ink-light); line-height: 1.6; margin-bottom: 0; }
-  .ms-section__copy p { max-width: 58ch; }
+  .ms-section__copy { width: 100%; }
+  .ms-section__copy p { max-width: none; }
   .ms-section__copy a, .vinyl-details a { color: var(--xpn-red); text-decoration: underline; text-underline-offset: 2px; }
+  .ms-section__copy a[href^="tel:"] { white-space: nowrap; }
   .ms-section__requests { border-top: 1px solid var(--cream-deep); }
   .request-item { border-bottom: 1px solid var(--cream-deep); }
   .request-item > summary { list-style: none; cursor: pointer; padding: var(--s3) 0; display: flex; align-items: center; justify-content: space-between; gap: var(--s3); font-weight: 600; font-size: 1rem; color: var(--ink); transition: color 0.15s; }
@@ -477,7 +476,6 @@
   <section class="mem-hero">
     <div class="container mem-hero__grid">
       <div class="mem-hero__text">
-        <span class="eyebrow">Become a Member</span>
         <h1>Members Power the Music</h1>
         <p class="mem-hero__sub">Everything we do at XPN is made possible thanks to our community of supporters.</p>
         <div class="mem-hero__cta">
@@ -719,7 +717,6 @@
     <div class="container container--wide">
       <div class="vinyl-card">
         <div class="vinyl-card__content">
-          <span class="vinyl-card__eyebrow">Vinyl Club</span>
           <h2>A Club for Record Lovers</h2>
           <p>If you like to feel the music - hold it, drop the needle and hear the crackle and pop of a record - this group is for you. Join Mike Vasilikos, host of the XPN Midday Show, and like-minded friends.</p>
           <div class="vinyl-prices">
@@ -755,7 +752,6 @@
         <section class="ms-section" aria-labelledby="manage-membership-title">
           <div class="ms-section__intro">
             <div class="ms-section__copy">
-              <span class="ms-section__eyebrow">Membership Help</span>
               <h3 id="manage-membership-title">Need something?</h3>
               <p>If you don&rsquo;t find it below, contact us at <a href="mailto:memberservices@xpn.org">memberservices@xpn.org</a> or <a href="tel:+18005659976">1-800-565-9976</a>.</p>
             </div>
