@@ -20,7 +20,6 @@
   .sp-wrap { max-width: 1160px; margin: 0 auto; }
   .sp-section { padding: var(--s8) 0; scroll-margin-top: 72px; }
   .sp-section--alt { background: var(--cream-dark); }
-  .sp-kicker { display: block; margin-bottom: var(--s3); color: var(--xpn-red); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
   .sp-heading { max-width: 760px; margin-bottom: var(--s6); }
   .sp-heading--split { display: grid; max-width: none; grid-template-columns: minmax(0, 0.8fr) minmax(320px, 1fr); gap: var(--s7); align-items: end; }
   .sp-heading h2 { color: var(--ink); font-size: clamp(2rem, 3.4vw, 3rem); font-weight: 850; letter-spacing: -0.04em; line-height: 1.03; }
@@ -40,33 +39,32 @@
 
   /* Page navigation */
   .sp-jump { border-bottom: 1px solid var(--cream-deep); background: var(--cream); }
-  .sp-jump__inner { display: flex; min-height: 68px; align-items: center; justify-content: space-between; gap: var(--s5); }
-  .sp-jump__label { color: var(--ink-muted); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+  .sp-jump__inner { display: flex; min-height: 68px; align-items: center; }
   .sp-jump__links { display: flex; flex-wrap: wrap; gap: var(--s5); }
   .sp-jump a { color: var(--ink); font-size: 0.85rem; font-weight: 700; text-decoration: none; }
   .sp-jump a:hover { color: var(--xpn-red); }
 
   /* Reach */
-  .sp-channel-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 3px solid var(--xpn-red); border-bottom: 1px solid var(--cream-deep); }
-  .sp-channel { min-width: 0; padding: var(--s5); border-right: 1px solid var(--cream-deep); }
-  .sp-channel:last-child { border-right: 0; }
-  .sp-channel__number { display: block; margin-bottom: var(--s6); color: var(--xpn-red); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; }
-  .sp-channel h3 { margin-bottom: var(--s3); color: var(--ink); font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; }
+  .sp-channel-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .sp-channel { display: flex; min-width: 0; min-height: 220px; flex-direction: column; justify-content: flex-end; padding: var(--s6); }
+  .sp-channel:nth-child(1), .sp-channel:nth-child(4) { grid-column: span 7; }
+  .sp-channel:nth-child(2), .sp-channel:nth-child(3) { grid-column: span 5; background: var(--cream-deep); }
+  .sp-channel:nth-child(1) { background: var(--ink); }
+  .sp-channel:nth-child(4) { background: var(--xpn-red); }
+  .sp-channel h3 { margin-bottom: var(--s3); color: var(--ink); font-size: clamp(1.55rem, 2.5vw, 2.15rem); font-weight: 850; letter-spacing: -0.035em; }
   .sp-channel p { margin: 0; color: var(--ink-light); font-size: 0.92rem; line-height: 1.62; }
+  .sp-channel:nth-child(1) h3, .sp-channel:nth-child(4) h3 { color: #fff; }
+  .sp-channel:nth-child(1) p, .sp-channel:nth-child(4) p { max-width: 46ch; color: rgba(255,255,255,0.7); }
 
   /* Value */
-  .sp-value-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 3px solid var(--ink); }
-  .sp-value { display: grid; grid-template-columns: 48px 1fr; gap: var(--s4); padding: var(--s5) 0; border-bottom: 1px solid var(--cream-deep); }
-  .sp-value:nth-child(odd) { padding-right: var(--s6); }
-  .sp-value:nth-child(even) { padding-left: var(--s6); border-left: 1px solid var(--cream-deep); }
-  .sp-value__number { color: var(--xpn-red); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; padding-top: 5px; }
-  .sp-value h3 { margin-bottom: var(--s2); color: var(--ink); font-size: 1.15rem; font-weight: 800; }
+  .sp-value-grid { border-top: 3px solid var(--ink); }
+  .sp-value { display: grid; grid-template-columns: minmax(180px, 0.7fr) minmax(0, 1.3fr); gap: var(--s7); align-items: baseline; padding: var(--s5) 0; border-bottom: 1px solid var(--cream-deep); }
+  .sp-value h3 { color: var(--ink); font-size: clamp(1.35rem, 2.2vw, 1.8rem); font-weight: 850; letter-spacing: -0.03em; }
   .sp-value p { margin: 0; color: var(--ink-light); font-size: 0.92rem; line-height: 1.62; }
 
   /* Opportunities */
   .sp-opportunity-grid { border-top: 3px solid var(--xpn-red); }
-  .sp-opportunity { display: grid; min-width: 0; grid-template-columns: 110px minmax(180px, 0.7fr) minmax(0, 1.3fr); gap: var(--s6); padding: var(--s6) 0; border-bottom: 1px solid var(--cream-deep); }
-  .sp-opportunity__tag { color: var(--xpn-red); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding-top: 6px; }
+  .sp-opportunity { display: grid; min-width: 0; grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr); gap: var(--s7); padding: var(--s6) 0; border-bottom: 1px solid var(--cream-deep); }
   .sp-opportunity h3 { color: var(--ink); font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 850; letter-spacing: -0.035em; line-height: 1; }
   .sp-opportunity__details > p { margin: 0 0 var(--s4); color: var(--ink-light); font-size: 0.94rem; line-height: 1.62; }
   .sp-opportunity ul { margin: 0; padding: var(--s3) 0 0; border-top: 1px solid var(--cream-deep); list-style: none; }
@@ -83,9 +81,9 @@
   .sp-audience-list { margin: 0; padding: 0; list-style: none; }
   .sp-audience-list li { padding: var(--s3) 0; border-top: 1px solid var(--cream-deep); color: var(--ink); font-size: 0.92rem; font-weight: 650; }
   .sp-coverage { border-top: 3px solid var(--xpn-red); }
-  .sp-coverage__title { margin: var(--s4) 0 var(--s3); color: var(--ink-muted); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+  .sp-coverage__title { margin: var(--s5) 0 var(--s3); color: var(--ink); font-size: 1.35rem; font-weight: 800; letter-spacing: -0.025em; }
   .sp-coverage__item { display: grid; grid-template-columns: minmax(190px, 0.85fr) 1fr; gap: var(--s4); padding: var(--s4) 0; border-top: 1px solid var(--cream-deep); }
-  .sp-coverage__item h3 { color: var(--ink); font-size: 0.94rem; font-weight: 800; line-height: 1.4; }
+  .sp-coverage__item h4 { color: var(--ink); font-size: 0.94rem; font-weight: 800; line-height: 1.4; }
   .sp-coverage__item p { margin: 0; color: var(--ink-light); font-size: 0.88rem; line-height: 1.5; }
 
   /* Contact */
@@ -101,9 +99,9 @@
   .sp-contact__links { display: flex; flex-direction: column; gap: var(--s2); }
   .sp-contact__links a { color: #fff; font-size: 0.9rem; font-weight: 700; text-decoration: none; }
   .sp-form { padding: var(--s6); background: #fff; border: 1px solid var(--cream-deep); }
-  .sp-form__status { display: flex; justify-content: space-between; gap: var(--s4); margin-bottom: var(--s5); padding-bottom: var(--s3); border-bottom: 1px solid var(--cream-deep); }
-  .sp-form__status strong { color: var(--ink); font-size: 0.85rem; }
-  .sp-form__status span { color: var(--xpn-red); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+  .sp-form__status { margin-bottom: var(--s5); padding-bottom: var(--s4); border-bottom: 1px solid var(--cream-deep); }
+  .sp-form__status strong { display: block; color: var(--ink); font-size: 1.1rem; }
+  .sp-form__status p { margin: var(--s2) 0 0; color: var(--ink-muted); font-size: 0.82rem; line-height: 1.5; }
   .sp-form form { display: flex; flex-direction: column; gap: var(--s4); }
   .sp-form__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4); }
   .sp-form__group { display: flex; flex-direction: column; gap: var(--s2); }
@@ -118,9 +116,8 @@
     .sp-hero__grid { gap: var(--s7); }
     .sp-hero__photo { max-width: 620px; }
     .sp-channel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .sp-channel:nth-child(2) { border-right: 0; }
-    .sp-channel:nth-child(-n+2) { border-bottom: 1px solid var(--cream-deep); }
-    .sp-opportunity { grid-template-columns: 85px minmax(170px, 0.7fr) minmax(0, 1.3fr); gap: var(--s4); }
+    .sp-channel:nth-child(n) { grid-column: auto; }
+    .sp-opportunity { grid-template-columns: minmax(190px, 0.75fr) minmax(0, 1.25fr); gap: var(--s5); }
     .sp-package { grid-template-columns: 1fr; }
     .sp-package .btn { justify-self: start; }
   }
@@ -130,13 +127,10 @@
     .sp-hero { padding: var(--s7) 0; }
     .sp-hero h1 { font-size: clamp(3.3rem, 17vw, 5rem); }
     .sp-jump__inner { min-height: 0; padding-top: var(--s4); padding-bottom: var(--s4); align-items: flex-start; }
-    .sp-jump__label { display: none; }
     .sp-jump__links { gap: var(--s3) var(--s4); }
-    .sp-channel-grid, .sp-value-grid { grid-template-columns: 1fr; }
-    .sp-channel { border-right: 0; border-bottom: 1px solid var(--cream-deep); }
-    .sp-channel:last-child { border-bottom: 0; }
-    .sp-value { grid-template-columns: 36px 1fr; padding: var(--s4) 0; }
-    .sp-value:nth-child(odd), .sp-value:nth-child(even) { padding-left: 0; padding-right: 0; border-left: 0; }
+    .sp-channel-grid { grid-template-columns: 1fr; }
+    .sp-channel { min-height: 190px; padding: var(--s5); }
+    .sp-value { grid-template-columns: 1fr; gap: var(--s2); padding: var(--s4) 0; }
     .sp-opportunity { grid-template-columns: 1fr; gap: var(--s3); padding: var(--s5) 0; }
     .sp-package { padding: var(--s4); }
     .sp-coverage__item { grid-template-columns: 1fr; gap: var(--s2); }
@@ -231,7 +225,6 @@
     <div class="container">
       <div class="sp-wrap sp-hero__grid">
         <div>
-          <span class="sp-kicker">WXPN Sponsorship</span>
           <h1>Sponsorship</h1>
           <p class="sp-hero__lede">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           <div class="sp-hero__actions">
@@ -247,7 +240,6 @@
   <nav class="sp-jump" aria-label="On this page">
     <div class="container">
       <div class="sp-wrap sp-jump__inner">
-        <span class="sp-jump__label">On this page</span>
         <div class="sp-jump__links">
           <a href="#reach">Reach</a>
           <a href="#value">Why WXPN</a>
@@ -264,29 +256,24 @@
       <div class="sp-wrap">
         <div class="sp-heading sp-heading--split">
           <div>
-            <span class="sp-kicker">Reach</span>
             <h2>How WXPN Reaches Your Audience</h2>
           </div>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
         </div>
         <div class="sp-channel-grid">
           <article class="sp-channel">
-            <span class="sp-channel__number">01</span>
             <h3>Broadcast</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
           </article>
           <article class="sp-channel">
-            <span class="sp-channel__number">02</span>
             <h3>Streaming</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation.</p>
           </article>
           <article class="sp-channel">
-            <span class="sp-channel__number">03</span>
             <h3>Digital</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit.</p>
           </article>
           <article class="sp-channel">
-            <span class="sp-channel__number">04</span>
             <h3>Live Events</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.</p>
           </article>
@@ -299,37 +286,24 @@
     <div class="container">
       <div class="sp-wrap">
         <div class="sp-heading">
-          <span class="sp-kicker">Why WXPN</span>
           <h2>Why Public Radio Sponsorship</h2>
         </div>
         <div class="sp-value-grid">
           <article class="sp-value">
-            <span class="sp-value__number">01</span>
-            <div>
-              <h3>Less Clutter</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
-            </div>
+            <h3>Less Clutter</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
           </article>
           <article class="sp-value">
-            <span class="sp-value__number">02</span>
-            <div>
-              <h3>Real Trust</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-            </div>
+            <h3>Real Trust</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation.</p>
           </article>
           <article class="sp-value">
-            <span class="sp-value__number">03</span>
-            <div>
-              <h3>Quality Audience</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit.</p>
-            </div>
+            <h3>Quality Audience</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit.</p>
           </article>
           <article class="sp-value">
-            <span class="sp-value__number">04</span>
-            <div>
-              <h3>Mission Alignment</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.</p>
-            </div>
+            <h3>Mission Alignment</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.</p>
           </article>
         </div>
       </div>
@@ -341,14 +315,12 @@
       <div class="sp-wrap">
         <div class="sp-heading sp-heading--split">
           <div>
-            <span class="sp-kicker">Opportunities</span>
             <h2>Sponsorship Opportunities</h2>
           </div>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
         </div>
         <div class="sp-opportunity-grid">
           <article class="sp-opportunity">
-            <span class="sp-opportunity__tag">01 / Broadcast</span>
             <h3>On-Air</h3>
             <div class="sp-opportunity__details">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -360,7 +332,6 @@
             </div>
           </article>
           <article class="sp-opportunity">
-            <span class="sp-opportunity__tag">02 / Digital</span>
             <h3>Online &amp; On Demand</h3>
             <div class="sp-opportunity__details">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
@@ -372,7 +343,6 @@
             </div>
           </article>
           <article class="sp-opportunity">
-            <span class="sp-opportunity__tag">03 / Experiential</span>
             <h3>Events</h3>
             <div class="sp-opportunity__details">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
@@ -399,7 +369,6 @@
     <div class="container">
       <div class="sp-wrap sp-audience-grid">
         <div class="sp-audience-copy">
-          <span class="sp-kicker">Audience</span>
           <h2>Who&rsquo;s Listening</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
           <ul class="sp-audience-list">
@@ -409,17 +378,17 @@
           </ul>
         </div>
         <div class="sp-coverage">
-          <p class="sp-coverage__title">Regional coverage</p>
+          <h3 class="sp-coverage__title">Regional coverage</h3>
           <div class="sp-coverage__item">
-            <h3>Greater Philadelphia &amp; South Jersey</h3>
+            <h4>Greater Philadelphia &amp; South Jersey</h4>
             <p>Including Wilmington, Delaware, and parts of the Baltimore region</p>
           </div>
           <div class="sp-coverage__item">
-            <h3>Central Pennsylvania</h3>
+            <h4>Central Pennsylvania</h4>
             <p>Harrisburg, Lancaster, and York</p>
           </div>
           <div class="sp-coverage__item">
-            <h3>Northern New Jersey &amp; Lehigh Valley</h3>
+            <h4>Northern New Jersey &amp; Lehigh Valley</h4>
             <p>Extending toward the New York region</p>
           </div>
         </div>
@@ -432,7 +401,6 @@
       <div class="sp-wrap">
         <div class="sp-contact__head">
           <div>
-            <span class="sp-kicker">Connect</span>
             <h2>Get in Touch</h2>
           </div>
           <p class="sp-contact__lede">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -450,7 +418,7 @@
           <div class="sp-form">
             <div class="sp-form__status" id="form-status">
               <strong>Sponsorship inquiry</strong>
-              <span>Form placeholder</span>
+              <p>This form is a placeholder and is not connected yet.</p>
             </div>
             <form id="contact-form" aria-describedby="form-status">
               <div class="sp-form__row">
