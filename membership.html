@@ -74,20 +74,15 @@
   /* ────────────────────────────────────────────────────────
      01 — MEMBERSHIP OPTIONS
   ──────────────────────────────────────────────────────── */
-  .options { padding: var(--s7) 0 var(--s6); background: var(--cream); border-bottom: 1px solid var(--cream-deep); border-top: 1px solid var(--cream-deep); }
-  .options__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 0; align-items: stretch; }
-  .option { display: flex; flex-direction: column; gap: var(--s2); padding: 0 var(--s6) 0 0; border-right: 1px solid var(--cream-deep); }
-  .option:first-child { padding-left: 0; }
-  .option:last-child { border-right: none; padding-right: 0; padding-left: var(--s6); }
-  .option:nth-child(2) { padding-left: var(--s6); }
-  .option__eyebrow { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--xpn-red); margin-bottom: var(--s2); }
-  .option h3 { font-size: 1.35rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); margin-bottom: var(--s2); }
-  .option--lg h3 { font-size: clamp(1.75rem, 2.8vw, 2.4rem); line-height: 1.1; letter-spacing: -0.03em; margin-bottom: var(--s3); }
-  .option p { color: var(--ink-light); font-size: 0.95rem; line-height: 1.6; margin-bottom: var(--s3); }
-  .option--lg p { font-size: 1.05rem; }
-  .option__link { font-size: 0.88rem; font-weight: 700; color: var(--xpn-red); letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.2s; text-decoration: none; margin-top: auto; }
+  .options { padding: var(--s7) 0; background: var(--cream); border-bottom: 1px solid var(--cream-deep); border-top: 1px solid var(--cream-deep); }
+  .options__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; align-items: stretch; }
+  .option { display: flex; min-width: 0; flex-direction: column; padding: 0 var(--s5); border-right: 1px solid var(--cream-deep); }
+  .option:last-child { border-right: none; }
+  .option__eyebrow { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--xpn-red); margin-bottom: var(--s3); }
+  .option h3 { font-size: clamp(1.45rem, 2vw, 1.7rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.025em; color: var(--ink); margin-bottom: var(--s3); }
+  .option p { color: var(--ink-light); font-size: 0.98rem; line-height: 1.6; margin-bottom: var(--s4); }
+  .option__link { font-size: 0.9rem; font-weight: 700; color: var(--xpn-red); letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.2s; text-decoration: none; margin-top: auto; }
   .option__link:hover { gap: 10px; color: var(--xpn-red); }
-  .option--lg .option__link { font-size: 0.95rem; }
   .option__link::after { content: "→"; transition: transform 0.2s; }
 
   /* ────────────────────────────────────────────────────────
@@ -254,7 +249,7 @@
     .mem-hero__grid { grid-template-columns: 1fr; gap: var(--s5); }
     .mem-hero__photo { aspect-ratio: 16 / 10; max-height: 360px; }
     .options__grid { grid-template-columns: 1fr; }
-    .option { padding: var(--s4) 0 !important; border-right: none !important; border-bottom: 1px solid var(--cream-deep); }
+    .option { padding: var(--s5) 0 !important; border-right: none !important; border-bottom: 1px solid var(--cream-deep); }
     .option:last-child { border-bottom: none; }
     .monthly-band__inner { grid-template-columns: minmax(0, 1fr) minmax(220px, 240px); gap: var(--s5); }
     .monthly-band__btn { justify-self: end; }
@@ -278,12 +273,9 @@
     .mem-hero__cta { flex-direction: column; align-items: stretch; gap: var(--s2); }
     .mem-hero__cta .btn { justify-content: center; width: 100%; }
     .mem-hero__photo { aspect-ratio: 4 / 3; max-height: none; }
-    .options { padding: var(--s5) 0 var(--s3); }
-    .options__grid { gap: var(--s3); }
-    .option { padding-top: var(--s3); border-top: 1px solid var(--cream-deep); }
-    .option:first-child { border-top: 3px solid var(--xpn-red); padding-top: var(--s4); }
-    .option h3 { font-size: 1.25rem; }
-    .option--lg h3 { font-size: 1.55rem; }
+    .options { padding: var(--s3) 0; }
+    .option { padding: var(--s4) 0 !important; }
+    .option h3 { font-size: 1.4rem; }
     .levels { padding: var(--s3) 0 var(--s5); }
     .levels-head { margin-bottom: var(--s4); }
     .levels-head h2 { font-size: 1.75rem; margin-bottom: var(--s3); }
@@ -531,7 +523,7 @@
   <section class="options">
     <div class="container container--wide">
       <div class="options__grid">
-        <div class="option option--lg">
+        <div class="option">
           <span class="option__eyebrow">WXPN Member</span>
           <h3>We Saved You a Spot</h3>
           <p>Join at the level that suits you best and start enjoying the benefits of being part of the coolest music-loving group of people we know!</p>
