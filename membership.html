@@ -102,8 +102,17 @@
   .period-toggle button { padding: var(--s2) var(--s5); border: 0; background: transparent; color: var(--ink-muted); font-size: 0.82rem; font-weight: 700; border-radius: 3px; cursor: pointer; transition: background 0.15s, color 0.15s; white-space: nowrap; }
   .period-toggle button.is-active { background: var(--ink); color: #fff; }
 
-  .matrix { overflow-x: auto; border-top: 3px solid var(--xpn-red); }
-  .matrix-row { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); border-bottom: 1px solid var(--cream-deep); min-width: 760px; }
+  .matrix {
+    --tier-count: 4;
+    overflow-x: auto;
+    border-top: 3px solid var(--xpn-red);
+  }
+  .matrix-row {
+    display: grid;
+    grid-template-columns: minmax(190px, 1.4fr) repeat(var(--tier-count), minmax(145px, 1fr));
+    border-bottom: 1px solid var(--cream-deep);
+    min-width: calc(190px + (var(--tier-count) * 145px));
+  }
   .matrix-row.matrix-row--header { align-items: end; padding: var(--s4) 0 var(--s3); }
   .matrix-col { padding: var(--s2) var(--s3); }
   .matrix-col:first-child { padding-left: 0; }
@@ -125,14 +134,15 @@
   /* ────────────────────────────────────────────────────────
      03 — MONTHLY GIVING
   ──────────────────────────────────────────────────────── */
-  .monthly-band { background: linear-gradient(135deg, #c74d1d 0%, #d54e1b 54%, #e05f24 100%); padding: var(--s5) 0; color: #fff; position: relative; overflow: hidden; isolation: isolate; }
+  .monthly-band { background: linear-gradient(135deg, #c74d1d 0%, #d54e1b 54%, #e05f24 100%); padding: var(--s6) 0; color: #fff; position: relative; overflow: hidden; isolation: isolate; }
   .monthly-band::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 220px; opacity: 0.14; mix-blend-mode: overlay; pointer-events: none; }
   .monthly-band::after { content: ''; position: absolute; right: -120px; bottom: -220px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 70%); pointer-events: none; }
-  .monthly-band__inner { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(250px, 300px); gap: clamp(1.75rem, 4vw, 3rem); align-items: center; justify-content: center; position: relative; z-index: 1; }
+  .monthly-band__inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 280px); gap: clamp(2rem, 6vw, 5rem); align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+  .monthly-band__copy { max-width: 720px; }
   .monthly-band__eyebrow { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.78); margin-bottom: var(--s3); }
-  .monthly-band h2 { font-size: clamp(1.8rem, 3.1vw, 2.75rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: var(--s3); max-width: 15ch; }
-  .monthly-band p { font-size: 1.06rem; color: rgba(255,255,255,0.88); line-height: 1.55; margin-bottom: 0; max-width: 44ch; }
-  .monthly-band__btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); min-width: 280px; justify-self: center; font-size: 0.98rem; font-weight: 700; padding: 1em 2em; border-radius: 4px; background: #fff; color: var(--xpn-red); text-decoration: none; transition: background 0.15s, transform 0.15s; }
+  .monthly-band h2 { font-size: clamp(1.8rem, 3.1vw, 2.75rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: var(--s3); max-width: 22ch; }
+  .monthly-band p { font-size: 1.06rem; color: rgba(255,255,255,0.88); line-height: 1.55; margin-bottom: 0; max-width: 62ch; }
+  .monthly-band__btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); width: 100%; min-width: 0; justify-self: end; font-size: 0.98rem; font-weight: 700; padding: 1em 2em; border-radius: 4px; background: #fff; color: var(--xpn-red); text-decoration: none; transition: background 0.15s, transform 0.15s; }
   .monthly-band__btn:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); color: var(--xpn-red); }
 
   /* ────────────────────────────────────────────────────────
@@ -146,6 +156,10 @@
   .vinyl-card__eyebrow { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--xpn-red); margin-bottom: var(--s3); }
   .vinyl-card h2 { font-size: clamp(2rem, 3.2vw, 2.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: var(--s3); }
   .vinyl-card p { color: var(--ink-light); font-size: 1.05rem; line-height: 1.55; margin-bottom: var(--s4); }
+  .vinyl-card .vinyl-details { margin: var(--s4) 0; display: grid; gap: var(--s3); }
+  .vinyl-card .vinyl-details p { font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  .vinyl-card .vinyl-details strong { color: var(--ink); }
+  .vinyl-card .vinyl-fine-print { font-size: 0.82rem; color: var(--ink-muted); }
   .vinyl-prices { display: flex; flex-wrap: wrap; gap: var(--s7); margin-bottom: var(--s4); }
   .vinyl-price small { display: block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 4px; }
   .vinyl-price strong { display: block; font-size: 1.5rem; font-weight: 800; color: var(--ink); letter-spacing: -0.01em; }
@@ -163,6 +177,7 @@
   .ms-section h3 { font-size: clamp(1.45rem, 2.4vw, 1.95rem); font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: var(--s2); }
   .ms-section p { font-size: 0.95rem; color: var(--ink-light); line-height: 1.6; margin-bottom: 0; }
   .ms-section__copy p { max-width: 58ch; }
+  .ms-section__copy a, .vinyl-details a { color: var(--xpn-red); text-decoration: underline; text-underline-offset: 2px; }
   .ms-section__requests { border-top: 1px solid var(--cream-deep); }
   .request-item { border-bottom: 1px solid var(--cream-deep); }
   .request-item > summary { list-style: none; cursor: pointer; padding: var(--s3) 0; display: flex; align-items: center; justify-content: space-between; gap: var(--s3); font-weight: 600; font-size: 1rem; color: var(--ink); transition: color 0.15s; }
@@ -181,6 +196,7 @@
   .contact__list a, .contact__list span { font-size: 1rem; font-weight: 600; color: var(--ink); text-decoration: none; }
   .contact__list a { color: var(--xpn-red); }
   .contact__list a:hover { text-decoration: underline; text-underline-offset: 2px; }
+  .contact__note { margin: var(--s5) auto 0; max-width: 78ch; color: var(--ink-light); font-size: 0.92rem; font-style: italic; line-height: 1.6; }
 
   /* ────────────────────────────────────────────────────────
      06 — FAQ
@@ -241,12 +257,19 @@
     .options__grid { grid-template-columns: 1fr; }
     .option { padding: var(--s4) 0 !important; border-right: none !important; border-bottom: 1px solid var(--cream-deep); }
     .option:last-child { border-bottom: none; }
-    .monthly-band__inner { grid-template-columns: 1fr; }
-    .monthly-band__btn { justify-self: center; }
+    .monthly-band__inner { grid-template-columns: minmax(0, 1fr) minmax(220px, 240px); gap: var(--s5); }
+    .monthly-band__btn { justify-self: end; }
     .vinyl-card { padding: var(--s6) var(--s5); }
     .vinyl-card__content { max-width: calc(100% - 280px); }
     .vinyl-card::after { top: var(--s6); right: var(--s5); bottom: var(--s6); width: min(240px, 32%); }
     .ways-list { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 760px) {
+    .monthly-band__inner { grid-template-columns: 1fr; gap: var(--s4); align-items: start; }
+    .monthly-band__copy { max-width: none; }
+    .monthly-band p { max-width: none; }
+    .monthly-band__btn { width: 100%; justify-self: stretch; }
   }
 
   @media (max-width: 640px) {
@@ -281,6 +304,7 @@
     .mobile-tier__benefits .value.empty { color: var(--ink-faint); font-weight: 400; }
     .mobile-tier .btn { display: block; width: 100%; text-align: center; justify-content: center; }
     .monthly-band { padding: var(--s5) 0; }
+    .monthly-band__inner { gap: var(--s4); }
     .monthly-band h2 { font-size: 1.6rem; }
     .monthly-band p { font-size: 0.92rem; }
     .monthly-band__btn { display: flex; width: 100%; min-width: 0; justify-content: center; }
@@ -351,7 +375,7 @@
         <button class="header-search-btn" aria-label="Search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
-        <a href="#" class="nav-donate">Donate</a>
+        <a href="https://xpn.my.salesforce-sites.com/donate?c=701Wj00000Pat9I" class="nav-donate">Donate</a>
         <button class="header-menu-btn header-menu-btn--row1" aria-label="Open menu" aria-expanded="false" aria-controls="header-drawer" data-drawer-open>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
@@ -387,7 +411,7 @@
       <a href="#">Connect</a>
       <a href="#">Playlist</a>
       <a href="concert-calendar/index.html">Concert Calendar</a>
-      <a href="#" class="nav-donate">Donate</a>
+      <a href="https://xpn.my.salesforce-sites.com/donate?c=701Wj00000Pat9I" class="nav-donate">Donate</a>
       <hr class="drawer-divider">
     </div>
     <a href="#">Newsletters</a>
@@ -415,13 +439,17 @@
   <!-- ═══════════════════════════════════════════════════════════
        00 — TIMELY UPDATES
        ═══════════════════════════════════════════════════════════ -->
-  <section class="timely is-active" aria-label="Timely update">
+  <!--
+    Campaign module: add "is-active" only while the figures below are current.
+    Outside a drive, this space can hold a verified member or geographic stat.
+  -->
+  <section class="timely" aria-label="Timely update">
     <div class="container timely__inner">
       <div class="timely__copy">
         <span class="timely__tag">Timely Update</span>
         <div class="timely__headline">
           <strong>Spring Membership Goal</strong>
-          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</span>
+          <span>Help us reach our goal and keep independent music discovery thriving.</span>
         </div>
         <div class="timely__meter" aria-label="Membership drive progress">
           <div class="timely__meter-head">
@@ -438,7 +466,7 @@
       <aside class="timely__summary" aria-label="Amount remaining">
         <span class="timely__summary-label">Amount Left</span>
         <strong>$18,400</strong>
-        <p>Lorem ipsum placeholder for a short campaign-status note from Member Services.</p>
+        <p>Every gift moves us closer. Thank you for powering the music.</p>
       </aside>
     </div>
   </section>
@@ -450,10 +478,10 @@
     <div class="container mem-hero__grid">
       <div class="mem-hero__text">
         <span class="eyebrow">Become a Member</span>
-        <h1>Lorem ipsum dolor sit amet.</h1>
-        <p class="mem-hero__sub">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+        <h1>Members Power the Music</h1>
+        <p class="mem-hero__sub">Everything we do at XPN is made possible thanks to our community of supporters.</p>
         <div class="mem-hero__cta">
-          <a href="#levels" class="btn btn--primary btn--primary--lg">Donate Now</a>
+          <a href="https://xpn.my.salesforce-sites.com/donate?c=701Wj00000Pat9I" class="btn btn--primary btn--primary--lg">Donate Now</a>
           <a href="#services" class="btn btn--secondary btn--primary--lg">Already a Member?</a>
         </div>
       </div>
@@ -472,20 +500,20 @@
           <div class="carousel__slides">
             <div class="carousel__slide is-active" data-slide>
               <blockquote>
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."</p>
-                <cite>Lorem Ipsum &middot; Philadelphia, PA</cite>
+                <p>&ldquo;XPN is my singular lifeline to meaningful new music.&rdquo;</p>
+                <cite>Eliot &middot; Chester, NJ</cite>
               </blockquote>
             </div>
             <div class="carousel__slide" data-slide>
               <blockquote>
-                <p>"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
-                <cite>Lorem Ipsum &middot; Philadelphia, PA</cite>
+                <p>&ldquo;The human touch is unbeatable.&rdquo;</p>
+                <cite>Emily &middot; Doylestown, PA</cite>
               </blockquote>
             </div>
             <div class="carousel__slide" data-slide>
               <blockquote>
-                <p>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</p>
-                <cite>Lorem Ipsum &middot; Philadelphia, PA</cite>
+                <p>&ldquo;I wanted to show my gratitude by investing in a membership.&rdquo;</p>
+                <cite>PJ &middot; Philadelphia, PA</cite>
               </blockquote>
             </div>
           </div>
@@ -507,20 +535,20 @@
       <div class="options__grid">
         <div class="option option--lg">
           <span class="option__eyebrow">WXPN Member</span>
-          <h3>Lorem ipsum dolor sit amet, consectetur.</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <h3>We Saved You a Spot</h3>
+          <p>Join at the level that suits you best and start enjoying the benefits of being part of the coolest music-loving group of people we know!</p>
           <a href="#levels" class="option__link">See Membership Levels</a>
         </div>
         <div class="option">
           <span class="option__eyebrow">Vinyl Club</span>
-          <h3>Lorem ipsum dolor sit amet.</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+          <h3>Calling All Crate Diggers</h3>
+          <p>Our only affinity group - created and curated by on-air host Mike Vasilikos for people who love vinyl.</p>
           <a href="#vinyl-club" class="option__link">Explore Vinyl Club</a>
         </div>
         <div class="option">
           <span class="option__eyebrow">Leadership Circle</span>
-          <h3>Lorem ipsum dolor sit amet.</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+          <h3>A Deeper Commitment</h3>
+          <p>Where membership becomes philanthropy.</p>
           <a href="contribution/" class="option__link">Make a Contribution</a>
         </div>
       </div>
@@ -534,14 +562,15 @@
     <div class="container container--wide">
       <div class="levels-head">
         <span class="eyebrow">Membership Levels</span>
-        <h2>Lorem ipsum dolor sit amet.</h2>
+        <h2>Join Today</h2>
         <div class="period-toggle" role="tablist" aria-label="Price period">
-          <button class="is-active" type="button" role="tab" data-period="monthly">Monthly</button>
-          <button type="button" role="tab" data-period="onetime">One-Time</button>
+          <button class="is-active" type="button" role="tab" aria-selected="true" data-period="monthly">Monthly</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1" data-period="onetime">One-Time</button>
         </div>
       </div>
 
       <!-- Desktop matrix -->
+      <!-- Set --tier-count above to 6 when the two planned fall levels are added. -->
       <div class="matrix">
         <div class="matrix-row matrix-row--header">
           <div class="matrix-col matrix-col--label"><span class="matrix-label">Benefit</span></div>
@@ -549,57 +578,57 @@
             <h3>Basic</h3>
             <div class="price" data-price data-monthly="$10–$19" data-onetime="$120–$239">$10–$19</div>
             <div class="freq" data-freq data-monthly="per month" data-onetime="per year">per month</div>
-            <a href="#" class="tier-btn">Join Basic</a>
+            <a href="https://xpn.my.salesforce-sites.com/donate?c=701Wj00000Pat9I" class="tier-btn">Join Basic</a>
           </div>
           <div class="matrix-col matrix-col--tier">
             <h3>Member Plus</h3>
             <div class="price" data-price data-monthly="$20–$39" data-onetime="$240–$479">$20–$39</div>
             <div class="freq" data-freq data-monthly="per month" data-onetime="per year">per month</div>
-            <a href="#" class="tier-btn">Join Plus</a>
+            <a href="https://xpn.my.salesforce-sites.com/donate?c=701Wj00000Pat9I" class="tier-btn">Join Plus</a>
           </div>
           <div class="matrix-col matrix-col--tier">
             <h3>Premium</h3>
             <div class="price" data-price data-monthly="$40–$74" data-onetime="$480–$899">$40–$74</div>
             <div class="freq" data-freq data-monthly="per month" data-onetime="per year">per month</div>
-            <a href="#" class="tier-btn">Join Premium</a>
+            <a href="https://xpn.my.salesforce-sites.com/donate?c=701Wj00000Pat9I" class="tier-btn">Join Premium</a>
           </div>
           <div class="matrix-col matrix-col--tier">
             <h3>Platinum</h3>
             <div class="price" data-price data-monthly="$75–$124" data-onetime="$900–$1,499">$75–$124</div>
             <div class="freq" data-freq data-monthly="per month" data-onetime="per year">per month</div>
-            <a href="#" class="tier-btn">Join Platinum</a>
+            <a href="https://xpn.my.salesforce-sites.com/donate?c=701Wj00000Pat9I" class="tier-btn">Join Platinum</a>
           </div>
         </div>
         <div class="matrix-row matrix-row--benefit">
-          <div class="matrix-col">Presales and event access</div>
-          <div class="matrix-col">Lorem ipsum</div>
-          <div class="matrix-col">Lorem ipsum</div>
-          <div class="matrix-col">Lorem ipsum</div>
-          <div class="matrix-col">Lorem ipsum</div>
+          <div class="matrix-col">Members Only E-News</div>
+          <div class="matrix-col">✓</div>
+          <div class="matrix-col">✓</div>
+          <div class="matrix-col">✓</div>
+          <div class="matrix-col">✓</div>
         </div>
         <div class="matrix-row matrix-row--benefit">
-          <div class="matrix-col">Curated playlists from the hosts</div>
-          <div class="matrix-col empty">—</div>
-          <div class="matrix-col">Lorem ipsum</div>
-          <div class="matrix-col">Lorem ipsum</div>
-          <div class="matrix-col">Lorem ipsum</div>
+          <div class="matrix-col">Free At Noon Early RSVP</div>
+          <div class="matrix-col">✓</div>
+          <div class="matrix-col">✓</div>
+          <div class="matrix-col">✓</div>
+          <div class="matrix-col">✓</div>
         </div>
         <div class="matrix-row matrix-row--benefit">
-          <div class="matrix-col">XPoNential Music Festival</div>
-          <div class="matrix-col">Discount</div>
-          <div class="matrix-col">Discount</div>
-          <div class="matrix-col">Complimentary passes</div>
-          <div class="matrix-col">Complimentary passes</div>
+          <div class="matrix-col">Invites to Members-Only Events</div>
+          <div class="matrix-col">✓</div>
+          <div class="matrix-col">✓</div>
+          <div class="matrix-col">✓</div>
+          <div class="matrix-col">✓</div>
         </div>
         <div class="matrix-row matrix-row--benefit">
-          <div class="matrix-col">Thank-you gifts</div>
-          <div class="matrix-col">Lorem ipsum</div>
-          <div class="matrix-col">Lorem ipsum</div>
-          <div class="matrix-col">Lorem ipsum</div>
-          <div class="matrix-col">Lorem ipsum</div>
+          <div class="matrix-col">Festival Discount</div>
+          <div class="matrix-col">Up to 50% off</div>
+          <div class="matrix-col">Up to 50% off</div>
+          <div class="matrix-col">2 complimentary passes</div>
+          <div class="matrix-col">2 complimentary passes</div>
         </div>
         <div class="matrix-row matrix-row--benefit">
-          <div class="matrix-col">Sustaining renewal gift</div>
+          <div class="matrix-col">Monthly Host-Curated Playlist</div>
           <div class="matrix-col empty">—</div>
           <div class="matrix-col">✓</div>
           <div class="matrix-col">✓</div>
@@ -612,58 +641,58 @@
         <div class="mobile-tier">
           <div class="mobile-tier__head">
             <span class="mobile-tier__name">Basic</span>
-            <span class="mobile-tier__price" data-price data-monthly="$10–$19" data-onetime="$120–$239">$10–$19<span class="freq" data-freq data-monthly="/mo" data-onetime="/yr">/mo</span></span>
+            <span class="mobile-tier__price"><span data-price data-monthly="$10–$19" data-onetime="$120–$239">$10–$19</span><span class="freq" data-freq data-monthly="/mo" data-onetime="/yr">/mo</span></span>
           </div>
           <ul class="mobile-tier__benefits">
-            <li><span class="label">Presales and event access</span><span class="value">Lorem ipsum</span></li>
-            <li><span class="label">Curated playlists</span><span class="value empty">—</span></li>
-            <li><span class="label">XPoNential Festival</span><span class="value">Discount</span></li>
-            <li><span class="label">Thank-you gifts</span><span class="value">Lorem ipsum</span></li>
-            <li><span class="label">Sustaining renewal gift</span><span class="value empty">—</span></li>
+            <li><span class="label">Members Only E-News</span><span class="value">✓</span></li>
+            <li><span class="label">Free At Noon Early RSVP</span><span class="value">✓</span></li>
+            <li><span class="label">Members-Only Events</span><span class="value">✓</span></li>
+            <li><span class="label">Festival Discount</span><span class="value">Up to 50% off</span></li>
+            <li><span class="label">Monthly Host-Curated Playlist</span><span class="value empty">—</span></li>
           </ul>
-          <a href="#" class="btn btn--secondary">Join Basic</a>
+          <a href="https://xpn.my.salesforce-sites.com/donate?c=701Wj00000Pat9I" class="btn btn--secondary">Join Basic</a>
         </div>
         <div class="mobile-tier">
           <div class="mobile-tier__head">
             <span class="mobile-tier__name">Member Plus</span>
-            <span class="mobile-tier__price" data-price data-monthly="$20–$39" data-onetime="$240–$479">$20–$39<span class="freq" data-freq data-monthly="/mo" data-onetime="/yr">/mo</span></span>
+            <span class="mobile-tier__price"><span data-price data-monthly="$20–$39" data-onetime="$240–$479">$20–$39</span><span class="freq" data-freq data-monthly="/mo" data-onetime="/yr">/mo</span></span>
           </div>
           <ul class="mobile-tier__benefits">
-            <li><span class="label">Presales and event access</span><span class="value">Lorem ipsum</span></li>
-            <li><span class="label">Curated playlists</span><span class="value">Lorem ipsum</span></li>
-            <li><span class="label">XPoNential Festival</span><span class="value">Discount</span></li>
-            <li><span class="label">Thank-you gifts</span><span class="value">Lorem ipsum</span></li>
-            <li><span class="label">Sustaining renewal gift</span><span class="value">✓</span></li>
+            <li><span class="label">Members Only E-News</span><span class="value">✓</span></li>
+            <li><span class="label">Free At Noon Early RSVP</span><span class="value">✓</span></li>
+            <li><span class="label">Members-Only Events</span><span class="value">✓</span></li>
+            <li><span class="label">Festival Discount</span><span class="value">Up to 50% off</span></li>
+            <li><span class="label">Monthly Host-Curated Playlist</span><span class="value">✓</span></li>
           </ul>
-          <a href="#" class="btn btn--secondary">Join Plus</a>
+          <a href="https://xpn.my.salesforce-sites.com/donate?c=701Wj00000Pat9I" class="btn btn--secondary">Join Plus</a>
         </div>
         <div class="mobile-tier">
           <div class="mobile-tier__head">
             <span class="mobile-tier__name">Premium</span>
-            <span class="mobile-tier__price" data-price data-monthly="$40–$74" data-onetime="$480–$899">$40–$74<span class="freq" data-freq data-monthly="/mo" data-onetime="/yr">/mo</span></span>
+            <span class="mobile-tier__price"><span data-price data-monthly="$40–$74" data-onetime="$480–$899">$40–$74</span><span class="freq" data-freq data-monthly="/mo" data-onetime="/yr">/mo</span></span>
           </div>
           <ul class="mobile-tier__benefits">
-            <li><span class="label">Presales and event access</span><span class="value">Lorem ipsum</span></li>
-            <li><span class="label">Curated playlists</span><span class="value">Lorem ipsum</span></li>
-            <li><span class="label">XPoNential Festival</span><span class="value">Complimentary passes</span></li>
-            <li><span class="label">Thank-you gifts</span><span class="value">Lorem ipsum</span></li>
-            <li><span class="label">Sustaining renewal gift</span><span class="value">✓</span></li>
+            <li><span class="label">Members Only E-News</span><span class="value">✓</span></li>
+            <li><span class="label">Free At Noon Early RSVP</span><span class="value">✓</span></li>
+            <li><span class="label">Members-Only Events</span><span class="value">✓</span></li>
+            <li><span class="label">Festival Discount</span><span class="value">2 complimentary passes</span></li>
+            <li><span class="label">Monthly Host-Curated Playlist</span><span class="value">✓</span></li>
           </ul>
-          <a href="#" class="btn btn--secondary">Join Premium</a>
+          <a href="https://xpn.my.salesforce-sites.com/donate?c=701Wj00000Pat9I" class="btn btn--secondary">Join Premium</a>
         </div>
         <div class="mobile-tier">
           <div class="mobile-tier__head">
             <span class="mobile-tier__name">Platinum</span>
-            <span class="mobile-tier__price" data-price data-monthly="$75–$124" data-onetime="$900–$1,499">$75–$124<span class="freq" data-freq data-monthly="/mo" data-onetime="/yr">/mo</span></span>
+            <span class="mobile-tier__price"><span data-price data-monthly="$75–$124" data-onetime="$900–$1,499">$75–$124</span><span class="freq" data-freq data-monthly="/mo" data-onetime="/yr">/mo</span></span>
           </div>
           <ul class="mobile-tier__benefits">
-            <li><span class="label">Presales and event access</span><span class="value">Lorem ipsum</span></li>
-            <li><span class="label">Curated playlists</span><span class="value">Lorem ipsum</span></li>
-            <li><span class="label">XPoNential Festival</span><span class="value">Complimentary passes</span></li>
-            <li><span class="label">Thank-you gifts</span><span class="value">Lorem ipsum</span></li>
-            <li><span class="label">Sustaining renewal gift</span><span class="value">✓</span></li>
+            <li><span class="label">Members Only E-News</span><span class="value">✓</span></li>
+            <li><span class="label">Free At Noon Early RSVP</span><span class="value">✓</span></li>
+            <li><span class="label">Members-Only Events</span><span class="value">✓</span></li>
+            <li><span class="label">Festival Discount</span><span class="value">2 complimentary passes</span></li>
+            <li><span class="label">Monthly Host-Curated Playlist</span><span class="value">✓</span></li>
           </ul>
-          <a href="#" class="btn btn--secondary">Join Platinum</a>
+          <a href="https://xpn.my.salesforce-sites.com/donate?c=701Wj00000Pat9I" class="btn btn--secondary">Join Platinum</a>
         </div>
       </div>
     </div>
@@ -676,10 +705,10 @@
     <div class="container monthly-band__inner">
       <div class="monthly-band__copy">
         <span class="monthly-band__eyebrow">Monthly Giving</span>
-        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <h2>Sustainers Get More</h2>
+        <p>Giving on a monthly basis is the easiest and most efficient method for giving. It&rsquo;s also the most reliable for XPN, so we add some extra benefits to thank Sustaining Members. Those include a special annual thank you gift, contest invitations, and other surprises.</p>
       </div>
-      <a href="#" class="monthly-band__btn">Become a Sustainer &rarr;</a>
+      <a href="https://xpn.my.salesforce-sites.com/donate?c=701Wj00000Pat9I" class="monthly-band__btn">Become a Sustainer &rarr;</a>
     </div>
   </section>
 
@@ -691,8 +720,8 @@
       <div class="vinyl-card">
         <div class="vinyl-card__content">
           <span class="vinyl-card__eyebrow">Vinyl Club</span>
-          <h2>Lorem ipsum dolor sit amet.</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <h2>A Club for Record Lovers</h2>
+          <p>If you like to feel the music - hold it, drop the needle and hear the crackle and pop of a record - this group is for you. Join Mike Vasilikos, host of the XPN Midday Show, and like-minded friends.</p>
           <div class="vinyl-prices">
             <div class="vinyl-price">
               <small>New Member</small>
@@ -703,7 +732,11 @@
               <strong>$400 / year</strong>
             </div>
           </div>
-          <a href="#" class="btn btn--primary">Join the Vinyl Club</a>
+          <a href="https://xpn.my.salesforce-sites.com/donate?c=7012M0000029ssB" class="btn btn--primary">Join the Vinyl Club</a>
+          <div class="vinyl-details">
+            <p><strong>Includes:</strong> Basic Member Benefits*; 4 albums per year plus any XPN-produced vinyl; invites to special events.</p>
+            <p class="vinyl-fine-print"><strong>Fine Print:</strong> Because these benefits are tailor-made for the Vinyl Club, this affinity group does not include eligibility for benefits at the Member Plus, Premium, or Platinum levels such as complimentary Festival passes. Existing members who wish to retain their current benefits can gain access to the WXPN Vinyl Club with a once-annual additional gift of $400. Questions? Contact <a href="mailto:memberservices@xpn.org">memberservices@xpn.org</a>.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -722,59 +755,43 @@
         <section class="ms-section" aria-labelledby="manage-membership-title">
           <div class="ms-section__intro">
             <div class="ms-section__copy">
-              <span class="ms-section__eyebrow">Renew, Upgrade, Update Payment</span>
-              <h3 id="manage-membership-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+              <span class="ms-section__eyebrow">Membership Help</span>
+              <h3 id="manage-membership-title">Need something?</h3>
+              <p>If you don&rsquo;t find it below, contact us at <a href="mailto:memberservices@xpn.org">memberservices@xpn.org</a> or <a href="tel:+18005659976">1-800-565-9976</a>.</p>
             </div>
           </div>
           <div class="ms-section__requests">
-            <details class="request-item" data-accordion-group="manage-membership">
-              <summary>Update payment method or contact information</summary>
-              <div class="request-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            <details class="request-item" open data-accordion-group="membership-help">
+              <summary>Update sustaining payment method or contact information</summary>
+              <div class="request-answer">Use <a href="https://xpn.my.salesforce-sites.com/donate?c=70141000000qSX2">this donation form</a> to update your credit card or bank account. Put this note in the donation comment field: &ldquo;payment update&rdquo; to avoid an additional charge.</div>
             </details>
-            <details class="request-item" data-accordion-group="manage-membership">
+            <details class="request-item" data-accordion-group="membership-help">
               <summary>Upgrade donation amount</summary>
-              <div class="request-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+              <div class="request-answer">Use <a href="https://xpn.my.salesforce-sites.com/donate?c=701Wj00000Pat9I">this donation form</a> to upgrade your monthly donation amount.</div>
             </details>
-            <details class="request-item" data-accordion-group="manage-membership">
+            <details class="request-item" data-accordion-group="membership-help">
               <summary>Annual tax letter</summary>
-              <div class="request-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+              <div class="request-answer">All eligible supporters receive a charitable donation receipt in January, via email. If you need a copy or have a question, <a href="mailto:memberservices@xpn.org">contact us</a>. Please note: donations via Donor Advised Fund or QCD do not receive tax receipts.</div>
             </details>
-            <details class="request-item" data-accordion-group="manage-membership">
+            <details class="request-item" data-accordion-group="membership-help">
               <summary>Give from outside the US</summary>
-              <div class="request-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+              <div class="request-answer">Interested donors outside of the United States can donate to WXPN via the <a href="https://giving.apps.upenn.edu/fund?fund=340220&amp;program=XPN">University of Pennsylvania&rsquo;s Giving Portal</a>. Please note: WXPN will receive your donation from the University of Pennsylvania at the end of the month in which the donation is made, so there is a slight delay.</div>
             </details>
-            <details class="request-item" data-accordion-group="manage-membership">
-              <summary>Email or mail preferences</summary>
-              <div class="request-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            <details class="request-item" data-accordion-group="membership-help">
+              <summary>Cancelling a membership</summary>
+              <div class="request-answer">You can stop your sustaining membership at any time by contacting Member Services. Please note: If you selected a benefit at the time of your initial gift, we fulfill it immediately in good faith that you will remain a sustaining member for a minimum of 12 months. If you cancel before the end of a one-year term, WXPN reserves the right to revoke any promised benefits including complimentary Festival passes or thank you gifts.</div>
             </details>
-            <details class="request-item" data-accordion-group="manage-membership">
-              <summary>Employer matching</summary>
-              <div class="request-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. <a href="contribution/#employer-matching">See Make a Contribution &rarr;</a></div>
+            <details class="request-item" data-accordion-group="membership-help">
+              <summary>Giving via DAF or QCD</summary>
+              <div class="request-answer">If you choose to make a gift to XPN via a Donor Advised Fund, IRA distribution, or other Qualified Charitable Distribution, you must waive all benefits in accordance with IRS regulations. We are happy to show our gratitude with stewardship opportunities (and undying gratitude) but cannot provide any tangible promised benefits. Want to talk about it? Email <a href="mailto:xpngiving@xpn.org">xpngiving@xpn.org</a>.</div>
             </details>
-          </div>
-        </section>
-
-        <section class="ms-section" aria-labelledby="sustainer-central-title">
-          <div class="ms-section__intro">
-            <div class="ms-section__copy">
-              <span class="ms-section__eyebrow">Sustainer Central</span>
-              <h3 id="sustainer-central-title">Lorem ipsum dolor sit amet, sed do eiusmod tempor.</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-            </div>
-          </div>
-          <div class="ms-section__requests">
-            <details class="request-item" data-accordion-group="sustainer-central">
-              <summary>Cancel sustaining membership</summary>
-              <div class="request-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. (12-month premium item commitment applies.)</div>
-            </details>
-            <details class="request-item" data-accordion-group="sustainer-central">
+            <details class="request-item" data-accordion-group="membership-help">
               <summary>Thank-you gift status</summary>
-              <div class="request-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. (4&ndash;8 weeks from first payment.)</div>
+              <div class="request-answer">Thank-you gifts are mailed based on their availability and receipt of your payment. Expect your gift(s) to be mailed within 4-8 weeks of your full payment or first installment. If you do not receive all of your gifts within 8 weeks, please contact Member Services.</div>
             </details>
-            <details class="request-item" data-accordion-group="sustainer-central">
-              <summary>Contact Member Services</summary>
-              <div class="request-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            <details class="request-item" data-accordion-group="membership-help">
+              <summary>Member merchandise and thank-you gifts</summary>
+              <div class="request-answer">WXPN merchandise is usually available only as a thank-you gift to members. Current members can make an additional donation and receive additional thank-you gifts; merchandise is not sold separately.</div>
             </details>
           </div>
         </section>
@@ -796,43 +813,7 @@
             <span>Mon&ndash;Fri, 9am&ndash;5pm ET</span>
           </li>
         </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════════
-       FAQ
-       ═══════════════════════════════════════════════════════════ -->
-  <section class="faq" id="faq">
-    <div class="container container--wide">
-      <div class="faq__head">
-        <h2>Frequently asked questions.</h2>
-      </div>
-      <div class="faq-list">
-        <details class="faq-item" open data-accordion-group="faq">
-          <summary>How to change membership, contact info, or donation amount</summary>
-          <div class="faq-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-        </details>
-        <details class="faq-item" data-accordion-group="faq">
-          <summary>Cancellation policy (12-month premium item commitment)</summary>
-          <div class="faq-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-        </details>
-        <details class="faq-item" data-accordion-group="faq">
-          <summary>Tax deductibility (501(c)(3) under UPenn) and the DAF tax note</summary>
-          <div class="faq-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-        </details>
-        <details class="faq-item" data-accordion-group="faq">
-          <summary>Thank-you gift timing (4&ndash;8 weeks from first payment)</summary>
-          <div class="faq-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-        </details>
-        <details class="faq-item" data-accordion-group="faq">
-          <summary>Merchandise policy (member gifts only, not sold separately)</summary>
-          <div class="faq-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-        </details>
-        <details class="faq-item" data-accordion-group="faq">
-          <summary>International donations (via giving.apps.upenn.edu)</summary>
-          <div class="faq-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-        </details>
+        <p class="contact__note">Our team is small (and busy!) and responds to every message. During high volume periods like member drives, Festival season, etc. it may take up to 3 business days to receive an answer. Thanks for understanding!</p>
       </div>
     </div>
   </section>
@@ -853,7 +834,7 @@
           <span class="eyebrow">Going Deeper</span>
           <h2>Leadership Circle &amp; More</h2>
           <p>Leadership Circle, Musicians On Call, planned giving, employer matching, and other ways to make a lasting impact at WXPN.</p>
-          <a href="contribution/" class="btn btn--primary">Make a Contribution &rarr;</a>
+          <a href="contribution/" class="btn btn--primary">Learn more &rarr;</a>
         </div>
       </div>
     </div>
@@ -927,7 +908,7 @@
         <div class="footer-brand__wordmark">wxpn</div>
       </div>
       <div class="footer-cta">
-        <a href="#" class="footer-donate-btn">
+        <a href="https://xpn.my.salesforce-sites.com/donate?c=701Wj00000Pat9I" class="footer-donate-btn">
           Donate
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
@@ -980,7 +961,12 @@
     buttons.forEach(b => {
       b.addEventListener('click', () => {
         const p = b.dataset.period;
-        buttons.forEach(x => x.classList.toggle('is-active', x === b));
+        buttons.forEach(x => {
+          const active = x === b;
+          x.classList.toggle('is-active', active);
+          x.setAttribute('aria-selected', String(active));
+          x.tabIndex = active ? 0 : -1;
+        });
         prices.forEach(n => { n.textContent = n.dataset[p]; });
         freqs.forEach(n => { n.textContent = n.dataset[p]; });
       });
